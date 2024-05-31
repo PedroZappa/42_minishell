@@ -43,6 +43,8 @@ minishell
 *.idb
 *.pdb
 .temp/
+.build/
+lib/
 
 # Kernel Module Compile Results
 *.mod*
