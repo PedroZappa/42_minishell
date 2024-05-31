@@ -10,7 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../inc/minishell.h"
+
 int	main(void)
 {
+	ft_printf("MINISHELL\n");
+	ft_printf("Success : %d\n", SUCCESS);
 	return (0);
 }
