@@ -7,7 +7,7 @@
 
 # include "../lib/libft/libft/libft.h"			// libft library
 # include "../lib/libft/ft_printf/ft_printf.h" 	// ft_printf
-//
+
 //=============================================================================/
 //							Variables & Definitions                            /
 //=============================================================================/
