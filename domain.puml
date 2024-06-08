@@ -1,0 +1,116 @@
+@startuml DomainModel
+
+enum LoginServices {
+	Twitter
+	Google
+}
+
+class OAuth {
+	service
+	token
+}
+
+class User {
+	nickname
+	handle {unique}
+	email {unique}
+	hashed_password
+}
+
+class Player {
+	level {>=0}
+	coins {>=0}
+}
+
+class Animal {
+	level {>=1}
+	base_hp {>=0}
+	base_atk {>=0}
+	base_critdmg {>=0}
+	base_critrate {>=0}
+	scaling_hp {>=0 and <= 1}
+	scaling_atk {>=0 and <=1}
+	scaling_critdmg {>=0 and <=1}
+	scaling_critrate {>=0 and <=1}
+}
+
+enum ConservationStatus {
+	extinct
+	extinct_wild
+	criticallly_endangered
+	endangered
+	vulnerable
+	near_threatened
+	conversation_dependent
+	least_concern
+	data_deficient
+	not_evaluated
+}
+
+class LootBox {
+	id {unique}
+	name
+	availability
+	cost
+}
+
+class LootItem {
+	rate {>=0.01 and <=1}
+}
+
+class AnimalInventory {
+	capacity {>=0}
+}
+
+class Shop
+
+class AnimalBiography {
+	name
+	scientific_name
+	conservation_status
+	average_weight {>=0}
+	average_longevity {>=0}
+	origin
+	description
+}
+
+class Map {
+	name
+}
+
+class MapRegion {
+	name
+	total_fauna_count
+}
+
+LoginServices -- OAuth::service
+ConservationStatus -- AnimalBiography::conservation_status
+LootBox "1" *-- "1..*" LootItem
+LootItem "1" -- "1" Animal
+AnimalBiography "1" -- "1" Animal
+User "1" -- "1" Player
+Player "1" -- "1" AnimalInventory
+AnimalInventory "1" -- "0..*" Animal
+Shop "1" -- "0..*" LootBox
+User "1" -- "0..*" OAuth
+Map "1" -- "0..*" MapRegion
+MapRegion "1" -- "0..*" Animal
+
+note bottom of AnimalInventory
+	The ammount of animals 
+	can't exceed capacity
+endnote
+
+note left of Animal
+	Status in battle are
+	calculate using the formula
+	base * scaling * level
+endnote
+
+note right of LootItem
+	Sum of the rates of all 
+	LootItems in a lootbox 
+	must be 1
+endnote
+
+@enduml
