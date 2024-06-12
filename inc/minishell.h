@@ -43,7 +43,7 @@ typedef enum e_exit
 //=============================================================================/
 
 /// @enum	Token types
-typedef enum e_token
+typedef enum e_token_type
 {
 	TK_NAME,
 	TK_NULL,
@@ -53,7 +53,21 @@ typedef enum e_token
 	TK_PIPE,
 	TK_OR,
 	TK_AND,
-}	t_token;
+}	t_token_type;
+
+/// @enum	Command types
+typedef enum e_cmd_type
+{
+	CMD_EXEC,
+	CMD_ECHO,
+	CMD_CD,
+	CMD_PWD,
+	CMD_EXPORT,
+	CMD_UNSET,
+	CMD_ENV,
+	CMD_EXIT,
+	CMD_HELP,
+}	t_cmd_type;
 
 //=============================================================================/
 //                               Structures                                    /
