@@ -45,6 +45,7 @@ minishell
 .temp/
 .build/
 lib/
+gdb.txt
 
 # Kernel Module Compile Results
 *.mod*
