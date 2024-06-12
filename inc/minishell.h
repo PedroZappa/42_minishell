@@ -73,13 +73,13 @@ typedef enum e_cmd_type
 //                               Structures                                    /
 //=============================================================================/
 
-/// @struct	Token
-/// @brief	Structure for linked list to store tokens
-///	@var	Token type
-///	@var	Token string
-///	@var	Token length
-///	@var	Flag to delete token
-///	@var	Next token
+/// @struct		Token
+/// @brief		Structure for linked list to store tokens
+///	@var type	Token type
+///	@var val	Token string
+///	@var len	Token length
+///	@var to_del	Flag to delete token
+///	@var next	Next token
 typedef struct s_token
 {
 	t_token_type	type;
