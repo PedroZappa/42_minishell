@@ -73,6 +73,18 @@ typedef enum e_cmd_type
 //                               Structures                                    /
 //=============================================================================/
 
+/// @struct	Token
+/// @brief	Structure to store tokens
+///	
+typedef struct s_token
+{
+	t_token_type	type;
+	char			*val;
+	int				len;
+	int				to_del;
+	struct s_token	*next;
+}	t_token;
+
 //=============================================================================/
 //							Function Prototypes                                /
 //=============================================================================/
