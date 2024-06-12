@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/12 17:19:28 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/12 17:27:16 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,9 @@ typedef struct	s_cmd
 /// @var exit_status	Exit status
 /// @var envp			Pointer to Environment Variables
 /// @var envt			Pointer to Temporary Environment Variables
+/// @var path			Pointer to PATH
+/// @var home			Pointer to HOME
+/// @var heredoc		Pointer to HEREDOC
 /// ...
 typedef struct	s_shell
 {
@@ -134,6 +137,9 @@ typedef struct	s_shell
 	int			exit_status;
 	char		**envp;
 	char		**envt;
+	char		*path;
+	char		*home;
+	char		*heredoc;
 }	t_shell;
 
 //=============================================================================/
