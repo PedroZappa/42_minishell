@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 20:40:17 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/13 16:04:14 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/13 16:27:24 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -19,6 +19,10 @@
 ***/
 
 #include "../inc/minishell.h"
+
+/// @brief		Global variable to store exit code.
+/// @details	Indicateds a received signal.
+int	g_exit;
 
 /// @brief		Minishell main function.
 /// @param argc	Number of arguments.
