@@ -24,6 +24,7 @@
 //									Defines									   /
 //=============================================================================/
 
+/// @define		Error messages
 # define FORK_ERR "Fork error\n"
 # define QUOTE_ERR "No matching quote error\n"
 # define PIPE_ERR "Pipe error\n"
@@ -33,6 +34,7 @@
 # define REDIR_ERR "Redirection error\n"
 # define ARG_ERR "Invalid arguments\n"
 
+/// @define		Constants
 # define D_QUOTE '\"'
 # define QUOTE '\''
 # define STR_QUOTE "\'"
