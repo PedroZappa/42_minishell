@@ -21,9 +21,16 @@
 # include "../lib/libft/ft_printf/ft_printf.h" 	// ft_printf
 
 //=============================================================================/
-//							Variables & Definitions                            /
+//								Error Messages								   /
 //=============================================================================/
 
+# define FORK_ERR "Fork error\n"
+# define QUOTE_ERR "No matching quote error\n"
+# define PIPE_ERR "Pipe error\n"
+# define DIR_ERR "Directory/Fire error\n"
+# define CMD_ERR "Command not found\n"
+# define REDIR_ERR "Redirection error\n"
+# define ARG_ERR "Invalid arguments\n"
 //=============================================================================/
 //									Enums	                                   /
 //=============================================================================/
