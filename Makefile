@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/29 20:35:29 by passunca          #+#    #+#              #
-#    Updated: 2024/05/29 20:40:40 by passunca         ###   ########.fr        #
+#    Updated: 2024/06/13 16:46:17 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,8 +45,9 @@ BUILD_PATH		= .build
 TEMP_PATH		= .temp
 TESTS_PATH		= files
 
-SRC		= $(addprefix $(SRC_PATH)/, main.c)
+FILES			= 000_main.c
 
+SRC		= $(addprefix $(SRC_PATH)/, $(FILES))
 OBJS	= $(SRC:$(SRC_PATH)/%.c=$(BUILD_PATH)/%.o)
 
 LIBFT_PATH	= $(LIBS_PATH)/libft
