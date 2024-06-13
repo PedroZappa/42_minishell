@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 20:40:17 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/13 16:29:32 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/13 16:34:10 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -29,7 +29,8 @@ int	g_exit;
 /// @param argv	Array of arguments.
 /// @param envp	Array of environment variables.
 /// @return		0 on success, 1 on failure.
-/// @details	Executes the program.
+/// @details	- Initializes the minishell environment variabes;
+///				- Enter minishell loop;
 int	main(int argc, char **argv, char **envp)
 {
 	(void)argc;
