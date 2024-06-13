@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/12 17:27:16 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/13 16:32:34 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ typedef struct	s_redir
 /// @var argv	Argument vector
 /// @var in		Input redirection data
 /// @var out	Output redirection data
-typedef struct	s_cmd	
+typedef struct	s_cmd
 {
 	char	*cmd;
 	int		argc;
