@@ -10,7 +10,12 @@
 ## Tools
 - [PlantUML](https://plantuml.com/class-diagram)
 
-## Docs
+# Docs
+## General
 - [Writing your own shell](https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf)
 - [Shell Command Language](https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html)
 - [Bash Reference Manual](https://www.gnu.org/software/bash/manual/bash.html)
+
+## Termios
+- [A Brief Introduction to Termios](https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios/)
+- [A Brief Introduction to Termios: termios(3) and stty](https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios-termios3-and-stty/)
