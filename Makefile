@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/29 20:35:29 by passunca          #+#    #+#              #
-#    Updated: 2024/06/13 16:46:17 by passunca         ###   ########.fr        #
+#    Updated: 2024/06/14 23:09:15 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,8 @@ TESTS_PATH		= files
 
 FILES			= 000_main.c
 FILES			+= 100_termios.c
-FILES			+= 900_errors.c
+FILES			+= 500_env.c
+FILES			+= 800_errors.c
 
 SRC		= $(addprefix $(SRC_PATH)/, $(FILES))
 OBJS	= $(SRC:$(SRC_PATH)/%.c=$(BUILD_PATH)/%.o)
@@ -85,7 +86,7 @@ all: $(BUILD_PATH) $(NAME)	## Compile
 
 $(NAME): deps $(BUILD_PATH) $(OBJS) $(LIBFT_ARC)			## Compile
 	@echo "$(YEL)Compiling $(MAG)$(NAME)$(YEL) mandatory version$(D)"
-	$(CC) $(CFLAGS) $(DFLAGS) $(OBJS) $(LIBFT_ARC) -o $(NAME)
+	$(CC) $(CFLAGS) $(DFLAGS) $(OBJS) $(INC) $(LIBFT_ARC) -o $(NAME)
 	@echo "[$(_SUCCESS) compiling $(MAG)$(NAME)$(D) $(YEL)🖔$(D)]"
 	make norm
 
