@@ -17,6 +17,7 @@
 //								Library Headers                                /
 //=============================================================================/
 
+# include <errno.h>								// Get errno
 # include <termios.h>							// termios interface
 # include <unistd.h>							// STDIN_FILENO STDOUT_FILENO
 # include "../lib/libft/libft/libft.h"			// libft library
@@ -28,6 +29,8 @@
 
 /// @define		Error messages
 # define INIT_ERR "Init Error\n"
+# define ENV_INIT_ERR "Env Init Error\n"
+# define MALLOC_ERR "Malloc Error\n"
 # define TERMIOS_ERR "Termios Error\n"
 # define FORK_ERR "Fork error\n"
 # define QUOTE_ERR "No matching quote error\n"
@@ -51,6 +54,10 @@
 
 /// @typedef	Data Types shorthands
 typedef struct termios	t_term;
+
+/// @brief		Global variable to store exit code.
+/// @details	Indicates a received signal.
+extern int	g_exit;
 
 //=============================================================================/
 //									Enums	                                   /
@@ -217,6 +224,6 @@ void		ft_set_termios(int fd, int opts, t_term *termios);
 //	800	Free & Errors & Info												   /
 //=============================================================================/
 /// @file		900_errors.c
-int			ft_err(char *msg);
+int	ft_err(char *msg, int status);
 
 #endif
