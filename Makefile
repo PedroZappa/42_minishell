@@ -48,7 +48,7 @@ TEMP_PATH		= .temp
 TESTS_PATH		= files
 
 FILES			= 000_main.c
-FILES			+= 200_termios.c
+FILES			+= 100_termios.c
 FILES			+= 900_errors.c
 
 SRC		= $(addprefix $(SRC_PATH)/, $(FILES))
