@@ -48,6 +48,9 @@
 # define SPC " \t"
 # define SPC_QUOTES " \t\'\""
 
+/// @typedef	Data Types shorthands
+typedef struct termios	t_term;
+
 //=============================================================================/
 //									Enums	                                   /
 //=============================================================================/
@@ -157,7 +160,7 @@ typedef struct s_cmd
 /// ...
 typedef struct s_shell
 {
-	struct termios	termios;
+	t_term	termios;
 	t_cmd			*cmds;
 	int				n_cmds;
 	int				exit_status;
@@ -186,7 +189,8 @@ static int	ft_init(t_shell *sh);
 //	200 Termios  															   /
 //=============================================================================/
 /// @file		200_termios.c
-void		ft_get_termios(int fd, struct termios *termios);
+void		ft_get_termios(int fd, t_term *termios);
+void		ft_set_termios(int fd, int opts, t_term *termios);
 
 //=============================================================================/
 //	300 Parser  															   /
