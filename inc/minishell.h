@@ -17,8 +17,8 @@
 //								Library Headers                                /
 //=============================================================================/
 
-#include <termios.h>							// termios interface
-#include <unistd.h>								// STDIN_FILENO STDOUT_FILENO
+# include <termios.h>							// termios interface
+# include <unistd.h>							// STDIN_FILENO STDOUT_FILENO
 # include "../lib/libft/libft/libft.h"			// libft library
 # include "../lib/libft/ft_printf/ft_printf.h" 	// ft_printf
 
@@ -106,7 +106,7 @@ typedef enum e_cmd_type
 ///	@var next	Next token
 /// @desc		Redirection tokens: '<', '<<', '>', '>>'
 ///				...
-typedef struct	s_token
+typedef struct s_token
 {
 	t_token_type	type;
 	char			*val;
@@ -120,7 +120,7 @@ typedef struct	s_token
 /// @var name  		Redirection name
 /// @var flag  		Redirection status flag
 /// @var heredoc	Pointer to Heredoc redirection node
-typedef struct	s_redir
+typedef struct s_redir
 {
 	char	*name;
 	int		flag;
@@ -134,7 +134,7 @@ typedef struct	s_redir
 /// @var argv	Argument vector
 /// @var in		Input redirection data
 /// @var out	Output redirection data
-typedef struct	s_cmd
+typedef struct s_cmd
 {
 	char	*cmd;
 	int		argc;
@@ -155,7 +155,7 @@ typedef struct	s_cmd
 /// @var home			Pointer to HOME
 /// @var heredoc		Pointer to HEREDOC
 /// ...
-typedef struct	s_shell
+typedef struct s_shell
 {
 	struct termios	termios;
 	t_cmd			*cmds;
@@ -175,7 +175,8 @@ typedef struct	s_shell
 //	000 Main  																   /
 //=============================================================================/
 /// @file		000_main.c
-int	main(int argc, char **argv, char **envp);
+int			main(int argc, char **argv, char **envp);
+static int	ft_init(t_shell *sh);
 
 //=============================================================================/
 //	100 Info  																   /
@@ -185,7 +186,7 @@ int	main(int argc, char **argv, char **envp);
 //	200 Termios  															   /
 //=============================================================================/
 /// @file		200_termios.c
-void	ft_get_termios(int fd, struct termios *termios);
+void		ft_get_termios(int fd, struct termios *termios);
 
 //=============================================================================/
 //	300 Parser  															   /
@@ -204,7 +205,7 @@ void	ft_get_termios(int fd, struct termios *termios);
 //=============================================================================/
 
 //=============================================================================/
-//	700 Executer																   /
+//	700 Executer															   /
 //=============================================================================/
 
 //=============================================================================/
@@ -215,6 +216,6 @@ void	ft_get_termios(int fd, struct termios *termios);
 //	900	Free & Errors														   /
 //=============================================================================/
 /// @file		900_errors.c
-int		ft_err(char *msg);
+int			ft_err(char *msg);
 
 #endif
