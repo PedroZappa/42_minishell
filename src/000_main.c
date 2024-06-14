@@ -18,6 +18,8 @@
 
 #include "../inc/minishell.h"
 
+static int	ft_init(t_shell *sh);
+
 /// @brief		Global variable to store exit code.
 /// @details	Indicates a received signal.
 int	g_exit;
@@ -32,13 +34,20 @@ int	g_exit;
 ///				- Enter Minishell loop;
 int	main(int argc, char **argv, char **envp)
 {
-	t_shell	sh;
+	t_shell	*sh;
 
 	(void)argc;
 	(void)argv;
 	(void)envp;
 	ft_printf("MINISHELL\n");
 	ft_printf("Success : %d\n", SUCCESS);
-	ft_get_termios(STDIN_FILENO, &sh.termios);
+	ft_init(sh);
 	return (0);
+}
+
+/// @brief	
+static int	ft_init(t_shell *sh)
+{
+	ft_get_termios(STDIN_FILENO, &sh->termios);
+	return (SUCCESS);
 }
