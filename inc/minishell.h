@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/13 16:43:06 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/14 16:55:31 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 //								Librariy Headers                               /
 //=============================================================================/
 
+#include <termios.h>							// termios interface
 # include "../lib/libft/libft/libft.h"			// libft library
 # include "../lib/libft/ft_printf/ft_printf.h" 	// ft_printf
 
@@ -142,6 +143,7 @@ typedef struct	s_cmd
 
 /// @struct				Shell
 /// @brief				Structure to save minishell data
+/// @var termios		Pointer to termios interface
 /// @var cmds  			Pointer to commands list
 /// @var n_cmds			Number of commands
 /// @var exit_status	Exit status
@@ -153,14 +155,15 @@ typedef struct	s_cmd
 /// ...
 typedef struct	s_shell
 {
-	t_cmd		*cmds;
-	int			n_cmds;
-	int			exit_status;
-	char		**envp;
-	char		**envt;
-	char		*path;
-	char		*home;
-	char		*heredoc;
+	struct termios	termios;
+	t_cmd			*cmds;
+	int				n_cmds;
+	int				exit_status;
+	char			**envp;
+	char			**envt;
+	char			*path;
+	char			*home;
+	char			*heredoc;
 }	t_shell;
 
 //=============================================================================/
