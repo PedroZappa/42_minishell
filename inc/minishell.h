@@ -152,24 +152,24 @@ typedef struct s_cmd
 /// @var termios		Pointer to termios interface
 /// @var cmds  			Pointer to commands list
 /// @var n_cmds			Number of commands
-/// @var exit_status	Exit status
 /// @var envp			Pointer to Environment Variables
 /// @var envt			Pointer to Temporary Environment Variables
 /// @var path			Pointer to PATH
 /// @var home			Pointer to HOME
 /// @var heredoc		Pointer to HEREDOC
+/// @var exit_status	Exit status
 /// ...
 typedef struct s_shell
 {
 	t_term	termios;
 	t_cmd	*cmds;
 	int		n_cmds;
-	int		exit_status;
 	char	**envp;
 	char	**envt;
 	char	*path;
 	char	*home;
 	char	*heredoc;
+	int		exit_status;
 }	t_shell;
 
 //=============================================================================/
