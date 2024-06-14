@@ -185,7 +185,7 @@ int	main(int argc, char **argv, char **envp);
 //	200 Termios  															   /
 //=============================================================================/
 /// @file		200_termios.c
-void	ft_init_termios(struct termios *termios);
+void	ft_get_termios(int fd, struct termios *termios);
 
 //=============================================================================/
 //	300 Parser  															   /
