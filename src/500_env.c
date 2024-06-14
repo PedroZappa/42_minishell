@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 22:02:06 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/14 23:06:42 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/14 23:14:28 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ char	*ft_get_var(char *var, char **envp, char** envt)
 /// @var len		Length of the selected variable
 /// @return			Pointer to selected var string or NULL
 /// @detail			- Check input for NULL
-///					- Format string
+///					- Format select string
+///					- Take its length
+///					- If selectec var is found set it to var and break
 static char	*ft_extract_var(char *select, char **envp)
 {
 	char	*tmp;
