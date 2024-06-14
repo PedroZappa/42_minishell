@@ -101,14 +101,14 @@ typedef enum e_cmd_type
 //                               Structures                                    /
 //=============================================================================/
 
-/// @struct		Token
-/// @brief		Structure to build linked list of tokens
-///	@var type	Token type
-///	@var val	Token string
-///	@var len	Token length
-///	@var to_del	Flag to delete token
-///	@var next	Next token
-/// @desc		Redirection tokens: '<', '<<', '>', '>>'
+/// @struct			Token
+/// @brief			Structure to build linked list of tokens
+///	@var type		Token type
+///	@var val		Token string
+///	@var len		Token length
+///	@var to_del		Flag to delete token
+///	@var next		Next token
+/// @desc			Redirection tokens: '<', '<<', '>', '>>'
 ///				...
 typedef struct s_token
 {
@@ -131,13 +131,13 @@ typedef struct s_redir
 	t_list	*heredoc;
 }	t_redir;
 
-/// @struct		Command
-/// @brief		Structure to save command data
-/// @var cmd	Command string
-/// @var argc	Argument count
-/// @var argv	Argument vector
-/// @var in		Input redirection data
-/// @var out	Output redirection data
+/// @struct			Command
+/// @brief			Structure to save command data
+/// @var cmd   	 	Command string
+/// @var argc  	 	Argument count
+/// @var argv  	 	Argument vector
+/// @var in	   	 	Input redirection data
+/// @var out   	 	Output redirection data
 typedef struct s_cmd
 {
 	char	*cmd;
@@ -214,7 +214,7 @@ void		ft_set_termios(int fd, int opts, t_term *termios);
 //=============================================================================/
 
 //=============================================================================/
-//	800	Free & Errors & Info														   /
+//	800	Free & Errors & Info												   /
 //=============================================================================/
 /// @file		900_errors.c
 int			ft_err(char *msg);
