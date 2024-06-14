@@ -47,4 +47,3 @@ void	ft_set_termios(int fd, int opts, t_term *termios)
 	if (term_conn != SUCCESS)
 		ft_err(TERMIOS_ERR);
 }
-

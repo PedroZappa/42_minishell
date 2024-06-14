@@ -161,14 +161,14 @@ typedef struct s_cmd
 typedef struct s_shell
 {
 	t_term	termios;
-	t_cmd			*cmds;
-	int				n_cmds;
-	int				exit_status;
-	char			**envp;
-	char			**envt;
-	char			*path;
-	char			*home;
-	char			*heredoc;
+	t_cmd	*cmds;
+	int		n_cmds;
+	int		exit_status;
+	char	**envp;
+	char	**envt;
+	char	*path;
+	char	*home;
+	char	*heredoc;
 }	t_shell;
 
 //=============================================================================/
