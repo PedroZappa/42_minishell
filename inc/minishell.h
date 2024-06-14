@@ -14,10 +14,11 @@
 # define MINISHELL_H
 
 //=============================================================================/
-//								Librariy Headers                               /
+//								Library Headers                                /
 //=============================================================================/
 
 #include <termios.h>							// termios interface
+#include <unistd.h>								// STDIN_FILENO STDOUT_FILENO
 # include "../lib/libft/libft/libft.h"			// libft library
 # include "../lib/libft/ft_printf/ft_printf.h" 	// ft_printf
 
@@ -26,6 +27,7 @@
 //=============================================================================/
 
 /// @define		Error messages
+# define TERMIOS_ERR "Termios Error\n"
 # define FORK_ERR "Fork error\n"
 # define QUOTE_ERR "No matching quote error\n"
 # define PIPE_ERR "Pipe error\n"
