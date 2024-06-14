@@ -18,8 +18,9 @@
 
 #include "../inc/minishell.h"
 
-int	ft_err(char *msg)
+int	ft_err(char *msg, int status)
 {
-	ft_putendl_fd(msg, STDERR_FILENO);
+	ft_putstr_fd(msg, STDERR_FILENO);
+	g_exit = status;
 	return (FAILURE);
 }
