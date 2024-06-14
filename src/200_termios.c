@@ -18,11 +18,13 @@
 
 #include "../inc/minishell.h"
 
-/// @brief		Get Termios Interface
-/// @param		Pointer to Termios Interface structure
-/// @details	- Get Termios Attribute
-///				- Handle Failure
-void	ft_get_termios(int fd, struct termios *termios)
+/// @brief			Get Termios Interface
+/// @param fd
+/// @param termios	Pointer to Termios Interface structure
+/// @var term_conn	Gets tcsgetattribute() return for error handling
+/// @details		- Get Termios Attribute
+///					- Handle Failure
+void	ft_get_termios(int fd, t_term *termios)
 {
 	int		term_conn;
 
@@ -30,3 +32,19 @@ void	ft_get_termios(int fd, struct termios *termios)
 	if (term_conn != SUCCESS)
 		ft_err(TERMIOS_ERR);
 }
+
+/// @brief			Set Termios Interface
+/// @param fd
+/// @param termios	Pointer to Termios Interface structure
+/// @var term_conn	Gets tcsetattribute() return for error handling
+/// @details		- Get Termios Attribute
+///					- Handle Failure
+void	ft_set_termios(int fd, int opts, t_term *termios)
+{
+	int		term_conn;
+
+	term_conn = tcsetattr(fd, opts, termios);
+	if (term_conn != SUCCESS)
+		ft_err(TERMIOS_ERR);
+}
+
