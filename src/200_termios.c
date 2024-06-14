@@ -21,7 +21,7 @@
 /// @brief		Get Termios Interface
 /// @param		Pointer to Termios Interface structure
 /// @details	- Get Termios Attribute
-/// - Handle Failure
+///				- Handle Failure
 void	ft_get_termios(int fd, struct termios *termios)
 {
 	int		term_conn;
