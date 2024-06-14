@@ -13,18 +13,20 @@
 * @file			200_termios.c
 * @brief		Termios Interface
 * @version		1.0
-* @date			2024/05/29
 * @author		passunca
-* @copyright	© 2024 passunca/gfragoso
 ***/
 
 #include "../inc/minishell.h"
 
-void	ft_init_termios(struct termios *termios)
+/// @brief		Get Termios Interface
+/// @param		Pointer to Termios Interface structure
+/// @details	- Get Termios Attribute
+/// - Handle Failure
+void	ft_get_termios(int fd, struct termios *termios)
 {
 	int		term_conn;
 
-	term_conn = tcgetattr(STDIN_FILENO, termios);
+	term_conn = tcgetattr(fd, termios);
 	if (term_conn != SUCCESS)
 		ft_err(TERMIOS_ERR);
 }
