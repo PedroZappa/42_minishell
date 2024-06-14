@@ -18,6 +18,7 @@ MAKE	= make -C
 SHELL	:= bash
 
 # Default test values
+IN_PATH		?= $(SRC_PATH)
 ARG			= ...
 
 #==============================================================================#
@@ -40,12 +41,15 @@ _SEP 			= =====================
 #==============================================================================#
 
 SRC_PATH		= src
+INC_PATH		= inc
 LIBS_PATH		= lib
 BUILD_PATH		= .build
 TEMP_PATH		= .temp
 TESTS_PATH		= files
 
 FILES			= 000_main.c
+FILES			+= 200_termios.c
+FILES			+= 900_errors.c
 
 SRC		= $(addprefix $(SRC_PATH)/, $(FILES))
 OBJS	= $(SRC:$(SRC_PATH)/%.c=$(BUILD_PATH)/%.o)
@@ -61,7 +65,7 @@ CC			= cc
 
 CFLAGS		= -Wall -Wextra -Werror
 DFLAGS		= -g
-INC			= -I.
+INC			= -I $(INC_PATH)
 
 #==============================================================================#
 #                                COMMANDS                                      #
@@ -119,20 +123,24 @@ get_libft:
 
 ##@ Norm Rules
 
-norm: $(TEMP_PATH)		## Run norminette test on source files
+norm: 
+	@make --no-print-directory norm_path IN_PATH=$(SRC_PATH)
+	@make --no-print-directory norm_path IN_PATH=$(INC_PATH)
+
+norm_path: $(TEMP_PATH)		## Run norminette test on source files
 	@echo "$(CYA)$(_SEP)$(D)"
-	@printf "${_NORM}: $(YEL)$(SRC_PATH)$(D)\n"
-	@ls $(SRC_PATH) | wc -l > $(TEMP_PATH)/norm_ls.txt
+	@printf "${_NORM}: $(YEL)$(IN_PATH)$(D)\n"
+	@ls $(IN_PATH) | wc -l > $(TEMP_PATH)/norm_ls.txt
 	@printf "$(_NORM_INFO) $$(cat $(TEMP_PATH)/norm_ls.txt)\n"
 	@printf "$(_NORM_SUCCESS) "
-	@norminette $(SRC_PATH) | grep -wc "OK" > $(TEMP_PATH)/norm.txt; \
+	@norminette $(IN_PATH) | grep -wc "OK" > $(TEMP_PATH)/norm.txt; \
 	if [ $$? -eq 1 ]; then \
 		echo "0" > $(TEMP_PATH)/norm.txt; \
 	fi
 	@printf "$$(cat $(TEMP_PATH)/norm.txt)\n"
 	@if ! diff -q $(TEMP_PATH)/norm_ls.txt $(TEMP_PATH)/norm.txt > /dev/null; then \
 		printf "$(_NORM_ERR) "; \
-		norminette $(SRC_PATH) | grep -v "OK"> $(TEMP_PATH)/norm_err.txt; \
+		norminette $(IN_PATH) | grep -v "OK" > $(TEMP_PATH)/norm_err.txt; \
 		cat $(TEMP_PATH)/norm_err.txt | grep -wc "Error:" > $(TEMP_PATH)/norm_errn.txt; \
 		printf "$$(cat $(TEMP_PATH)/norm_errn.txt)\n"; \
 		printf "$$(cat $(TEMP_PATH)/norm_err.txt)\n"; \
