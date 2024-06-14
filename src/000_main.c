@@ -13,9 +13,7 @@
 * @file			main.c
 * @brief		Minishell main function
 * @version		1.0
-* @date			2024/05/29
 * @author		passunca & gfragoso
-* @copyright	© 2024 passunca/gfragoso
 ***/
 
 #include "../inc/minishell.h"
@@ -29,14 +27,18 @@ int	g_exit;
 /// @param argv	Array of arguments.
 /// @param envp	Array of environment variables.
 /// @return		0 on success, 1 on failure.
-/// @details	- Initializes the minishell environment variabes;
-///				- Enter minishell loop;
+/// @details	- Init Env Variables
+///				- Init Termios Interface
+///				- Enter Minishell loop;
 int	main(int argc, char **argv, char **envp)
 {
+	t_shell	sh;
+
 	(void)argc;
 	(void)argv;
 	(void)envp;
 	ft_printf("MINISHELL\n");
 	ft_printf("Success : %d\n", SUCCESS);
+	ft_get_termios(STDIN_FILENO, &sh.termios);
 	return (0);
 }
