@@ -38,6 +38,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	(void)envp;
+	sh = NULL;
 	ft_printf("MINISHELL\n");
 	ft_printf("Success : %d\n", SUCCESS);
 	if (ft_init(sh) != SUCCESS)
@@ -72,7 +73,7 @@ static char	**ft_init_env(char **env)
 	if (new_env != SUCCESS)
 		return (ft_err(MALLOC_ERR, errno), NULL);
 	n = -1;
-	while(env[++n])
+	while (env[++n])
 	{
 		new_env[n] = ft_strdup(env[n]);
 		if (new_env != SUCCESS)
