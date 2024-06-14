@@ -57,7 +57,7 @@ typedef struct termios	t_term;
 
 /// @brief		Global variable to store exit code.
 /// @details	Indicates a received signal.
-extern int	g_exit;
+extern int				g_exit;
 
 //=============================================================================/
 //									Enums	                                   /
@@ -185,14 +185,13 @@ typedef struct s_shell
 //=============================================================================/
 //	000 Main  																   /
 //=============================================================================/
-/// @file		000_main.c
+/// @file	000_main.c
 int			main(int argc, char **argv, char **envp);
-static int	ft_init(t_shell *sh);
 
 //=============================================================================/
 //	100 Termios  															   /
 //=============================================================================/
-/// @file		100_termios.c
+/// @file	100_termios.c
 void		ft_get_termios(int fd, t_term *termios);
 void		ft_set_termios(int fd, int opts, t_term *termios);
 
@@ -223,7 +222,7 @@ void		ft_set_termios(int fd, int opts, t_term *termios);
 //=============================================================================/
 //	800	Free & Errors & Info												   /
 //=============================================================================/
-/// @file		900_errors.c
-int	ft_err(char *msg, int status);
+/// @file	900_errors.c
+int			ft_err(char *msg, int status);
 
 #endif
