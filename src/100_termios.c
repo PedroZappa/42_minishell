@@ -30,7 +30,7 @@ void	ft_get_termios(int fd, t_term *termios)
 
 	term_conn = tcgetattr(fd, termios);
 	if (term_conn != SUCCESS)
-		ft_err(TERMIOS_ERR);
+		ft_err(TERMIOS_ERR, errno);
 }
 
 /// @brief			Set Termios Interface
@@ -45,5 +45,5 @@ void	ft_set_termios(int fd, int opts, t_term *termios)
 
 	term_conn = tcsetattr(fd, opts, termios);
 	if (term_conn != SUCCESS)
-		ft_err(TERMIOS_ERR);
+		ft_err(TERMIOS_ERR, errno);
 }
