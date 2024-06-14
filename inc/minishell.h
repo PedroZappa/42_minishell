@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/14 17:42:21 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/14 22:15:17 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,7 +212,7 @@ void		ft_set_termios(int fd, int opts, t_term *termios);
 //	500		Env Setters/Getters												   /
 //=============================================================================/
 /// @file	500_env.c
-char		**ft_get_env(char **env);
+char		*ft_get_var(char *var, char **envp, char** envt);
 
 //=============================================================================/
 //	600		Executer														   /
