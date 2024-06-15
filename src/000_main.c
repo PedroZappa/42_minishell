@@ -58,7 +58,7 @@ int	main(int argc, char **argv, char **envp)
 /// @details	- ...
 static int	ft_init(t_shell *sh, char **envp)
 {
-	sh->cmds = NULL;
+	// sh->cmds = NULL;
 	sh->envp = ft_init_env(envp);
 	sh->envt = ft_calloc(1, sizeof(char *));
 	if ((sh->envp != SUCCESS) || (sh->envt != SUCCESS))
@@ -77,6 +77,7 @@ static char	**ft_init_env(char **env)
 	char	**new_env;
 	int		n;
 
+	n = 0;
 	while (env[n])
 		++n;
 	new_env = ft_calloc((n + 1), sizeof(char *));

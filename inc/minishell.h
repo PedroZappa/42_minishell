@@ -188,6 +188,8 @@ typedef struct s_shell
 //=============================================================================/
 /// @file	000_main.c
 int			main(int argc, char **argv, char **envp);
+// static int	ft_init(t_shell *sh, char **envp);
+// static char	**ft_init_env(char **env);
 
 //=============================================================================/
 //	100		Termios  														   /

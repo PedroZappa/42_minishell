@@ -18,7 +18,7 @@ set print array on
 ### 000_main.c
 define main
 	display argc
-	display *argv@argc
+	display *argv
 	display *envp
 end
 
@@ -38,24 +38,7 @@ end
 ### Go GDB Go! I Choose YOU! 
 ##
 #
-# main()
-# break main
-# run
-# main
-# fs cmd
-# rfr
-
-# ft_init()
-# break ft_init
-# run
-# init
-# fs cmd
-# rfr
-
-# ft_init()
-break ft_init_env
-break 82
+break main
 run
-init_env
-fs cmd
-rfr
+main
+
