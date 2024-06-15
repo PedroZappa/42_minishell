@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 20:40:17 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/14 23:08:34 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/14 23:27:30 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -34,6 +34,7 @@ int	g_exit;
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell	*sh;
+	char	**copy;
 
 	(void)argc;
 	(void)argv;
@@ -41,6 +42,10 @@ int	main(int argc, char **argv, char **envp)
 	sh = NULL;
 	ft_printf("MINISHELL\n");
 	ft_printf("Success : %d\n", SUCCESS);
+	copy = envp;
+	while (*copy)
+		ft_printf("%s", *copy++);
+	ft_printf("\n");
 	if (ft_init(sh, envp) != SUCCESS)
 		ft_err(INIT_ERR, errno);
 	return (SUCCESS);
