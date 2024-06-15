@@ -34,18 +34,10 @@ int	g_exit;
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell	*sh;
-	char	**copy;
 
 	(void)argc;
 	(void)argv;
-	(void)envp;
 	sh = NULL;
-	ft_printf("MINISHELL\n");
-	ft_printf("Success : %d\n", SUCCESS);
-	copy = envp;
-	while (*copy)
-		ft_printf("%s", *copy++);
-	ft_printf("\n");
 	if (ft_init(sh, envp) != SUCCESS)
 		ft_err(INIT_ERR, errno);
 	return (SUCCESS);
@@ -81,13 +73,13 @@ static char	**ft_init_env(char **env)
 	while (env[n])
 		++n;
 	new_env = ft_calloc((n + 1), sizeof(char *));
-	if (new_env != SUCCESS)
+	if (!new_env)
 		return (ft_err(MALLOC_ERR, errno), NULL);
 	n = -1;
 	while (env[++n])
 	{
 		new_env[n] = ft_strdup(env[n]);
-		if (new_env[n] != SUCCESS)
+		if (!new_env[n])
 			return (NULL);
 	}
 	new_env[n] = NULL;
