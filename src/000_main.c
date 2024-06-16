@@ -59,13 +59,20 @@ static int	ft_init(t_shell *sh, char **envp)
 	sh->envt = NULL;
 	sh->path = ft_strdup("");
 	sh->home = ft_get_var("HOME", sh->envp, NULL);
-	ft_printf("sh->home = %s\n", sh->home);
 	sh->heredoc = ft_strdup("");
 	ft_get_termios(STDIN_FILENO, &sh->termios);
 
 	return (SUCCESS);
 }
 
+/// @brief			Initialize env
+/// @param env		Pointer to environment variables array
+/// @var new_env	Pointer for memory allocation
+/// @var n			Gets the count of environment variable
+/// @return			Pointer to initialized env
+/// @details		- Count variables
+///					- Allocate memory
+///					- Copy variables
 static char	**ft_init_env(char **env)
 {
 	char	**new_env;
