@@ -28,7 +28,7 @@ static char	*ft_extract_var(char *select, char **env);
 /// @return			Selected variable to get
 /// @details		- Extract from envp
 ///					- If NULL extract from temporary env;
-///	@note			Used in ft_init()
+/// @note			Used in ft_init()
 char	*ft_get_var(char *var, char **envp, char**envt)
 {
 	char	*var2get;
@@ -50,7 +50,7 @@ char	*ft_get_var(char *var, char **envp, char**envt)
 ///					- Format select string
 ///					- Take its length
 ///					- If selectec var is found set it to var and break
-///	@note			Used in ft_get_var()
+/// @note			Used in ft_get_var()
 static char	*ft_extract_var(char *select, char **envp)
 {
 	char	*tmp;

@@ -24,7 +24,7 @@
 /// @var term_conn	Gets tcsgetattribute() return for error handling
 /// @details		- Get Termios Attribute
 ///					- Handle Failure
-///	@note			Used in ft_init()
+/// @note			Used in ft_init()
 void	ft_get_termios(int fd, t_term *termios)
 {
 	int		term_conn;
@@ -40,7 +40,7 @@ void	ft_get_termios(int fd, t_term *termios)
 /// @var term_conn	Gets tcsetattribute() return for error handling
 /// @details		- Get Termios Attribute
 ///					- Handle Failure
-///	@note			Used in ft_execute()
+/// @note			Used in ft_execute()
 void	ft_set_termios(int fd, int opts, t_term *termios)
 {
 	int		term_conn;

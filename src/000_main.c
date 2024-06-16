@@ -50,7 +50,8 @@ int	main(int argc, char **argv, char **envp)
 /// @details	- Allocate memory for minishell
 ///				- Initialize envp
 ///				- Alloc memory for temp env
-///	@note		Used in main()
+///				- Get HOME var
+/// @note		Used in main()
 static int	ft_init(t_shell *sh, char **envp)
 {
 	sh = ft_calloc(1, sizeof(t_shell));

@@ -24,7 +24,7 @@
 /// @return			Returns 1
 /// @details		Prints message to stderr
 ///					- Saves exit code to g_exit
-///	@note			Used all over the code base
+/// @note			Used all over the code base
 int	ft_err(char *msg, int status)
 {
 	ft_putstr_fd(msg, STDERR_FILENO);
