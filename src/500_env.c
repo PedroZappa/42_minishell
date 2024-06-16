@@ -22,7 +22,7 @@ static char	*ft_extract_var(char *select, char **env);
 /// @return			Selected variable to get
 /// @details		- Extract from envp
 ///					- If NULL extract from temporary env;
-char	*ft_get_var(char *var, char **envp, char** envt)
+char	*ft_get_var(char *var, char **envp, char**envt)
 {
 	char	*var2get;
 

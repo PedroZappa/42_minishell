@@ -214,7 +214,7 @@ void		ft_set_termios(int fd, int opts, t_term *termios);
 //	500		Env Setters/Getters												   /
 //=============================================================================/
 /// @file	500_env.c
-char		*ft_get_var(char *var, char **envp, char** envt);
+char		*ft_get_var(char *var, char **envp, char**envt);
 
 //=============================================================================/
 //	600		Executer														   /

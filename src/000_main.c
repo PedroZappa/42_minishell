@@ -61,7 +61,6 @@ static int	ft_init(t_shell *sh, char **envp)
 	sh->home = ft_get_var("HOME", sh->envp, NULL);
 	sh->heredoc = ft_strdup("");
 	ft_get_termios(STDIN_FILENO, &sh->termios);
-
 	return (SUCCESS);
 }
 
