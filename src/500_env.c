@@ -9,6 +9,12 @@
 /*   Updated: 2024/06/14 23:14:28 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/**
+* @file			500_env.c
+* @brief		Environment related functions
+* @version		1.0
+* @author		passunca & gfragoso
+***/
 
 #include "../inc/minishell.h"
 
@@ -22,6 +28,7 @@ static char	*ft_extract_var(char *select, char **env);
 /// @return			Selected variable to get
 /// @details		- Extract from envp
 ///					- If NULL extract from temporary env;
+///	@note			Used in ft_init()
 char	*ft_get_var(char *var, char **envp, char**envt)
 {
 	char	*var2get;
@@ -43,6 +50,7 @@ char	*ft_get_var(char *var, char **envp, char**envt)
 ///					- Format select string
 ///					- Take its length
 ///					- If selectec var is found set it to var and break
+///	@note			Used in ft_get_var()
 static char	*ft_extract_var(char *select, char **envp)
 {
 	char	*tmp;

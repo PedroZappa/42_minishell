@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 /**
-* @file			900_errirs.c
+* @file			900_errors.c
 * @brief		Error functions
 * @version		1.0
 * @author		passunca
@@ -18,6 +18,13 @@
 
 #include "../inc/minishell.h"
 
+/// @brief			Error printing
+/// @param msg		Message to be printed
+/// @param status	Error number
+/// @return			Returns 1
+/// @details		Prints message to stderr
+///					- Saves exit code to g_exit
+///	@note			Used all over the code base
 int	ft_err(char *msg, int status)
 {
 	ft_putstr_fd(msg, STDERR_FILENO);

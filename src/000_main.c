@@ -47,7 +47,10 @@ int	main(int argc, char **argv, char **envp)
 /// @param sh	Pointer to a t_shell struct
 /// @param envp	Pointer to environment variables
 /// @return		0 on success, 1 on failure.
-/// @details	- ...
+/// @details	- Allocate memory for minishell
+///				- Initialize envp
+///				- Alloc memory for temp env
+///	@note		Used in main()
 static int	ft_init(t_shell *sh, char **envp)
 {
 	sh = ft_calloc(1, sizeof(t_shell));
@@ -72,6 +75,7 @@ static int	ft_init(t_shell *sh, char **envp)
 /// @details		- Count variables
 ///					- Allocate memory
 ///					- Copy variables
+///	@note			Used in ft_init()
 static char	**ft_init_env(char **env)
 {
 	char	**new_env;
