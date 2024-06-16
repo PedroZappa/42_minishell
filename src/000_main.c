@@ -40,7 +40,7 @@ int	main(int argc, char **argv, char **envp)
 	sh = NULL;
 	if (ft_init(sh, envp) != SUCCESS)
 		ft_err(INIT_ERR, errno);
-	return (SUCCESS);
+	return (EXIT_SUCCESS);
 }
 
 /// @brief		Initialize minishell
@@ -50,10 +50,11 @@ int	main(int argc, char **argv, char **envp)
 /// @details	- ...
 static int	ft_init(t_shell *sh, char **envp)
 {
-	// sh->cmds = NULL;
+	sh = ft_calloc(1, sizeof(t_shell));
+	sh->cmds = NULL;
 	sh->envp = ft_init_env(envp);
 	sh->envt = ft_calloc(1, sizeof(char *));
-	if ((sh->envp != SUCCESS) || (sh->envt != SUCCESS))
+	if (!sh->envp || !sh->envt)
 		return (ft_err(ENV_INIT_ERR, errno), FAILURE);
 	sh->envt = NULL;
 	sh->path = ft_strdup("");
