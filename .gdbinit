@@ -47,16 +47,16 @@ end
 # rfr
 
 # ft_init()
-# break ft_init
-# run
-# init
-# fs cmd
-# rfr
-
-# ft_init()
-break ft_init_env
-break 75
+break ft_init
 run
-init_env
+init
 fs cmd
 rfr
+
+# ft_init()
+# break ft_init_env
+# break 75
+# run
+# init_env
+# fs cmd
+# rfr
