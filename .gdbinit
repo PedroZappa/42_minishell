@@ -40,7 +40,7 @@ define get_var
 	display *var
 	display *envp
 	display *envt
-	display *var2get
+	display var2get
 end
 
 define extract_var
