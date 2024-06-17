@@ -66,7 +66,7 @@ static char	*ft_extract_var(char *select, char **envp)
 	{
 		if (!ft_strncmp(tmp, *envp, len))
 		{
-			var = ft_strdup((*envp + len));
+			var = ft_strdup(*envp + len);
 			break ;
 		}
 		++envp;
