@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/14 22:15:17 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/17 15:14:26 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 //=============================================================================/
 
 # include <errno.h>								// Get errno
+# include <stdlib.h>							// exit, free, malloc
 # include <termios.h>							// termios interface
 # include <unistd.h>							// STDIN_FILENO STDOUT_FILENO
 # include "../lib/libft/libft/libft.h"			// libft library
@@ -230,5 +231,7 @@ char		*ft_get_var(char *var, char **envp, char**envt);
 //=============================================================================/
 /// @file	800_errors.c
 int			ft_err(char *msg, int status);
+/// @file	810_free.c
+void		ft_free(t_shell *sh);
 
 #endif
