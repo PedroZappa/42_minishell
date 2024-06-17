@@ -41,7 +41,6 @@ int	main(int argc, char **argv, char **envp)
 	if (ft_init(sh, envp) != SUCCESS)
 		ft_err(INIT_ERR, errno);
 	ft_printf("MINISHELL\n");
-	ft_printf("%p", sh);
 	return (EXIT_SUCCESS);
 }
 
@@ -57,12 +56,10 @@ int	main(int argc, char **argv, char **envp)
 static int	ft_init(t_shell *sh, char **envp)
 {
 	sh = ft_calloc(1, sizeof(t_shell));
-	sh->cmds = NULL;
 	sh->envp = ft_init_env(envp);
 	sh->envt = ft_calloc(1, sizeof(char *));
 	if (!sh->envp || !sh->envt)
 		return (ft_err(ENV_INIT_ERR, errno), FAILURE);
-	sh->envt = NULL;
 	sh->path = ft_strdup("");
 	sh->home = ft_get_var("HOME", sh->envp, NULL);
 	sh->heredoc = ft_strdup("");
