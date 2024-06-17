@@ -59,11 +59,11 @@ end
 #
 ### 000_main.c
 ## main()
-# break main
-# run
-# main
-# fs cmd
-# rfr
+break main
+run
+main
+fs cmd
+rfr
 
 ## ft_init()
 # break ft_init
@@ -89,11 +89,11 @@ end
 # rfr
 
 # ft_extract_var()
-break ft_extract_var
-run
-extract_var
-fs cmd
-rfr
+# break ft_extract_var
+# run
+# extract_var
+# fs cmd
+# rfr
 
 ### Info Stats
 info break
