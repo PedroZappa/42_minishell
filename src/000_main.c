@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 20:40:17 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/14 23:27:30 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/17 15:22:08 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -41,6 +41,7 @@ int	main(int argc, char **argv, char **envp)
 	if (ft_init(sh, envp) != SUCCESS)
 		ft_err(INIT_ERR, errno);
 	ft_printf("MINISHELL\n");
+	ft_free(sh);
 	return (EXIT_SUCCESS);
 }
 
