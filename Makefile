@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/29 20:35:29 by passunca          #+#    #+#              #
-#    Updated: 2024/06/14 23:09:15 by passunca         ###   ########.fr        #
+#    Updated: 2024/06/17 15:13:17 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ FILES			= 000_main.c
 FILES			+= 100_termios.c
 FILES			+= 500_env.c
 FILES			+= 800_errors.c
+FILES			+= 810_free.c
 
 SRC		= $(addprefix $(SRC_PATH)/, $(FILES))
 OBJS	= $(SRC:$(SRC_PATH)/%.c=$(BUILD_PATH)/%.o)
