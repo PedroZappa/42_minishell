@@ -40,6 +40,8 @@ int	main(int argc, char **argv, char **envp)
 	sh = NULL;
 	if (ft_init(sh, envp) != SUCCESS)
 		ft_err(INIT_ERR, errno);
+	ft_printf("MINISHELL\n");
+	ft_printf("%p", sh);
 	return (EXIT_SUCCESS);
 }
 
