@@ -163,8 +163,8 @@ typedef struct s_cmd
 /// @var n_cmds			Number of commands
 /// @var envp			Pointer to Environment Variables
 /// @var envt			Pointer to Temporary Environment Variables
-/// @var path			Pointer to PATH
-/// @var home			Pointer to HOME
+/// @var path			Pointer to PATH array
+/// @var home			Pointer to HOME address
 /// @var heredoc		Pointer to HEREDOC
 /// @var exit_status	Exit status
 /// ...
@@ -175,7 +175,7 @@ typedef struct s_shell
 	int		n_cmds;
 	char	**envp;
 	char	**envt;
-	char	*path;
+	char	**path;
 	char	*home;
 	char	*heredoc;
 	int		exit_status;
@@ -232,7 +232,7 @@ char		*ft_get_var(char *var, char **envp, char**envt);
 /// @file	800_errors.c
 int			ft_err(char *msg, int status);
 /// @file	810_free.c
-void		ft_free(t_shell **sh);
+int			ft_free_sh(t_shell *sh, int status);
 // static int	ft_free_arr(char **array, int err);
 
 #endif
