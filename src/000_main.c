@@ -41,7 +41,7 @@ int	main(int argc, char **argv, char **envp)
 	if (ft_init(sh, envp) != SUCCESS)
 		ft_err(INIT_ERR, errno);
 	ft_printf("MINISHELL\n");
-	ft_free(sh);
+	ft_free(&sh);
 	return (EXIT_SUCCESS);
 }
 
