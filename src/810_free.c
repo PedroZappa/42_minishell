@@ -19,7 +19,7 @@ void	ft_free(t_shell **sh)
 {
 	if (sh)
 	{
-		ft_free_arr(sh->envp, 0);
+		ft_free_arr((*sh)->envp, 0);
 		free(sh);
 	}
 }
