@@ -232,6 +232,7 @@ char		*ft_get_var(char *var, char **envp, char**envt);
 /// @file	800_errors.c
 int			ft_err(char *msg, int status);
 /// @file	810_free.c
-void		ft_free(t_shell *sh);
+void		ft_free(t_shell **sh);
+// static int	ft_free_arr(char **array, int err);
 
 #endif
