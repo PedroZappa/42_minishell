@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 20:40:17 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/17 15:22:08 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/14 23:27:30 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -40,8 +40,7 @@ int	main(int argc, char **argv, char **envp)
 	sh = NULL;
 	if (ft_init(sh, envp) != SUCCESS)
 		ft_err(INIT_ERR, errno);
-	ft_printf("MINISHELL\n");
-	ft_free(&sh);
+	ft_free_sh(sh, SUCCESS);
 	return (EXIT_SUCCESS);
 }
 
@@ -57,11 +56,13 @@ int	main(int argc, char **argv, char **envp)
 static int	ft_init(t_shell *sh, char **envp)
 {
 	sh = ft_calloc(1, sizeof(t_shell));
+	sh->cmds = NULL;
 	sh->envp = ft_init_env(envp);
 	sh->envt = ft_calloc(1, sizeof(char *));
 	if (!sh->envp || !sh->envt)
 		return (ft_err(ENV_INIT_ERR, errno), FAILURE);
-	sh->path = ft_strdup("");
+	sh->envt = NULL;
+	sh->path = NULL;
 	sh->home = ft_get_var("HOME", sh->envp, NULL);
 	sh->heredoc = ft_strdup("");
 	ft_get_termios(STDIN_FILENO, &sh->termios);
@@ -76,7 +77,7 @@ static int	ft_init(t_shell *sh, char **envp)
 /// @details		- Count variables
 ///					- Allocate memory
 ///					- Copy variables
-///	@note			Used in ft_init()
+/// @note			Used in ft_init()
 static char	**ft_init_env(char **env)
 {
 	char	**new_env;
