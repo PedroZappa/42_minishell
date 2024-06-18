@@ -12,20 +12,27 @@
 
 #include "../inc/minishell.h"
 
-void	ft_free(t_shell *sh)
+static int	ft_free_arr(char **array, int err);
+
+/// @brief		Handles freeing memory
+void	ft_free(t_shell **sh)
 {
-	if (sh->envp)
-	{
-		while (sh->envp)
-		{
-			free(*sh->envp);
-			++(sh->envp);
-		}
-	}
-	if (sh->envp)
-		free(sh->envp);
-	if (sh->envt)
-		free(sh->envt);
 	if (sh)
+	{
+		ft_free_arr(sh->envp, 0);
 		free(sh);
+	}
+}
+
+static int	ft_free_arr(char **array, int err)
+{
+	int	i;
+
+	if (!array)
+		return (err);
+	i = -1;
+	while (array[++i])
+		free(array[i]);
+	free(array);
+	return (err);
 }
