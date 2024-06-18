@@ -52,6 +52,12 @@ define extract_var
 	display len
 end
 
+### 810_free.c
+define free
+	display *sh
+	display **sh
+end
+
 #
 ##
 ### Go GDB Go! I Choose YOU! 
