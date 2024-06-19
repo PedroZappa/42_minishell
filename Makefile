@@ -69,6 +69,7 @@ CC			= cc
 
 CFLAGS		= -Wall -Wextra -Werror
 DFLAGS		= -g
+RFLAGS		= -lreadline
 INC			= -I $(INC_PATH)
 
 #==============================================================================#
@@ -87,9 +88,9 @@ MKDIR_P	= mkdir -p
 
 all: $(BUILD_PATH) $(NAME)	## Compile
 
-$(NAME): deps $(BUILD_PATH) $(OBJS) $(LIBFT_ARC)			## Compile
+$(NAME): deps $(BUILD_PATH) $(LIBFT_ARC) $(OBJS)			## Compile
 	@echo "$(YEL)Compiling $(MAG)$(NAME)$(YEL) mandatory version$(D)"
-	$(CC) $(CFLAGS) $(DFLAGS) $(OBJS) $(INC) $(LIBFT_ARC) -o $(NAME)
+	$(CC) $(CFLAGS) $(DFLAGS) $(OBJS) $(INC) $(LIBFT_ARC) $(RFLAGS) -o $(NAME)
 	@echo "[$(_SUCCESS) compiling $(MAG)$(NAME)$(D) $(YEL)🖔$(D)]"
 	make norm
 
