@@ -12,27 +12,41 @@
 
 #include "../inc/minishell.h"
 
-static int	ft_free_arr(char **array, int err);
+static int	ft_free_arr(char **arr, int status);
 
 /// @brief		Handles freeing memory
-void	ft_free(t_shell **sh)
+/// @param arr		Array to be freed
+/// @param status	Exit status
+int	ft_free_sh(t_shell *sh, int status)
 {
 	if (sh)
 	{
+<<<<<<< HEAD
 		ft_free_arr((*sh)->envp, 0);
 		free(sh);
+=======
+		ft_free_arr(sh->path, status);
+		ft_free_arr(sh->envp, status);
+		ft_free_arr(sh->envt, status);
+>>>>>>> refs/remotes/origin/main
 	}
+	return (status);
 }
 
-static int	ft_free_arr(char **array, int err)
+/// @brief			Free array
+/// @param arr		Array to be freed
+/// @param status	Exit status
+/// @var i			To iterate array members
+/// @return			Returns status
+static int	ft_free_arr(char **arr, int status)
 {
 	int	i;
 
-	if (!array)
-		return (err);
+	if (!arr)
+		return (FAILURE);
 	i = -1;
-	while (array[++i])
-		free(array[i]);
-	free(array);
-	return (err);
+	while (arr[++i])
+		free(arr[i]);
+	free(arr);
+	return (status);
 }
