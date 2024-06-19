@@ -21,6 +21,8 @@
 # include <stdlib.h>							// exit, free, malloc
 # include <termios.h>							// termios interface
 # include <unistd.h>							// STDIN_FILENO STDOUT_FILENO
+# include <readline/readline.h>					// readline
+# include <readline/history.h>					// shell history
 # include "../lib/libft/libft/libft.h"			// libft library
 # include "../lib/libft/ft_printf/ft_printf.h" 	// ft_printf
 
