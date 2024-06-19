@@ -189,8 +189,6 @@ typedef struct s_shell
 //=============================================================================/
 /// @file	000_main.c
 int			main(int argc, char **argv, char **envp);
-// static int	ft_init(t_shell *sh, char **envp);
-// static char	**ft_init_env(char **env);
 
 //=============================================================================/
 //	100		Termios  														   /
@@ -215,6 +213,7 @@ void		ft_set_termios(int fd, int opts, t_term *termios);
 //	500		Env Setters/Getters												   /
 //=============================================================================/
 /// @file	500_env.c
+char		**ft_init_env(char **env);
 char		*ft_get_var(char *var, char **envp, char**envt);
 // static char	*ft_extract_var(char *select, char **env);
 

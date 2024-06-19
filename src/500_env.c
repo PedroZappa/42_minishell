@@ -20,6 +20,37 @@
 
 static char	*ft_extract_var(char *select, char **env);
 
+/// @brief			Initialize env
+/// @param env		Pointer to environment variables array
+/// @var new_env	Pointer for memory allocation
+/// @var n			Gets the count of environment variable
+/// @return			Pointer to initialized env
+/// @details		- Count variables
+///					- Allocate memory
+///					- Copy variables
+/// @note			Used in ft_init()
+char	**ft_init_env(char **env)
+{
+	char	**new_env;
+	int		n;
+
+	n = 0;
+	while (env[n])
+		++n;
+	new_env = ft_calloc((n + 1), sizeof(char *));
+	if (!new_env)
+		return (ft_err(MALLOC_ERR, errno), NULL);
+	n = -1;
+	while (env[++n])
+	{
+		new_env[n] = ft_strdup(env[n]);
+		if (!new_env[n])
+			return (NULL);
+	}
+	new_env[n] = NULL;
+	return (new_env);
+}
+
 /// @brief			Get a var from ENV
 /// @param var		Var to get
 /// @param envp		Pointer to array of pointers, primary env
