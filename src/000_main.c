@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 20:40:17 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/14 23:27:30 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/19 11:53:58 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -17,6 +17,8 @@
 ***/
 
 #include "../inc/minishell.h"
+
+// static int	ft_sh_loop(t_shell *sh);
 
 int	g_exit;
 
@@ -35,6 +37,17 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	sh = ft_calloc(1, sizeof(t_shell));
+	if (!sh)
+		return (ft_err(MALLOC_ERR, errno), FAILURE);
+	if (ft_init(sh, envp) != SUCCESS)
+		ft_err(INIT_ERR, errno);
+	// ft_sh_loop(sh);
+	ft_free_sh(sh, SUCCESS);
+	return (EXIT_SUCCESS);
+}
+
+int	ft_init(t_shell *sh, char **envp)
+{
 	sh->envp = ft_init_env(envp);
 	sh->envt = ft_calloc(1, sizeof(char *));
 	if (!sh->envp || !sh->envt)
@@ -42,9 +55,20 @@ int	main(int argc, char **argv, char **envp)
 	sh->home = ft_get_var("HOME", sh->envp, NULL);
 	sh->heredoc = ft_strdup("");
 	ft_get_termios(STDIN_FILENO, &sh->termios);
-	ft_free_arr(sh->envp, 0);
-	ft_free_arr(sh->envt, 0);
-	ft_free_arr(sh->path, 0);
-	ft_free_sh(sh, SUCCESS);
-	return (EXIT_SUCCESS);
+	return (SUCCESS);
 }
+
+// static int	ft_sh_loop(t_shell *sh)
+// {
+// 	char	*line_buf;
+// 	int		status;
+//
+// 	(void)sh;
+// 	status = 0;
+// 	line_buf = NULL;
+// 	while (1)
+// 	{
+// 		// ft_sigset();
+// 		// status = ft_parser(sh, &line_buf);
+// 	}
+// }
