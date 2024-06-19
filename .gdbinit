@@ -6,7 +6,7 @@
 set trace-commands on
 set logging enabled on
 
-# set print pretty on
+set print pretty on
 # set print elements 2
 set print array on
 
@@ -52,7 +52,7 @@ define extract_var
 	display len
 end
 
-### 810_free.c
+### 900_free.c
 define free
 	display *sh
 	display status
