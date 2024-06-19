@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/29 20:35:29 by passunca          #+#    #+#              #
-#    Updated: 2024/06/19 15:49:52 by passunca         ###   ########.fr        #
+#    Updated: 2024/06/19 21:24:56 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ FILES			= 000_main.c
 FILES			+= 010_init.c
 FILES			+= 100_termios.c
 FILES			+= 200_tokenizer.c
+FILES			+= 210_tk_list.c
 FILES			+= 300_parser.c
 FILES			+= 500_env.c
 FILES			+= 800_errors.c
