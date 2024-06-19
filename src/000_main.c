@@ -46,6 +46,15 @@ int	main(int argc, char **argv, char **envp)
 	return (EXIT_SUCCESS);
 }
 
+/// @brief			Minishell loop
+/// @param sh		Pointer to a t_shell struct
+/// @var line_buf	Line buffer
+/// @var status		Toi store parser exit status
+/// @return			Return status
+/// @details		- Setup signal handler
+///					- Call parser
+/// 				- Execute commands
+/// @note			Used in main()
 static int	ft_sh_loop(t_shell *sh)
 {
 	char	*line_buf;
