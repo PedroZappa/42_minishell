@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:48:25 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/19 16:03:26 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/19 18:24:53 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 /// @brief			Parser
 /// @param sh		Pointer to a t_shell struct
 /// @param line_buf	Line buffer
+/// @var tks		Pointer to a t_token struct
 /// @return			Return 0 on success, 1 on failure
 /// @details		- Call readline to display prompt
+///					- Add line to history
 ///					- Call tokenizer
 ///					- Handle case where tk expands to a blank
 ///					- Validate syntax
@@ -31,8 +33,6 @@ int	ft_parser(t_shell *sh, char **line_buf)
 {
 	t_token	*tks;
 
-	(void)sh;
-	(void)tks;
 	tks = NULL;
 	*line_buf = readline(GRN"minishell > "NC);
 	if (!*line_buf)
