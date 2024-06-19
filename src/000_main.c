@@ -18,7 +18,7 @@
 
 #include "../inc/minishell.h"
 
-static int	ft_init(t_shell *sh, char **envp);
+// static int	ft_init(t_shell *sh, char **envp);
 static char	**ft_init_env(char **env);
 
 int	g_exit;
@@ -37,9 +37,17 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	sh = NULL;
-	if (ft_init(sh, envp) != SUCCESS)
-		ft_err(INIT_ERR, errno);
+	sh = ft_calloc(1, sizeof(t_shell));
+	sh->envp = ft_init_env(envp);
+	sh->envt = ft_calloc(1, sizeof(char *));
+	if (!sh->envp || !sh->envt)
+		return (ft_err(ENV_INIT_ERR, errno), FAILURE);
+	sh->home = ft_get_var("HOME", sh->envp, NULL);
+	sh->heredoc = ft_strdup("");
+	ft_get_termios(STDIN_FILENO, &sh->termios);
+	ft_free_arr(sh->envp, 0);
+	ft_free_arr(sh->envt, 0);
+	ft_free_arr(sh->path, 0);
 	ft_free_sh(sh, SUCCESS);
 	return (EXIT_SUCCESS);
 }
@@ -53,21 +61,18 @@ int	main(int argc, char **argv, char **envp)
 ///				- Alloc memory for temp env
 ///				- Get HOME var
 /// @note		Used in main()
-static int	ft_init(t_shell *sh, char **envp)
-{
-	sh = ft_calloc(1, sizeof(t_shell));
-	sh->cmds = NULL;
-	sh->envp = ft_init_env(envp);
-	sh->envt = ft_calloc(1, sizeof(char *));
-	if (!sh->envp || !sh->envt)
-		return (ft_err(ENV_INIT_ERR, errno), FAILURE);
-	sh->envt = NULL;
-	sh->path = NULL;
-	sh->home = ft_get_var("HOME", sh->envp, NULL);
-	sh->heredoc = ft_strdup("");
-	ft_get_termios(STDIN_FILENO, &sh->termios);
-	return (SUCCESS);
-}
+// static int	ft_init(t_shell *sh, char **envp)
+// {
+// 	sh = ft_calloc(1, sizeof(t_shell));
+// 	sh->envp = ft_init_env(envp);
+// 	sh->envt = ft_calloc(1, sizeof(char *));
+// 	if (!sh->envp || !sh->envt)
+// 		return (ft_err(ENV_INIT_ERR, errno), FAILURE);
+// 	sh->home = ft_get_var("HOME", sh->envp, NULL);
+// 	sh->heredoc = ft_strdup("");
+// 	ft_get_termios(STDIN_FILENO, &sh->termios);
+// 	return (SUCCESS);
+// }
 
 /// @brief			Initialize env
 /// @param env		Pointer to environment variables array
