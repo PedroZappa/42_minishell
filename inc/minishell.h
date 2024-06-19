@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/19 12:44:45 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/19 15:47:49 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,8 @@ void		ft_set_termios(int fd, int opts, t_term *termios);
 //=============================================================================/
 //	200		Tokenizer  														   /
 //=============================================================================/
+/// @file		200_tokenizer.c
+int			ft_tokenizer(t_shell *sh, char **line, t_token **tks);
 
 //=============================================================================/
 //	300		Parser  														   /
@@ -245,5 +247,6 @@ int			ft_err(char *msg, int status);
 /// @file	900_free.c
 int			ft_free_sh(t_shell *sh, int status);
 int			ft_free_arr(char **array, int err);
+int			ft_free_tks(t_token **tk);
 
 #endif
