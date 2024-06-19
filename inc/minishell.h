@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/19 15:47:49 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/19 21:04:47 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 /// @define		Error messages
 # define INIT_ERR "Init Error\n"
 # define ENV_INIT_ERR "Env Init Error\n"
+# define TKNZR_ERR "Tokenizer Error\n"
 # define MALLOC_ERR "Malloc Error\n"
 # define TERMIOS_ERR "Termios Error\n"
 # define FORK_ERR "Fork error\n"
@@ -84,11 +85,11 @@ typedef enum e_exit
 /// @enum	Token types
 typedef enum e_token_type
 {
+	TK_IN,
+	TK_OUT,
 	TK_NAME,
 	TK_NULL,
 	TK_BLANK,
-	TK_IN,
-	TK_OUT,
 	TK_PIPE,
 	TK_OR,
 	TK_AND,
@@ -119,7 +120,6 @@ typedef enum e_cmd_type
 ///	@var len		Token length
 ///	@var to_del		Flag to delete token
 ///	@var next		Next token
-/// @desc			Redirection tokens: '<', '<<', '>', '>>'
 ///				...
 typedef struct s_token
 {
@@ -129,6 +129,19 @@ typedef struct s_token
 	int				to_del;
 	struct s_token	*next;
 }	t_token;
+
+/// @struct			
+/// @brief			Structure to save token operators
+/// @var tkn		Pointer to token string
+/// @var type		Token operator (see e_token_type)
+/// @var len		Token length
+/// @note			Used in 200_tokenizer.c
+typedef struct s_tk_ops
+{
+	char			*tkn;
+	t_token_type	type;
+	int				len;
+}	t_tk_ops;
 
 /// @struct			Redirection
 /// @brief	   		Structure to save redirection data
@@ -204,8 +217,12 @@ void		ft_set_termios(int fd, int opts, t_term *termios);
 //=============================================================================/
 //	200		Tokenizer  														   /
 //=============================================================================/
-/// @file		200_tokenizer.c
+/// @file	200_tokenizer.c
 int			ft_tokenizer(t_shell *sh, char **line, t_token **tks);
+/// @file	210_tokenizer.c
+t_token		*ft_tk_new(char *line, t_token_type type, int len);
+void		ft_tk_add(t_token **tk_list, t_token *tks);
+t_token		*ft_tk_last(t_token *tk);
 
 //=============================================================================/
 //	300		Parser  														   /
