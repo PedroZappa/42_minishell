@@ -237,6 +237,6 @@ int			ft_err(char *msg, int status);
 //=============================================================================/
 /// @file	900_free.c
 int			ft_free_sh(t_shell *sh, int status);
-// static int	ft_free_arr(char **array, int err);
+int			ft_free_arr(char **array, int err);
 
 #endif
