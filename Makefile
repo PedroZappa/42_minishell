@@ -50,6 +50,7 @@ TESTS_PATH		= files
 FILES			= 000_main.c
 FILES			+= 010_init.c
 FILES			+= 100_termios.c
+FILES			+= 300_parser.c
 FILES			+= 500_env.c
 FILES			+= 800_errors.c
 FILES			+= 900_free.c
