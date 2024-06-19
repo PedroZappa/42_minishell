@@ -191,7 +191,7 @@ typedef struct s_shell
 //=============================================================================/
 /// @file	000_main.c
 int			main(int argc, char **argv, char **envp);
-/// @file	001_init.c
+/// @file	010_init.c
 int			ft_init(t_shell *sh, char **envp);
 
 //=============================================================================/
