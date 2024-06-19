@@ -51,7 +51,7 @@ FILES			= 000_main.c
 FILES			+= 100_termios.c
 FILES			+= 500_env.c
 FILES			+= 800_errors.c
-FILES			+= 810_free.c
+FILES			+= 900_free.c
 
 SRC		= $(addprefix $(SRC_PATH)/, $(FILES))
 OBJS	= $(SRC:$(SRC_PATH)/%.c=$(BUILD_PATH)/%.o)

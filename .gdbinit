@@ -55,7 +55,7 @@ end
 ### 810_free.c
 define free
 	display *sh
-	display **sh
+	display status
 end
 
 #
