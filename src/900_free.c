@@ -21,6 +21,9 @@ int	ft_free_sh(t_shell *sh, int status)
 {
 	if (sh)
 	{
+		ft_free_arr(sh->envp, 0);
+		ft_free_arr(sh->envt, 0);
+		ft_free_arr(sh->path, 0);
 		free(sh->heredoc);
 		free(sh->home);
 		free(sh);
