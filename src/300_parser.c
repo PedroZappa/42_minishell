@@ -12,10 +12,16 @@
 
 #include "../inc/minishell.h"
 
-int			ft_parser(t_shell *sh, char **line_buf)
+int	ft_parser(t_shell *sh, char **line_buf)
 {
+	t_token	*tk;
+
 	(void)sh;
-	(void)line_buf;
+	(void)tk;
+	tk = NULL;
+	*line_buf = readline("minishell > ");
+	if (!*line_buf)
+		*line_buf = ft_strdup("exit");
+	add_history(*line_buf);
 	return (0);
 }
-
