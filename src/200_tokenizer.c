@@ -24,7 +24,8 @@ static char		*ft_tk_expander(t_shell *sh, char *val);
 /// @return			Return 0 on success, 1 on failure
 /// @details		- Get tokens from line
 ///					- Handle Token Expansion
-///
+///						- Expand ~ (HOME)
+///						- Expand all other tokens
 int	ft_tokenizer(t_shell *sh, char **line, t_token **tks)
 {
 	t_token	*tk_ptr;
@@ -49,9 +50,12 @@ int	ft_tokenizer(t_shell *sh, char **line, t_token **tks)
 /// @brief			Get tokens from line
 /// @param line		Line buffer
 /// @param tks		Pointer to a t_token struct
-/// @return			Return 0 on success, 1 on failure
-/// @details		- Call ft_get_tk() 
-///
+/// @return			Return 0 on success, errno on failure
+/// @details		- Loop through line
+///						- Call ft_get_tk() to get token operation
+/// 			   		- Add token to list
+///				   		- Check if line contains a matching closing quote
+///	@note			Used in ft_tokenizer()
 static int	ft_get_tkns(char *line, t_token **tks)
 {
 	t_tk_ops	tk_ptr;
