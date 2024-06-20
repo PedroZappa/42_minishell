@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/19 21:04:47 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/20 17:39:10 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@
 # define SPC " \t"
 # define SPC_QUOTES " \t\'\""
 
+///@define		Semantics
+# define NO_TOKEN 0
+
 /// @typedef	Data Types shorthands
 typedef struct termios	t_term;
 
@@ -87,7 +90,7 @@ typedef enum e_token_type
 {
 	TK_IN,
 	TK_OUT,
-	TK_NAME,
+	TK_CMD,
 	TK_NULL,
 	TK_BLANK,
 	TK_PIPE,
@@ -131,7 +134,7 @@ typedef struct s_token
 }	t_token;
 
 /// @struct			
-/// @brief			Structure to save token operators
+/// @brief			Structure to save tokens
 /// @var tkn		Pointer to token string
 /// @var type		Token operator (see e_token_type)
 /// @var len		Token length
