@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/29 20:35:29 by passunca          #+#    #+#              #
-#    Updated: 2024/06/20 17:57:36 by passunca         ###   ########.fr        #
+#    Updated: 2024/06/20 18:55:28 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ FILES			+= 200_tokenizer.c
 FILES			+= 210_tk_list.c
 FILES			+= 220_tk_expander.c
 FILES			+= 300_parser.c
+FILES			+= 400_signal.c
 FILES			+= 500_env.c
 FILES			+= 800_errors.c
 FILES			+= 900_free.c
