@@ -65,7 +65,7 @@ static int	ft_sh_loop(t_shell *sh)
 	line_buf = NULL;
 	while (1)
 	{
-		ft_sigset();
+		// ft_sigset();
 		status = ft_parser(sh, &line_buf);
 	}
 	return (status);
