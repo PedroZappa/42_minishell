@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:44:44 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/20 16:47:42 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/20 16:50:13 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ static char		*ft_tk_expander(t_shell *sh, char *val);
 /// @param tks		Pointer to a t_token struct
 /// @var tk_p		Stores the first token in the list
 ///					Used to traverse the tokens list
-/// @return			Return 0 on success, 1 on failure
-/// @details		- 
+/// @details		- Get tokens from line
+///					- Handle Token Expansion
+///						- Expand ~ (HOME)
+///						- Expand all other tokens
 int	ft_tokenizer(t_shell *sh, char **line, t_token **tks)
 {
 	t_token	*tk_p;
@@ -49,9 +51,12 @@ int	ft_tokenizer(t_shell *sh, char **line, t_token **tks)
 /// @brief			Get tokens from line
 /// @param line		Line buffer
 /// @param tks		Pointer to a t_token struct
-/// @return			Return 0 on success, 1 on failure
-/// @details		- Call ft_get_tk() 
-///
+/// @return			Return 0 on success, errno on failure
+/// @details		- Loop through line
+///						- Call ft_get_tk() to get token operation
+/// 			   		- Add token to list
+///				   		- Check if line contains a matching closing quote
+///	@note			Used in ft_tokenizer()
 static int	ft_get_tkns(char *line, t_token **tks)
 {
 	t_tk_ops	tk_p;
@@ -83,21 +88,31 @@ static int	ft_get_tkns(char *line, t_token **tks)
 /// @note			Used in ft_get_tkns()
 static t_tk_ops	ft_get_tk(char *tk)
 {
-	t_tk_ops	ops[16] = {{"<<", TK_IN, 2}, {"<", TK_IN, 1}, {">>", TK_OUT, 2},
-	{">|", TK_OUT, 2}, {"<>", TK_OUT, 2}, {">", TK_OUT, 1},
-	{" ", TK_BLANK, 1}, {"\n", TK_BLANK, 1}, {"\v", TK_BLANK, 1},
-	{"\t", TK_BLANK, 1}, {"\r", TK_BLANK, 1}, {"\f", TK_BLANK , 1},
-	{"||", TK_OR, 2}, {"&&", TK_AND, 2}, {"|", TK_PIPE, 1}, {NULL, 0, 1}};
+	t_tk_ops	ops[16];
 	t_tk_ops	curr_op;
 	int			i;
 
+	ops[0] = (t_tk_ops){"<<", TK_IN, 2};
+	ops[1] = (t_tk_ops){"<", TK_IN, 1};
+	ops[2] = (t_tk_ops){">>", TK_OUT, 2};
+	ops[3] = (t_tk_ops){">|", TK_OUT, 2};
+	ops[4] = (t_tk_ops){"<>", TK_OUT, 2};
+	ops[5] = (t_tk_ops){">", TK_OUT, 1};
+	ops[6] = (t_tk_ops){" ", TK_BLANK, 1};
+	ops[7] = (t_tk_ops){"\n", TK_BLANK, 1};
+	ops[8] = (t_tk_ops){"\v", TK_BLANK, 1};
+	ops[9] = (t_tk_ops){"\t", TK_BLANK, 1};
+	ops[10] = (t_tk_ops){"\r", TK_BLANK, 1};
+	ops[11] = (t_tk_ops){"\f", TK_BLANK, 1};
+	ops[12] = (t_tk_ops){"||", TK_OR, 2};
+	ops[13] = (t_tk_ops){"&&", TK_AND, 2};
+	ops[14] = (t_tk_ops){"|", TK_PIPE, 1};
+	ops[15] = (t_tk_ops){NULL, 0, 1};
 	curr_op = (t_tk_ops){0, 0, 0};
 	i = -1;
 	while (ops[++i].tkn)
-	{
 		if (!ft_strncmp(tk, ops[i].tkn, ops[i].len))
 			return (ops[i]);
-	}
 	return (curr_op);
 }
 
