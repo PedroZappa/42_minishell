@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:44:44 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/20 17:45:08 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/20 17:55:49 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static int		ft_get_tkns(char *line, t_token **tks);
 static t_tk_ops	ft_get_tk(char *tk);
 static int		ft_has_match(char **line);
-static char		*ft_tk_expander(t_shell *sh, char *val);
 
 /// @brief			Tokenizer
 /// @param sh		Pointer to a t_shell struct
@@ -135,7 +134,7 @@ static t_tk_ops	ft_get_tk(char *tk)
 /// @brief			Check if line contains a matching closing quote
 /// @param quote	Pointer to a quote
 /// @var line_0		Pointer to store the start of the line
-/// @return			0 on success, 1 on failure
+/// @return			SUCCESS(matching quote found) or FAILURE(no match)
 /// @details		- Checks if line contains a matching closing quote
 /// 					- If it doesn't, move pointer to end of the line
 /// @note			Used in ft_get_tkns() when a quote is parsed
@@ -151,11 +150,4 @@ static int	ft_has_match(char **quote)
 		return (FAILURE);
 	}
 	return (SUCCESS);
-}
-
-static char	*ft_tk_expander(t_shell *sh, char *val)
-{
-	(void)sh;
-	(void)val;
-	return (NULL);
 }
