@@ -87,14 +87,26 @@ static int	ft_get_tkns(char *line, t_token **tks)
 /// @note			Used in ft_get_tkns()
 static t_tk_ops	ft_get_tk(char *tk)
 {
-	t_tk_ops	ops[16] = {{"<<", TK_IN, 2}, {"<", TK_IN, 1}, {">>", TK_OUT, 2},
-	{">|", TK_OUT, 2}, {"<>", TK_OUT, 2}, {">", TK_OUT, 1},
-	{" ", TK_BLANK, 1}, {"\n", TK_BLANK, 1}, {"\v", TK_BLANK, 1},
-	{"\t", TK_BLANK, 1}, {"\r", TK_BLANK, 1}, {"\f", TK_BLANK , 1},
-	{"||", TK_OR, 2}, {"&&", TK_AND, 2}, {"|", TK_PIPE, 1}, {NULL, 0, 1}};
+	t_tk_ops	ops[16];
 	t_tk_ops	curr_op;
 	int			i;
 
+	ops[0] = (t_tk_ops){"<<", TK_IN, 2};
+	ops[1] = (t_tk_ops){"<", TK_IN, 1};
+	ops[2] = (t_tk_ops){">>", TK_OUT, 2};
+	ops[3] = (t_tk_ops){">|", TK_OUT, 2};
+	ops[4] = (t_tk_ops){"<>", TK_OUT, 2};
+	ops[5] = (t_tk_ops){">", TK_OUT, 1};
+	ops[6] = (t_tk_ops){" ", TK_BLANK, 1};
+	ops[7] = (t_tk_ops){"\n", TK_BLANK, 1};
+	ops[8] = (t_tk_ops){"\v", TK_BLANK, 1};
+	ops[9] = (t_tk_ops){"\t", TK_BLANK, 1};
+	ops[10] = (t_tk_ops){"\r", TK_BLANK, 1};
+	ops[11] = (t_tk_ops){"\f", TK_BLANK, 1};
+	ops[12] = (t_tk_ops){"||", TK_OR, 2};
+	ops[13] = (t_tk_ops){"&&", TK_AND, 2};
+	ops[14] = (t_tk_ops){"|", TK_PIPE, 1};
+	ops[15] = (t_tk_ops){NULL, 0, 1};
 	curr_op = (t_tk_ops){0, 0, 0};
 	i = -1;
 	while (ops[++i].tkn)
