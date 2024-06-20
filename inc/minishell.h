@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/20 17:56:32 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/20 18:16:58 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,33 +31,30 @@
 //=============================================================================/
 
 /// @define		Error messages
-# define INIT_ERR "Init Error\n"
-# define ENV_INIT_ERR "Env Init Error\n"
-# define TKNZR_ERR "Tokenizer Error\n"
-# define MALLOC_ERR "Malloc Error\n"
-# define TERMIOS_ERR "Termios Error\n"
-# define FORK_ERR "Fork error\n"
-# define QUOTE_ERR "No matching quote error\n"
-# define PIPE_ERR "Pipe error\n"
-# define PID_ERR "PID error\n"
-# define DIR_ERR "Directory/Fire error\n"
-# define CMD_ERR "Command not found\n"
-# define REDIR_ERR "Redirection error\n"
-# define ARG_ERR "Invalid arguments\n"
+# define INIT_ERR		"Init Error\n"
+# define ENV_INIT_ERR	"Env Init Error\n"
+# define TKNZR_ERR		"Tokenizer Error\n"
+# define MALLOC_ERR		"Malloc Error\n"
+# define TERMIOS_ERR	"Termios Error\n"
+# define FORK_ERR		"Fork error\n"
+# define QUOTE_ERR		"No matching quote error\n"
+# define PIPE_ERR		"Pipe error\n"
+# define PID_ERR		"PID error\n"
+# define DIR_ERR		"Directory/Fire error\n"
+# define CMD_ERR		"Command not found\n"
+# define REDIR_ERR		"Redirection error\n"
+# define ARG_ERR		"Invalid arguments\n"
 
 /// @define		Constants
-# define D_QUOTE '\"'
-# define QUOTE '\''
-# define STR_QUOTE "\'"
-# define STR_D_QUOTE "\""
-# define QUOTE_SET "\'\""
 # define CHARSET "?%*+,.-/#:@~ \t"
 # define N_HANDLE "&;(){}*\\"
-# define SPC " \t"
+# define QUOTE_SET "\'\""
 # define SPC_QUOTES " \t\'\""
+# define SPC " \t"
 
 ///@define		Semantics
 # define NO_TOKEN 0
+# define NO_PATH 0
 
 /// @typedef	Data Types shorthands
 typedef struct termios	t_term;
@@ -118,7 +115,7 @@ typedef enum e_cmd_type
 
 /// @struct			Token
 /// @brief			Structure to build linked list of tokens
-///	@var type		Token type
+///	@var type		Token type (see e_token_type)
 ///	@var val		Token string
 ///	@var len		Token length
 ///	@var to_del		Flag to delete token
@@ -150,7 +147,7 @@ typedef struct s_tk_ops
 /// @brief	   		Structure to save redirection data
 /// @var name  		Redirection name
 /// @var flag  		Redirection status flag
-/// @var heredoc	Pointer to Heredoc redirection node
+/// @var heredoc	Pointer to Heredoc redirection node (see t_list)
 typedef struct s_redir
 {
 	char	*name;
@@ -163,8 +160,8 @@ typedef struct s_redir
 /// @var cmd   	 	Command string
 /// @var argc  	 	Argument count
 /// @var argv  	 	Argument vector
-/// @var in	   	 	Input redirection data
-/// @var out   	 	Output redirection data
+/// @var in	   	 	Input redirection data (see t_redir)
+/// @var out   	 	Output redirection data (see t_redir)
 typedef struct s_cmd
 {
 	char	*cmd;
@@ -176,8 +173,8 @@ typedef struct s_cmd
 
 /// @struct				Shell
 /// @brief				Structure to save minishell data
-/// @var termios		Pointer to termios interface
-/// @var cmds  			Pointer to commands list
+/// @var termios		Pointer to termios interface (see t_term)
+/// @var cmds  			Pointer to commands list (see t_cmd)
 /// @var n_cmds			Number of commands
 /// @var envp			Pointer to Environment Variables
 /// @var envt			Pointer to Temporary Environment Variables
