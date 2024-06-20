@@ -9,6 +9,12 @@
 /*   Updated: 2024/06/20 18:53:13 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/**
+* @file			minishell.h
+* @brief		Header file for minishell.c
+* @version		1.0
+* @author		passunca
+***/
 
 #ifndef MINISHELL_H
 # define MINISHELL_H

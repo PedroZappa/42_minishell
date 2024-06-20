@@ -9,10 +9,14 @@
 /*   Updated: 2024/06/20 18:35:38 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/**
+* @file			900_free.c
+* @brief		Free functions
+* @version		1.0
+* @author		passunca
+***/
 
 #include "../inc/minishell.h"
-
-int	ft_free_arr(char **arr, int status);
 
 /// @brief		Handles freeing memory
 /// @param sh	Array to be freed

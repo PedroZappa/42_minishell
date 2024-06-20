@@ -9,6 +9,12 @@
 /*   Updated: 2024/06/20 18:41:37 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/**
+* @file			600_execute.c
+* @brief		Execute commands
+* @version		1.0
+* @author		passunca
+***/
 
 #include "../inc/minishell.h"
 

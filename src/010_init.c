@@ -9,6 +9,12 @@
 /*   Updated: 2024/06/19 12:18:35 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/**
+* @file			010_init.c
+* @brief		Initialize minishell
+* @version		1.0
+* @author		passunca
+***/
 
 #include "../inc/minishell.h"
 
