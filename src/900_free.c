@@ -52,7 +52,7 @@ int	ft_free_arr(char **arr, int status)
 	return (status);
 }
 
-int			ft_free_tks(t_token **tk)
+int	ft_free_tks(t_token **tk)
 {
 	(void)tk;
 	return (0);
