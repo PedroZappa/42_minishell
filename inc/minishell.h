@@ -56,6 +56,7 @@
 ///@define		Semantics
 # define NO_TOKEN 0
 # define NO_PATH 0
+# define NO_CMDS 0
 # define EXIT_SIGINT 130
 
 /// @typedef	Data Types shorthands
@@ -169,14 +170,14 @@ typedef struct s_cmd
 	char	*cmd;
 	int		argc;
 	char	**argv;
-	t_redir	*in;
-	t_redir	*out;
+	t_redir	in;
+	t_redir	out;
 }	t_cmd;
 
 /// @struct				Shell
 /// @brief				Structure to save minishell data
 /// @var termios		Pointer to termios interface (see t_term)
-/// @var cmds  			Pointer to commands list (see t_cmd)
+/// @var cmds  			Pointer to commands array (see t_cmd)
 /// @var n_cmds			Number of commands
 /// @var envp			Pointer to Environment Variables
 /// @var envt			Pointer to Temporary Environment Variables
@@ -271,5 +272,6 @@ int			ft_err(char *msg, int status);
 int			ft_free_sh(t_shell *sh, int status);
 int			ft_free_arr(char **array, int err);
 int			ft_free_tks(t_token **tk);
+int			ft_free_cmds(t_cmd *cmds, int n_cmds);
 
 #endif
