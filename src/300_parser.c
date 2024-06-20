@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:48:25 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/19 18:24:53 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/20 18:36:54 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,5 @@ int	ft_parser(t_shell *sh, char **line_buf)
 	add_history(*line_buf);
 	if (ft_tokenizer(sh, line_buf, &tks) == FAILURE)
 		return (ft_free_tks(&tks));
-	return (SUCCESS);
+	return (ft_free_tks(&tks), SUCCESS);
 }
