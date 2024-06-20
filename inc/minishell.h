@@ -269,8 +269,8 @@ int			ft_err(char *msg, int status);
 //	900		Free															   /
 //=============================================================================/
 /// @file	900_free.c
-int			ft_free_sh(t_shell *sh, int status);
-int			ft_free_arr(char **array, int err);
+void		ft_free_sh(t_shell *sh);
+int			ft_free_arr(char **arr);
 int			ft_free_tks(t_token **tk);
 int			ft_free_cmds(t_cmd *cmds, int n_cmds);
 
