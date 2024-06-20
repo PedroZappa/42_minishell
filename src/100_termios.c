@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 17:10:25 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/14 17:11:58 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/20 18:20:19 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -18,7 +18,7 @@
 
 #include "../inc/minishell.h"
 
-/// @brief			Get Termios Interface
+/// @brief			Get Termios Interface State of a given fd
 /// @param fd
 /// @param termios	Pointer to Termios Interface structure
 /// @var term_conn	Gets tcsgetattribute() return for error handling
