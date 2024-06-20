@@ -20,6 +20,8 @@ static int	ft_path_from_env(char **envp);
 /// @return			0 on success, 1 on failure.
 /// @details		- Get path and split it
 ///					- Execute commands (TODO)
+///						- Handle one command
+///						- Or handle many
 ///					- Flush stdin with termios setter
 int	ft_execute(t_shell *sh)
 {
