@@ -35,6 +35,12 @@ define init_env
 	display n
 end
 
+### 300_parser.c
+define parser
+	display *sh
+	display *line_buf
+	 
+end
 ### 500_env.c
 define get_var
 	display *var

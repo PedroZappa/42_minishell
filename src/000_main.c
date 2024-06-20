@@ -67,6 +67,13 @@ static int	ft_sh_loop(t_shell *sh)
 	{
 		// ft_sigset();
 		status = ft_parser(sh, &line_buf);
+		ft_free(line_buf);
+		if (status == FAILURE)
+			continue;
+		if (sh->n_cmds > NO_CMDS)
+			if (ft_execute(sh) == FAILURE)
+				break ;
+		ft_free_cmds(sh->cmds, sh->n_cmds);
 	}
 	return (status);
 }
