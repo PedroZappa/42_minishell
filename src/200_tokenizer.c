@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:44:44 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/19 21:24:19 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/20 16:47:42 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,26 @@ static char		*ft_tk_expander(t_shell *sh, char *val);
 /// @param sh		Pointer to a t_shell struct
 /// @param line		Line buffer
 /// @param tks		Pointer to a t_token struct
+/// @var tk_p		Stores the first token in the list
+///					Used to traverse the tokens list
 /// @return			Return 0 on success, 1 on failure
 /// @details		- 
 int	ft_tokenizer(t_shell *sh, char **line, t_token **tks)
 {
-	t_token	*tk_ptr;
+	t_token	*tk_p;
 	char	*val;
 
 	if (ft_get_tkns(*line, tks) != SUCCESS)
 		return (ft_err(TKNZR_ERR, errno));
-	tk_ptr = *tks;
-	while (tk_ptr)
+	tk_p = *tks;
+	while (tk_p)
 	{
-		val = tk_ptr->val;
+		val = tk_p->val;
 		if (val[0] == '~' && (ft_strlen(val) == 1))
-			tk_ptr->val = ft_strdup(sh->home);
+			tk_p->val = ft_strdup(sh->home);
 		else
-			tk_ptr->val = ft_tk_expander(sh, val);
-		tk_ptr = tk_ptr->next;
+			tk_p->val = ft_tk_expander(sh, val);
+		tk_p = tk_p->next;
 		free(val);
 	}
 	return (SUCCESS);
@@ -52,17 +54,17 @@ int	ft_tokenizer(t_shell *sh, char **line, t_token **tks)
 ///
 static int	ft_get_tkns(char *line, t_token **tks)
 {
-	t_tk_ops	tk_ptr;
+	t_tk_ops	tk_p;
 	char		*tmp;
 
 	tmp = line;
 	while (line && *line)
 	{
-		tk_ptr = ft_get_tk(line);
-		if (tk_ptr.tkn != 0)
+		tk_p = ft_get_tk(line);
+		if (tk_p.tkn != 0)
 		{
-			line += tk_ptr.len;
-			ft_tk_add(tks, ft_tk_new(tk_ptr.tkn, tk_ptr.type, tk_ptr.len));
+			line += tk_p.len;
+			ft_tk_add(tks, ft_tk_new(tk_p.tkn, tk_p.type, tk_p.len));
 		}
 		else if (ft_is_tkquote(&line) && ((*line == '\'') || (*line == '\"')))
 			return (ft_err(TKNZR_ERR, errno));
