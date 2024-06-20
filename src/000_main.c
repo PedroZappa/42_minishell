@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 20:40:17 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/19 12:41:22 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/20 18:54:56 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -65,7 +65,7 @@ static int	ft_sh_loop(t_shell *sh)
 	line_buf = NULL;
 	while (1)
 	{
-		// ft_sigset();
+		ft_sigset();
 		status = ft_parser(sh, &line_buf);
 	}
 	return (status);
