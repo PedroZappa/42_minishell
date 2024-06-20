@@ -20,6 +20,11 @@ void		ft_sigset(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
+/// @brief			Signal handler
+/// @param signo	Signal number
+/// @details		On SIGINT
+///					
+///					
 static void	ft_signal_handler(int signo)
 {
 	if (signo == SIGINT)
