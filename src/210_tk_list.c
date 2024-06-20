@@ -12,6 +12,13 @@
 
 #include "../inc/minishell.h"
 
+/// @brief			Create new token
+/// @param line		Line buffer
+/// @param type		Token type
+/// @param len		Length of token
+/// @return			Pointer to a t_token struct
+/// @details		...
+/// @note			Used in ft_get_tkns()
 t_token	*ft_tk_new(char *line, t_token_type type, int len)
 {
 	t_token	*tk;
@@ -30,7 +37,14 @@ t_token	*ft_tk_new(char *line, t_token_type type, int len)
 	return (tk);
 }
 
-void	ft_tk_add(t_token **tk_list, t_token *tks)
+/// @brief			Add token to list
+/// @param tk_list	Pointer to a list of t_token structs
+/// @param tk		Pointer to a t_token struct
+/// @var curr		Pointer to a local t_token struct
+/// @details		- Get last token in list
+///					-
+/// @note			Used in ft_get_tkns()
+void	ft_tk_add(t_token **tk_list, t_token *tk)
 {
 	t_token	*curr;
 
@@ -40,9 +54,14 @@ void	ft_tk_add(t_token **tk_list, t_token *tks)
 		(*curr).next = *tk_list;
 	}
 	else
-		*tk_list = tks;
+		*tk_list = tk;
 }
 
+/// @brief			Get last token in list
+/// @param tk		Pointer to a t_token struct
+/// @return			Pointer to a t_token struct
+/// @details		
+/// @note			Used in ft_tk_add()
 t_token	*ft_tk_last(t_token *tk)
 {
 	if (!tk)

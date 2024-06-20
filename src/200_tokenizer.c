@@ -20,9 +20,11 @@ static char		*ft_tk_expander(t_shell *sh, char *val);
 /// @brief			Tokenizer
 /// @param sh		Pointer to a t_shell struct
 /// @param line		Line buffer
-/// @param tks		Pointer to a t_token struct
+/// @param tks		Pointer to a list og t_token structs
 /// @return			Return 0 on success, 1 on failure
-/// @details		- 
+/// @details		- Get tokens from line
+///					- Handle Token Expansion
+///
 int	ft_tokenizer(t_shell *sh, char **line, t_token **tks)
 {
 	t_token	*tk_ptr;
@@ -92,10 +94,8 @@ static t_tk_ops	ft_get_tk(char *tk)
 	curr_op = (t_tk_ops){0, 0, 0};
 	i = -1;
 	while (ops[++i].tkn)
-	{
 		if (!ft_strncmp(tk, ops[i].tkn, ops[i].len))
 			return (ops[i]);
-	}
 	return (curr_op);
 }
 
