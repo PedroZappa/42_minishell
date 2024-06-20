@@ -71,3 +71,28 @@ int	ft_free_tks(t_token **tk)
 	}
 	return (SUCCESS);
 }
+
+int	ft_free_cmds(t_cmd *cmds, int n_cmds)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < n_cmds)
+	{
+		j = -1;
+		while (++j < cmds[i].argc)
+			if (cmds[i].argv[j])
+				ft_free(cmds[i].argv[j]);
+		free(cmds[i].argv);
+		if (cmds[i].in.name) 
+			ft_free(cmds[i].in.name);
+		if (cmds[i].out.name)
+			ft_free(cmds[i].out.name);
+		if (cmds[i].in.heredoc)
+			ft_lstclear(&cmds[i].in.heredoc, free);
+	}
+	if (cmds)
+		free(cmds);
+	return (SUCCESS);
+}
