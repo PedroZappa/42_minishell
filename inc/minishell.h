@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/20 18:16:58 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/20 18:53:13 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 //=============================================================================/
 
 # include <errno.h>								// Get errno
+# include <signal.h>							// Signal
 # include <stdlib.h>							// exit, free, malloc
 # include <termios.h>							// termios interface
 # include <unistd.h>							// STDIN_FILENO STDOUT_FILENO
@@ -40,7 +41,7 @@
 # define QUOTE_ERR		"No matching quote error\n"
 # define PIPE_ERR		"Pipe error\n"
 # define PID_ERR		"PID error\n"
-# define DIR_ERR		"Directory/Fire error\n"
+# define DIR_ERR		"Directory/File error\n"
 # define CMD_ERR		"Command not found\n"
 # define REDIR_ERR		"Redirection error\n"
 # define ARG_ERR		"Invalid arguments\n"
@@ -55,6 +56,7 @@
 ///@define		Semantics
 # define NO_TOKEN 0
 # define NO_PATH 0
+# define EXIT_SIGINT 130
 
 /// @typedef	Data Types shorthands
 typedef struct termios	t_term;
