@@ -42,7 +42,7 @@ int	main(int argc, char **argv, char **envp)
 	if (ft_init(sh, envp) != SUCCESS)
 		ft_err(INIT_ERR, errno);
 	ft_sh_loop(sh);
-	ft_free_sh(sh, SUCCESS);
+	ft_free_sh(sh);
 	return (EXIT_SUCCESS);
 }
 
