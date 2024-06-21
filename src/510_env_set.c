@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 09:15:42 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/21 09:58:47 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/21 10:18:47 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,33 @@ int	ft_set_var(char *var, char *val, char ***env)
 	return (SUCCESS);
 }
 
+/// @brief			Extract variable index from env
+/// @param var		Pointer to variable string
+/// @param env		Pointer to array of environment variables
+/// @var i			Environment variables iterator
+/// @var len		To store variable length
+/// @return			SUCCESS(var index in env) or FAILURE(-1)
+/// @details		- Check if env is NULL
+/// 				- Get variable to search for length
+///					- Loop through environment variables
+///						- If variable is found, return its index
+///	@note			Used in ft_set_var() ...
 int	ft_var_from_env(char *var, char **env)
 {
-	(void)var;
-	(void)env;
-	return (SUCCESS);
+	int	i;
+	int	len;
+
+	if (!*env)
+		return (NO_ENV);
+	i = -1;
+	len = ft_strlen(var);
+	while (env[++i])
+	{
+		if ((ft_strncmp(var, env[i], len) == SUCCESS) \
+			&& (env[i][len] == '=') || (env[i][len] == '\0'))
+			return (i);
+	}
+	return (NO_VAR);
 }
 
 char	**ft_env_add_var(char **env, char *new_var)
