@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 21:22:16 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/21 21:39:15 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/21 21:44:38 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 int	ft_exit(t_shell *sh)
 {
+	(void)sh;
 	return (SUCCESS);
 }
