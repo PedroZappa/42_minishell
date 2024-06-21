@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 16:10:50 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/20 18:41:37 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/21 10:01:11 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -23,7 +23,7 @@ static int	ft_path_from_env(char **envp);
 
 /// @brief			Execute commands
 /// @param sh		Pointer to a t_shell struct
-/// @return			0 on success, 1 on failure.
+/// @return			SUCCESS(0) or FAILURE(1)
 /// @details		- Get path and split it
 ///					- Execute commands (TODO)
 ///						- Handle one command
