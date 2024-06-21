@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:51:40 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/21 21:29:53 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/21 21:42:51 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -25,7 +25,8 @@ static int	ft_exec_check(char *cmd);
 /// @var cmd		Command type
 /// @return			SUCCESS(0) or FAILURE(1)
 /// @details		- Check command type
-///					
+///					- Execute command
+///	@note			Used in ft_execute()
 int	ft_exec_one(t_shell *sh)
 {
 	int	cmd;
@@ -46,5 +47,5 @@ static int	ft_exec_check(char *cmd)
 	type = CMD_EXEC;
 	if (ft_strncmp(cmd, "exit", 4) == SUCCESS)
 		type = CMD_EXIT;
-	return (SUCCESS);
+	return (type);
 }
