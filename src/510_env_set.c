@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 09:15:42 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/21 10:54:15 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/21 20:35:47 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -125,3 +125,7 @@ static char	**ft_env_add_var(char **env, char *new_var)
 	ft_free_arr(env);
 	return (new_env);
 }
+
+
+/*  TODO:
+ * char **ft_env_del_var(char **env, char *to_del, int j); */
