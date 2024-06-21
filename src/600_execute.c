@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 16:10:50 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/21 21:41:06 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/21 21:48:23 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -32,6 +32,8 @@ static int	ft_path_from_env(char **envp);
 int	ft_execute(t_shell *sh)
 {
 	sh->path = ft_split_path(sh->envp);
+	if (ft_exec_one(sh))
+		return (FAILURE);
 	ft_set_termios(STDIN_FILENO, TCSAFLUSH, &sh->termios);
 	return (SUCCESS);
 }
