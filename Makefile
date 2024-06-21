@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/29 20:35:29 by passunca          #+#    #+#              #
-#    Updated: 2024/06/21 09:43:37 by passunca         ###   ########.fr        #
+#    Updated: 2024/06/21 10:55:02 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ FILES			+= 300_parser.c
 FILES			+= 400_signal.c
 FILES			+= 500_env_get.c
 FILES			+= 510_env_set.c
+FILES			+= 600_execute.c
 FILES			+= 800_errors.c
 FILES			+= 900_free.c
 
