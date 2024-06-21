@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/20 18:53:13 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/21 10:00:08 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -60,6 +60,8 @@
 # define SPC " \t"
 
 ///@define		Semantics
+# define NO_ENV -1
+# define NO_VAR -1
 # define NO_TOKEN 0
 # define NO_PATH 0
 # define NO_CMDS 0
@@ -250,16 +252,22 @@ void		ft_sigset(void);
 //=============================================================================/
 //	500		Env Setters/Getters												   /
 //=============================================================================/
-/// @file	500_env.c
+/// @file	500_env_get.c
 char		**ft_init_env(char **env);
 char		*ft_get_var(char *var, char **envp, char**envt);
 // static char	*ft_extract_var(char *select, char **env);
+/// @file	510_env_set.c
+int			ft_set_var(char *var, char *val, char ***env);
+int			ft_var_from_env(char *var, char **env);
+char		**ft_env_add_var(char **env, char *new_var);
 
 //=============================================================================/
 //	600		Executer														   /
 //=============================================================================/
 /// @file	600_executer.c
 int			ft_execute(t_shell *sh);
+// static char	**ft_split_path(char **envp);
+// static int	ft_path_from_env(char **envp);
 
 //=============================================================================/
 //	700		Builtins														   /
