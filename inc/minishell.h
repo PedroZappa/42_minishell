@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/21 10:50:51 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/21 21:28:09 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -269,10 +269,15 @@ int			ft_var_from_env(char *var, char **env);
 int			ft_execute(t_shell *sh);
 // static char	**ft_split_path(char **envp);
 // static int	ft_path_from_env(char **envp);
+int			ft_exec(t_shell *sh, int cmd, int i);
+/// @file	610_exec_one.c
+int			ft_exec_one(t_shell *sh);
 
 //=============================================================================/
 //	700		Builtins														   /
 //=============================================================================/
+/// @file	700_exit.c
+int			ft_exit(char **args, t_shell *sh);
 
 //=============================================================================/
 //	800		Errors & Info													   /
