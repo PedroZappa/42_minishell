@@ -9,6 +9,12 @@
 /*   Updated: 2024/06/21 10:54:15 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/**
+* @file			510_env_set.c
+* @brief		Set environment variable
+* @version		1.0
+* @author		passunca
+***/
 
 #include "../inc/minishell.h"
 

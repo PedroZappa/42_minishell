@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 /**
-* @file			500_env.c
-* @brief		Environment related functions
+* @file			500_env_get.c
+* @brief		Get Environment variable
 * @version		1.0
-* @author		passunca & gfragoso
+* @author		passunca
 ***/
 
 #include "../inc/minishell.h"
