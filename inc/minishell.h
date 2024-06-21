@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/21 10:00:08 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/21 10:50:51 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -40,6 +40,7 @@
 /// @define		Error messages
 # define INIT_ERR		"Init Error\n"
 # define ENV_INIT_ERR	"Env Init Error\n"
+# define ENV_NULL_ERR	"Null Env Error\n"
 # define TKNZR_ERR		"Tokenizer Error\n"
 # define MALLOC_ERR		"Malloc Error\n"
 # define TERMIOS_ERR	"Termios Error\n"
@@ -259,7 +260,7 @@ char		*ft_get_var(char *var, char **envp, char**envt);
 /// @file	510_env_set.c
 int			ft_set_var(char *var, char *val, char ***env);
 int			ft_var_from_env(char *var, char **env);
-char		**ft_env_add_var(char **env, char *new_var);
+// static char	**ft_env_add_var(char **env, char *new_var);
 
 //=============================================================================/
 //	600		Executer														   /
