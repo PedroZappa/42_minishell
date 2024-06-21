@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 16:10:50 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/21 10:01:11 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/21 21:18:52 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -81,4 +81,11 @@ static int	ft_path_from_env(char **envp)
 		if (!ft_strncmp("PATH=", envp[i++], 5))
 			return (i);
 	return (-1);
+}
+
+int	ft_exec(t_shell *sh, int cmd, int i)
+{
+	if (cmd == CMD_EXIT)
+		return (ft_exit(sh));
+	return (SUCCESS);
 }
