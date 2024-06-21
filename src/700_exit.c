@@ -6,14 +6,13 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 21:22:16 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/21 21:25:35 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/21 21:39:15 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	ft_exit(char **args, t_shell *sh)
+int	ft_exit(t_shell *sh)
 {
-	int		status;
 	return (SUCCESS);
 }
