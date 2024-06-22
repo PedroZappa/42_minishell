@@ -129,11 +129,11 @@ typedef enum e_cmd_type
 
 /// @struct			Token
 /// @brief			Structure to build linked list of tokens
-///	@var type		Token type (see e_token_type)
-///	@var val		Token string
-///	@var len		Token length
-///	@var to_del		Flag to delete token
-///	@var next		Next token
+///	@param type		Token type (see e_token_type)
+///	@param val		Token string
+///	@param len		Token length
+///	@param to_del		Flag to delete token
+///	@param next		Next token
 ///				...
 typedef struct s_token
 {
@@ -146,9 +146,9 @@ typedef struct s_token
 
 /// @struct			Token Operators
 /// @brief			Helper structure to save token operators
-/// @var tkn		Pointer to token string
-/// @var type		Token operator (see e_token_type)
-/// @var len		Token length
+/// @param tkn		Pointer to token string
+/// @param type		Token operator (see e_token_type)
+/// @param len		Token length
 /// @note			Used in 200_tokenizer.c
 typedef struct s_tk_ops
 {
@@ -159,9 +159,9 @@ typedef struct s_tk_ops
 
 /// @struct			Redirection
 /// @brief	   		Structure to save redirection data
-/// @var name  		Redirection name
-/// @var flag  		Redirection status flag
-/// @var heredoc	Pointer to Heredoc redirection node (see t_list)
+/// @param name  		Redirection name
+/// @param flag  		Redirection status flag
+/// @param heredoc	Pointer to Heredoc redirection node (see t_list)
 typedef struct s_redir
 {
 	char	*name;
@@ -171,11 +171,11 @@ typedef struct s_redir
 
 /// @struct			Command
 /// @brief			Structure to save command data
-/// @var cmd   	 	Command string
-/// @var argc  	 	Argument count
-/// @var argv  	 	Argument vector
-/// @var in	   	 	Input redirection data (see t_redir)
-/// @var out   	 	Output redirection data (see t_redir)
+/// @param cmd   	 	Command string
+/// @param argc  	 	Argument count
+/// @param argv  	 	Argument vector
+/// @param in	   	 	Input redirection data (see t_redir)
+/// @param out   	 	Output redirection data (see t_redir)
 typedef struct s_cmd
 {
 	char	*cmd;
@@ -187,15 +187,15 @@ typedef struct s_cmd
 
 /// @struct				Shell
 /// @brief				Structure to save minishell data
-/// @var termios		Pointer to termios interface (see t_term)
-/// @var cmds  			Pointer to commands array (see t_cmd)
-/// @var n_cmds			Number of commands
-/// @var envp			Pointer to Environment Variables
-/// @var envt			Pointer to Temporary Environment Variables
-/// @var path			Pointer to PATH array
-/// @var home			Pointer to HOME address
-/// @var heredoc		Pointer to HEREDOC
-/// @var exit_status	Exit status
+/// @param termios		Pointer to termios interface (see t_term)
+/// @param cmds  			Pointer to commands array (see t_cmd)
+/// @param n_cmds			Number of commands
+/// @param envp			Pointer to Environment Variables
+/// @param envt			Pointer to Temporary Environment Variables
+/// @param path			Pointer to PATH array
+/// @param home			Pointer to HOME address
+/// @param heredoc		Pointer to HEREDOC
+/// @param exit_status	Exit status
 /// ...
 typedef struct s_shell
 {
@@ -279,7 +279,7 @@ int			ft_var_from_env(char *var, char **env);
 //=============================================================================/
 //	600		Executer														   /
 //=============================================================================/
-/// @file	600_executer.c
+/// @file	600_execute.c
 
 int			ft_execute(t_shell *sh);
 // static char	**ft_split_path(char **envp);
@@ -315,4 +315,4 @@ int			ft_free_cmds(t_cmd *cmds, int n_cmds);
 
 #endif
 
-/* @} */
+/** @} */

@@ -23,7 +23,7 @@ static void	ft_signal_handler(int signo);
 
 /// @brief			Set signal handlers
 /// @details		On SIGINT and SIGQUIT
-/// @notes			Used in ft_sh_loop()
+/// @note			Used in ft_sh_loop()
 void		ft_sigset(void)
 {
 	signal(SIGINT, ft_signal_handler);
@@ -51,4 +51,4 @@ static void	ft_signal_handler(int signo)
 	}
 }
 
-/* @} */
+/** @} */

@@ -166,4 +166,4 @@ static int	ft_has_match(char **quote)
 	return (SUCCESS);
 }
 
-/* @} */
+/** @} */

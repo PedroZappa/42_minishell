@@ -52,4 +52,4 @@ int	ft_parser(t_shell *sh, char **line_buf)
 	return (ft_free_tks(&tks), SUCCESS);
 }
 
-/* @} */
+/** @} */

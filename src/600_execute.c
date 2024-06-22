@@ -26,11 +26,12 @@ static int	ft_path_from_env(char **envp);
 /// @param sh		Pointer to a t_shell struct
 /// @return			SUCCESS(0)
 ///					FAILURE(1)
-/// @details		- Get path and split it
-///					- Execute commands (TODO)
-///						- Handle one command
-///						- Or handle many
-///					- Flush stdin with termios setter
+/// @details		
+/// - Get path and split it
+/// - Execute commands (TODO)
+/// 	- Handle one command
+/// 	- Or handle many
+/// - Flush stdin with termios setter
 int	ft_execute(t_shell *sh)
 {
 	sh->path = ft_split_path(sh->envp);
@@ -104,4 +105,4 @@ int	ft_exec(t_shell *sh, int cmd, int i)
 	return (SUCCESS);
 }
 
-/* @} */
+/** @} */

@@ -33,4 +33,4 @@ int	ft_err(char *msg, int status)
 	return (FAILURE);
 }
 
-/* @} */
+/** @} */

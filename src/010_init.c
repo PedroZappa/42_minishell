@@ -46,4 +46,4 @@ int	ft_init(t_shell *sh, char **envp)
 	return (SUCCESS);
 }
 
-/* @} */
+/** @} */

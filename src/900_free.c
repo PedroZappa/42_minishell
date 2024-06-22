@@ -80,13 +80,14 @@ int	ft_free_tks(t_token **tk)
 /// @var i			To iterate through the array of commands
 /// @var j			To iterate through the command's arguments
 /// @return			SUCCESS(0)
-///					FAILURE(1)
-/// @details		- Free command's arguments
-/// 				- Free command argv
-/// 				- Free command's input redirection
-/// 				- Free command's output redirection
-/// 				- Free command heredoc list
-/// 				- Free command struct
+///	@return			FAILURE(1)
+/// @details
+/// - Free command's arguments
+/// - Free command argv
+/// - Free command's input redirection
+/// - Free command's output redirection
+/// - Free command heredoc list
+/// - Free command struct
 /// @note			Used in ft_sh_loop() ...
 int	ft_free_cmds(t_cmd *cmds, int n_cmds)
 {
@@ -103,7 +104,7 @@ int	ft_free_cmds(t_cmd *cmds, int n_cmds)
 			if (cmds[i].argv[j])
 				ft_free(cmds[i].argv[j]);
 		free(cmds[i].argv);
-		if (cmds[i].in.name) 
+		if (cmds[i].in.name)
 			ft_free(cmds[i].in.name);
 		if (cmds[i].out.name)
 			ft_free(cmds[i].out.name);
@@ -115,4 +116,4 @@ int	ft_free_cmds(t_cmd *cmds, int n_cmds)
 	return (SUCCESS);
 }
 
-/* @} */
+/** @} */

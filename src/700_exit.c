@@ -28,4 +28,4 @@ int	ft_exit(t_shell *sh)
 	return (SUCCESS);
 }
 
-/* @} */
+/** @} */

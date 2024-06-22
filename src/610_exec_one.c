@@ -58,4 +58,4 @@ static int	ft_exec_check(char *cmd)
 	return (type);
 }
 
-/* @} */
+/** @} */

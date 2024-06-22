@@ -83,4 +83,4 @@ static int	ft_sh_loop(t_shell *sh)
 	return (status);
 }
 
-/* @} */
+/** @} */

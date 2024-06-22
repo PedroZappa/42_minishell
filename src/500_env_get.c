@@ -110,4 +110,4 @@ static char	*ft_extract_var(char *select, char **envp)
 	return (var);
 }
 
-/* @} */
+/** @} */

@@ -24,13 +24,14 @@
 /// @param type		Token type
 /// @param len		Length of token
 /// @return			SUCCESS(Pointer to a t_token struct)
-///					FAILURE(NULL)
-/// @details		- Allocates memory for a t_token struct
-/// 				- Stores line in val
-/// 				- Stores type in type
-/// 				- Stores len in len
-/// 				- If first character is not a quote, set to_del to 1
-/// 				- Set next to NULL (Sentinel value)
+///	@return			FAILURE(NULL)
+/// @details
+/// - Allocates memory for a t_token struct
+/// - Stores line in val
+/// - Stores type in type
+/// - Stores len in len
+/// - If first character is not a quote, set to_del to 1
+/// - Set next to NULL (Sentinel value)
 /// @note			Used in ft_get_tkns()
 t_token	*ft_tk_new(char *line, t_token_type type, int len)
 {
@@ -88,4 +89,4 @@ t_token	*ft_tk_last(t_token *tk)
 	return (tk);
 }
 
-/* @} */
+/** @} */
