@@ -19,3 +19,7 @@
 ## Termios
 - [A Brief Introduction to Termios](https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios/)
 - [A Brief Introduction to Termios: termios(3) and stty](https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios-termios3-and-stty/)
+
+## Readline
+- [The GNU Readline Library](https://tiswww.case.edu/php/chet/readline/rltop.html)
+- [Programming with GNU Readline](https://web.mit.edu/gnu/doc/html/rlman_2.html)
