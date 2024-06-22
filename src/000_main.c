@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 20:40:17 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/20 18:54:56 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/22 09:41:25 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -49,8 +49,8 @@ int	main(int argc, char **argv, char **envp)
 /// @brief			Minishell loop
 /// @param sh		Pointer to a t_shell struct
 /// @var line_buf	Line buffer
-/// @var status		Toi store parser exit status
-/// @return			Return status
+/// @var status		Stores parser exit status
+/// @return			SUCCESS(status) or FAILURE(1)
 /// @details		- Setup signal handler
 ///					- Call parser
 /// 				- Execute commands
