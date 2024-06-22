@@ -82,21 +82,19 @@ extern int				g_exit;
 //									Enums	                                   /
 //=============================================================================/
 
-/// @enum	Bool
+/// @brief		Boolean type
 typedef enum e_bool
 {
 	NO = 0,
 	YES = 1
 }	t_bool;
 
-/// @enum	Exit status
 typedef enum e_exit
 {
 	SUCCESS,
 	FAILURE
 }	t_exit;
 
-/// @enum	Token types
 typedef enum e_token_type
 {
 	TK_IN,
@@ -109,7 +107,6 @@ typedef enum e_token_type
 	TK_AND,
 }	t_token_type;
 
-/// @enum	Command types
 typedef enum e_cmd_type
 {
 	CMD_EXEC,
