@@ -26,9 +26,12 @@
 ///				FAILURE(1)
 /// @details	
 ///	- Allocate memory for minishell
-///	- Initialize envp
-///	- Alloc memory for temp env
+///	- Initialize envp (primary env)
+///	- Alloc envt (temporary env)
 ///	- Get HOME var
+///	- Initialize heredoc
+///	- Get snapshot of termios interface state
+///	- Set readline() editing mode to VI
 /// @note		Used in main()
 int	ft_init(t_shell *sh, char **envp)
 {
@@ -39,6 +42,7 @@ int	ft_init(t_shell *sh, char **envp)
 	sh->home = ft_get_var("HOME", sh->envp, NULL);
 	sh->heredoc = ft_strdup("");
 	ft_get_termios(STDIN_FILENO, &sh->termios);
+	rl_editing_mode = VI;
 	return (SUCCESS);
 }
 
