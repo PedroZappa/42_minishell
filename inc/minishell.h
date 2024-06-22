@@ -144,8 +144,8 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
-/// @struct			
-/// @brief			Structure to save tokens
+/// @struct			Token Operators
+/// @brief			Helper structure to save token operators
 /// @var tkn		Pointer to token string
 /// @var type		Token operator (see e_token_type)
 /// @var len		Token length
