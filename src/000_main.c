@@ -15,7 +15,6 @@
 *
 * @brief		Minishell main function
 * @version		1.0
-* @author		passunca & gfragoso
 ***/
 
 #include "../inc/minishell.h"
@@ -51,14 +50,15 @@ int	main(int argc, char **argv, char **envp)
 }
 
 /// @brief			Minishell loop
+/// @details
+/// - Setup signal handler
+/// - Call parser
+/// - Execute commands
 /// @param sh		Pointer to a t_shell struct
 /// @var line_buf	Line buffer
 /// @var status		Stores parser exit status
 /// @return			SUCCESS(status)
-///					FAILURE(1)
-/// @details		- Setup signal handler
-///					- Call parser
-/// 				- Execute commands
+///	@return			FAILURE(1)
 /// @note			Used in main()
 static int	ft_sh_loop(t_shell *sh)
 {

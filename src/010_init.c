@@ -10,10 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 /**
-* @file			010_init.c
+* @defgroup init Init
+* @{
+*
 * @brief		Initialize minishell
 * @version		1.0
-* @author		passunca
 ***/
 
 #include "../inc/minishell.h"
@@ -23,10 +24,11 @@
 /// @param envp	Pointer to environment variables
 /// @return		SUCCESS(0)
 ///				FAILURE(1)
-/// @details	- Allocate memory for minishell
-///				- Initialize envp
-///				- Alloc memory for temp env
-///				- Get HOME var
+/// @details	
+///	- Allocate memory for minishell
+///	- Initialize envp
+///	- Alloc memory for temp env
+///	- Get HOME var
 /// @note		Used in main()
 int	ft_init(t_shell *sh, char **envp)
 {
@@ -39,3 +41,5 @@ int	ft_init(t_shell *sh, char **envp)
 	ft_get_termios(STDIN_FILENO, &sh->termios);
 	return (SUCCESS);
 }
+
+/* @} */

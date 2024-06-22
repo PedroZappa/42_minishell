@@ -10,10 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 /**
-* @file			610_exec_one.c
+* @defgroup exec_one Execute one
+* @{
+*
 * @brief		Execute one command
 * @version		1.0
-* @author		passunca
 ***/
 
 #include "../inc/minishell.h"
@@ -24,9 +25,10 @@ static int	ft_exec_check(char *cmd);
 /// @param sh		Pointer to a t_shell struct
 /// @var cmd		Command type
 /// @return			SUCCESS(0)
-///					FAILURE(1)
-/// @details		- Check command type
-///					- Execute command
+///	@return			FAILURE(1)
+/// @details	
+/// - Check command type
+/// - Execute command
 ///	@note			Used in ft_execute()
 int	ft_exec_one(t_shell *sh)
 {
@@ -55,3 +57,5 @@ static int	ft_exec_check(char *cmd)
 		type = CMD_EXIT;
 	return (type);
 }
+
+/* @} */

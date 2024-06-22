@@ -10,10 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 /**
-* @file			minishell.h
+* @defgroup 	minishell	minishell header
+* @{
+*
 * @brief		Header file for minishell.c
 * @version		1.0
-* @author		passunca
 ***/
 
 #ifndef MINISHELL_H
@@ -312,3 +313,5 @@ int			ft_free_tks(t_token **tk);
 int			ft_free_cmds(t_cmd *cmds, int n_cmds);
 
 #endif
+
+/* @} */

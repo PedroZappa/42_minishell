@@ -10,10 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 /**
-* @file			500_env_get.c
+* @defgroup env_get Set environment variable
+* @{
+*
 * @brief		Get Environment variable
 * @version		1.0
-* @author		passunca
 ***/
 
 #include "../inc/minishell.h"
@@ -108,3 +109,5 @@ static char	*ft_extract_var(char *select, char **envp)
 	free(tmp);
 	return (var);
 }
+
+/* @} */

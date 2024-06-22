@@ -9,6 +9,13 @@
 /*   Updated: 2024/06/22 10:04:00 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/**
+* @defgroup parser Parser
+* @{
+*
+* @brief		Parser
+* @version		1.0
+***/
 
 #include "../inc/minishell.h"
 
@@ -17,18 +24,19 @@
 /// @param line_buf	Line buffer
 /// @var tks		Pointer to a t_token struct
 /// @return			SUCCESS(0)
-/// 				FAILURE(1)
-/// @details		- Call readline to display prompt
-///					- Add line to history
-///					- Call tokenizer
-///					- Handle case where tk expands to a blank
-///					- Validate syntax
-///					- Count commands
-///					- Alloc cmds array
-///					- Count cmd's arguments
-///					- Initialize cmd's list
-///					- Parse cmds
-///					- Free tks
+/// @return			FAILURE(1)
+/// @details
+/// - Call readline to display prompt
+///	- Add line to history
+///	- Call tokenizer
+///	- Handle case where tk expands to a blank
+///	- Validate syntax
+///	- Count commands
+///	- Alloc cmds array
+///	- Count cmd's arguments
+///	- Initialize cmd's list
+///	- Parse cmds
+///	- Free tks
 ///	@note			Used in ft_sh_loop()
 int	ft_parser(t_shell *sh, char **line_buf)
 {
@@ -43,3 +51,5 @@ int	ft_parser(t_shell *sh, char **line_buf)
 		return (ft_free_tks(&tks), FAILURE);
 	return (ft_free_tks(&tks), SUCCESS);
 }
+
+/* @} */

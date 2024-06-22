@@ -10,10 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 /**
-* @file			900_errors.c
+* @defgroup error Error functions
+* @{
+*
 * @brief		Error functions
 * @version		1.0
-* @author		passunca
 ***/
 
 #include "../inc/minishell.h"
@@ -31,3 +32,5 @@ int	ft_err(char *msg, int status)
 	g_exit = status;
 	return (FAILURE);
 }
+
+/* @} */

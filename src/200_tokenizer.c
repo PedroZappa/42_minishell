@@ -9,6 +9,13 @@
 /*   Updated: 2024/06/22 10:01:32 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/**
+* @defgroup tokenizer Tokenizer
+* @{
+*
+* @brief		Tokenizer
+* @version		1.0
+***/
 
 #include "../inc/minishell.h"
 
@@ -20,14 +27,16 @@ static int		ft_has_match(char **line);
 /// @param sh		Pointer to a t_shell struct
 /// @param line		Line buffer
 /// @param tks		Pointer to a t_token struct
-/// @var tk			Stores the first token in the list
-///					Used to traverse the tokens list
+/// @var tk
+/// Stores the first token in the list
+///	Used to traverse the tokens list
 /// @return			SUCCESS(0)
-///					FAILURE(errno)
-/// @details		- Get tokens from line
-///					- Handle Token Expansion
-///						- Expand ~ (HOME)
-///						- Expand all other tokens
+///	@return			FAILURE(errno)
+/// @details		
+/// - Get tokens from line
+/// - Handle Token Expansion
+/// 	- Expand ~ (HOME)
+/// 	- Expand all other tokens
 ///	@note			Used in ft_parser()
 int	ft_tokenizer(t_shell *sh, char **line, t_token **tks)
 {
@@ -156,3 +165,5 @@ static int	ft_has_match(char **quote)
 	}
 	return (SUCCESS);
 }
+
+/* @} */

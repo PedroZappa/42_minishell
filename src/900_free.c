@@ -10,10 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 /**
-* @file			900_free.c
+* @defgroup free Free functions
+* @{
+*
 * @brief		Free functions
 * @version		1.0
-* @author		passunca
 ***/
 
 #include "../inc/minishell.h"
@@ -113,3 +114,5 @@ int	ft_free_cmds(t_cmd *cmds, int n_cmds)
 		free(cmds);
 	return (SUCCESS);
 }
+
+/* @} */

@@ -10,10 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 /**
-* @file			600_execute.c
+* @defgroup execute Execute
+* @{
+*
 * @brief		Execute commands
 * @version		1.0
-* @author		passunca
 ***/
 
 #include "../inc/minishell.h"
@@ -102,3 +103,5 @@ int	ft_exec(t_shell *sh, int cmd, int i)
 		return (ft_exit(sh));
 	return (SUCCESS);
 }
+
+/* @} */

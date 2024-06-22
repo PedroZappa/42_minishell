@@ -10,10 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 /**
-* @file			100_termios.c
+* @defgroup termios Termios
+* @{
+*
 * @brief		Termios Interface
 * @version		1.0
-* @author		passunca
 ***/
 
 #include "../inc/minishell.h"
@@ -49,3 +50,5 @@ void	ft_set_termios(int fd, int opts, t_term *termios)
 	if (term_conn != SUCCESS)
 		ft_err(TERMIOS_ERR, errno);
 }
+
+/* @} */

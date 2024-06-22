@@ -9,6 +9,13 @@
 /*   Updated: 2024/06/22 10:25:58 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/**
+* @defgroup exit Exit built-in
+* @{
+*
+* @brief		Exit built-in
+* @version		1.0
+***/
 
 #include "../inc/minishell.h"
 
@@ -20,3 +27,5 @@ int	ft_exit(t_shell *sh)
 	(void)sh;
 	return (SUCCESS);
 }
+
+/* @} */

@@ -9,6 +9,13 @@
 /*   Updated: 2024/06/22 10:02:44 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/**
+* @defgroup tk_list Token list
+* @{
+*
+* @brief		Token related functions
+* @version		1.0
+***/
 
 #include "../inc/minishell.h"
 
@@ -80,3 +87,5 @@ t_token	*ft_tk_last(t_token *tk)
 	}
 	return (tk);
 }
+
+/* @} */
