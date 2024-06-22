@@ -119,7 +119,7 @@ typedef enum e_cmd_type
 	CMD_ENV,
 	CMD_EXIT,
 	CMD_HELP,
-}	t_cmd_type;
+}	t_cmd_type; 
 
 //=============================================================================/
 //                               Structures                                    /
@@ -215,14 +215,18 @@ typedef struct s_shell
 //	000		Main  															   /
 //=============================================================================/
 /// @file	000_main.c
+
 int			main(int argc, char **argv, char **envp);
+
 /// @file	010_init.c
+
 int			ft_init(t_shell *sh, char **envp);
 
 //=============================================================================/
 //	100		Termios  														   /
 //=============================================================================/
 /// @file	100_termios.c
+
 void		ft_get_termios(int fd, t_term *termios);
 void		ft_set_termios(int fd, int opts, t_term *termios);
 
@@ -230,30 +234,38 @@ void		ft_set_termios(int fd, int opts, t_term *termios);
 //	200		Tokenizer  														   /
 //=============================================================================/
 /// @file	200_tokenizer.c
+
 int			ft_tokenizer(t_shell *sh, char **line, t_token **tks);
+
 /// @file	210_tk_list.c
+
 t_token		*ft_tk_new(char *line, t_token_type type, int len);
 void		ft_tk_add(t_token **tk_list, t_token *tks);
 t_token		*ft_tk_last(t_token *tk);
+
 /// @file	220_tk_expander.c
+
 char		*ft_tk_expander(t_shell *sh, char *tk);
 
 //=============================================================================/
 //	300		Parser  														   /
 //=============================================================================/
 /// @file	300_parser.c
+
 int			ft_parser(t_shell *sh, char **line_buf);
 
 //=============================================================================/
 //	400		Signal  														   /
 //=============================================================================/
 /// @file	400_signal.c
+
 void		ft_sigset(void);
 
 //=============================================================================/
 //	500		Env Setters/Getters												   /
 //=============================================================================/
 /// @file	500_env_get.c
+
 char		**ft_init_env(char **env);
 char		*ft_get_var(char *var, char **envp, char**envt);
 // static char	*ft_extract_var(char *select, char **env);
@@ -266,6 +278,7 @@ int			ft_var_from_env(char *var, char **env);
 //	600		Executer														   /
 //=============================================================================/
 /// @file	600_executer.c
+
 int			ft_execute(t_shell *sh);
 // static char	**ft_split_path(char **envp);
 // static int	ft_path_from_env(char **envp);
@@ -277,18 +290,22 @@ int			ft_exec_one(t_shell *sh);
 //	700		Builtins														   /
 //=============================================================================/
 /// @file	700_exit.c
+
 int			ft_exit(t_shell *sh);
 
 //=============================================================================/
 //	800		Errors & Info													   /
 //=============================================================================/
 /// @file	800_errors.c
+
 int			ft_err(char *msg, int status);
+
 //
 //=============================================================================/
 //	900		Free															   /
 //=============================================================================/
 /// @file	900_free.c
+
 void		ft_free_sh(t_shell *sh);
 int			ft_free_arr(char **arr);
 int			ft_free_tks(t_token **tk);

@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 /**
-* @file			main.c
+* @defgroup main Main
+* @{
+*
 * @brief		Minishell main function
 * @version		1.0
 * @author		passunca & gfragoso
@@ -23,14 +25,15 @@ static int	ft_sh_loop(t_shell *sh);
 int	g_exit;
 
 /// @brief		Minishell main function.
+/// @details
+/// - Init Env Variables 
+/// - Init Termios Interface
+/// - Enter Minishell loop;
 /// @param argc	Number of arguments.
 /// @param argv	Array of arguments.
 /// @param envp	Array of environment variables.
 /// @return		SUCCESS(0)
-///				FAILURE(1)
-/// @details	- Init Env Variables
-///				- Init Termios Interface
-///				- Enter Minishell loop;
+///	@return		FAILURE(1)
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell	*sh;
@@ -79,3 +82,5 @@ static int	ft_sh_loop(t_shell *sh)
 	}
 	return (status);
 }
+
+/* @} */
