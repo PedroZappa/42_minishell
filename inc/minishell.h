@@ -62,6 +62,7 @@
 # define SPC " \t"
 
 ///@define		Semantics
+# define VI 0
 # define NO_ENV -1
 # define NO_VAR -1
 # define NO_TOKEN 0
