@@ -156,8 +156,8 @@ typedef struct s_tk_ops
 
 /// @struct			Redirection
 /// @brief	   		Structure to save redirection data
-/// @param name  		Redirection name
-/// @param flag  		Redirection status flag
+/// @param name  	Redirection name
+/// @param flag  	Redirection status flag
 /// @param heredoc	Pointer to Heredoc redirection node (see t_list)
 typedef struct s_redir
 {
@@ -168,11 +168,11 @@ typedef struct s_redir
 
 /// @struct			Command
 /// @brief			Structure to save command data
-/// @param cmd   	 	Command string
-/// @param argc  	 	Argument count
-/// @param argv  	 	Argument vector
-/// @param in	   	 	Input redirection data (see t_redir)
-/// @param out   	 	Output redirection data (see t_redir)
+/// @param cmd   	Command string
+/// @param argc  	Argument count
+/// @param argv  	Argument vector
+/// @param in	   	Input redirection data (see t_redir)
+/// @param out   	Output redirection data (see t_redir)
 typedef struct s_cmd
 {
 	char	*cmd;
@@ -185,8 +185,8 @@ typedef struct s_cmd
 /// @struct				Shell
 /// @brief				Structure to save minishell data
 /// @param termios		Pointer to termios interface (see t_term)
-/// @param cmds  			Pointer to commands array (see t_cmd)
-/// @param n_cmds			Number of commands
+/// @param cmds  		Pointer to commands array (see t_cmd)
+/// @param n_cmds		Number of commands
 /// @param envp			Pointer to Environment Variables
 /// @param envt			Pointer to Temporary Environment Variables
 /// @param path			Pointer to PATH array

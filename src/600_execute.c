@@ -23,15 +23,15 @@ static char	**ft_split_path(char **envp);
 static int	ft_path_from_env(char **envp);
 
 /// @brief			Execute commands
-/// @param sh		Pointer to a t_shell struct
-/// @return			SUCCESS(0)
-///					FAILURE(1)
-/// @details		
+/// @details
 /// - Get path and split it
 /// - Execute commands (TODO)
 /// 	- Handle one command
 /// 	- Or handle many
 /// - Flush stdin with termios setter
+/// @param sh		Pointer to a t_shell struct
+/// @return			SUCCESS(0)
+///					FAILURE(1)
 int	ft_execute(t_shell *sh)
 {
 	sh->path = ft_split_path(sh->envp);
@@ -42,17 +42,18 @@ int	ft_execute(t_shell *sh)
 }
 
 /// @brief			Extract PATH from envp array
+/// @details
+/// - Extract PATH from envp
+/// - Skip PATH= from envp with pointer arithmetics
+/// - Split PATH string on :
+/// - Append / to each path
+/// - Copy paths to array of paths
 /// @param envp		Pointer to array of environment variables
 /// @var path		Pointer to array of paths
 /// @var to_split	Pointer to temporary string
 /// @var i			PATH indexer
 /// @return			SUCCESS(Pointer to array of paths)
-///					FAILURE(NULL)
-/// @details		- Extract PATH from envp
-/// 				- Skip PATH= from envp with pointer arithmetics
-/// 				- Split PATH string on :
-/// 				- Append / to each path
-/// 				- Copy paths to array of paths
+///	@return			FAILURE(NULL)
 /// @note			Used in ft_execute()
 static char	**ft_split_path(char **envp)
 {
@@ -78,7 +79,7 @@ static char	**ft_split_path(char **envp)
 /// @brief			Extract PATH index in envp array
 /// @param envp		Pointer to array of environment variables
 /// @return			SUCCESS(PATH index)
-///					FAILURE(-1)
+/// @return			FAILURE(-1)
 static int	ft_path_from_env(char **envp)
 {
 	int	i;
@@ -95,7 +96,7 @@ static int	ft_path_from_env(char **envp)
 /// @var cmd		Command type
 /// @var i			Command index (to handle multiple commands)
 /// @return			SUCCESS(0)
-///					FAILURE(1)
+///	@return			FAILURE(1)
 ///	@note			Used in ft_execute()
 int	ft_exec(t_shell *sh, int cmd, int i)
 {

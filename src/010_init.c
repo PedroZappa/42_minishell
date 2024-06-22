@@ -20,11 +20,7 @@
 #include "../inc/minishell.h"
 
 /// @brief		Initialize minishell
-/// @param sh	Pointer to a t_shell struct
-/// @param envp	Pointer to environment variables
-/// @return		SUCCESS(0)
-///				FAILURE(1)
-/// @details	
+/// @details
 ///	- Allocate memory for minishell
 ///	- Initialize envp (primary env)
 ///	- Alloc envt (temporary env)
@@ -32,6 +28,10 @@
 ///	- Initialize heredoc
 ///	- Get snapshot of termios interface state
 ///	- Set readline() editing mode to VI
+/// @param sh	Pointer to a t_shell struct
+/// @param envp	Pointer to environment variables
+/// @return		SUCCESS(0)
+///				FAILURE(1)
 /// @note		Used in main()
 int	ft_init(t_shell *sh, char **envp)
 {

@@ -25,7 +25,7 @@ int	g_exit;
 
 /// @brief		Minishell main function.
 /// @details
-/// - Init Env Variables 
+/// - Init Env Variables
 /// - Init Termios Interface
 /// - Enter Minishell loop;
 /// @param argc	Number of arguments.
