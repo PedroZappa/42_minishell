@@ -1,0 +1,13 @@
+# Setup lldb for minishell
+target create minishell
+
+# Set breakpoints
+breakpoint set --name main
+
+# Info
+breakpoint list
+watchpoint list
+
+# GO lldb GO!!
+run
+thread list
