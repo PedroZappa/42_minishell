@@ -6,12 +6,15 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 21:22:16 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/21 21:44:38 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/22 10:25:58 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
+/// @brief			exit built-in
+/// @param sh		Pointer to a t_shell struct
+/// ...
 int	ft_exit(t_shell *sh)
 {
 	(void)sh;

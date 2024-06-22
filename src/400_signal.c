@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:46:27 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/20 18:54:25 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/22 10:05:25 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 static void	ft_signal_handler(int signo);
 
+/// @brief			Set signal handlers
+/// @details		On SIGINT and SIGQUIT
+/// @notes			Used in ft_sh_loop()
 void		ft_sigset(void)
 {
 	signal(SIGINT, ft_signal_handler);
@@ -24,7 +27,7 @@ void		ft_sigset(void)
 /// @param signo	Signal number
 /// @details		On SIGINT
 ///					
-///					
+///	@note			Used in ft_sgnal_handler()
 static void	ft_signal_handler(int signo)
 {
 	if (signo == SIGINT)

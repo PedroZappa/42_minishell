@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:53:41 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/22 09:44:52 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/22 10:00:14 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -21,7 +21,8 @@
 /// @brief		Initialize minishell
 /// @param sh	Pointer to a t_shell struct
 /// @param envp	Pointer to environment variables
-/// @return		SUCCESS(0) or FAILURE(1)
+/// @return		SUCCESS(0)
+///				FAILURE(1)
 /// @details	- Allocate memory for minishell
 ///				- Initialize envp
 ///				- Alloc memory for temp env

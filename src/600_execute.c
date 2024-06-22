@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 16:10:50 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/21 21:48:23 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/22 10:20:20 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -23,7 +23,8 @@ static int	ft_path_from_env(char **envp);
 
 /// @brief			Execute commands
 /// @param sh		Pointer to a t_shell struct
-/// @return			SUCCESS(0) or FAILURE(1)
+/// @return			SUCCESS(0)
+///					FAILURE(1)
 /// @details		- Get path and split it
 ///					- Execute commands (TODO)
 ///						- Handle one command
@@ -43,7 +44,8 @@ int	ft_execute(t_shell *sh)
 /// @var path		Pointer to array of paths
 /// @var to_split	Pointer to temporary string
 /// @var i			PATH indexer
-/// @return			SUCCESS(Pointer to array of paths) or FAILURE(NULL)
+/// @return			SUCCESS(Pointer to array of paths)
+///					FAILURE(NULL)
 /// @details		- Extract PATH from envp
 /// 				- Skip PATH= from envp with pointer arithmetics
 /// 				- Split PATH string on :
@@ -73,7 +75,8 @@ static char	**ft_split_path(char **envp)
 
 /// @brief			Extract PATH index in envp array
 /// @param envp		Pointer to array of environment variables
-/// @return			SUCCESS(PATH index) or FAILURE(-1)
+/// @return			SUCCESS(PATH index)
+///					FAILURE(-1)
 static int	ft_path_from_env(char **envp)
 {
 	int	i;
@@ -85,6 +88,13 @@ static int	ft_path_from_env(char **envp)
 	return (-1);
 }
 
+/// @brief			Execute one command
+/// @param sh		Pointer to a t_shell struct
+/// @var cmd		Command type
+/// @var i			Command index (to handle multiple commands)
+/// @return			SUCCESS(0)
+///					FAILURE(1)
+///	@note			Used in ft_execute()
 int	ft_exec(t_shell *sh, int cmd, int i)
 {
 	(void)i;

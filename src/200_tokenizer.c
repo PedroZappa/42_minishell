@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:44:44 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/20 17:55:49 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/22 10:01:32 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,15 @@ static int		ft_has_match(char **line);
 /// @param sh		Pointer to a t_shell struct
 /// @param line		Line buffer
 /// @param tks		Pointer to a t_token struct
-/// @var tk		Stores the first token in the list
+/// @var tk			Stores the first token in the list
 ///					Used to traverse the tokens list
+/// @return			SUCCESS(0)
+///					FAILURE(errno)
 /// @details		- Get tokens from line
 ///					- Handle Token Expansion
 ///						- Expand ~ (HOME)
 ///						- Expand all other tokens
+///	@note			Used in ft_parser()
 int	ft_tokenizer(t_shell *sh, char **line, t_token **tks)
 {
 	t_token	*tk;
@@ -50,9 +53,10 @@ int	ft_tokenizer(t_shell *sh, char **line, t_token **tks)
 /// @brief			Get tokens from line
 /// @param tks		Pointer to a t_token struct
 /// @param line		Line buffer
-/// @var tk			Stores extracted token from line
 /// @var tmp		Pointer to the previous token
-/// @return			Return 0 on success, errno on failure
+/// @var tk			Stores extracted token from line
+/// @return			SUCCESS(0) on success,
+///					FAILURE(1) on failure
 /// @details		- Stash line in tmp
 ///					- Loop through line
 ///						- Get token data
@@ -96,10 +100,10 @@ static int	ft_get_tkns(char *line, t_token **tks)
 /// @var ops		Pointer to an array of t_tk_ops structs
 /// @var ret		Pointer to a t_tk_ops struct to be returned
 /// @var i			To iterate the array of supported tokens
-/// @return			t_tk_ops struct
-/// @details		- Iniitializes t_tk_ops array with all supported tokens
+/// @return			SUCCESS(t_tk_ops struct with op data) 
+///					FAILURE(empty t_tk_ops struct)
+/// @details		- Initializes t_tk_ops array with all supported tokens
 ///					- Compares tk with each token in the array
-///					- Re
 /// @note			Used in ft_get_tkns()
 static t_tk_ops	ft_get_tk(char *tk)
 {
@@ -134,7 +138,8 @@ static t_tk_ops	ft_get_tk(char *tk)
 /// @brief			Check if line contains a matching closing quote
 /// @param quote	Pointer to a quote
 /// @var line_0		Pointer to store the start of the line
-/// @return			SUCCESS(matching quote found) or FAILURE(no match)
+/// @return			SUCCESS(matching quote found)
+///					FAILURE(no match)
 /// @details		- Checks if line contains a matching closing quote
 /// 					- If it doesn't, move pointer to end of the line
 /// @note			Used in ft_get_tkns() when a quote is parsed

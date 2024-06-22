@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:48:25 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/20 18:36:54 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/22 10:04:00 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 /// @param sh		Pointer to a t_shell struct
 /// @param line_buf	Line buffer
 /// @var tks		Pointer to a t_token struct
-/// @return			Return 0 on success, 1 on failure
+/// @return			SUCCESS(0)
+/// 				FAILURE(1)
 /// @details		- Call readline to display prompt
 ///					- Add line to history
 ///					- Call tokenizer
@@ -38,7 +39,7 @@ int	ft_parser(t_shell *sh, char **line_buf)
 	if (!*line_buf)
 		*line_buf = ft_strdup("exit");
 	add_history(*line_buf);
-	if (ft_tokenizer(sh, line_buf, &tks) == FAILURE)
-		return (ft_free_tks(&tks));
+	if (ft_tokenizer(sh, line_buf, &tks))
+		return (ft_free_tks(&tks), FAILURE);
 	return (ft_free_tks(&tks), SUCCESS);
 }

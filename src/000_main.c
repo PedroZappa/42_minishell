@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 20:40:17 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/22 09:41:25 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/22 09:59:44 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -26,7 +26,8 @@ int	g_exit;
 /// @param argc	Number of arguments.
 /// @param argv	Array of arguments.
 /// @param envp	Array of environment variables.
-/// @return		0 on success, 1 on failure.
+/// @return		SUCCESS(0)
+///				FAILURE(1)
 /// @details	- Init Env Variables
 ///				- Init Termios Interface
 ///				- Enter Minishell loop;
@@ -38,7 +39,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	sh = ft_calloc(1, sizeof(t_shell));
 	if (!sh)
-		return (ft_err(MALLOC_ERR, errno), FAILURE);
+		return (ft_err(MALLOC_ERR, errno), EXIT_FAILURE);
 	if (ft_init(sh, envp) != SUCCESS)
 		ft_err(INIT_ERR, errno);
 	ft_sh_loop(sh);
@@ -50,7 +51,8 @@ int	main(int argc, char **argv, char **envp)
 /// @param sh		Pointer to a t_shell struct
 /// @var line_buf	Line buffer
 /// @var status		Stores parser exit status
-/// @return			SUCCESS(status) or FAILURE(1)
+/// @return			SUCCESS(status)
+///					FAILURE(1)
 /// @details		- Setup signal handler
 ///					- Call parser
 /// 				- Execute commands

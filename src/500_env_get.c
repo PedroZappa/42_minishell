@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   500_env.c                                          :+:      :+:    :+:   */
+/*   500_env_get.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 22:02:06 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/14 23:14:28 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/22 10:09:05 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -24,7 +24,8 @@ static char	*ft_extract_var(char *select, char **env);
 /// @param env		Pointer to environment variables array
 /// @var new_env	Pointer for memory allocation
 /// @var n			Gets the count of environment variable
-/// @return			Pointer to initialized env
+/// @return			SUCCESS(Pointer to new env array)
+///					FAILURE(NULL)
 /// @details		- Count variables
 ///					- Allocate memory
 ///					- Copy variables
@@ -54,9 +55,10 @@ char	**ft_init_env(char **env)
 /// @brief			Get a var from ENV
 /// @param var		Var to get
 /// @param envp		Pointer to array of pointers, primary env
-/// @param envt		Pointer to array of pointerdataemdata env
+/// @param envt		Pointer to array of pointers, temporary env
 /// @var var2get	Variable to extract from env
-/// @return			Selected variable to get
+/// @return			SUCCESS(var2get)
+///					FAILURE(NULL)
 /// @details		- Extract from envp
 ///					- If NULL extract from temporary env;
 /// @note			Used in ft_init()
@@ -76,7 +78,8 @@ char	*ft_get_var(char *var, char **envp, char**envt)
 /// @var tmp		Pointer to temporary variable
 /// @var var		Pointer to return variable
 /// @var len		Length of the selected variable
-/// @return			Pointer to selected var string or NULL
+/// @return			SUCCESS(requested var)
+///					FAILURE(NULL)
 /// @detail			- Check input for NULL
 ///					- Format select string
 ///					- Take its length

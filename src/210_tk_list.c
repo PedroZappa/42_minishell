@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 20:34:20 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/19 21:04:12 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/22 10:02:44 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,14 @@
 /// @param line		Line buffer
 /// @param type		Token type
 /// @param len		Length of token
-/// @return			Pointer to a t_token struct
-/// @details		...
+/// @return			SUCCESS(Pointer to a t_token struct)
+///					FAILURE(NULL)
+/// @details		- Allocates memory for a t_token struct
+/// 				- Stores line in val
+/// 				- Stores type in type
+/// 				- Stores len in len
+/// 				- If first character is not a quote, set to_del to 1
+/// 				- Set next to NULL (Sentinel value)
 /// @note			Used in ft_get_tkns()
 t_token	*ft_tk_new(char *line, t_token_type type, int len)
 {
@@ -29,9 +35,8 @@ t_token	*ft_tk_new(char *line, t_token_type type, int len)
 	tk->val = ft_substr(line, 0, len);
 	tk->type = type;
 	tk->len = len;
-	if ((tk->val[0] == '\'') || (tk->val[0] == '\"'))
-		tk->to_del = 0;
-	else
+	tk->to_del = 0;
+	if ((tk->val[0] != '\'') || (tk->val[0] != '\"'))
 		tk->to_del = 1;
 	tk->next = NULL;
 	return (tk);
@@ -59,8 +64,9 @@ void	ft_tk_add(t_token **tk_list, t_token *tk)
 
 /// @brief			Get last token in list
 /// @param tk		Pointer to a t_token struct
-/// @return			Pointer to a t_token struct
-/// @details		
+/// @return			SUCCESS(Pointer to a t_token struct)
+/// 				FAILURE(NULL)
+/// @details		- Traverse list until last token is reached
 /// @note			Used in ft_tk_add()
 t_token	*ft_tk_last(t_token *tk)
 {

@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:12:55 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/20 18:35:38 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/22 10:27:17 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -37,7 +37,8 @@ void	ft_free_sh(t_shell *sh)
 /// @param arr		Array to be freed
 /// @param status	Exit status
 /// @var i			To iterate array members
-/// @return			SUCCESS(0) or FAILURE(1)
+/// @return			SUCCESS(0)
+///					FAILURE(1)
 int	ft_free_arr(char **arr)
 {
 	int	i;
@@ -54,7 +55,8 @@ int	ft_free_arr(char **arr)
 /// @brief			Free tokens
 /// @param tk		Pointer to a list of t_token structs
 /// @var tmp		Pointer to hold next token in the list
-/// @return			SUCCESS(0) or FAILURE(1)
+/// @return			SUCCESS(0)
+///					FAILURE(1)
 int	ft_free_tks(t_token **tk)
 {
 	t_token	*tmp;
@@ -76,7 +78,8 @@ int	ft_free_tks(t_token **tk)
 /// @param n_cmds	Number of commands in the array
 /// @var i			To iterate through the array of commands
 /// @var j			To iterate through the command's arguments
-/// @return			SUCCESS(0) or FAILURE(1)
+/// @return			SUCCESS(0)
+///					FAILURE(1)
 /// @details		- Free command's arguments
 /// 				- Free command argv
 /// 				- Free command's input redirection

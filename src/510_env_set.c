@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 09:15:42 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/21 20:35:47 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/22 10:18:15 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -25,8 +25,10 @@ static char	**ft_env_add_var(char **env, char *new_var);
 /// @param val		Pointer to value to be set
 /// @param env		Pointer to array of environment variables
 /// @var new		Pointer for local string manipulation
+/// @var max		Stores max length of new variable
 /// @var i			Environment variables iterator
-/// @return			SUCCESS(0) or FAILURE(-1)
+/// @return			SUCCESS(0) 
+///					FAILURE(-1)
 /// @details		Build new variable string
 ///					- If val exists	concatenate "=" and val to var;
 ///					- else just copy var;
@@ -37,6 +39,7 @@ static char	**ft_env_add_var(char **env, char *new_var);
 int	ft_set_var(char *var, char *val, char ***env)
 {
 	char	*new;
+	int		max;
 	int		i;
 
 	if (!*env)
@@ -50,8 +53,8 @@ int	ft_set_var(char *var, char *val, char ***env)
 		(*env) = ft_env_add_var(*env, new);
 	else
 	{
-		if (ft_strncmp(new, (*env)[i], ft_max(ft_strlen(new), \
-			ft_strlen((*env)[i]))) != SUCCESS)
+		max = ft_max(ft_strlen(new), ft_strlen((*env)[i]));
+		if (ft_strncmp(new, (*env)[i], max != SUCCESS))
 			ft_swapstrs(&(*env)[i], &new);
 		free(new);
 	}
@@ -63,7 +66,8 @@ int	ft_set_var(char *var, char *val, char ***env)
 /// @param env		Pointer to array of environment variables
 /// @var i			Environment variables iterator
 /// @var len		To store variable length
-/// @return			SUCCESS(var index in env) or FAILURE(-1)
+/// @return			SUCCESS(var index in env)
+///					FAILURE(-1)
 /// @details		- Check if env is NULL
 /// 				- Get variable to search for length
 ///					- Loop through environment variables
@@ -93,7 +97,8 @@ int	ft_var_from_env(char *var, char **env)
 /// @param new_var	Pointer to new variable to add to env
 /// @var new_env	Pointer to new array of environment variables
 /// @var i			Environment variables iterator
-/// @return			SUCCESS(Pointer to new env array) or FAILURE(NULL)
+/// @return			SUCCESS(Pointer to new env array)
+///					FAILURE(NULL)
 /// @details		- Loop through old environment variables
 ///					- Count variables in old env
 ///					- Increment var count by 2 to account for new var & NULL
@@ -126,6 +131,5 @@ static char	**ft_env_add_var(char **env, char *new_var)
 	return (new_env);
 }
 
-
-/*  TODO:
+/*  TODO: Implement me!!
  * char **ft_env_del_var(char **env, char *to_del, int j); */

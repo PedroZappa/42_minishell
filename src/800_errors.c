@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   900_errors.c                                       :+:      :+:    :+:   */
+/*   800_errors.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 17:35:23 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/14 17:45:32 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/22 10:26:18 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -21,7 +21,7 @@
 /// @brief			Error printing
 /// @param msg		Message to be printed
 /// @param status	Error number
-/// @return			Returns 1
+/// @return			SUCCESS(1)
 /// @details		Prints message to stderr
 ///					- Saves exit code to g_exit
 /// @note			Used all over the code base
