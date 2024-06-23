@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:48:25 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/23 11:14:36 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/23 11:20:47 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -20,6 +20,7 @@
 #include "../inc/minishell.h"
 
 static int	ft_check_syntax(t_token *tks);
+static int	ft_count_cmds(t_token *tks);
 
 /// @brief			Parser
 /// @details
@@ -54,6 +55,10 @@ int	ft_parser(t_shell *sh, char **line_buf)
 	return (ft_free_tks(&tks), SUCCESS);
 	if (ft_check_syntax(tks))
 		return (ft_free_tks(&tks), FAILURE);
+	sh->n_cmds = ft_count_cmds(tks);
+	sh->cmds = (t_cmd *)ft_calloc(sh->n_cmds, sizeof(t_cmd));
+	if (!sh->cmds)
+		return (ft_err(MALLOC_ERR, errno), FAILURE);
 }
 
 /// @brief Check if a given token's list is a valid command syntactically
@@ -74,6 +79,22 @@ static int	ft_check_syntax(t_token *tks)
 		tks = tks->next;
 	}
 	return (SUCCESS);
+}
+
+static int	ft_count_cmds(t_token *tks)
+{
+	int	count;
+
+	count = 0;
+	while (tks)
+	{
+		if (!count)
+			count = 1;
+		if ((tks->type == TK_PIPE) || (tks->type == TK_OR))
+			++count;
+		tks = tks->next;
+	}
+	return (count);
 }
 
 /** @} */
