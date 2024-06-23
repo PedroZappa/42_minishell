@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:48:25 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/23 11:56:53 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/23 12:24:22 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -54,7 +54,7 @@ int	ft_parser(t_shell *sh, char **line_buf)
 	add_history(*line_buf);
 	if (ft_tokenizer(sh, line_buf, &tks))
 		return (ft_free_tks(&tks), FAILURE);
-	return (ft_free_tks(&tks), SUCCESS);
+	ft_rm_blank_tk(&tks);
 	if (ft_check_syntax(tks))
 		return (ft_free_tks(&tks), FAILURE);
 	sh->n_cmds = ft_count_cmds(tks);
