@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:48:25 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/23 11:29:21 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/23 11:43:52 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -101,6 +101,46 @@ static int	ft_count_cmds(t_token *tks)
 		tks = tks->next;
 	}
 	return (count);
+}
+
+/// @brief			Count a given command's arguments
+/// @details
+/// - For each parsed command:
+///		- Initialize argument counter
+///		- Save current token in prev
+///		- Loop through token list to get the current command arguments
+///			- If token is not an input or output redirection
+///				- Increment argument counter
+///			- Save current token in prev
+///			- Move to next token
+///		- Move to next token
+///		- Increment command counter
+/// @param sh		Pointer to a t_shell struct
+/// @param tks		Pointer to a t_token struct
+/// @var prev		Pointer to the previous token
+/// @var i			Count of commands
+/// @note			Used in ft_parser()
+static void	ft_count_args(t_shell *sh, t_token *tks)
+{
+	t_token	*prev;
+	int		i;
+
+	while (i < sh->n_cmds)
+	{
+		sh->cmds[i].argc = 0;
+		prev = tks;
+		while (tks && (tks->type != TK_PIPE))
+		{
+			if ((tks->type == TK_CMD) \
+				&& (prev->type != TK_IN) && (prev->type != TK_OUT))
+				++sh->cmds[i].argc;
+			prev = tks;
+			tks = tks->next;
+		}
+		if (tks)
+			tks = tks->next;
+		++i;
+	}
 }
 
 /** @} */
