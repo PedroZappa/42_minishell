@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:48:25 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/23 11:20:47 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/23 11:22:46 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -81,6 +81,10 @@ static int	ft_check_syntax(t_token *tks)
 	return (SUCCESS);
 }
 
+/// @brief			Count commands
+/// @param tks		Pointer to a t_token struct
+/// @var count		Count of commands
+/// @return			Number of commands
 static int	ft_count_cmds(t_token *tks)
 {
 	int	count;
