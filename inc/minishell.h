@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/23 11:34:27 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/23 11:51:48 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -252,6 +252,7 @@ int			ft_parser(t_shell *sh, char **line_buf);
 /// static int	ft_check_syntax(t_token *tks);
 /// static int	ft_count_cmds(t_token *tks);
 /// static void	ft_count_args(t_shell *sh, t_token *tks);
+/// static int	ft_parse_cmds(t_token *tks, t_cmd *cmds, int i, int j);
 
 //=============================================================================/
 //	400		Signal  														   /

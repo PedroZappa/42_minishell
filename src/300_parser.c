@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:48:25 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/23 11:43:52 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/23 11:56:53 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -21,6 +21,8 @@
 
 static int	ft_check_syntax(t_token *tks);
 static int	ft_count_cmds(t_token *tks);
+static void	ft_count_args(t_shell *sh, t_token *tks);
+static int	ft_parse_cmds(t_token *tks, t_cmd *cmds, int i, int j);
 
 /// @brief			Parser
 /// @details
@@ -61,6 +63,10 @@ int	ft_parser(t_shell *sh, char **line_buf)
 		return (ft_err(MALLOC_ERR, errno), FAILURE);
 	if (sh->n_cmds == NO_CMDS)
 		return (ft_free_nocmds(sh->cmds, sh->n_cmds, &tks));
+	ft_count_args(sh, tks);
+	if (ft_parse_cmds(tks, sh->cmds, 0, 0))
+		return (ft_free_tks(&tks), FAILURE);
+	return (ft_free_tks(&tks), SUCCESS);
 }
 
 /// @brief Check if a given token's list is a valid command syntactically
@@ -141,6 +147,36 @@ static void	ft_count_args(t_shell *sh, t_token *tks)
 			tks = tks->next;
 		++i;
 	}
+}
+
+/// @brief			Parse commands from token list
+/// @param tks		Pointer to a t_token struct list
+/// @param cmds		Pointer to an array of t_cmd structs
+/// @param i		Count of commands
+/// @param j		Count of arguments
+/// @return			SUCCESS(0)
+/// @return			FAILURE(1)
+static int	ft_parse_cmds(t_token *tks, t_cmd *cmds, int i, int j)
+{
+	while (tks)
+	{
+		cmds[i].argv = ft_calloc((cmds[i].argc + 1), sizeof(char *));
+		if (!cmds[i].argv)
+			return (ft_err(MALLOC_ERR, errno), FAILURE);
+		j = 0;
+		while (tks && (tks->type != TK_PIPE) && (tks->type != TK_OR))
+		{
+			if (tks->type == TK_CMD)
+				cmds[i].argv[j++] = ft_strdup(tks->val);
+			if (tks)
+				tks = tks->next;
+		}
+		if (tks)
+			tks = tks->next;
+		cmds[i].argv[j] = NULL;
+		++i;
+	}
+	return (SUCCESS);
 }
 
 /** @} */
