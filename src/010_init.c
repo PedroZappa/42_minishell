@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:53:41 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/22 10:00:14 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/23 12:05:22 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -44,6 +44,26 @@ int	ft_init(t_shell *sh, char **envp)
 	ft_get_termios(STDIN_FILENO, &sh->termios);
 	rl_editing_mode = VI;
 	return (SUCCESS);
+}
+
+/// @brief Initialize in & out redirections
+/// @param cmds Pointer to an array of t_cmd structs
+/// @param n_cmds Number of commands in the array
+/// @var i To iterate through the array of commands
+/// @note		Used in ft_parser()
+void	ft_reset_redir(t_cmd *cmds, int n_cmds)
+{
+	int	i;
+
+	i = -1;
+	while (++i < n_cmds)
+	{
+		cmds[i].in.name = NULL;
+		cmds[i].in.heredoc = NULL;
+		cmds[i].in.flag = -1;
+		cmds[i].out.name = NULL;
+		cmds[i].out.flag = -1;
+	}
 }
 
 /** @} */

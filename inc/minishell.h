@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/23 11:51:48 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/23 12:03:10 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -219,6 +219,7 @@ int			main(int argc, char **argv, char **envp);
 
 /// @file	010_init.c
 int			ft_init(t_shell *sh, char **envp);
+void		ft_reset_redir(t_cmd *cmd, int n_cmds);
 
 //=============================================================================/
 //	100		Termios  														   /
