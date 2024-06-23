@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:48:25 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/22 10:04:00 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/23 11:11:01 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -18,6 +18,8 @@
 ***/
 
 #include "../inc/minishell.h"
+
+static int	ft_check_syntax(t_token *tks);
 
 /// @brief			Parser
 /// @param sh		Pointer to a t_shell struct
@@ -50,6 +52,27 @@ int	ft_parser(t_shell *sh, char **line_buf)
 	if (ft_tokenizer(sh, line_buf, &tks))
 		return (ft_free_tks(&tks), FAILURE);
 	return (ft_free_tks(&tks), SUCCESS);
+	if (ft_check_syntax(tks))
+		return (ft_free_tks(&tks), FAILURE);
+}
+
+/// @brief Check if a given token's list is a valid command syntactically
+/// @details
+/// - If first token is a pipe, return failure
+/// - Loop through token list
+///		- If there is no next token, and the current tkn is a TK_PIPE or TK_OR
+///		...
+/// @param tks	Pointer to a t_token struct
+/// @return		SUCCESS(0)
+/// @note		Used in ft_parser()
+static int	ft_check_syntax(t_token *tks)
+{
+	while(tks)
+	{
+
+		tks = tks->next;
+	}
+	return (SUCCESS);
 }
 
 /** @} */
