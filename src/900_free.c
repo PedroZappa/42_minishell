@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:12:55 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/22 10:27:17 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/23 11:27:09 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -114,6 +114,19 @@ int	ft_free_cmds(t_cmd *cmds, int n_cmds)
 	if (cmds)
 		free(cmds);
 	return (SUCCESS);
+}
+
+/// @brief			Free commands and tokens when no commands were parsed
+/// @param cmds		Pointer to an array of t_cmd structs
+/// @param n_cmds	Number of commands in the array
+/// @param tks		Pointer to a list of t_token structs
+///	@return			FAILURE(1)
+/// @note			Used in ft_parser()
+int	ft_free_nocmds(t_cmd *cmds, int n_cmds, t_token **tks)
+{
+	ft_free_cmds(cmds, n_cmds);
+	ft_free_tks(tks);
+	return (FAILURE);
 }
 
 /** @} */

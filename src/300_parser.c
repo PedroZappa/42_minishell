@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:48:25 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/23 11:22:46 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/23 11:29:21 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -59,6 +59,8 @@ int	ft_parser(t_shell *sh, char **line_buf)
 	sh->cmds = (t_cmd *)ft_calloc(sh->n_cmds, sizeof(t_cmd));
 	if (!sh->cmds)
 		return (ft_err(MALLOC_ERR, errno), FAILURE);
+	if (sh->n_cmds == NO_CMDS)
+		return (ft_free_nocmds(sh->cmds, sh->n_cmds, &tks));
 }
 
 /// @brief Check if a given token's list is a valid command syntactically

@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/23 11:07:48 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/23 11:26:03 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -309,6 +309,7 @@ void		ft_free_sh(t_shell *sh);
 int			ft_free_arr(char **arr);
 int			ft_free_tks(t_token **tk);
 int			ft_free_cmds(t_cmd *cmds, int n_cmds);
+int			ft_free_nocmds(t_cmd *cmds, int n_cmds, t_token **tks);
 
 #endif
 
