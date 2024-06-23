@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:48:25 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/23 11:11:01 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/23 11:14:36 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -22,11 +22,6 @@
 static int	ft_check_syntax(t_token *tks);
 
 /// @brief			Parser
-/// @param sh		Pointer to a t_shell struct
-/// @param line_buf	Line buffer
-/// @var tks		Pointer to a t_token struct
-/// @return			SUCCESS(0)
-/// @return			FAILURE(1)
 /// @details
 /// - Call readline to display prompt
 ///	- Add line to history
@@ -39,6 +34,11 @@ static int	ft_check_syntax(t_token *tks);
 ///	- Initialize cmd's list
 ///	- Parse cmds
 ///	- Free tks
+/// @param sh		Pointer to a t_shell struct
+/// @param line_buf	Line buffer
+/// @var tks		Pointer to a t_token struct
+/// @return			SUCCESS(0)
+/// @return			FAILURE(1)
 ///	@note			Used in ft_sh_loop()
 int	ft_parser(t_shell *sh, char **line_buf)
 {
@@ -67,9 +67,10 @@ int	ft_parser(t_shell *sh, char **line_buf)
 /// @note		Used in ft_parser()
 static int	ft_check_syntax(t_token *tks)
 {
+	if (tks && (tks->type == TK_PIPE || tks->type == TK_OR))
+		return (ft_syntax_err(tks->val, FAILURE));
 	while(tks)
 	{
-
 		tks = tks->next;
 	}
 	return (SUCCESS);
