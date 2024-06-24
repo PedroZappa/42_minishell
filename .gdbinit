@@ -54,6 +54,7 @@ end
 
 define get_tk
 	display tk
+	display tk[i]
 	display ret
 	display i
 end
