@@ -58,6 +58,27 @@ define get_tk
 	display i
 end
 
+# 210_tk_list.c
+define tk_new
+	display line
+	display *line
+	display type
+	display len
+	display tk
+	display *tk
+end
+
+define tk_add
+	display *tk_list
+	display tk
+	display curr
+	display *curr
+end
+
+define tk_last
+	display tk
+end
+
 ### 300_parser.c
 define parser
 	display *sh
