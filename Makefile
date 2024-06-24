@@ -85,9 +85,13 @@ INC			= -I $(INC_PATH)
 #                                COMMANDS                                      #
 #==============================================================================#
 
+### Core Utils
 RM		= rm -rf
 AR		= ar rcs
 MKDIR_P	= mkdir -p
+
+### Valgrind
+VGDB_ARGS 	= --vgdb-error=0 --log-file=gdb.txt --leak-check=full --show-leak-kinds=all
 
 #==============================================================================#
 #                                  RULES                                       #
@@ -180,8 +184,8 @@ gdb: all $(NAME) $(TEMP_PATH)			## Debug w/ gdb
 	make get_log
 
 vgdb: all $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck) & gdb
-	tmux split-window -h "valgrind --vgdb-error=0 --log-file=gdb.txt --leak-check=full --show-leak-kinds=all ./$(NAME) $(ARG)"
-	make vgdb_pid
+	tmux split-window -h "valgrind $(VGDB_ARGS) ./$(NAME) $(ARG)"
+	make vgdb_cmd
 	tmux split-window -v "gdb --tui -x $(TEMP_PATH)/gdb_commands.txt $(NAME)"
 	tmux resize-pane -U 18
 	make get_log
@@ -198,7 +202,7 @@ helgrind: all $(NAME) $(TEMP_PATH)			## Debug threads w/ helgrind
 
 vgdb_helgrind: all $(NAME) $(TEMP_PATH)			## Debug threads w/ helgrind & gdb
 	tmux split-window -h "valgrind --vgdb-error=0 --log-file=gdb.txt --tool=helgrind ./$(NAME) $(ARG)"
-	make vgdb_pid
+	make vgdb_cmd
 	tmux split-window -v "gdb --tui -x $(TEMP_PATH)/gdb_commands.txt $(NAME)"
 	tmux resize-pane -U 18
 	make get_log
@@ -222,9 +226,12 @@ get_log:
 		tail -f gdb.txt; \
 	fi
 
-vgdb_pid: $(NAME) $(TEMP_PATH)
+vgdb_cmd: $(NAME) $(TEMP_PATH)
 	printf "target remote | vgdb --pid=" > $(TEMP_PATH)/gdb_commands.txt
 	printf "$(shell pgrep -f valgrind)" >> $(TEMP_PATH)/gdb_commands.txt
+	printf "\n" >> $(TEMP_PATH)/gdb_commands.txt
+	# printf "break main\n" >> $(TEMP_PATH)/gdb_commands.txt
+	cat .vgdbinit >> $(TEMP_PATH)/gdb_commands.txt
 
 ##@ Clean-up Rules 󰃢
 
