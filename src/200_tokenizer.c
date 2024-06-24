@@ -102,6 +102,7 @@ static int	ft_get_tkns(char *line, t_token **tks)
 	}
 	if (tmp != line)
 		ft_tk_add(tks, ft_tk_new(tmp, TK_CMD, (line - tmp)));
+	ft_free(tk.tkn);
 	return (SUCCESS);
 }
 
