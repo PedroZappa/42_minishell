@@ -46,6 +46,7 @@ minishell
 .build/
 lib/
 gdb.txt
+massif.*
 
 # Kernel Module Compile Results
 *.mod*
