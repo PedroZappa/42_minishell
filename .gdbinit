@@ -35,6 +35,17 @@ define init_env
 	display n
 end
 
+### 200_tokenizer.c
+define tokenizer
+	display *sh
+	display *line
+	display **line
+	display *tks
+	display **tks
+	display *tk
+	display *name
+end
+
 ### 300_parser.c
 define parser
 	display *sh
@@ -71,11 +82,11 @@ end
 #
 ### 000_main.c
 ## main()
-break main
-run
-main
-fs cmd
-rfr
+# break main
+# run
+# main
+# fs cmd
+# rfr
 
 ## ft_init()
 # break ft_init
