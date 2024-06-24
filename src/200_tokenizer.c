@@ -41,20 +41,20 @@ static int		ft_has_match(char **line);
 int	ft_tokenizer(t_shell *sh, char **line, t_token **tks)
 {
 	t_token	*tk;
-	char	*val;
+	char	*name;
 
 	if (ft_get_tkns(*line, tks) != SUCCESS)
 		return (ft_err(TKNZR_ERR, errno));
 	tk = *tks;
 	while (tk)
 	{
-		val = tk->val;
-		if (val[0] == '~' && (ft_strlen(val) == 1))
-			tk->val = ft_strdup(sh->home);
+		name = tk->name;
+		if (name[0] == '~' && (ft_strlen(name) == 1))
+			tk->name = ft_strdup(sh->home);
 		else
-			tk->val = ft_tk_expander(sh, val);
+			tk->name = ft_tk_expander(sh, name);
 		tk = tk->next;
-		free(val);
+		free(name);
 	}
 	return (SUCCESS);
 }

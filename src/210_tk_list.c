@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 20:34:20 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/22 10:02:44 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/24 15:47:32 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -27,7 +27,7 @@
 ///	@return			FAILURE(NULL)
 /// @details
 /// - Allocates memory for a t_token struct
-/// - Stores line in val
+/// - Stores line in name
 /// - Stores type in type
 /// - Stores len in len
 /// - If first character is not a quote, set to_del to 1
@@ -40,11 +40,11 @@ t_token	*ft_tk_new(char *line, t_token_type type, int len)
 	tk = ft_calloc(1, sizeof(t_token));
 	if (!tk)
 		return (ft_err(TKNZR_ERR, errno), NULL);
-	tk->val = ft_substr(line, 0, len);
+	tk->name = ft_substr(line, 0, len);
 	tk->type = type;
 	tk->len = len;
 	tk->to_del = 0;
-	if ((tk->val[0] != '\'') || (tk->val[0] != '\"'))
+	if ((tk->name[0] != '\'') || (tk->name[0] != '\"'))
 		tk->to_del = 1;
 	tk->next = NULL;
 	return (tk);

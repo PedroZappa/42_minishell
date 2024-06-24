@@ -81,7 +81,7 @@ int	ft_parser(t_shell *sh, char **line_buf)
 static int	ft_check_syntax(t_token *tks)
 {
 	if (tks && (tks->type == TK_PIPE || tks->type == TK_OR))
-		return (ft_syntax_err(tks->val, FAILURE));
+		return (ft_syntax_err(tks->name, FAILURE));
 	while(tks)
 	{
 		tks = tks->next;
@@ -179,7 +179,7 @@ static int	ft_parse_cmds(t_token *tks, t_cmd *cmds, int i, int j)
 		while (tks && (tks->type != TK_PIPE) && (tks->type != TK_OR))
 		{
 			if (tks->type == TK_CMD)
-				cmds[i].argv[j++] = ft_strdup(tks->val);
+				cmds[i].argv[j++] = ft_strdup(tks->name);
 			if (tks)
 				tks = tks->next;
 		}

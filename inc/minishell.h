@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/23 12:13:27 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/24 15:45:17 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -127,7 +127,7 @@ typedef enum e_cmd_type
 /// @struct			Token
 /// @brief			Structure to build linked list of tokens
 ///	@param type		Token type (see e_token_type)
-///	@param val		Token string
+///	@param name		Token string
 ///	@param len		Token length
 ///	@param to_del		Flag to delete token
 ///	@param next		Next token
@@ -135,7 +135,7 @@ typedef enum e_cmd_type
 typedef struct s_token
 {
 	t_token_type	type;
-	char			*val;
+	char			*name;
 	int				len;
 	int				to_del;
 	struct s_token	*next;
