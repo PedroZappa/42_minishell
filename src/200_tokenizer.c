@@ -132,22 +132,23 @@ static t_tk_ops	ft_get_tk(char *tk)
 	ops[6] = (t_tk_ops){"||", TK_OR, 2};
 	ops[7] = (t_tk_ops){"&&", TK_AND, 2};
 	ops[8] = (t_tk_ops){"|", TK_PIPE, 1};
-	ops[9] = (t_tk_ops){NULL, 0, 1};
-	ops[10] = (t_tk_ops){" ", TK_BLANK, 1};
-	ops[11] = (t_tk_ops){"\n", TK_BLANK, 1};
-	ops[12] = (t_tk_ops){"\v", TK_BLANK, 1};
-	ops[13] = (t_tk_ops){"\t", TK_BLANK, 1};
-	ops[14] = (t_tk_ops){"\r", TK_BLANK, 1};
-	ops[15] = (t_tk_ops){"\f", TK_BLANK, 1};
+	ops[9] = (t_tk_ops){" ", TK_BLANK, 1};
+	ops[10] = (t_tk_ops){"\n", TK_BLANK, 1};
+	ops[11] = (t_tk_ops){"\v", TK_BLANK, 1};
+	ops[12] = (t_tk_ops){"\t", TK_BLANK, 1};
+	ops[13] = (t_tk_ops){"\r", TK_BLANK, 1};
+	ops[14] = (t_tk_ops){"\f", TK_BLANK, 1};
+	ops[15] = (t_tk_ops){NULL, 0, 1};
 	ret = (t_tk_ops){0, TK_CMD, 0};
-	i = -1;
-	while (ops[++i].tkn)
-		if (!ft_strncmp(tk, ops[i].tkn, ops[i].len))
-			return (ops[i]);
 	i = 0;
 	while (tk[i] && (!ft_isspace(tk[i])))
 		++i;
 	ret.tkn = ft_substr(tk, 0, i);
+	ret.len = i;
+	i = -1;
+	while (ops[++i].tkn)
+		if (!ft_strncmp(tk, ops[i].tkn, ops[i].len))
+			return (ops[i]);
 	return (ret);
 }
 
