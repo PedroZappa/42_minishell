@@ -47,7 +47,7 @@ end
 
 define get_tkns
 	display line
-	display *tks
+	display **tks
 	display tmp
 	display tk
 end
@@ -55,6 +55,7 @@ end
 define get_tk
 	display tk
 	display tk[i]
+	display ops[i]
 	display ret
 	display i
 end
@@ -62,7 +63,6 @@ end
 # 210_tk_list.c
 define tk_new
 	display line
-	display *line
 	display type
 	display len
 	display tk
