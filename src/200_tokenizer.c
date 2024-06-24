@@ -73,7 +73,7 @@ int	ft_tokenizer(t_shell *sh, char **line, t_token **tks)
 /// 	- If the token is part of a command, add it to tokens list
 ///		- If a operation token is parsed:
 /// 		- Move pointer to next token
-/// 		- If the token is not a blank, add it to the list
+/// 		- If the token is not a blank, add it to the li	st
 ///		- Check if line contains a matching closing quote
 /// - Get last remaining remaining token
 ///	@note			Used in ft_tokenizer()
@@ -138,11 +138,15 @@ static t_tk_ops	ft_get_tk(char *tk)
 	ops[13] = (t_tk_ops){"\t", TK_BLANK, 1};
 	ops[14] = (t_tk_ops){"\r", TK_BLANK, 1};
 	ops[15] = (t_tk_ops){"\f", TK_BLANK, 1};
-	ret = (t_tk_ops){0, 0, 0};
+	ret = (t_tk_ops){0, TK_CMD, 0};
 	i = -1;
 	while (ops[++i].tkn)
 		if (!ft_strncmp(tk, ops[i].tkn, ops[i].len))
 			return (ops[i]);
+	i = 0;
+	while (tk[i] && (!ft_isspace(tk[i])))
+		++i;
+	ret.tkn = ft_substr(tk, 0, i);
 	return (ret);
 }
 
