@@ -19,7 +19,7 @@ SHELL	:= bash
 
 # Default test values
 IN_PATH		?= $(SRC_PATH)
-ARG			= ...
+ARG			=
 
 #==============================================================================#
 #                                     NAMES                                    #
