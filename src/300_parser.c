@@ -164,8 +164,8 @@ static void	ft_count_args(t_shell *sh, t_token *tks)
 ///		- Move to next command
 /// @param tks		Pointer to a t_token struct list
 /// @param cmds		Pointer to an array of t_cmd structs
-/// @param i		Count of commands
-/// @param j		Count of arguments
+/// @param i		Count of commands (Norminette made me do this)
+/// @param j		Count of arguments (Norminette made me do this)
 /// @return			SUCCESS(0)
 /// @return			FAILURE(1)
 static int	ft_parse_cmds(t_token *tks, t_cmd *cmds, int i, int j)
