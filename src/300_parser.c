@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:48:25 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/23 12:24:22 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/23 17:14:06 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -48,7 +48,7 @@ int	ft_parser(t_shell *sh, char **line_buf)
 	t_token	*tks;
 
 	tks = NULL;
-	*line_buf = readline(GRN"minishell > "NC);
+	*line_buf = readline(MAG"minishell > "NC);
 	if (!*line_buf)
 		*line_buf = ft_strdup("exit");
 	add_history(*line_buf);
@@ -58,7 +58,7 @@ int	ft_parser(t_shell *sh, char **line_buf)
 	if (ft_check_syntax(tks))
 		return (ft_free_tks(&tks), FAILURE);
 	sh->n_cmds = ft_count_cmds(tks);
-	sh->cmds = (t_cmd *)ft_calloc(sh->n_cmds, sizeof(t_cmd));
+	sh->cmds = ft_calloc(sh->n_cmds, sizeof(t_cmd));
 	if (!sh->cmds)
 		return (ft_err(MALLOC_ERR, errno), FAILURE);
 	if (sh->n_cmds == NO_CMDS)
@@ -150,6 +150,18 @@ static void	ft_count_args(t_shell *sh, t_token *tks)
 }
 
 /// @brief			Parse commands from token list
+/// @details
+/// - For each token in the list
+///		- Allocate memory for argv
+///		- While current token is not TK_PIPE or TK_OR (Gets one command)
+///			- If current token is a command
+///				- Save command in argv
+///			- If current token is not Null
+///				- Move to next token
+///		- If current token exists
+///			- Move to next token
+///		- Set last argument in argv to NULL
+///		- Move to next command
 /// @param tks		Pointer to a t_token struct list
 /// @param cmds		Pointer to an array of t_cmd structs
 /// @param i		Count of commands

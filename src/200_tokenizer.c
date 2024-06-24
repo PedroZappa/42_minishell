@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:44:44 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/22 10:01:32 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/23 17:29:17 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -32,7 +32,7 @@ static int		ft_has_match(char **line);
 ///	Used to traverse the tokens list
 /// @return			SUCCESS(0)
 ///	@return			FAILURE(errno)
-/// @details		
+/// @details
 /// - Get tokens from line
 /// - Handle Token Expansion
 /// 	- Expand ~ (HOME)
@@ -66,15 +66,16 @@ int	ft_tokenizer(t_shell *sh, char **line, t_token **tks)
 /// @var tk			Stores extracted token from line
 /// @return			SUCCESS(0) on success,
 ///					FAILURE(1) on failure
-/// @details		- Stash line in tmp
-///					- Loop through line
-///						- Get token data
-///						- Store command token in the tokens list
-///				   		- Check if line contains a matching closing quote
-/// 			   		- If a operation token was parsed:
-///							- Move pointer to next token
-///							- If the token is not a blank, add it to the list
-///					- Get last remaining remaining token
+/// @details
+/// - Stash line in tmp
+/// - Loop through line
+/// 	- Get token data
+/// 	- If the token is part of a command, add it to tokens list
+///		- If a operation token is parsed:
+/// 		- Move pointer to next token
+/// 		- If the token is not a blank, add it to the list
+///		- Check if line contains a matching closing quote
+/// - Get last remaining remaining token
 ///	@note			Used in ft_tokenizer()
 static int	ft_get_tkns(char *line, t_token **tks)
 {
@@ -86,21 +87,21 @@ static int	ft_get_tkns(char *line, t_token **tks)
 	{
 		tk = ft_get_tk(line);
 		if ((tk.tkn != NO_TOKEN) && (tmp != line))
-			ft_tk_add(tks, ft_tk_new(tmp, (line - tmp), TK_CMD));
-		if (((*line == '\'') || (*line == '\"')) && ft_has_match(&line))
-			return (FAILURE);
-		else if (tk.tkn != NO_TOKEN)
+			ft_tk_add(tks, ft_tk_new(tmp, TK_CMD, (line - tmp)));
+		if (tk.tkn != NO_TOKEN)
 		{
 			line += tk.len;
 			if (tk.type != TK_BLANK)
 				ft_tk_add(tks, ft_tk_new(tk.tkn, tk.type, tk.len));
 			tmp = line;
 		}
+		else if (((*line == '\'') || (*line == '\"')) && ft_has_match(&line))
+			return (FAILURE);
 		else
 			++line;
 	}
 	if (tmp != line)
-		ft_tk_add(tks, ft_tk_new(tmp, (line - tmp), TK_CMD));
+		ft_tk_add(tks, ft_tk_new(tmp, TK_CMD, (line - tmp)));
 	return (SUCCESS);
 }
 
@@ -109,10 +110,11 @@ static int	ft_get_tkns(char *line, t_token **tks)
 /// @var ops		Pointer to an array of t_tk_ops structs
 /// @var ret		Pointer to a t_tk_ops struct to be returned
 /// @var i			To iterate the array of supported tokens
-/// @return			SUCCESS(t_tk_ops struct with op data) 
+/// @return			SUCCESS(t_tk_ops struct with op data)
 ///					FAILURE(empty t_tk_ops struct)
-/// @details		- Initializes t_tk_ops array with all supported tokens
-///					- Compares tk with each token in the array
+/// @details
+/// - Initializes t_tk_ops array with all supported tokens
+///	- Compares tk with each token in the array
 /// @note			Used in ft_get_tkns()
 static t_tk_ops	ft_get_tk(char *tk)
 {
