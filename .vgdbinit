@@ -1,4 +1,5 @@
 break ft_tokenizer
 fs cmd
-start
 info break
+info thread
+continue
