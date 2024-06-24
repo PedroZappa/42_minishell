@@ -39,11 +39,23 @@ end
 define tokenizer
 	display *sh
 	display *line
-	display **line
-	display *tks
+	display *line
 	display **tks
 	display *tk
-	display *name
+	display name
+end
+
+define get_tkns
+	display line
+	display *tks
+	display tmp
+	display tk
+end
+
+define get_tk
+	display tk
+	display ret
+	display i
 end
 
 ### 300_parser.c
@@ -52,6 +64,14 @@ define parser
 	display *line_buf
 	 
 end
+
+define count_args
+	display *sh
+	display *tks
+	display *prev
+	display i 
+end
+
 ### 500_env.c
 define get_var
 	display *var
