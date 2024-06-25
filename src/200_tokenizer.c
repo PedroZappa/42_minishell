@@ -21,6 +21,7 @@
 
 static int		ft_get_tkns(char *line, t_token **tks);
 static t_tk_ops	ft_get_tk(char *tk);
+static void		ft_init_ops(t_tk_ops *ops);
 static int		ft_has_match(char **line);
 
 /// @brief			Tokenizer
@@ -123,6 +124,22 @@ static t_tk_ops	ft_get_tk(char *tk)
 	t_tk_ops	ret;
 	int			i;
 
+	ft_init_ops(ops);
+	ret = (t_tk_ops){0, TK_CMD, 0};
+	i = 0;
+	while (tk[i] && (!ft_isspace(tk[i])))
+		++i;
+	ret.tkn = ft_substr(tk, 0, i);
+	ret.len = i;
+	i = -1;
+	while (ops[++i].tkn)
+		if (!ft_strncmp(tk, ops[i].tkn, ops[i].len))
+			return (ops[i]);
+	return (ret);
+}
+
+static void	ft_init_ops(t_tk_ops *ops)
+{
 	ops[0] = (t_tk_ops){"<<", TK_IN, 2};
 	ops[1] = (t_tk_ops){"<", TK_IN, 1};
 	ops[2] = (t_tk_ops){">>", TK_OUT, 2};
@@ -139,17 +156,6 @@ static t_tk_ops	ft_get_tk(char *tk)
 	ops[13] = (t_tk_ops){"\r", TK_BLANK, 1};
 	ops[14] = (t_tk_ops){"\f", TK_BLANK, 1};
 	ops[15] = (t_tk_ops){NULL, 0, 1};
-	ret = (t_tk_ops){0, TK_CMD, 0};
-	i = 0;
-	while (tk[i] && (!ft_isspace(tk[i])))
-		++i;
-	ret.tkn = ft_substr(tk, 0, i);
-	ret.len = i;
-	i = -1;
-	while (ops[++i].tkn)
-		if (!ft_strncmp(tk, ops[i].tkn, ops[i].len))
-			return (ops[i]);
-	return (ret);
 }
 
 /// @brief			Check if line contains a matching closing quote
