@@ -54,7 +54,6 @@ int	ft_parser(t_shell *sh, char **line_buf)
 	add_history(*line_buf);
 	if (ft_tokenizer(sh, line_buf, &tks))
 		return (ft_free_tks(&tks), FAILURE);
-	ft_rm_blank_tk(&tks);
 	if (ft_check_syntax(tks))
 		return (ft_free_tks(&tks), FAILURE);
 	sh->n_cmds = ft_count_cmds(tks);
