@@ -97,7 +97,7 @@ end
 define parse_cmds
 	display *tks
 	display *cmds
-	display cmds[i]
+	display cmds[i].argv
 	display i
 	display j
 end
