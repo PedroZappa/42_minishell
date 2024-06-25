@@ -298,6 +298,7 @@ int			ft_exec_one(t_shell *sh);
 
 /// @file	700_exit.c
 int			ft_exit(t_shell *sh, int n);
+/// static void	ft_kill(t_shell *sh, int sig);
 
 //=============================================================================/
 //	800		Errors & Info													   /
