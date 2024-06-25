@@ -1,6 +1,6 @@
 #
 ##
-### GDB Settings 
+### GDB Settings
 ##
 #
 set trace-commands on
@@ -84,14 +84,22 @@ end
 define parser
 	display *sh
 	display *line_buf
-	 
+
 end
 
 define count_args
 	display *sh
 	display *tks
 	display *prev
-	display i 
+	display i
+end
+
+define parse_cmds
+	display *tks
+	display *cmds
+	display cmds[i]
+	display i
+	display j
 end
 
 ### 500_env.c
