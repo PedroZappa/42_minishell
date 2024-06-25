@@ -23,16 +23,16 @@ static char	**ft_split_path(char **envp);
 static int	ft_path_from_env(char **envp);
 
 /**
-* @brief			Execute commands
+* @brief	Execute commands
 * @details
 * - Get path and split it
 * - Execute commands (TODO)
 * 	- Handle one command
 * 	- Or handle many
 * - Flush stdin with termios setter
-* @param sh		Pointer to a t_shell struct
-* @return			SUCCESS(0)
-*					FAILURE(1)
+* @param sh	Pointer to a t_shell struct
+* @return	SUCCESS(0)
+* @return	FAILURE(1)
 * @endcode
 */
 int	ft_execute(t_shell *sh)
@@ -79,7 +79,7 @@ static char	**ft_split_path(char **envp)
 		return (NULL);
 }
 
-/// @brief			Extract PATH index in envp array
+/// @brief			Extract PATH index from envp array
 /// @param envp		Pointer to array of environment variables
 /// @return			SUCCESS(PATH index)
 /// @return			FAILURE(-1)
@@ -94,18 +94,17 @@ static int	ft_path_from_env(char **envp)
 	return (-1);
 }
 
-/// @brief			Execute one command
+/// @brief			Execute one builtin command
 /// @param sh		Pointer to a t_shell struct
-/// @var cmd		Command type
-/// @var i			Command index (to handle multiple commands)
+/// @param cmd		Command type
+/// @param n		Command index (to handle multiple commands)
 /// @return			SUCCESS(0)
 ///	@return			FAILURE(1)
 ///	@note			Used in ft_execute()
-int	ft_exec(t_shell *sh, int cmd, int i)
+int	ft_exec(t_shell *sh, int cmd, int n)
 {
-	(void)i;
 	if (cmd == CMD_EXIT)
-		return (ft_exit(sh));
+		g_exit = ft_exit(sh, n);
 	return (SUCCESS);
 }
 
