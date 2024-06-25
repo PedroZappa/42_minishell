@@ -19,7 +19,7 @@
 
 #include "../inc/minishell.h"
 
-void		ft_rm_blank_tk(t_token **tks)
+void	ft_rm_blank_tk(t_token **tks)
 {
 	(void)tks;
 }
