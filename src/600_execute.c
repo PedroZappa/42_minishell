@@ -104,7 +104,7 @@ static int	ft_path_from_env(char **envp)
 int	ft_exec(t_shell *sh, int cmd, int n)
 {
 	if (cmd == CMD_EXIT)
-		g_exit = ft_exit(sh, n);
+		return (ft_exit(sh, n));
 	return (SUCCESS);
 }
 
