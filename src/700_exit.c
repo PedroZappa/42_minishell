@@ -27,18 +27,21 @@ static void	ft_kill(t_shell *sh, int sig);
 int	ft_exit(t_shell *sh, int n)
 {
 	if (sh->cmds[n].argc == 1)
-		ft_kill(sh, 0);
+		ft_kill(sh, SUCCESS);
 	else if (sh->cmds[n].argc > 1)
-		g_exit = ft_err("exit: too many arguments", FAILURE);
+		return (ft_err("exit: too many arguments\n", FAILURE);
 	return (SUCCESS);
 }
 
+/// @brief			exit built-in
+/// @param sh		Pointer to a t_shell struct
+/// @param sig		Signal number
 static void	ft_kill(t_shell *sh, int sig)
 {
 	ft_putstr_fd("exit\n ", STDOUT_FILENO);
 	errno = sig;
 	ft_free_sh(sh);
-	exit(g_exit);
+	exit(errno);
 }	
 
 /** @} */
