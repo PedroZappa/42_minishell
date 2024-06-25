@@ -241,10 +241,7 @@ t_token		*ft_tk_new(char *line, t_token_type type, int len);
 void		ft_tk_add(t_token **tk_list, t_token *tks);
 t_token		*ft_tk_last(t_token *tk);
 
-/// @file	220_tk_blanks.c
-void		ft_rm_blank_tk(t_token **tks);
-
-/// @file	230_tk_expander.c
+/// @file	220_tk_expander.c
 char		*ft_tk_expander(t_shell *sh, char *tk);
 
 //=============================================================================/
