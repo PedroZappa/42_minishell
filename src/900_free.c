@@ -25,6 +25,7 @@ void	ft_free_sh(t_shell *sh)
 {
 	if (sh)
 	{
+		ft_free_cmds(sh->cmds, sh->n_cmds);
 		ft_free_arr(sh->envp);
 		ft_free_arr(sh->envt);
 		ft_free_arr(sh->path);
