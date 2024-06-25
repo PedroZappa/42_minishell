@@ -42,6 +42,6 @@ static void	ft_kill(t_shell *sh, int sig)
 	errno = sig;
 	ft_free_sh(sh);
 	exit(errno);
-}	
+}
 
 /** @} */
