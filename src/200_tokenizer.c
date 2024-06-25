@@ -127,10 +127,14 @@ static t_tk_ops	ft_get_tk(char *tk)
 	ft_init_ops(ops);
 	ret = (t_tk_ops){0, TK_CMD, 0};
 	i = 0;
-	while (tk[i] && (!ft_isspace(tk[i])))
-		++i;
-	ret.tkn = ft_substr(tk, 0, i);
-	ret.len = i;
+	if (!ft_isspace(tk[0]))
+	{
+		while (tk[i] && (!ft_isspace(tk[i])))
+			++i;
+		return ((t_tk_ops){ft_substr(tk, 0, i), TK_CMD, i});
+	}
+	else
+		ret = (t_tk_ops){ft_substr(tk, 0, 1), TK_BLANK, 0};
 	i = -1;
 	while (ops[++i].tkn)
 		if (!ft_strncmp(tk, ops[i].tkn, ops[i].len))
