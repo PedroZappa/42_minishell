@@ -39,7 +39,6 @@ end
 define tokenizer
 	display *sh
 	display *line
-	display *line
 	display **tks
 	display *tk
 	display name
@@ -84,7 +83,7 @@ end
 define parser
 	display *sh
 	display *line_buf
-
+	display 
 end
 
 define count_args

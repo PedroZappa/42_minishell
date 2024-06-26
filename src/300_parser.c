@@ -130,6 +130,7 @@ static void	ft_count_args(t_shell *sh, t_token *tks)
 	t_token	*prev;
 	int		i;
 
+	i = 0;
 	while (i < sh->n_cmds)
 	{
 		sh->cmds[i].argc = 0;

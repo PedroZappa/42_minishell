@@ -84,7 +84,7 @@ t_token	*ft_tk_last(t_token *tk)
 	{
 		if ((*tk).next == NULL)
 			return (tk);
-		tk = tk->next;
+		tk = (*tk).next;
 	}
 	return (tk);
 }
