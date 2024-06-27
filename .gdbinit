@@ -118,6 +118,12 @@ define extract_var
 	display len
 end
 
+# 600_execute.c
+define execute
+	display *sh
+	display *sh->path
+end
+
 ### 900_free.c
 define free
 	display *sh
