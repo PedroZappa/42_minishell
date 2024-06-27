@@ -90,7 +90,11 @@ AR		= ar rcs
 MKDIR_P	= mkdir -p
 
 ### Valgrind
-VGDB_ARGS 	= --vgdb-error=0 --log-file=gdb.txt --leak-check=full --show-leak-kinds=all
+VGDB_ARGS 	= --vgdb-error=0 \
+			  --log-file=gdb.txt \
+			  --suppressions=readline.supp \
+			  --leak-check=full --show-leak-kinds=all \
+			  --track-origins=yes
 
 #==============================================================================#
 #                                  RULES                                       #
@@ -183,7 +187,7 @@ gdb: all $(NAME) $(TEMP_PATH)			## Debug w/ gdb
 	make get_log
 
 vgdb: all $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck) & gdb
-	tmux split-window -h "valgrind $(VGDB_ARGS) ./$(NAME) $(ARG)"
+	tmux split-window -h "valgrind $(VGDB_ARGS) --suppressions=readline.supp ./$(NAME) $(ARG)"
 	make vgdb_cmd
 	tmux split-window -v "gdb --tui -x $(TEMP_PATH)/gdb_commands.txt $(NAME)"
 	tmux resize-pane -U 18
