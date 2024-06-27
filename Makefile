@@ -90,11 +90,10 @@ AR		= ar rcs
 MKDIR_P	= mkdir -p
 
 ### Valgrind
-VGDB_ARGS 	= --vgdb-error=0 \
+VAL_LEAk	= --leak-check=full --show-leak-kinds=all
+VGDB_ARGS 	= --suppressions=readline.supp \
+			  --vgdb-error=0 \
 			  --log-file=gdb.txt \
-			  --suppressions=readline.supp \
-			  --leak-check=full --show-leak-kinds=all \
-			  --track-origins=yes
 
 #==============================================================================#
 #                                  RULES                                       #
@@ -187,7 +186,7 @@ gdb: all $(NAME) $(TEMP_PATH)			## Debug w/ gdb
 	make get_log
 
 vgdb: all $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck) & gdb
-	tmux split-window -h "valgrind $(VGDB_ARGS) --suppressions=readline.supp ./$(NAME) $(ARG)"
+	tmux split-window -h "valgrind $(VGDB_ARGS) ./$(NAME) $(ARG)"
 	make vgdb_cmd
 	tmux split-window -v "gdb --tui -x $(TEMP_PATH)/gdb_commands.txt $(NAME)"
 	tmux resize-pane -U 18
@@ -195,19 +194,12 @@ vgdb: all $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck) & gdb
 
 valgrind: all $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck)
 	tmux set-option remain-on-exit on
-	tmux split-window -h "valgrind --leak-check=full --show-leak-kinds=all -s ./$(NAME) $(ARG)"
+	tmux split-window -h "valgrind --suppressions=readline.supp ./$(NAME) $(ARG)"
 
 helgrind: all $(NAME) $(TEMP_PATH)			## Debug threads w/ helgrind
 	tmux set-option remain-on-exit on
 	tmux split-window -h "valgrind --log-file=gdb.txt --tool=helgrind -s ./$(NAME) $(ARG)"
 	tmux resize-pane -R 55
-	make get_log
-
-vgdb_helgrind: all $(NAME) $(TEMP_PATH)			## Debug threads w/ helgrind & gdb
-	tmux split-window -h "valgrind --vgdb-error=0 --log-file=gdb.txt --tool=helgrind ./$(NAME) $(ARG)"
-	make vgdb_cmd
-	tmux split-window -v "gdb --tui -x $(TEMP_PATH)/gdb_commands.txt $(NAME)"
-	tmux resize-pane -U 18
 	make get_log
 
 massif: all $(TEMP_PATH)		## Run Valgrind w/ Massif (gather profiling information)
