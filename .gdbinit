@@ -22,6 +22,13 @@ define main
 	display *envp
 end
 
+define sh_loop
+	display *sh
+	display *line_buf
+	display status
+end
+
+### 010_init.c
 define init
 	display sh
 	display sh->home
@@ -96,7 +103,8 @@ end
 define parse_cmds
 	display *tks
 	display *cmds
-	display cmds[i].argv
+	display *cmds->argv
+	display cmds[i].argv[j]
 	display i
 	display j
 end
@@ -122,6 +130,29 @@ end
 define execute
 	display *sh
 	display *sh->path
+end
+
+define exec_one
+	display *sh
+	display cmd
+end
+
+define exec
+	display *sh
+	display *cmd
+	display n
+end
+
+# 700_exit.c
+define exit
+	display *sh
+	display n
+	display *sh->cmds[n]
+end
+
+define kill
+	display *sh
+	display sig
 end
 
 ### 900_free.c
