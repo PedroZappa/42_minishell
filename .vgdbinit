@@ -1,4 +1,4 @@
-break ft_exit
+break ft_sh_loop
 fs cmd
 info break
 info thread

@@ -24,7 +24,7 @@ end
 
 define sh_loop
 	display *sh
-	display *line_buf
+	display line_buf
 	display status
 end
 
@@ -150,7 +150,7 @@ define exit
 	display *sh->cmds[n]
 end
 
-define kill
+define ft_kill
 	display *sh
 	display sig
 end
