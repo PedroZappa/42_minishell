@@ -23,3 +23,6 @@
 ## Readline
 - [The GNU Readline Library](https://tiswww.case.edu/php/chet/readline/rltop.html)
 - [Programming with GNU Readline](https://web.mit.edu/gnu/doc/html/rlman_2.html)
+
+## GCC cleanup __attribute__
+- [Using the __cleanup__ variable attribute in GCC](https://echorand.me/site/notes/articles/c_cleanup/cleanup_attribute_c.html)
