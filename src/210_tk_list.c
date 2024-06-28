@@ -64,7 +64,7 @@ void	ft_tk_add(t_token **tk_list, t_token *tk)
 	if (*tk_list)
 	{
 		curr = ft_tk_last(*tk_list);
-		(*curr).next = *tk_list;
+		(*curr).next = &*tk;
 	}
 	else
 		*tk_list = tk;
