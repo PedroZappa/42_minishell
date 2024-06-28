@@ -41,7 +41,7 @@ static int		ft_has_match(char **line);
 ///	@note			Used in ft_parser()
 int	ft_tokenizer(t_shell *sh, char **line, t_token **tks)
 {
-	t_token	*tk;
+	t_token	*tk __attribute__((cleanup(ft_free_tks)));
 	char	*name;
 
 	if (ft_get_tkns(*line, tks) != SUCCESS)
@@ -55,7 +55,7 @@ int	ft_tokenizer(t_shell *sh, char **line, t_token **tks)
 		// else
 		// 	tk->name = ft_tk_expander(sh, name);
 		tk = tk->next;
-		free(name);
+		// free(name);
 	}
 	return (SUCCESS);
 }
