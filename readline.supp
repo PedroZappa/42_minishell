@@ -1,6 +1,12 @@
 {
-   readline-suppressions
-   Memcheck:Leak
-   fun:readline
-   obj:/usr/lib/x86_64-linux-gnu/libreadline.so.*
+    leak readline
+    Memcheck:Leak
+    ...
+    fun:readline
+}
+{
+    leak add_history
+    Memcheck:Leak
+    ...
+    fun:add_history
 }
