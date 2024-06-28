@@ -66,6 +66,15 @@ define get_tk
 	display i
 end
 
+define p_tks
+	print tks
+	set $node = tks
+	while ($node != 0)
+		print *$node
+		set $node = $node->next
+	end
+end
+
 # 210_tk_list.c
 define tk_new
 	display line
