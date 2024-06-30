@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/24 15:45:17 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/30 11:53:21 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -54,14 +54,14 @@
 # define REDIR_ERR		"Redirection error\n"
 # define ARG_ERR		"Invalid arguments\n"
 
-/// @define		Constants
+/// Constants
 # define CHARSET "?%*+,.-/#:@~ \t"
 # define N_HANDLE "&;(){}*\\"
 # define QUOTE_SET "\'\""
 # define SPC_QUOTES " \t\'\""
 # define BLANKS " \t\v\r\n\f"
 
-///@define		Semantics
+/// Semantics
 # define VI 0
 # define NO_ENV -1
 # define NO_VAR -1
@@ -254,6 +254,9 @@ int			ft_parser(t_shell *sh, char **line_buf);
 /// static int	ft_count_cmds(t_token *tks);
 /// static void	ft_count_args(t_shell *sh, t_token *tks);
 /// static int	ft_parse_cmds(t_token *tks, t_cmd *cmds, int i, int j);
+
+/// @file	310_readline.c
+void		ft_readline(char ***line_buf);
 
 //=============================================================================/
 //	400		Signal  														   /

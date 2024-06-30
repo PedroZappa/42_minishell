@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:48:25 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/23 17:14:06 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/30 11:52:12 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -48,10 +48,11 @@ int	ft_parser(t_shell *sh, char **line_buf)
 	t_token	*tks;
 
 	tks = NULL;
-	*line_buf = readline(MAG"minishell > "NC);
-	if (!*line_buf)
-		*line_buf = ft_strdup("exit");
-	add_history(*line_buf);
+	ft_readline(&line_buf);
+	// *line_buf = readline(MAG"minishell > "NC);
+	// if (!*line_buf)
+	// 	*line_buf = ft_strdup("exit");
+	// add_history(*line_buf);
 	if (ft_tokenizer(sh, line_buf, &tks))
 		return (ft_free_tks(&tks), FAILURE);
 	if (ft_check_syntax(tks))
