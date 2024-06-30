@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:48:25 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/30 11:54:00 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/30 12:02:38 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -71,16 +71,23 @@ int	ft_parser(t_shell *sh, char **line_buf)
 /// - Loop through token list
 ///		- If there is no next token, and the current tkn is a TK_PIPE or TK_OR
 ///		...
-/// @param tks	Pointer to a t_token struct
+/// @param tk	Pointer to a t_token struct
 /// @return		SUCCESS(0)
 /// @note		Used in ft_parser()
-static int	ft_check_syntax(t_token *tks)
+static int	ft_check_syntax(t_token *tk)
 {
-	if (tks && (tks->type == TK_PIPE || tks->type == TK_OR))
-		return (ft_syntax_err(tks->name, FAILURE));
-	while (tks)
+	if (tk && (tk->type == TK_PIPE || tk->type == TK_OR))
+		return (ft_syntax_err(tk->name, FAILURE));
+	while (tk)
 	{
-		tks = tks->next;
+		if (!tk->next && (tk->type == TK_PIPE || tk->type == TK_OR))
+			return (ft_syntax_err(tk->name, FAILURE));
+		if (tk->next && ((tk->type == TK_PIPE) && (tk->next->type == TK_PIPE)) \
+			&& ((tk->type == TK_PIPE) || (tk->next->type == TK_OR)) \
+			&& ((tk->type == TK_OR) || (tk->next->type == TK_PIPE)) \
+			&& ((tk->type == TK_OR) || (tk->next->type == TK_OR)))
+			return (ft_syntax_err(tk->name, FAILURE));
+		tk = tk->next;
 	}
 	return (SUCCESS);
 }
