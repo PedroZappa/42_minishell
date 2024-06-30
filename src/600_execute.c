@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 16:10:50 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/30 19:32:56 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/30 21:43:33 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -108,11 +108,28 @@ int	ft_exec(t_shell *sh, int cmd, int n)
 	return (SUCCESS);
 }
 
+/// @brief			Execute a command
+/// @param sh		Pointer to a t_shell struct
+/// @param id		Command type
+/// @param i		Command index
+/// @note			Used in ft_exec_child()
 void	ft_exec_cmd(t_shell *sh, int id, int i)
 {
-	(void)sh;
-	(void)id;
-	(void)i;
+	t_stat stat_buf;
+
+	memset(&stat_buf, 0, sizeof(t_stat));
+	if (id == CMD_EXEC)
+	{
+		if (!sh->cmds[i].argv[0][0])
+			return ;
+		stat(sh->cmds[i].argv[0], &stat_buf);
+		ft_execve(sh->path, sh->cmds[i].argv, sh->envp);
+		// TODO: Handle errors
+		ft_free_sh(sh);
+		exit(CMD_NOT_FOUND);
+	}
+	else
+		ft_exec(sh, id, i);
 }
 
 /** @} */

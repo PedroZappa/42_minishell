@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/30 19:31:35 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/30 21:40:51 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -24,17 +24,18 @@
 //								Library Headers                                /
 //=============================================================================/
 
-# include <errno.h>								// Get errno
-// # include <fcntl.h>							// stat struct
-# include <signal.h>							// Signal
-# include <stdlib.h>							// exit, free, malloc
-# include <termios.h>							// termios interface
-# include <unistd.h>							// STDIN_FILENO STDOUT_FILENO
-# include <readline/readline.h>					// readline
-# include <readline/history.h>					// shell history
-# include <sys/wait.h>							// wait
-# include "../lib/libft/libft/libft.h"			// libft library
-# include "../lib/libft/ft_printf/ft_printf.h" 	// ft_printf
+# include <errno.h> // Get errno
+# include <fcntl.h> // stat struct
+# include <signal.h> // signal()
+# include <stdlib.h> // exit, free, malloc
+# include <termios.h> // termios interface
+# include <unistd.h> // STDIN_FILENO STDOUT_FILENO
+# include <readline/readline.h> // readline
+# include <readline/history.h> // shell history
+# include <sys/wait.h> // wait()
+# include <sys/stat.h> // stat()
+# include "../lib/libft/libft/libft.h" // libft library
+# include "../lib/libft/ft_printf/ft_printf.h" // ft_printf
 
 //=============================================================================/
 //									Defines									   /
@@ -75,11 +76,13 @@
 # define IGNORE_SIGQUIT	-1
 
 /// Signals
+# define CMD_NOT_FOUND	127
 # define EXIT_SIGINT	130
 # define EXIT_SIGQUIT	131
 
 /// @typedef	Data Types shorthands
 typedef struct termios	t_term;
+typedef struct stat		t_stat;
 
 /// @brief		Global variable to store exit code.
 /// @details	Indicates a received signal.
@@ -312,6 +315,9 @@ int			ft_exec_one(t_shell *sh);
 
 /// @file	640_exec_child.c
 void		ft_exec_child(t_shell *sh, int *outpipe);
+
+/// @file	650_execve.c
+void	ft_execve(char **path, char **argv, char **envp);
 
 //=============================================================================/
 //	700		Builtins														   /
