@@ -38,7 +38,7 @@ int	ft_exit(t_shell *sh, int n)
 /// @param sig		Signal number
 static void	ft_kill(t_shell *sh, int sig)
 {
-	ft_putstr_fd("exit\n ", STDOUT_FILENO);
+	ft_putstr_fd("exit\n", STDOUT_FILENO);
 	errno = sig;
 	ft_free_sh(sh);
 	exit(errno);
