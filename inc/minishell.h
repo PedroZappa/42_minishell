@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/30 11:53:21 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/30 12:15:56 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -289,7 +289,10 @@ int			ft_execute(t_shell *sh);
 // static int	ft_path_from_env(char **envp);
 int			ft_exec(t_shell *sh, int cmd, int i);
 
-/// @file	610_exec_one.c
+/// @file	610_exec_check.c
+int			ft_exec_check(char *cmd);
+
+/// @file	620_exec_one.c
 int			ft_exec_one(t_shell *sh);
 
 //=============================================================================/

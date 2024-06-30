@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   610_exec_one.c                                     :+:      :+:    :+:   */
+/*   620_exec_one.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:51:40 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/22 10:25:07 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/30 12:14:51 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -19,7 +19,7 @@
 
 #include "../inc/minishell.h"
 
-static int	ft_exec_check(char *cmd);
+int	ft_exec_check(char *cmd);
 
 /// @brief			Execute one command
 /// @param sh		Pointer to a t_shell struct
@@ -42,20 +42,3 @@ int	ft_exec_one(t_shell *sh)
 			return (ft_free_arr(sh->path), FAILURE);
 	return (ft_free_arr(sh->path), SUCCESS);
 }
-
-/// @brief			Check command type
-/// @param cmd		Command name
-/// @var type		Command type
-/// @return			SUCCESS(cmd type)
-/// @note			Used in ft_exec_one()
-static int	ft_exec_check(char *cmd)
-{
-	int	type;
-
-	type = CMD_EXEC;
-	if (ft_strncmp(cmd, "exit", 4) == SUCCESS)
-		type = CMD_EXIT;
-	return (type);
-}
-
-/** @} */
