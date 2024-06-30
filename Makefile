@@ -61,6 +61,7 @@ FILES			+= 510_env_set.c
 FILES			+= 600_execute.c
 FILES			+= 610_exec_check.c
 FILES			+= 620_exec_one.c
+FILES			+= 640_exec_child.c
 FILES			+= 700_exit.c
 FILES			+= 800_errors.c
 FILES			+= 900_free.c
