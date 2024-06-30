@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/30 12:15:56 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/30 19:31:35 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -25,12 +25,14 @@
 //=============================================================================/
 
 # include <errno.h>								// Get errno
+// # include <fcntl.h>							// stat struct
 # include <signal.h>							// Signal
 # include <stdlib.h>							// exit, free, malloc
 # include <termios.h>							// termios interface
 # include <unistd.h>							// STDIN_FILENO STDOUT_FILENO
 # include <readline/readline.h>					// readline
 # include <readline/history.h>					// shell history
+# include <sys/wait.h>							// wait
 # include "../lib/libft/libft/libft.h"			// libft library
 # include "../lib/libft/ft_printf/ft_printf.h" 	// ft_printf
 
@@ -68,7 +70,12 @@
 # define NO_TOKEN 0
 # define NO_PATH 0
 # define NO_CMDS 0
-# define EXIT_SIGINT 130
+# define NO_PIPE 0
+# define PID_FAIL -1
+
+/// Signals
+# define EXIT_SIGINT	130
+# define EXIT_SIGQUIT	131
 
 /// @typedef	Data Types shorthands
 typedef struct termios	t_term;
@@ -157,7 +164,11 @@ typedef struct s_tk_ops
 /// @struct			Redirection
 /// @brief	   		Structure to save redirection data
 /// @param name  	Redirection name
-/// @param flag  	Redirection status flag
+/// @param flag
+/// Redirection status flag:
+/// - -1: Ignores SIGQUIT
+/// - 0: No redirection
+/// - 1: Input redirection
 /// @param heredoc	Pointer to Heredoc redirection node (see t_list)
 typedef struct s_redir
 {
@@ -264,6 +275,8 @@ void		ft_readline(char ***line_buf);
 
 /// @file	400_signal.c
 void		ft_sigset(void);
+void		ft_fork_sigset();
+void		ft_fork_sighandler(int sig);
 
 //=============================================================================/
 //	500		Env Setters/Getters												   /
@@ -287,13 +300,17 @@ int			ft_var_from_env(char *var, char **env);
 int			ft_execute(t_shell *sh);
 // static char	**ft_split_path(char **envp);
 // static int	ft_path_from_env(char **envp);
-int			ft_exec(t_shell *sh, int cmd, int i);
+int			ft_exec_bi(t_shell *sh, int cmd, int i);
+void		ft_exec_cmd(t_shell *sh, int id, int i);
 
 /// @file	610_exec_check.c
 int			ft_exec_check(char *cmd);
 
 /// @file	620_exec_one.c
 int			ft_exec_one(t_shell *sh);
+
+/// @file	640_exec_child.c
+void		ft_exec_child(t_shell *sh, int outpipe);
 
 //=============================================================================/
 //	700		Builtins														   /
