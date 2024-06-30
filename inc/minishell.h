@@ -300,7 +300,7 @@ int			ft_var_from_env(char *var, char **env);
 int			ft_execute(t_shell *sh);
 // static char	**ft_split_path(char **envp);
 // static int	ft_path_from_env(char **envp);
-int			ft_exec_bi(t_shell *sh, int cmd, int i);
+int			ft_exec(t_shell *sh, int cmd, int i);
 void		ft_exec_cmd(t_shell *sh, int id, int i);
 
 /// @file	610_exec_check.c
@@ -310,7 +310,7 @@ int			ft_exec_check(char *cmd);
 int			ft_exec_one(t_shell *sh);
 
 /// @file	640_exec_child.c
-void		ft_exec_child(t_shell *sh, int outpipe);
+void		ft_exec_child(t_shell *sh, int *outpipe);
 
 //=============================================================================/
 //	700		Builtins														   /
