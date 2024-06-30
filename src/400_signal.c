@@ -36,7 +36,7 @@ void	ft_sigset(void)
 ///	- Replace contents of rl_line_buffer with empty string
 ///	- Write newline
 ///	- Announce new line
-///	- Redisplay line with cleared rl_line_buffer
+///	- Redisplay line w/ cleared rl_line_buffer
 ///	- Set g_exit to EXIT_SIGINT
 ///	@note			Used in ft_sgnal_handler()
 static void	ft_signal_handler(int signo)
@@ -45,6 +45,41 @@ static void	ft_signal_handler(int signo)
 	{
 		rl_replace_line("", 0);
 		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_redisplay();
+		g_exit = EXIT_SIGINT;
+	}
+}
+
+/// @brief			Fork signal setter
+/// @details		Handles SIGINT and SIGQUIT
+/// @note			Used in ft_exec_fork()
+void	ft_fork_sigset()
+{
+	signal(SIGINT, ft_fork_sighandler);
+	signal(SIGQUIT, ft_fork_sighandler);
+}
+
+/// @brief			Fork signal handler
+/// @param sig		Signal number
+/// @details		On SIGQUIT
+/// - Write "Quit\n"
+///	- Announce new line
+///	- Redisplay line w/ cleared rl_line_buffer
+/// - Set g_exit to EXIT_SIGQUIT
+/// @note			Used in ft_sigset() and ft_exec_fork()
+void	ft_fork_sighandler(int sig)
+{
+	if (sig == SIGQUIT)
+	{
+		ft_putstr_fd("Quit\n", STDOUT_FILENO);
+		rl_on_new_line();
+		rl_redisplay();
+		g_exit = EXIT_SIGQUIT;
+	}
+	else if (sig == SIGINT)
+	{
+		ft_putchar_fd('\n', STDOUT_FILENO);
 		rl_on_new_line();
 		rl_redisplay();
 		g_exit = EXIT_SIGINT;
