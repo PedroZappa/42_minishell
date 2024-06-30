@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:48:25 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/30 12:02:38 by passunca         ###   ########.fr       */
+/*   Updated: 2024/06/30 12:08:01 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -68,9 +68,12 @@ int	ft_parser(t_shell *sh, char **line_buf)
 /// @brief Check if a given token's list is a valid command syntactically
 /// @details
 /// - If first token is a pipe, return failure
-/// - Loop through token list
-///		- If there is no next token, and the current tkn is a TK_PIPE or TK_OR
-///		...
+/// - Loop through token list and throw an error:
+///		- If there is no next token, and the current tkn is a PIPE or OR;
+///		- If there is a next token, the current tkn a PIPE and the next also;
+///		- If there is a next token, the current tkn a PIPE and the next OR
+///		- If there is a next token, the current tkn a OR and the next a PIPE;
+///		- If there is a next token, the current tkn a OR and the next also;
 /// @param tk	Pointer to a t_token struct
 /// @return		SUCCESS(0)
 /// @note		Used in ft_parser()
