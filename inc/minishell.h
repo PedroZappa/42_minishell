@@ -72,6 +72,7 @@
 # define NO_CMDS 0
 # define NO_PIPE 0
 # define PID_FAIL -1
+# define IGNORE_SIGQUIT	-1
 
 /// Signals
 # define EXIT_SIGINT	130

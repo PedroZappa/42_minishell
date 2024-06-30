@@ -19,16 +19,15 @@
 
 #include "../inc/minishell.h"
 
-void	ft_fork_sighandler(int sig);
-
 /// @brief			Execute one command
-/// @param sh		Pointer to a t_shell struct
-/// @var cmd		Command type
-/// @return			SUCCESS(0)
-///	@return			FAILURE(1)
 /// @details	
 /// - Check command type
 /// - Execute command
+/// @param sh		Pointer to a t_shell struct
+/// @var cmd
+/// Command type
+/// @return			SUCCESS(0)
+///	@return			FAILURE(1)
 ///	@note			Used in ft_execute()
 int	ft_exec_one(t_shell *sh)
 {
@@ -43,11 +42,23 @@ int	ft_exec_one(t_shell *sh)
 	return (ft_free_arr(sh->path), SUCCESS);
 }
 
+/// @brief			Execute one command as a child process
+/// @details
+/// - Set signal handlers in parent process
+/// - Fork a child process:
+///		- Set signal handlers
+///		- Execute command
+///	- Wait for child process
+/// @param sh		Pointer to a t_shell struct
+/// @var pid		
+/// Process ID
+/// @return			SUCCESS(0)
+/// @return			FAILURE(1)
 int	ft_exec_fork(t_shell *sh)
 {
 	pid_t	pid;
 
-	if (sh->cmds[0].in.flag == -1)
+	if (sh->cmds[0].in.flag == IGNORE_SIGQUIT)
 		signal(SIGQUIT, SIG_IGN);
 	else
 		signal(SIGQUIT, ft_fork_sighandler);
