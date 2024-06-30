@@ -30,6 +30,7 @@ int	ft_exit(t_shell *sh, int n)
 		ft_kill(sh, SUCCESS);
 	else if (sh->cmds[n].argc > 1)
 		return (ft_err("exit: too many arguments\n", FAILURE));
+	// TODO: Handle numeric argument
 	return (SUCCESS);
 }
 
