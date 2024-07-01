@@ -20,11 +20,11 @@
 #include "../inc/minishell.h"
 
 /// @brief			Get Termios Interface State of a given fd
+/// @details
+/// - Get Termios Attribute
+///	- Handle Failure
 /// @param fd
 /// @param termios	Pointer to Termios Interface structure
-/// @var term_conn	Gets tcsgetattribute() return for error handling
-/// @details		- Get Termios Attribute
-///					- Handle Failure
 /// @note			Used in ft_init()
 void	ft_get_termios(int fd, t_term *termios)
 {
@@ -36,11 +36,11 @@ void	ft_get_termios(int fd, t_term *termios)
 }
 
 /// @brief			Set Termios Interface
+/// @details
+/// - Get Termios Attribute
+///	- Handle Failure
 /// @param fd
 /// @param termios	Pointer to Termios Interface structure
-/// @var term_conn	Gets tcsetattribute() return for error handling
-/// @details		- Get Termios Attribute
-///					- Handle Failure
 /// @note			Used in ft_execute()
 void	ft_set_termios(int fd, int opts, t_term *termios)
 {

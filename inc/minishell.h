@@ -41,7 +41,7 @@
 //									Defines									   /
 //=============================================================================/
 
-/// @define		Error messages
+//	Error messages
 # define INIT_ERR		"Init Error\n"
 # define ENV_INIT_ERR	"Env Init Error\n"
 # define ENV_NULL_ERR	"Null Env Error\n"
@@ -81,7 +81,7 @@
 # define EXIT_SIGINT	130
 # define EXIT_SIGQUIT	131
 
-/// @typedef	Data Types shorthands
+/// Data Types shorthands
 typedef struct termios	t_term;
 typedef struct stat		t_stat;
 
@@ -94,7 +94,6 @@ extern int				g_exit;
 //									Enums	                                   /
 //=============================================================================/
 
-/// @brief		Boolean type
 typedef enum e_bool
 {
 	NO = 0,
@@ -153,7 +152,7 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
-/// @struct			Token Operators
+/// @struct			Token operators
 /// @brief			Helper structure to save token operators
 /// @param tkn		Pointer to token string
 /// @param type		Token operator (see e_token_type)

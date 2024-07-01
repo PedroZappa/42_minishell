@@ -25,19 +25,16 @@ static void		ft_init_ops(t_tk_ops *ops);
 static int		ft_has_match(char **line);
 
 /// @brief			Tokenizer
-/// @param sh		Pointer to a t_shell struct
-/// @param line		Line buffer
-/// @param tks		Pointer to a t_token struct
-/// @var tk
-/// Stores the first token in the list
-///	Used to traverse the tokens list
-/// @return			SUCCESS(0)
-///	@return			FAILURE(errno)
 /// @details
 /// - Get tokens from line
 /// - Handle Token Expansion
 /// 	- Expand ~ (HOME)
 /// 	- Expand all other tokens
+/// @param sh		Pointer to a t_shell struct
+/// @param line		Line buffer
+/// @param tks		Pointer to a t_token struct
+/// @return			SUCCESS(0)
+///	@return			FAILURE(errno)
 ///	@note			Used in ft_parser()
 int	ft_tokenizer(t_shell *sh, char **line, t_token **tks)
 {
@@ -61,12 +58,6 @@ int	ft_tokenizer(t_shell *sh, char **line, t_token **tks)
 }
 
 /// @brief			Get tokens from line
-/// @param tks		Pointer to a t_token struct
-/// @param line		Line buffer
-/// @var tmp		Pointer to the previous token
-/// @var tk			Stores extracted token from line
-/// @return			SUCCESS(0) on success,
-///					FAILURE(1) on failure
 /// @details
 /// - Stash line in tmp
 /// - Loop through line
@@ -77,6 +68,10 @@ int	ft_tokenizer(t_shell *sh, char **line, t_token **tks)
 /// 		- If the token is not a blank, add it to the li	st
 ///		- Check if line contains a matching closing quote
 /// - Get last remaining remaining token
+/// @param tks		Pointer to a t_token struct
+/// @param line		Line buffer
+/// @return			SUCCESS(0) on success,
+///					FAILURE(1) on failure
 ///	@note			Used in ft_tokenizer()
 static int	ft_get_tkns(char *line, t_token **tks)
 {
@@ -108,15 +103,12 @@ static int	ft_get_tkns(char *line, t_token **tks)
 }
 
 /// @brief			Find matching token operation
-/// @param tk		Token string
-/// @var ops		Pointer to an array of t_tk_ops structs
-/// @var ret		Pointer to a t_tk_ops struct to be returned
-/// @var i			To iterate the array of supported tokens
-/// @return			SUCCESS(t_tk_ops struct with op data)
-///					FAILURE(empty t_tk_ops struct)
 /// @details
 /// - Initializes t_tk_ops array with all supported tokens
 ///	- Compares tk with each token in the array
+/// @param tk		Token string
+/// @return			SUCCESS(t_tk_ops struct with op data)
+///					FAILURE(empty t_tk_ops struct)
 /// @note			Used in ft_get_tkns()
 static t_tk_ops	ft_get_tk(char *tk)
 {
@@ -142,6 +134,8 @@ static t_tk_ops	ft_get_tk(char *tk)
 	return (ret);
 }
 
+/// @brief			Initialize t_tk_ops array with all supported tokens
+/// @param ops		Pointer to an array of t_tk_ops structs
 static void	ft_init_ops(t_tk_ops *ops)
 {
 	ops[0] = (t_tk_ops){"<<", TK_IN, 2};
@@ -163,12 +157,12 @@ static void	ft_init_ops(t_tk_ops *ops)
 }
 
 /// @brief			Check if line contains a matching closing quote
+/// @details
+/// - Checks if line contains a matching closing quote
+/// 	- If it doesn't, move pointer to end of the line
 /// @param quote	Pointer to a quote
-/// @var line_0		Pointer to store the start of the line
 /// @return			SUCCESS(matching quote found)
 ///					FAILURE(no match)
-/// @details		- Checks if line contains a matching closing quote
-/// 					- If it doesn't, move pointer to end of the line
 /// @note			Used in ft_get_tkns() when a quote is parsed
 static int	ft_has_match(char **quote)
 {

@@ -49,7 +49,6 @@ int	ft_init(t_shell *sh, char **envp)
 /// @brief Initialize in & out redirections
 /// @param cmds Pointer to an array of t_cmd structs
 /// @param n_cmds Number of commands in the array
-/// @var i To iterate through the array of commands
 /// @note		Used in ft_parser()
 void	ft_reset_redir(t_cmd *cmds, int n_cmds)
 {

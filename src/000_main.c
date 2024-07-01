@@ -55,8 +55,6 @@ int	main(int argc, char **argv, char **envp)
 /// - Call parser
 /// - Execute commands
 /// @param sh		Pointer to a t_shell struct
-/// @var line_buf	Line buffer
-/// @var status		Stores parser exit status
 /// @return			SUCCESS(status)
 ///	@return			FAILURE(1)
 /// @note			Used in main()

@@ -20,11 +20,6 @@
 #include "../inc/minishell.h"
 
 /// @brief			Create new token
-/// @param line		Line buffer
-/// @param type		Token type
-/// @param len		Length of token
-/// @return			SUCCESS(Pointer to a t_token struct)
-///	@return			FAILURE(NULL)
 /// @details
 /// - Allocates memory for a t_token struct
 /// - Stores line in name
@@ -32,6 +27,11 @@
 /// - Stores len in len
 /// - If first character is not a quote, set to_del to 1
 /// - Set next to NULL (Sentinel value)
+/// @param line		Line buffer
+/// @param type		Token type
+/// @param len		Length of token
+/// @return			SUCCESS(Pointer to a t_token struct)
+///	@return			FAILURE(NULL)
 /// @note			Used in ft_get_tkns()
 t_token	*ft_tk_new(char *line, t_token_type type, int len)
 {
@@ -51,11 +51,10 @@ t_token	*ft_tk_new(char *line, t_token_type type, int len)
 }
 
 /// @brief			Add token to list
-/// @param tk_list	Pointer to a list of t_token structs
-/// @param tk		Pointer to a t_token struct
-/// @var curr		Pointer to a local t_token struct
 /// @details		- Get last token in list
 ///					-
+/// @param tk_list	Pointer to a list of t_token structs
+/// @param tk		Pointer to a t_token struct
 /// @note			Used in ft_get_tkns()
 void	ft_tk_add(t_token **tk_list, t_token *tk)
 {
@@ -71,10 +70,10 @@ void	ft_tk_add(t_token **tk_list, t_token *tk)
 }
 
 /// @brief			Get last token in list
+/// @details		- Traverse list until last token is reached
 /// @param tk		Pointer to a t_token struct
 /// @return			SUCCESS(Pointer to a t_token struct)
-/// 				FAILURE(NULL)
-/// @details		- Traverse list until last token is reached
+/// @return			FAILURE(NULL)
 /// @note			Used in ft_tk_add()
 t_token	*ft_tk_last(t_token *tk)
 {

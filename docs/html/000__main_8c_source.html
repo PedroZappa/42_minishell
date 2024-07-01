@@ -118,33 +118,33 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>}</div>
 </div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="foldopen" id="foldopen00063" data-start="{" data-end="}">
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="group__main.html#ga3c4c12893e05d8e00d1a3a74cbdaf5a2">   63</a></span><span class="keyword">static</span> <span class="keywordtype">int</span>  <a class="code hl_function" href="group__main.html#ga3c4c12893e05d8e00d1a3a74cbdaf5a2">ft_sh_loop</a>(<a class="code hl_struct" href="structs__shell.html">t_shell</a> *sh)</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>{</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordtype">char</span>    *line_buf;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordtype">int</span>     status;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    status = 0;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    line_buf = NULL;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordflow">while</span> (1)</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    {</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <a class="code hl_function" href="group__minishell.html#ga8c99f3e7a34ea73379dd2ba5c9a1cd8c">ft_sigset</a>();</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        status = <a class="code hl_function" href="group__minishell.html#ga0c8ac350deba72c9149a366e25354f88">ft_parser</a>(sh, &amp;line_buf);</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <a class="code hl_function" href="ft__free_8c.html#aa1fa5092f17c4da4ee3f45bd33f44250">ft_free</a>(line_buf);</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keywordflow">if</span> (status == <a class="code hl_enumvalue" href="group__minishell.html#gga4b3d00327cec9ed72e1618372ac5038daa5571864412c8275a2e18a931fddcaa6">FAILURE</a>)</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            continue ;</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <span class="keywordflow">if</span> (sh-&gt;<a class="code hl_variable" href="structs__shell.html#a997feb477e8606389e07daa6d0ecba9e">n_cmds</a> &gt; <a class="code hl_define" href="group__minishell.html#ga69a556bdbf8142800a86580494e81563">NO_CMDS</a>)</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            <span class="keywordflow">if</span> (<a class="code hl_function" href="group__minishell.html#ga1ac8dea8c4dea952ed2d62e98df59073">ft_execute</a>(sh) == <a class="code hl_enumvalue" href="group__minishell.html#gga4b3d00327cec9ed72e1618372ac5038daa5571864412c8275a2e18a931fddcaa6">FAILURE</a>)</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>                break ;</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <a class="code hl_function" href="group__minishell.html#gaaefd9a2b2e8298ba86dcfae92e927153">ft_free_cmds</a>(sh-&gt;<a class="code hl_variable" href="structs__shell.html#ada5bc3831852455f62fa3c03de0f8244">cmds</a>, sh-&gt;<a class="code hl_variable" href="structs__shell.html#a997feb477e8606389e07daa6d0ecba9e">n_cmds</a>);</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    }</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keywordflow">return</span> (status);</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>}</div>
+<div class="foldopen" id="foldopen00065" data-start="{" data-end="}">
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="group__main.html#ga3c4c12893e05d8e00d1a3a74cbdaf5a2">   65</a></span><span class="keyword">static</span> <span class="keywordtype">int</span>  <a class="code hl_function" href="group__main.html#ga3c4c12893e05d8e00d1a3a74cbdaf5a2">ft_sh_loop</a>(<a class="code hl_struct" href="structs__shell.html">t_shell</a> *sh)</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>{</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordtype">char</span>    *line_buf;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordtype">int</span>     status;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    status = 0;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    line_buf = NULL;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keywordflow">while</span> (1)</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    {</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <a class="code hl_function" href="group__minishell.html#ga8c99f3e7a34ea73379dd2ba5c9a1cd8c">ft_sigset</a>();</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        status = <a class="code hl_function" href="group__minishell.html#ga0c8ac350deba72c9149a366e25354f88">ft_parser</a>(sh, &amp;line_buf);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <a class="code hl_function" href="ft__free_8c.html#aa1fa5092f17c4da4ee3f45bd33f44250">ft_free</a>(line_buf);</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <span class="keywordflow">if</span> (status == <a class="code hl_enumvalue" href="group__minishell.html#gga4b3d00327cec9ed72e1618372ac5038daa5571864412c8275a2e18a931fddcaa6">FAILURE</a>)</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            continue ;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="keywordflow">if</span> (sh-&gt;<a class="code hl_variable" href="structs__shell.html#a997feb477e8606389e07daa6d0ecba9e">n_cmds</a> &gt; <a class="code hl_define" href="group__minishell.html#ga69a556bdbf8142800a86580494e81563">NO_CMDS</a>)</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            <span class="keywordflow">if</span> (<a class="code hl_function" href="group__minishell.html#ga1ac8dea8c4dea952ed2d62e98df59073">ft_execute</a>(sh) == <a class="code hl_enumvalue" href="group__minishell.html#gga4b3d00327cec9ed72e1618372ac5038daa5571864412c8275a2e18a931fddcaa6">FAILURE</a>)</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                break ;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <a class="code hl_function" href="group__minishell.html#gaaefd9a2b2e8298ba86dcfae92e927153">ft_free_cmds</a>(sh-&gt;<a class="code hl_variable" href="structs__shell.html#ada5bc3831852455f62fa3c03de0f8244">cmds</a>, sh-&gt;<a class="code hl_variable" href="structs__shell.html#a997feb477e8606389e07daa6d0ecba9e">n_cmds</a>);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    }</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordflow">return</span> (status);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>}</div>
 </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
 <div class="ttc" id="aft__calloc_8c_html_a55cb9602200ccf92a7f43e58c6ee2679"><div class="ttname"><a href="ft__calloc_8c.html#a55cb9602200ccf92a7f43e58c6ee2679">ft_calloc</a></div><div class="ttdeci">void * ft_calloc(size_t nmemb, size_t size)</div><div class="ttdef"><b>Definition</b> <a href="ft__calloc_8c_source.html#l00015">ft_calloc.c:15</a></div></div>
 <div class="ttc" id="aft__free_8c_html_aa1fa5092f17c4da4ee3f45bd33f44250"><div class="ttname"><a href="ft__free_8c.html#aa1fa5092f17c4da4ee3f45bd33f44250">ft_free</a></div><div class="ttdeci">void ft_free(void *ptr)</div><div class="ttdoc">Free a pointer and set it to NULL.</div><div class="ttdef"><b>Definition</b> <a href="ft__free_8c_source.html#l00017">ft_free.c:17</a></div></div>
-<div class="ttc" id="agroup__main_html_ga3c4c12893e05d8e00d1a3a74cbdaf5a2"><div class="ttname"><a href="group__main.html#ga3c4c12893e05d8e00d1a3a74cbdaf5a2">ft_sh_loop</a></div><div class="ttdeci">static int ft_sh_loop(t_shell *sh)</div><div class="ttdef"><b>Definition</b> <a href="#l00063">000_main.c:63</a></div></div>
+<div class="ttc" id="agroup__main_html_ga3c4c12893e05d8e00d1a3a74cbdaf5a2"><div class="ttname"><a href="group__main.html#ga3c4c12893e05d8e00d1a3a74cbdaf5a2">ft_sh_loop</a></div><div class="ttdeci">static int ft_sh_loop(t_shell *sh)</div><div class="ttdef"><b>Definition</b> <a href="#l00065">000_main.c:65</a></div></div>
 <div class="ttc" id="agroup__main_html_ga647f21a28344e1d9c643f4115516d7c9"><div class="ttname"><a href="group__main.html#ga647f21a28344e1d9c643f4115516d7c9">main</a></div><div class="ttdeci">int main(int argc, char **argv, char **envp)</div><div class="ttdoc">Minishell main function.</div><div class="ttdef"><b>Definition</b> <a href="#l00036">000_main.c:36</a></div></div>
 <div class="ttc" id="agroup__main_html_gadf56530527b621d6a0659cd05fdffa44"><div class="ttname"><a href="group__main.html#gadf56530527b621d6a0659cd05fdffa44">g_exit</a></div><div class="ttdeci">int g_exit</div><div class="ttdoc">Global variable to store exit code.</div><div class="ttdef"><b>Definition</b> <a href="#l00024">000_main.c:24</a></div></div>
 <div class="ttc" id="agroup__minishell_html_ga0c8ac350deba72c9149a366e25354f88"><div class="ttname"><a href="group__minishell.html#ga0c8ac350deba72c9149a366e25354f88">ft_parser</a></div><div class="ttdeci">int ft_parser(t_shell *sh, char **line_buf)</div><div class="ttdef"><b>Definition</b> <a href="300__parser_8c_source.html#l00046">300_parser.c:46</a></div></div>
