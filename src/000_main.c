@@ -65,7 +65,6 @@ static int	ft_sh_loop(t_shell *sh)
 	char	*line_buf;
 	int		status;
 
-	(void)sh;
 	status = 0;
 	line_buf = NULL;
 	while (1)
