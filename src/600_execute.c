@@ -109,20 +109,26 @@ int	ft_exec(t_shell *sh, int cmd, int n)
 }
 
 /// @brief			Execute a command
+/// @details
+/// - Set statbuf to 0
+/// - If command type is CMD_EXEC
+/// 	- Execute command
+/// - Else
+/// 	- Execute builtin
 /// @param sh		Pointer to a t_shell struct
 /// @param id		Command type
 /// @param i		Command index
 /// @note			Used in ft_exec_child()
 void	ft_exec_cmd(t_shell *sh, int id, int i)
 {
-	t_stat stat_buf;
+	t_stat statbuf;
 
-	memset(&stat_buf, 0, sizeof(t_stat));
+	memset(&statbuf, 0, sizeof(t_stat));
 	if (id == CMD_EXEC)
 	{
 		if (!sh->cmds[i].argv[0][0])
 			return ;
-		stat(sh->cmds[i].argv[0], &stat_buf);
+		stat(sh->cmds[i].argv[0], &statbuf);
 		ft_execve(sh->path, sh->cmds[i].argv, sh->envp);
 		// TODO: Handle errors
 		ft_free_sh(sh);
