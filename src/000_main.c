@@ -56,14 +56,13 @@ int	main(int argc, char **argv, char **envp)
 /// - Execute commands
 /// @param sh		Pointer to a t_shell struct
 /// @return			SUCCESS(status)
-///	@return			FAILURE(1)
 /// @note			Used in main()
 static int	ft_sh_loop(t_shell *sh)
 {
 	char	*line_buf;
 	int		status;
 
-	status = 0;
+	status = SUCCESS;
 	line_buf = NULL;
 	while (1)
 	{
