@@ -83,8 +83,10 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:gabd71d24f33afb9df35c83ceab21e89ca" id="r_gabd71d24f33afb9df35c83ceab21e89ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gabd71d24f33afb9df35c83ceab21e89ca">ft_get_termios</a> (int fd, <a class="el" href="group__minishell.html#ga8a830347283c9d24ac1e3a45687b3fb5">t_term</a> *termios)</td></tr>
+<tr class="memdesc:gabd71d24f33afb9df35c83ceab21e89ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Termios Interface State of a given fd.  <br /></td></tr>
 <tr class="separator:gabd71d24f33afb9df35c83ceab21e89ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad4497a27a7528ce1fe73e51cca01660c" id="r_gad4497a27a7528ce1fe73e51cca01660c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gad4497a27a7528ce1fe73e51cca01660c">ft_set_termios</a> (int fd, int opts, <a class="el" href="group__minishell.html#ga8a830347283c9d24ac1e3a45687b3fb5">t_term</a> *termios)</td></tr>
+<tr class="memdesc:gad4497a27a7528ce1fe73e51cca01660c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set Termios Interface.  <br /></td></tr>
 <tr class="separator:gad4497a27a7528ce1fe73e51cca01660c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -110,13 +112,27 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Get Termios Interface State of a given fd. </p>
+<ul>
+<li>Get Termios Attribute</li>
+<li>Handle Failure <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td></td></tr>
+    <tr><td class="paramname">termios</td><td>Pointer to Termios Interface structure </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Used in <a class="el" href="group__minishell.html#gabdb2fd607199d7f814010936ed338371" title="Initialize minishell.">ft_init()</a> </dd></dl>
+</li>
+</ul>
+
 <p class="definition">Definition at line <a class="el" href="100__termios_8c_source.html#l00029">29</a> of file <a class="el" href="100__termios_8c_source.html">100_termios.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="group__termios_gabd71d24f33afb9df35c83ceab21e89ca_cgraph.png" border="0" usemap="#agroup__termios_gabd71d24f33afb9df35c83ceab21e89ca_cgraph" alt=""/></div>
 <map name="agroup__termios_gabd71d24f33afb9df35c83ceab21e89ca_cgraph" id="agroup__termios_gabd71d24f33afb9df35c83ceab21e89ca_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,121,31"/>
+<area shape="rect" title="Get Termios Interface State of a given fd." alt="" coords="5,5,121,31"/>
 <area shape="rect" href="group__error.html#gac47de99d45d512bc26c9d02d999b2ae8" title="Error printing." alt="" coords="169,5,225,31"/>
 <area shape="poly" title=" " alt="" coords="122,15,156,15,156,21,122,21"/>
 <area shape="rect" href="ft__putstr__fd_8c.html#a00b0638f31a75c7a30f77f33888bfb73" title=" " alt="" coords="273,5,369,31"/>
@@ -130,7 +146,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="group__termios_gabd71d24f33afb9df35c83ceab21e89ca_icgraph.png" border="0" usemap="#agroup__termios_gabd71d24f33afb9df35c83ceab21e89ca_icgraph" alt=""/></div>
 <map name="agroup__termios_gabd71d24f33afb9df35c83ceab21e89ca_icgraph" id="agroup__termios_gabd71d24f33afb9df35c83ceab21e89ca_icgraph">
-<area shape="rect" title=" " alt="" coords="215,5,331,31"/>
+<area shape="rect" title="Get Termios Interface State of a given fd." alt="" coords="215,5,331,31"/>
 <area shape="rect" href="group__init.html#gabdb2fd607199d7f814010936ed338371" title="Initialize minishell." alt="" coords="108,5,167,31"/>
 <area shape="poly" title=" " alt="" coords="201,21,167,21,167,15,201,15"/>
 <area shape="rect" href="group__main.html#ga647f21a28344e1d9c643f4115516d7c9" title="Minishell main function." alt="" coords="5,5,60,31"/>
@@ -164,13 +180,27 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>Set Termios Interface. </p>
+<ul>
+<li>Get Termios Attribute</li>
+<li>Handle Failure <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td></td></tr>
+    <tr><td class="paramname">termios</td><td>Pointer to Termios Interface structure </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Used in <a class="el" href="group__minishell.html#ga1ac8dea8c4dea952ed2d62e98df59073" title="Execute commands.">ft_execute()</a> </dd></dl>
+</li>
+</ul>
+
 <p class="definition">Definition at line <a class="el" href="100__termios_8c_source.html#l00045">45</a> of file <a class="el" href="100__termios_8c_source.html">100_termios.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="group__termios_gad4497a27a7528ce1fe73e51cca01660c_cgraph.png" border="0" usemap="#agroup__termios_gad4497a27a7528ce1fe73e51cca01660c_cgraph" alt=""/></div>
 <map name="agroup__termios_gad4497a27a7528ce1fe73e51cca01660c_cgraph" id="agroup__termios_gad4497a27a7528ce1fe73e51cca01660c_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,120,31"/>
+<area shape="rect" title="Set Termios Interface." alt="" coords="5,5,120,31"/>
 <area shape="rect" href="group__error.html#gac47de99d45d512bc26c9d02d999b2ae8" title="Error printing." alt="" coords="168,5,224,31"/>
 <area shape="poly" title=" " alt="" coords="120,15,154,15,154,21,120,21"/>
 <area shape="rect" href="ft__putstr__fd_8c.html#a00b0638f31a75c7a30f77f33888bfb73" title=" " alt="" coords="272,5,368,31"/>
@@ -184,10 +214,10 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="group__termios_gad4497a27a7528ce1fe73e51cca01660c_icgraph.png" border="0" usemap="#agroup__termios_gad4497a27a7528ce1fe73e51cca01660c_icgraph" alt=""/></div>
 <map name="agroup__termios_gad4497a27a7528ce1fe73e51cca01660c_icgraph" id="agroup__termios_gad4497a27a7528ce1fe73e51cca01660c_icgraph">
-<area shape="rect" title=" " alt="" coords="381,5,496,31"/>
+<area shape="rect" title="Set Termios Interface." alt="" coords="381,5,496,31"/>
 <area shape="rect" href="group__execute.html#ga1ac8dea8c4dea952ed2d62e98df59073" title="Execute commands." alt="" coords="244,5,333,31"/>
 <area shape="poly" title=" " alt="" coords="368,21,334,21,334,15,368,15"/>
-<area shape="rect" href="group__main.html#ga3c4c12893e05d8e00d1a3a74cbdaf5a2" title=" " alt="" coords="108,5,196,31"/>
+<area shape="rect" href="group__main.html#ga3c4c12893e05d8e00d1a3a74cbdaf5a2" title="Minishell loop." alt="" coords="108,5,196,31"/>
 <area shape="poly" title=" " alt="" coords="230,21,196,21,196,15,230,15"/>
 <area shape="rect" href="group__main.html#ga647f21a28344e1d9c643f4115516d7c9" title="Minishell main function." alt="" coords="5,5,60,31"/>
 <area shape="poly" title=" " alt="" coords="94,21,60,21,60,15,94,15"/>

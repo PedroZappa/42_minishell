@@ -115,51 +115,51 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>}</div>
 </div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="foldopen" id="foldopen00060" data-start="{" data-end="}">
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="group__minishell.html#gac87767530f63d01af8529373f9269dff">   60</a></span><span class="keywordtype">void</span>    <a class="code hl_function" href="group__tk__list.html#gacfc1c62b2b36d20b8ae3ac3c253fb2b5">ft_tk_add</a>(<a class="code hl_struct" href="structs__token.html">t_token</a> **tk_list, <a class="code hl_struct" href="structs__token.html">t_token</a> *tk)</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>{</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <a class="code hl_struct" href="structs__token.html">t_token</a> *curr;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordflow">if</span> (*tk_list)</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    {</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        curr = <a class="code hl_function" href="group__tk__list.html#ga241c80abbeebb821ce72427181d974c6">ft_tk_last</a>(*tk_list);</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        (*curr).next = &amp;*tk;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    }</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        *tk_list = tk;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>}</div>
+<div class="foldopen" id="foldopen00059" data-start="{" data-end="}">
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="group__minishell.html#gac87767530f63d01af8529373f9269dff">   59</a></span><span class="keywordtype">void</span>    <a class="code hl_function" href="group__tk__list.html#gacfc1c62b2b36d20b8ae3ac3c253fb2b5">ft_tk_add</a>(<a class="code hl_struct" href="structs__token.html">t_token</a> **tk_list, <a class="code hl_struct" href="structs__token.html">t_token</a> *tk)</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>{</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <a class="code hl_struct" href="structs__token.html">t_token</a> *curr;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordflow">if</span> (*tk_list)</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    {</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        curr = <a class="code hl_function" href="group__tk__list.html#ga241c80abbeebb821ce72427181d974c6">ft_tk_last</a>(*tk_list);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        (*curr).next = &amp;*tk;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    }</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        *tk_list = tk;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>}</div>
 </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="foldopen" id="foldopen00079" data-start="{" data-end="}">
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="group__minishell.html#ga241c80abbeebb821ce72427181d974c6">   79</a></span><a class="code hl_struct" href="structs__token.html">t_token</a> *<a class="code hl_function" href="group__tk__list.html#ga241c80abbeebb821ce72427181d974c6">ft_tk_last</a>(<a class="code hl_struct" href="structs__token.html">t_token</a> *tk)</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>{</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordflow">if</span> (!tk)</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="keywordflow">return</span> (NULL);</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordflow">while</span> (tk-&gt;<a class="code hl_variable" href="structs__token.html#a5dae434205818bfc83a61809d4a34a29">next</a>)</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    {</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <span class="keywordflow">if</span> ((*tk).next == NULL)</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            <span class="keywordflow">return</span> (tk);</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        tk = (*tk).<a class="code hl_variable" href="structs__token.html#a5dae434205818bfc83a61809d4a34a29">next</a>;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    }</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keywordflow">return</span> (tk);</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>}</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="foldopen" id="foldopen00078" data-start="{" data-end="}">
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="group__minishell.html#ga241c80abbeebb821ce72427181d974c6">   78</a></span><a class="code hl_struct" href="structs__token.html">t_token</a> *<a class="code hl_function" href="group__tk__list.html#ga241c80abbeebb821ce72427181d974c6">ft_tk_last</a>(<a class="code hl_struct" href="structs__token.html">t_token</a> *tk)</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>{</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keywordflow">if</span> (!tk)</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keywordflow">return</span> (NULL);</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keywordflow">while</span> (tk-&gt;<a class="code hl_variable" href="structs__token.html#a5dae434205818bfc83a61809d4a34a29">next</a>)</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    {</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <span class="keywordflow">if</span> ((*tk).next == NULL)</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            <span class="keywordflow">return</span> (tk);</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        tk = (*tk).<a class="code hl_variable" href="structs__token.html#a5dae434205818bfc83a61809d4a34a29">next</a>;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    }</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordflow">return</span> (tk);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>}</div>
 </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
 <div class="ttc" id="aft__calloc_8c_html_a55cb9602200ccf92a7f43e58c6ee2679"><div class="ttname"><a href="ft__calloc_8c.html#a55cb9602200ccf92a7f43e58c6ee2679">ft_calloc</a></div><div class="ttdeci">void * ft_calloc(size_t nmemb, size_t size)</div><div class="ttdef"><b>Definition</b> <a href="ft__calloc_8c_source.html#l00015">ft_calloc.c:15</a></div></div>
 <div class="ttc" id="aft__substr_8c_html_a78c402cbf3d55b1374693c3b7d34f71d"><div class="ttname"><a href="ft__substr_8c.html#a78c402cbf3d55b1374693c3b7d34f71d">ft_substr</a></div><div class="ttdeci">char * ft_substr(char const *s, unsigned int start, size_t len)</div><div class="ttdef"><b>Definition</b> <a href="ft__substr_8c_source.html#l00032">ft_substr.c:32</a></div></div>
 <div class="ttc" id="agroup__minishell_html_gaaa12264c004e358b28290c09bb20969a"><div class="ttname"><a href="group__minishell.html#gaaa12264c004e358b28290c09bb20969a">t_token_type</a></div><div class="ttdeci">enum e_token_type t_token_type</div></div>
 <div class="ttc" id="agroup__minishell_html_gac47de99d45d512bc26c9d02d999b2ae8"><div class="ttname"><a href="group__minishell.html#gac47de99d45d512bc26c9d02d999b2ae8">ft_err</a></div><div class="ttdeci">int ft_err(char *msg, int status)</div><div class="ttdoc">Error printing.</div><div class="ttdef"><b>Definition</b> <a href="800__errors_8c_source.html#l00029">800_errors.c:29</a></div></div>
 <div class="ttc" id="agroup__minishell_html_gad2ed9ddb3af0aa3efc4e340b69ba296e"><div class="ttname"><a href="group__minishell.html#gad2ed9ddb3af0aa3efc4e340b69ba296e">TKNZR_ERR</a></div><div class="ttdeci">#define TKNZR_ERR</div><div class="ttdef"><b>Definition</b> <a href="minishell_8h_source.html#l00048">minishell.h:48</a></div></div>
-<div class="ttc" id="agroup__tk__list_html_ga241c80abbeebb821ce72427181d974c6"><div class="ttname"><a href="group__tk__list.html#ga241c80abbeebb821ce72427181d974c6">ft_tk_last</a></div><div class="ttdeci">t_token * ft_tk_last(t_token *tk)</div><div class="ttdoc">Get last token in list.</div><div class="ttdef"><b>Definition</b> <a href="#l00079">210_tk_list.c:79</a></div></div>
+<div class="ttc" id="agroup__tk__list_html_ga241c80abbeebb821ce72427181d974c6"><div class="ttname"><a href="group__tk__list.html#ga241c80abbeebb821ce72427181d974c6">ft_tk_last</a></div><div class="ttdeci">t_token * ft_tk_last(t_token *tk)</div><div class="ttdoc">Get last token in list.</div><div class="ttdef"><b>Definition</b> <a href="#l00078">210_tk_list.c:78</a></div></div>
 <div class="ttc" id="agroup__tk__list_html_ga4c42f84cb9d01ff4c5a02b447ba4d680"><div class="ttname"><a href="group__tk__list.html#ga4c42f84cb9d01ff4c5a02b447ba4d680">ft_tk_new</a></div><div class="ttdeci">t_token * ft_tk_new(char *line, t_token_type type, int len)</div><div class="ttdoc">Create new token.</div><div class="ttdef"><b>Definition</b> <a href="#l00036">210_tk_list.c:36</a></div></div>
-<div class="ttc" id="agroup__tk__list_html_gacfc1c62b2b36d20b8ae3ac3c253fb2b5"><div class="ttname"><a href="group__tk__list.html#gacfc1c62b2b36d20b8ae3ac3c253fb2b5">ft_tk_add</a></div><div class="ttdeci">void ft_tk_add(t_token **tk_list, t_token *tk)</div><div class="ttdef"><b>Definition</b> <a href="#l00060">210_tk_list.c:60</a></div></div>
+<div class="ttc" id="agroup__tk__list_html_gacfc1c62b2b36d20b8ae3ac3c253fb2b5"><div class="ttname"><a href="group__tk__list.html#gacfc1c62b2b36d20b8ae3ac3c253fb2b5">ft_tk_add</a></div><div class="ttdeci">void ft_tk_add(t_token **tk_list, t_token *tk)</div><div class="ttdoc">Add token to list.</div><div class="ttdef"><b>Definition</b> <a href="#l00059">210_tk_list.c:59</a></div></div>
 <div class="ttc" id="aminishell_8h_html"><div class="ttname"><a href="minishell_8h.html">minishell.h</a></div></div>
-<div class="ttc" id="astructs__token_html"><div class="ttname"><a href="structs__token.html">s_token</a></div><div class="ttdef"><b>Definition</b> <a href="minishell_8h_source.html#l00147">minishell.h:148</a></div></div>
-<div class="ttc" id="astructs__token_html_a08ace73b7cbde540dc6f450886f028d5"><div class="ttname"><a href="structs__token.html#a08ace73b7cbde540dc6f450886f028d5">s_token::len</a></div><div class="ttdeci">int len</div><div class="ttdef"><b>Definition</b> <a href="minishell_8h_source.html#l00151">minishell.h:151</a></div></div>
-<div class="ttc" id="astructs__token_html_a350680c70abb7e7173240477e92dc0a3"><div class="ttname"><a href="structs__token.html#a350680c70abb7e7173240477e92dc0a3">s_token::type</a></div><div class="ttdeci">t_token_type type</div><div class="ttdef"><b>Definition</b> <a href="minishell_8h_source.html#l00149">minishell.h:149</a></div></div>
-<div class="ttc" id="astructs__token_html_a480e9b4c41cbf908eb059b5ab09c8584"><div class="ttname"><a href="structs__token.html#a480e9b4c41cbf908eb059b5ab09c8584">s_token::name</a></div><div class="ttdeci">char * name</div><div class="ttdef"><b>Definition</b> <a href="minishell_8h_source.html#l00150">minishell.h:150</a></div></div>
-<div class="ttc" id="astructs__token_html_a5dae434205818bfc83a61809d4a34a29"><div class="ttname"><a href="structs__token.html#a5dae434205818bfc83a61809d4a34a29">s_token::next</a></div><div class="ttdeci">struct s_token * next</div><div class="ttdef"><b>Definition</b> <a href="minishell_8h_source.html#l00153">minishell.h:153</a></div></div>
-<div class="ttc" id="astructs__token_html_adab17d2b867c476fa5edeca2d20759ab"><div class="ttname"><a href="structs__token.html#adab17d2b867c476fa5edeca2d20759ab">s_token::to_del</a></div><div class="ttdeci">int to_del</div><div class="ttdef"><b>Definition</b> <a href="minishell_8h_source.html#l00152">minishell.h:152</a></div></div>
+<div class="ttc" id="astructs__token_html"><div class="ttname"><a href="structs__token.html">s_token</a></div><div class="ttdef"><b>Definition</b> <a href="minishell_8h_source.html#l00146">minishell.h:147</a></div></div>
+<div class="ttc" id="astructs__token_html_a08ace73b7cbde540dc6f450886f028d5"><div class="ttname"><a href="structs__token.html#a08ace73b7cbde540dc6f450886f028d5">s_token::len</a></div><div class="ttdeci">int len</div><div class="ttdef"><b>Definition</b> <a href="minishell_8h_source.html#l00150">minishell.h:150</a></div></div>
+<div class="ttc" id="astructs__token_html_a350680c70abb7e7173240477e92dc0a3"><div class="ttname"><a href="structs__token.html#a350680c70abb7e7173240477e92dc0a3">s_token::type</a></div><div class="ttdeci">t_token_type type</div><div class="ttdef"><b>Definition</b> <a href="minishell_8h_source.html#l00148">minishell.h:148</a></div></div>
+<div class="ttc" id="astructs__token_html_a480e9b4c41cbf908eb059b5ab09c8584"><div class="ttname"><a href="structs__token.html#a480e9b4c41cbf908eb059b5ab09c8584">s_token::name</a></div><div class="ttdeci">char * name</div><div class="ttdef"><b>Definition</b> <a href="minishell_8h_source.html#l00149">minishell.h:149</a></div></div>
+<div class="ttc" id="astructs__token_html_a5dae434205818bfc83a61809d4a34a29"><div class="ttname"><a href="structs__token.html#a5dae434205818bfc83a61809d4a34a29">s_token::next</a></div><div class="ttdeci">struct s_token * next</div><div class="ttdef"><b>Definition</b> <a href="minishell_8h_source.html#l00152">minishell.h:152</a></div></div>
+<div class="ttc" id="astructs__token_html_adab17d2b867c476fa5edeca2d20759ab"><div class="ttname"><a href="structs__token.html#adab17d2b867c476fa5edeca2d20759ab">s_token::to_del</a></div><div class="ttdeci">int to_del</div><div class="ttdef"><b>Definition</b> <a href="minishell_8h_source.html#l00151">minishell.h:151</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

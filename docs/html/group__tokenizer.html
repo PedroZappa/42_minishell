@@ -83,14 +83,19 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:gac7e43dc3da1f3162f45536e737c83148" id="r_gac7e43dc3da1f3162f45536e737c83148"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gac7e43dc3da1f3162f45536e737c83148">ft_get_tkns</a> (char *line, <a class="el" href="group__minishell.html#gaead06bc7a81ebdd60cbdcf6b3b8e51d4">t_token</a> **tks)</td></tr>
+<tr class="memdesc:gac7e43dc3da1f3162f45536e737c83148"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get tokens from line.  <br /></td></tr>
 <tr class="separator:gac7e43dc3da1f3162f45536e737c83148"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaff1a04e198620fc85509ae994dc84bc8" id="r_gaff1a04e198620fc85509ae994dc84bc8"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__minishell.html#ga11d4e9d9eb9305bdd8b5f5c806485d60">t_tk_ops</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gaff1a04e198620fc85509ae994dc84bc8">ft_get_tk</a> (char *tk)</td></tr>
+<tr class="memdesc:gaff1a04e198620fc85509ae994dc84bc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find matching token operation.  <br /></td></tr>
 <tr class="separator:gaff1a04e198620fc85509ae994dc84bc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa970535e308776b35f1781134d1b6cdd" id="r_gaa970535e308776b35f1781134d1b6cdd"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gaa970535e308776b35f1781134d1b6cdd">ft_init_ops</a> (<a class="el" href="group__minishell.html#ga11d4e9d9eb9305bdd8b5f5c806485d60">t_tk_ops</a> *ops)</td></tr>
+<tr class="memdesc:gaa970535e308776b35f1781134d1b6cdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize t_tk_ops array with all supported tokens.  <br /></td></tr>
 <tr class="separator:gaa970535e308776b35f1781134d1b6cdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacedaf310abb4b0d79d92965ae8fa1e6d" id="r_gacedaf310abb4b0d79d92965ae8fa1e6d"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gacedaf310abb4b0d79d92965ae8fa1e6d">ft_has_match</a> (char **line)</td></tr>
-<tr class="separator:gacedaf310abb4b0d79d92965ae8fa1e6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga04709fd5daefe2c32e9ed76f8bfa492a" id="r_ga04709fd5daefe2c32e9ed76f8bfa492a"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga04709fd5daefe2c32e9ed76f8bfa492a">ft_has_match</a> (char **quote)</td></tr>
+<tr class="memdesc:ga04709fd5daefe2c32e9ed76f8bfa492a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if line contains a matching closing quote.  <br /></td></tr>
+<tr class="separator:ga04709fd5daefe2c32e9ed76f8bfa492a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad54fbbb5fa283dba9909ddee5af8e96e" id="r_gad54fbbb5fa283dba9909ddee5af8e96e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gad54fbbb5fa283dba9909ddee5af8e96e">ft_tokenizer</a> (<a class="el" href="group__minishell.html#gae4cfb7c093350dca726786f683b6aca3">t_shell</a> *sh, char **line, <a class="el" href="group__minishell.html#gaead06bc7a81ebdd60cbdcf6b3b8e51d4">t_token</a> **tks)</td></tr>
+<tr class="memdesc:gad54fbbb5fa283dba9909ddee5af8e96e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tokenizer.  <br /></td></tr>
 <tr class="separator:gad54fbbb5fa283dba9909ddee5af8e96e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -120,14 +125,28 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="200__tokenizer_8c_source.html#l00121">121</a> of file <a class="el" href="200__tokenizer_8c_source.html">200_tokenizer.c</a>.</p>
+<p>Find matching token operation. </p>
+<ul>
+<li>Initializes t_tk_ops array with all supported tokens</li>
+<li>Compares tk with each token in the array <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tk</td><td><a class="el" href="structToken.html" title="Structure to build linked list of tokens.">Token</a> string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__minishell.html#gga4b3d00327cec9ed72e1618372ac5038dac7f69f7c9e5aea9b8f54cf02870e2bf8">SUCCESS(t_tk_ops struct with op data)</a> <a class="el" href="group__minishell.html#gga4b3d00327cec9ed72e1618372ac5038daa5571864412c8275a2e18a931fddcaa6">FAILURE(empty t_tk_ops struct)</a> </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Used in <a class="el" href="#gac7e43dc3da1f3162f45536e737c83148" title="Get tokens from line.">ft_get_tkns()</a> </dd></dl>
+</li>
+</ul>
+
+<p class="definition">Definition at line <a class="el" href="200__tokenizer_8c_source.html#l00113">113</a> of file <a class="el" href="200__tokenizer_8c_source.html">200_tokenizer.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="group__tokenizer_gaff1a04e198620fc85509ae994dc84bc8_cgraph.png" border="0" usemap="#agroup__tokenizer_gaff1a04e198620fc85509ae994dc84bc8_cgraph" alt=""/></div>
 <map name="agroup__tokenizer_gaff1a04e198620fc85509ae994dc84bc8_cgraph" id="agroup__tokenizer_gaff1a04e198620fc85509ae994dc84bc8_cgraph">
-<area shape="rect" title=" " alt="" coords="5,80,84,105"/>
-<area shape="rect" href="group__tokenizer.html#gaa970535e308776b35f1781134d1b6cdd" title=" " alt="" coords="133,5,222,31"/>
+<area shape="rect" title="Find matching token operation." alt="" coords="5,80,84,105"/>
+<area shape="rect" href="group__tokenizer.html#gaa970535e308776b35f1781134d1b6cdd" title="Initialize t_tk_ops array with all supported tokens." alt="" coords="133,5,222,31"/>
 <area shape="poly" title=" " alt="" coords="66,78,131,40,139,35,141,40,133,44,68,82"/>
 <area shape="rect" href="ft__isspace_8c.html#a76cd21d0fd288012f02809cba504f650" title=" " alt="" coords="134,55,221,80"/>
 <area shape="poly" title=" " alt="" coords="84,83,120,76,121,81,85,88"/>
@@ -148,14 +167,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="group__tokenizer_gaff1a04e198620fc85509ae994dc84bc8_icgraph.png" border="0" usemap="#agroup__tokenizer_gaff1a04e198620fc85509ae994dc84bc8_icgraph" alt=""/></div>
 <map name="agroup__tokenizer_gaff1a04e198620fc85509ae994dc84bc8_icgraph" id="agroup__tokenizer_gaff1a04e198620fc85509ae994dc84bc8_icgraph">
-<area shape="rect" title=" " alt="" coords="660,5,739,31"/>
-<area shape="rect" href="group__tokenizer.html#gac7e43dc3da1f3162f45536e737c83148" title=" " alt="" coords="517,5,612,31"/>
+<area shape="rect" title="Find matching token operation." alt="" coords="660,5,739,31"/>
+<area shape="rect" href="group__tokenizer.html#gac7e43dc3da1f3162f45536e737c83148" title="Get tokens from line." alt="" coords="517,5,612,31"/>
 <area shape="poly" title=" " alt="" coords="646,21,612,21,612,15,646,15"/>
-<area shape="rect" href="group__tokenizer.html#gad54fbbb5fa283dba9909ddee5af8e96e" title=" " alt="" coords="371,5,469,31"/>
+<area shape="rect" href="group__tokenizer.html#gad54fbbb5fa283dba9909ddee5af8e96e" title="Tokenizer." alt="" coords="371,5,469,31"/>
 <area shape="poly" title=" " alt="" coords="504,21,470,21,470,15,504,15"/>
 <area shape="rect" href="group__parser.html#ga0c8ac350deba72c9149a366e25354f88" title=" " alt="" coords="244,5,323,31"/>
 <area shape="poly" title=" " alt="" coords="357,21,323,21,323,15,357,15"/>
-<area shape="rect" href="group__main.html#ga3c4c12893e05d8e00d1a3a74cbdaf5a2" title=" " alt="" coords="108,5,196,31"/>
+<area shape="rect" href="group__main.html#ga3c4c12893e05d8e00d1a3a74cbdaf5a2" title="Minishell loop." alt="" coords="108,5,196,31"/>
 <area shape="poly" title=" " alt="" coords="230,21,196,21,196,15,230,15"/>
 <area shape="rect" href="group__main.html#ga647f21a28344e1d9c643f4115516d7c9" title="Minishell main function." alt="" coords="5,5,60,31"/>
 <area shape="poly" title=" " alt="" coords="94,21,60,21,60,15,94,15"/>
@@ -191,24 +210,50 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="200__tokenizer_8c_source.html#l00081">81</a> of file <a class="el" href="200__tokenizer_8c_source.html">200_tokenizer.c</a>.</p>
+<p>Get tokens from line. </p>
+<ul>
+<li>Stash line in tmp</li>
+<li>Loop through line<ul>
+<li>Get token data</li>
+<li>If the token is part of a command, add it to tokens list</li>
+<li>If a operation token is parsed:<ul>
+<li>Move pointer to next token</li>
+<li>If the token is not a blank, add it to the li st</li>
+</ul>
+</li>
+<li>Check if line contains a matching closing quote</li>
+</ul>
+</li>
+<li>Get last remaining remaining token <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tks</td><td>Pointer to a t_token struct </td></tr>
+    <tr><td class="paramname">line</td><td>Line buffer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__minishell.html#gga4b3d00327cec9ed72e1618372ac5038dac7f69f7c9e5aea9b8f54cf02870e2bf8">SUCCESS(0)</a> on success, <a class="el" href="group__minishell.html#gga4b3d00327cec9ed72e1618372ac5038daa5571864412c8275a2e18a931fddcaa6">FAILURE(1)</a> on failure </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Used in <a class="el" href="#gad54fbbb5fa283dba9909ddee5af8e96e" title="Tokenizer.">ft_tokenizer()</a> </dd></dl>
+</li>
+</ul>
+
+<p class="definition">Definition at line <a class="el" href="200__tokenizer_8c_source.html#l00076">76</a> of file <a class="el" href="200__tokenizer_8c_source.html">200_tokenizer.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="group__tokenizer_gac7e43dc3da1f3162f45536e737c83148_cgraph.png" border="0" usemap="#agroup__tokenizer_gac7e43dc3da1f3162f45536e737c83148_cgraph" alt=""/></div>
 <map name="agroup__tokenizer_gac7e43dc3da1f3162f45536e737c83148_cgraph" id="agroup__tokenizer_gac7e43dc3da1f3162f45536e737c83148_cgraph">
-<area shape="rect" title=" " alt="" coords="5,217,100,243"/>
+<area shape="rect" title="Get tokens from line." alt="" coords="5,217,100,243"/>
 <area shape="rect" href="ft__free_8c.html#aa1fa5092f17c4da4ee3f45bd33f44250" title="Free a pointer and set it to NULL." alt="" coords="171,80,235,105"/>
 <area shape="poly" title=" " alt="" coords="60,216,94,168,118,140,146,115,157,107,160,112,150,119,122,143,98,171,64,219"/>
-<area shape="rect" href="group__tokenizer.html#gaff1a04e198620fc85509ae994dc84bc8" title=" " alt="" coords="163,129,242,155"/>
+<area shape="rect" href="group__tokenizer.html#gaff1a04e198620fc85509ae994dc84bc8" title="Find matching token operation." alt="" coords="163,129,242,155"/>
 <area shape="poly" title=" " alt="" coords="74,215,167,159,170,164,77,219"/>
-<area shape="rect" href="group__tokenizer.html#gacedaf310abb4b0d79d92965ae8fa1e6d" title=" " alt="" coords="148,217,257,243"/>
+<area shape="rect" href="group__tokenizer.html#ga04709fd5daefe2c32e9ed76f8bfa492a" title="Check if line contains a matching closing quote." alt="" coords="148,217,257,243"/>
 <area shape="poly" title=" " alt="" coords="100,227,134,227,134,233,100,233"/>
-<area shape="rect" href="group__tk__list.html#gacfc1c62b2b36d20b8ae3ac3c253fb2b5" title=" " alt="" coords="161,365,244,391"/>
+<area shape="rect" href="group__tk__list.html#gacfc1c62b2b36d20b8ae3ac3c253fb2b5" title="Add token to list." alt="" coords="161,365,244,391"/>
 <area shape="poly" title=" " alt="" coords="68,241,150,327,179,354,175,358,146,331,64,245"/>
 <area shape="rect" href="group__tk__list.html#ga4c42f84cb9d01ff4c5a02b447ba4d680" title="Create new token." alt="" coords="160,292,245,317"/>
 <area shape="poly" title=" " alt="" coords="81,241,165,283,163,288,78,245"/>
-<area shape="rect" href="group__tokenizer.html#gaa970535e308776b35f1781134d1b6cdd" title=" " alt="" coords="306,5,395,31"/>
+<area shape="rect" href="group__tokenizer.html#gaa970535e308776b35f1781134d1b6cdd" title="Initialize t_tk_ops array with all supported tokens." alt="" coords="306,5,395,31"/>
 <area shape="poly" title=" " alt="" coords="237,127,256,115,271,96,279,79,288,60,303,40,308,36,311,41,307,44,292,63,284,81,276,99,259,119,240,131"/>
 <area shape="rect" href="ft__isspace_8c.html#a76cd21d0fd288012f02809cba504f650" title=" " alt="" coords="307,55,394,80"/>
 <area shape="poly" title=" " alt="" coords="231,127,256,114,313,84,315,89,259,119,233,132"/>
@@ -248,12 +293,12 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="group__tokenizer_gac7e43dc3da1f3162f45536e737c83148_icgraph.png" border="0" usemap="#agroup__tokenizer_gac7e43dc3da1f3162f45536e737c83148_icgraph" alt=""/></div>
 <map name="agroup__tokenizer_gac7e43dc3da1f3162f45536e737c83148_icgraph" id="agroup__tokenizer_gac7e43dc3da1f3162f45536e737c83148_icgraph">
-<area shape="rect" title=" " alt="" coords="517,5,612,31"/>
-<area shape="rect" href="group__tokenizer.html#gad54fbbb5fa283dba9909ddee5af8e96e" title=" " alt="" coords="371,5,469,31"/>
+<area shape="rect" title="Get tokens from line." alt="" coords="517,5,612,31"/>
+<area shape="rect" href="group__tokenizer.html#gad54fbbb5fa283dba9909ddee5af8e96e" title="Tokenizer." alt="" coords="371,5,469,31"/>
 <area shape="poly" title=" " alt="" coords="504,21,470,21,470,15,504,15"/>
 <area shape="rect" href="group__parser.html#ga0c8ac350deba72c9149a366e25354f88" title=" " alt="" coords="244,5,323,31"/>
 <area shape="poly" title=" " alt="" coords="357,21,323,21,323,15,357,15"/>
-<area shape="rect" href="group__main.html#ga3c4c12893e05d8e00d1a3a74cbdaf5a2" title=" " alt="" coords="108,5,196,31"/>
+<area shape="rect" href="group__main.html#ga3c4c12893e05d8e00d1a3a74cbdaf5a2" title="Minishell loop." alt="" coords="108,5,196,31"/>
 <area shape="poly" title=" " alt="" coords="230,21,196,21,196,15,230,15"/>
 <area shape="rect" href="group__main.html#ga647f21a28344e1d9c643f4115516d7c9" title="Minishell main function." alt="" coords="5,5,60,31"/>
 <area shape="poly" title=" " alt="" coords="94,21,60,21,60,15,94,15"/>
@@ -262,8 +307,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="gacedaf310abb4b0d79d92965ae8fa1e6d" name="gacedaf310abb4b0d79d92965ae8fa1e6d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gacedaf310abb4b0d79d92965ae8fa1e6d">&#9670;&#160;</a></span>ft_has_match()</h2>
+<a id="ga04709fd5daefe2c32e9ed76f8bfa492a" name="ga04709fd5daefe2c32e9ed76f8bfa492a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga04709fd5daefe2c32e9ed76f8bfa492a">&#9670;&#160;</a></span>ft_has_match()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -274,7 +319,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">static int ft_has_match </td>
           <td>(</td>
-          <td class="paramtype">char **</td>          <td class="paramname"><span class="paramname"><em>line</em></span></td><td>)</td>
+          <td class="paramtype">char **</td>          <td class="paramname"><span class="paramname"><em>quote</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -285,13 +330,29 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="200__tokenizer_8c_source.html#l00173">173</a> of file <a class="el" href="200__tokenizer_8c_source.html">200_tokenizer.c</a>.</p>
+<p>Check if line contains a matching closing quote. </p>
+<ul>
+<li>Checks if line contains a matching closing quote<ul>
+<li>If it doesn't, move pointer to end of the line <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">quote</td><td>Pointer to a quote </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__minishell.html#gga4b3d00327cec9ed72e1618372ac5038dac7f69f7c9e5aea9b8f54cf02870e2bf8">SUCCESS(matching quote found)</a> <a class="el" href="group__minishell.html#gga4b3d00327cec9ed72e1618372ac5038daa5571864412c8275a2e18a931fddcaa6">FAILURE(no match)</a> </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Used in <a class="el" href="#gac7e43dc3da1f3162f45536e737c83148" title="Get tokens from line.">ft_get_tkns()</a> when a quote is parsed </dd></dl>
+</li>
+</ul>
+</li>
+</ul>
+
+<p class="definition">Definition at line <a class="el" href="200__tokenizer_8c_source.html#l00167">167</a> of file <a class="el" href="200__tokenizer_8c_source.html">200_tokenizer.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="group__tokenizer_gacedaf310abb4b0d79d92965ae8fa1e6d_cgraph.png" border="0" usemap="#agroup__tokenizer_gacedaf310abb4b0d79d92965ae8fa1e6d_cgraph" alt=""/></div>
-<map name="agroup__tokenizer_gacedaf310abb4b0d79d92965ae8fa1e6d_cgraph" id="agroup__tokenizer_gacedaf310abb4b0d79d92965ae8fa1e6d_cgraph">
-<area shape="rect" title=" " alt="" coords="5,31,115,56"/>
+<div class="center"><img src="group__tokenizer_ga04709fd5daefe2c32e9ed76f8bfa492a_cgraph.png" border="0" usemap="#agroup__tokenizer_ga04709fd5daefe2c32e9ed76f8bfa492a_cgraph" alt=""/></div>
+<map name="agroup__tokenizer_ga04709fd5daefe2c32e9ed76f8bfa492a_cgraph" id="agroup__tokenizer_ga04709fd5daefe2c32e9ed76f8bfa492a_cgraph">
+<area shape="rect" title="Check if line contains a matching closing quote." alt="" coords="5,31,115,56"/>
 <area shape="rect" href="ft__strchr_8c.html#aa6d0c2d180f32ee585485e1a1ce3d55d" title="Searches for the first occurrence of the character c." alt="" coords="163,5,237,31"/>
 <area shape="poly" title=" " alt="" coords="114,31,149,24,150,30,115,36"/>
 <area shape="rect" href="ft__strlen_8c.html#abbb8c6c4ed85d892e7f1509f65f5768a" title=" " alt="" coords="294,55,369,80"/>
@@ -304,16 +365,16 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="group__tokenizer_gacedaf310abb4b0d79d92965ae8fa1e6d_icgraph.png" border="0" usemap="#agroup__tokenizer_gacedaf310abb4b0d79d92965ae8fa1e6d_icgraph" alt=""/></div>
-<map name="agroup__tokenizer_gacedaf310abb4b0d79d92965ae8fa1e6d_icgraph" id="agroup__tokenizer_gacedaf310abb4b0d79d92965ae8fa1e6d_icgraph">
-<area shape="rect" title=" " alt="" coords="660,5,769,31"/>
-<area shape="rect" href="group__tokenizer.html#gac7e43dc3da1f3162f45536e737c83148" title=" " alt="" coords="517,5,612,31"/>
+<div class="center"><img src="group__tokenizer_ga04709fd5daefe2c32e9ed76f8bfa492a_icgraph.png" border="0" usemap="#agroup__tokenizer_ga04709fd5daefe2c32e9ed76f8bfa492a_icgraph" alt=""/></div>
+<map name="agroup__tokenizer_ga04709fd5daefe2c32e9ed76f8bfa492a_icgraph" id="agroup__tokenizer_ga04709fd5daefe2c32e9ed76f8bfa492a_icgraph">
+<area shape="rect" title="Check if line contains a matching closing quote." alt="" coords="660,5,769,31"/>
+<area shape="rect" href="group__tokenizer.html#gac7e43dc3da1f3162f45536e737c83148" title="Get tokens from line." alt="" coords="517,5,612,31"/>
 <area shape="poly" title=" " alt="" coords="646,21,612,21,612,15,646,15"/>
-<area shape="rect" href="group__tokenizer.html#gad54fbbb5fa283dba9909ddee5af8e96e" title=" " alt="" coords="371,5,469,31"/>
+<area shape="rect" href="group__tokenizer.html#gad54fbbb5fa283dba9909ddee5af8e96e" title="Tokenizer." alt="" coords="371,5,469,31"/>
 <area shape="poly" title=" " alt="" coords="504,21,470,21,470,15,504,15"/>
 <area shape="rect" href="group__parser.html#ga0c8ac350deba72c9149a366e25354f88" title=" " alt="" coords="244,5,323,31"/>
 <area shape="poly" title=" " alt="" coords="357,21,323,21,323,15,357,15"/>
-<area shape="rect" href="group__main.html#ga3c4c12893e05d8e00d1a3a74cbdaf5a2" title=" " alt="" coords="108,5,196,31"/>
+<area shape="rect" href="group__main.html#ga3c4c12893e05d8e00d1a3a74cbdaf5a2" title="Minishell loop." alt="" coords="108,5,196,31"/>
 <area shape="poly" title=" " alt="" coords="230,21,196,21,196,15,230,15"/>
 <area shape="rect" href="group__main.html#ga647f21a28344e1d9c643f4115516d7c9" title="Minishell main function." alt="" coords="5,5,60,31"/>
 <area shape="poly" title=" " alt="" coords="94,21,60,21,60,15,94,15"/>
@@ -345,22 +406,30 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="200__tokenizer_8c_source.html#l00145">145</a> of file <a class="el" href="200__tokenizer_8c_source.html">200_tokenizer.c</a>.</p>
+<p>Initialize t_tk_ops array with all supported tokens. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ops</td><td>Pointer to an array of t_tk_ops structs </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="200__tokenizer_8c_source.html#l00139">139</a> of file <a class="el" href="200__tokenizer_8c_source.html">200_tokenizer.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="group__tokenizer_gaa970535e308776b35f1781134d1b6cdd_icgraph.png" border="0" usemap="#agroup__tokenizer_gaa970535e308776b35f1781134d1b6cdd_icgraph" alt=""/></div>
 <map name="agroup__tokenizer_gaa970535e308776b35f1781134d1b6cdd_icgraph" id="agroup__tokenizer_gaa970535e308776b35f1781134d1b6cdd_icgraph">
-<area shape="rect" title=" " alt="" coords="787,5,876,31"/>
-<area shape="rect" href="group__tokenizer.html#gaff1a04e198620fc85509ae994dc84bc8" title=" " alt="" coords="660,5,739,31"/>
+<area shape="rect" title="Initialize t_tk_ops array with all supported tokens." alt="" coords="787,5,876,31"/>
+<area shape="rect" href="group__tokenizer.html#gaff1a04e198620fc85509ae994dc84bc8" title="Find matching token operation." alt="" coords="660,5,739,31"/>
 <area shape="poly" title=" " alt="" coords="773,21,739,21,739,15,773,15"/>
-<area shape="rect" href="group__tokenizer.html#gac7e43dc3da1f3162f45536e737c83148" title=" " alt="" coords="517,5,612,31"/>
+<area shape="rect" href="group__tokenizer.html#gac7e43dc3da1f3162f45536e737c83148" title="Get tokens from line." alt="" coords="517,5,612,31"/>
 <area shape="poly" title=" " alt="" coords="646,21,612,21,612,15,646,15"/>
-<area shape="rect" href="group__tokenizer.html#gad54fbbb5fa283dba9909ddee5af8e96e" title=" " alt="" coords="371,5,469,31"/>
+<area shape="rect" href="group__tokenizer.html#gad54fbbb5fa283dba9909ddee5af8e96e" title="Tokenizer." alt="" coords="371,5,469,31"/>
 <area shape="poly" title=" " alt="" coords="504,21,470,21,470,15,504,15"/>
 <area shape="rect" href="group__parser.html#ga0c8ac350deba72c9149a366e25354f88" title=" " alt="" coords="244,5,323,31"/>
 <area shape="poly" title=" " alt="" coords="357,21,323,21,323,15,357,15"/>
-<area shape="rect" href="group__main.html#ga3c4c12893e05d8e00d1a3a74cbdaf5a2" title=" " alt="" coords="108,5,196,31"/>
+<area shape="rect" href="group__main.html#ga3c4c12893e05d8e00d1a3a74cbdaf5a2" title="Minishell loop." alt="" coords="108,5,196,31"/>
 <area shape="poly" title=" " alt="" coords="230,21,196,21,196,15,230,15"/>
 <area shape="rect" href="group__main.html#ga647f21a28344e1d9c643f4115516d7c9" title="Minishell main function." alt="" coords="5,5,60,31"/>
 <area shape="poly" title=" " alt="" coords="94,21,60,21,60,15,94,15"/>
@@ -393,16 +462,38 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="200__tokenizer_8c_source.html#l00042">42</a> of file <a class="el" href="200__tokenizer_8c_source.html">200_tokenizer.c</a>.</p>
+<p>Tokenizer. </p>
+<ul>
+<li>Get tokens from line</li>
+<li>Handle <a class="el" href="structToken.html" title="Structure to build linked list of tokens.">Token</a> Expansion<ul>
+<li>Expand ~ (HOME)</li>
+<li>Expand all other tokens <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sh</td><td>Pointer to a t_shell struct </td></tr>
+    <tr><td class="paramname">line</td><td>Line buffer </td></tr>
+    <tr><td class="paramname">tks</td><td>Pointer to a t_token struct </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__minishell.html#gga4b3d00327cec9ed72e1618372ac5038dac7f69f7c9e5aea9b8f54cf02870e2bf8">SUCCESS(0)</a> </dd>
+<dd>
+<a class="el" href="group__minishell.html#gga4b3d00327cec9ed72e1618372ac5038daa5571864412c8275a2e18a931fddcaa6">FAILURE(errno)</a> </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Used in <a class="el" href="group__minishell.html#ga0c8ac350deba72c9149a366e25354f88">ft_parser()</a> </dd></dl>
+</li>
+</ul>
+</li>
+</ul>
+
+<p class="definition">Definition at line <a class="el" href="200__tokenizer_8c_source.html#l00039">39</a> of file <a class="el" href="200__tokenizer_8c_source.html">200_tokenizer.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="group__tokenizer_gad54fbbb5fa283dba9909ddee5af8e96e_cgraph.png" border="0" usemap="#agroup__tokenizer_gad54fbbb5fa283dba9909ddee5af8e96e_cgraph" alt=""/></div>
 <map name="agroup__tokenizer_gad54fbbb5fa283dba9909ddee5af8e96e_cgraph" id="agroup__tokenizer_gad54fbbb5fa283dba9909ddee5af8e96e_cgraph">
-<area shape="rect" title=" " alt="" coords="5,401,104,427"/>
+<area shape="rect" title="Tokenizer." alt="" coords="5,401,104,427"/>
 <area shape="rect" href="group__error.html#gac47de99d45d512bc26c9d02d999b2ae8" title="Error printing." alt="" coords="469,153,525,179"/>
 <area shape="poly" title=" " alt="" coords="64,400,99,357,150,308,188,281,229,257,313,218,393,190,456,172,457,178,394,195,315,223,231,262,191,285,154,312,103,360,68,403"/>
-<area shape="rect" href="group__tokenizer.html#gac7e43dc3da1f3162f45536e737c83148" title=" " alt="" coords="152,321,247,347"/>
+<area shape="rect" href="group__tokenizer.html#gac7e43dc3da1f3162f45536e737c83148" title="Get tokens from line." alt="" coords="152,321,247,347"/>
 <area shape="poly" title=" " alt="" coords="78,399,162,351,165,356,80,403"/>
 <area shape="rect" href="ft__strlen_8c.html#abbb8c6c4ed85d892e7f1509f65f5768a" title=" " alt="" coords="601,401,676,427"/>
 <area shape="poly" title=" " alt="" coords="105,417,239,428,322,431,404,430,587,417,587,422,404,435,321,436,239,433,104,422"/>
@@ -414,15 +505,15 @@ Here is the call graph for this function:</div>
 <area shape="poly" title=" " alt="" coords="687,163,721,163,721,169,687,169"/>
 <area shape="rect" href="ft__free_8c.html#aa1fa5092f17c4da4ee3f45bd33f44250" title="Free a pointer and set it to NULL." alt="" coords="317,345,381,371"/>
 <area shape="poly" title=" " alt="" coords="247,339,304,348,303,353,246,344"/>
-<area shape="rect" href="group__tokenizer.html#gaff1a04e198620fc85509ae994dc84bc8" title=" " alt="" coords="310,104,389,129"/>
+<area shape="rect" href="group__tokenizer.html#gaff1a04e198620fc85509ae994dc84bc8" title="Find matching token operation." alt="" coords="310,104,389,129"/>
 <area shape="poly" title=" " alt="" coords="207,320,329,140,333,143,212,323"/>
-<area shape="rect" href="group__tokenizer.html#gacedaf310abb4b0d79d92965ae8fa1e6d" title=" " alt="" coords="295,395,404,420"/>
+<area shape="rect" href="group__tokenizer.html#ga04709fd5daefe2c32e9ed76f8bfa492a" title="Check if line contains a matching closing quote." alt="" coords="295,395,404,420"/>
 <area shape="poly" title=" " alt="" coords="225,344,296,381,307,386,305,391,293,386,223,349"/>
-<area shape="rect" href="group__tk__list.html#gacfc1c62b2b36d20b8ae3ac3c253fb2b5" title=" " alt="" coords="308,296,391,321"/>
+<area shape="rect" href="group__tk__list.html#gacfc1c62b2b36d20b8ae3ac3c253fb2b5" title="Add token to list." alt="" coords="308,296,391,321"/>
 <area shape="poly" title=" " alt="" coords="246,323,294,315,295,320,247,329"/>
 <area shape="rect" href="group__tk__list.html#ga4c42f84cb9d01ff4c5a02b447ba4d680" title="Create new token." alt="" coords="307,240,392,265"/>
 <area shape="poly" title=" " alt="" coords="222,319,311,270,314,274,225,324"/>
-<area shape="rect" href="group__tokenizer.html#gaa970535e308776b35f1781134d1b6cdd" title=" " alt="" coords="453,55,542,80"/>
+<area shape="rect" href="group__tokenizer.html#gaa970535e308776b35f1781134d1b6cdd" title="Initialize t_tk_ops array with all supported tokens." alt="" coords="453,55,542,80"/>
 <area shape="poly" title=" " alt="" coords="387,101,445,82,446,87,389,106"/>
 <area shape="rect" href="ft__isspace_8c.html#a76cd21d0fd288012f02809cba504f650" title=" " alt="" coords="454,104,541,129"/>
 <area shape="poly" title=" " alt="" coords="389,114,441,114,441,119,389,119"/>
@@ -457,10 +548,10 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="group__tokenizer_gad54fbbb5fa283dba9909ddee5af8e96e_icgraph.png" border="0" usemap="#agroup__tokenizer_gad54fbbb5fa283dba9909ddee5af8e96e_icgraph" alt=""/></div>
 <map name="agroup__tokenizer_gad54fbbb5fa283dba9909ddee5af8e96e_icgraph" id="agroup__tokenizer_gad54fbbb5fa283dba9909ddee5af8e96e_icgraph">
-<area shape="rect" title=" " alt="" coords="371,5,469,31"/>
+<area shape="rect" title="Tokenizer." alt="" coords="371,5,469,31"/>
 <area shape="rect" href="group__parser.html#ga0c8ac350deba72c9149a366e25354f88" title=" " alt="" coords="244,5,323,31"/>
 <area shape="poly" title=" " alt="" coords="357,21,323,21,323,15,357,15"/>
-<area shape="rect" href="group__main.html#ga3c4c12893e05d8e00d1a3a74cbdaf5a2" title=" " alt="" coords="108,5,196,31"/>
+<area shape="rect" href="group__main.html#ga3c4c12893e05d8e00d1a3a74cbdaf5a2" title="Minishell loop." alt="" coords="108,5,196,31"/>
 <area shape="poly" title=" " alt="" coords="230,21,196,21,196,15,230,15"/>
 <area shape="rect" href="group__main.html#ga647f21a28344e1d9c643f4115516d7c9" title="Minishell main function." alt="" coords="5,5,60,31"/>
 <area shape="poly" title=" " alt="" coords="94,21,60,21,60,15,94,15"/>

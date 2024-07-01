@@ -86,6 +86,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:ga4c42f84cb9d01ff4c5a02b447ba4d680"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create new token.  <br /></td></tr>
 <tr class="separator:ga4c42f84cb9d01ff4c5a02b447ba4d680"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gacfc1c62b2b36d20b8ae3ac3c253fb2b5" id="r_gacfc1c62b2b36d20b8ae3ac3c253fb2b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gacfc1c62b2b36d20b8ae3ac3c253fb2b5">ft_tk_add</a> (<a class="el" href="group__minishell.html#gaead06bc7a81ebdd60cbdcf6b3b8e51d4">t_token</a> **tk_list, <a class="el" href="group__minishell.html#gaead06bc7a81ebdd60cbdcf6b3b8e51d4">t_token</a> *tk)</td></tr>
+<tr class="memdesc:gacfc1c62b2b36d20b8ae3ac3c253fb2b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add token to list.  <br /></td></tr>
 <tr class="separator:gacfc1c62b2b36d20b8ae3ac3c253fb2b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga241c80abbeebb821ce72427181d974c6" id="r_ga241c80abbeebb821ce72427181d974c6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__minishell.html#gaead06bc7a81ebdd60cbdcf6b3b8e51d4">t_token</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga241c80abbeebb821ce72427181d974c6">ft_tk_last</a> (<a class="el" href="group__minishell.html#gaead06bc7a81ebdd60cbdcf6b3b8e51d4">t_token</a> *tk)</td></tr>
 <tr class="memdesc:ga241c80abbeebb821ce72427181d974c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get last token in list.  <br /></td></tr>
@@ -114,13 +115,29 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="210__tk__list_8c_source.html#l00060">60</a> of file <a class="el" href="210__tk__list_8c_source.html">210_tk_list.c</a>.</p>
+<p>Add token to list. </p>
+<ul>
+<li>Get last token in list<ul>
+<li><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tk_list</td><td>Pointer to a list of t_token structs </td></tr>
+    <tr><td class="paramname">tk</td><td>Pointer to a t_token struct </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Used in <a class="el" href="group__tokenizer.html#gac7e43dc3da1f3162f45536e737c83148" title="Get tokens from line.">ft_get_tkns()</a> </dd></dl>
+</li>
+</ul>
+</li>
+</ul>
+
+<p class="definition">Definition at line <a class="el" href="210__tk__list_8c_source.html#l00059">59</a> of file <a class="el" href="210__tk__list_8c_source.html">210_tk_list.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="group__tk__list_gacfc1c62b2b36d20b8ae3ac3c253fb2b5_cgraph.png" border="0" usemap="#agroup__tk__list_gacfc1c62b2b36d20b8ae3ac3c253fb2b5_cgraph" alt=""/></div>
 <map name="agroup__tk__list_gacfc1c62b2b36d20b8ae3ac3c253fb2b5_cgraph" id="agroup__tk__list_gacfc1c62b2b36d20b8ae3ac3c253fb2b5_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,88,31"/>
+<area shape="rect" title="Add token to list." alt="" coords="5,5,88,31"/>
 <area shape="rect" href="group__tk__list.html#ga241c80abbeebb821ce72427181d974c6" title="Get last token in list." alt="" coords="136,5,219,31"/>
 <area shape="poly" title=" " alt="" coords="88,15,122,15,122,21,88,21"/>
 </map>
@@ -130,14 +147,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="group__tk__list_gacfc1c62b2b36d20b8ae3ac3c253fb2b5_icgraph.png" border="0" usemap="#agroup__tk__list_gacfc1c62b2b36d20b8ae3ac3c253fb2b5_icgraph" alt=""/></div>
 <map name="agroup__tk__list_gacfc1c62b2b36d20b8ae3ac3c253fb2b5_icgraph" id="agroup__tk__list_gacfc1c62b2b36d20b8ae3ac3c253fb2b5_icgraph">
-<area shape="rect" title=" " alt="" coords="660,5,743,31"/>
-<area shape="rect" href="group__tokenizer.html#gac7e43dc3da1f3162f45536e737c83148" title=" " alt="" coords="517,5,612,31"/>
+<area shape="rect" title="Add token to list." alt="" coords="660,5,743,31"/>
+<area shape="rect" href="group__tokenizer.html#gac7e43dc3da1f3162f45536e737c83148" title="Get tokens from line." alt="" coords="517,5,612,31"/>
 <area shape="poly" title=" " alt="" coords="646,21,612,21,612,15,646,15"/>
-<area shape="rect" href="group__tokenizer.html#gad54fbbb5fa283dba9909ddee5af8e96e" title=" " alt="" coords="371,5,469,31"/>
+<area shape="rect" href="group__tokenizer.html#gad54fbbb5fa283dba9909ddee5af8e96e" title="Tokenizer." alt="" coords="371,5,469,31"/>
 <area shape="poly" title=" " alt="" coords="504,21,470,21,470,15,504,15"/>
 <area shape="rect" href="group__parser.html#ga0c8ac350deba72c9149a366e25354f88" title=" " alt="" coords="244,5,323,31"/>
 <area shape="poly" title=" " alt="" coords="357,21,323,21,323,15,357,15"/>
-<area shape="rect" href="group__main.html#ga3c4c12893e05d8e00d1a3a74cbdaf5a2" title=" " alt="" coords="108,5,196,31"/>
+<area shape="rect" href="group__main.html#ga3c4c12893e05d8e00d1a3a74cbdaf5a2" title="Minishell loop." alt="" coords="108,5,196,31"/>
 <area shape="poly" title=" " alt="" coords="230,21,196,21,196,15,230,15"/>
 <area shape="rect" href="group__main.html#ga647f21a28344e1d9c643f4115516d7c9" title="Minishell main function." alt="" coords="5,5,60,31"/>
 <area shape="poly" title=" " alt="" coords="94,21,60,21,60,15,94,15"/>
@@ -162,34 +179,36 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Get last token in list. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<ul>
+<li>Traverse list until last token is reached <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">tk</td><td>Pointer to a t_token struct </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__minishell.html#gga4b3d00327cec9ed72e1618372ac5038dac7f69f7c9e5aea9b8f54cf02870e2bf8">SUCCESS(Pointer to a t_token struct)</a> <a class="el" href="group__minishell.html#gga4b3d00327cec9ed72e1618372ac5038daa5571864412c8275a2e18a931fddcaa6">FAILURE(NULL)</a></dd></dl>
-<ul>
-<li>Traverse list until last token is reached <dl class="section note"><dt>Note</dt><dd>Used in <a class="el" href="#gacfc1c62b2b36d20b8ae3ac3c253fb2b5">ft_tk_add()</a> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__minishell.html#gga4b3d00327cec9ed72e1618372ac5038dac7f69f7c9e5aea9b8f54cf02870e2bf8">SUCCESS(Pointer to a t_token struct)</a> </dd>
+<dd>
+<a class="el" href="group__minishell.html#gga4b3d00327cec9ed72e1618372ac5038daa5571864412c8275a2e18a931fddcaa6">FAILURE(NULL)</a> </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Used in <a class="el" href="#gacfc1c62b2b36d20b8ae3ac3c253fb2b5" title="Add token to list.">ft_tk_add()</a> </dd></dl>
 </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="210__tk__list_8c_source.html#l00079">79</a> of file <a class="el" href="210__tk__list_8c_source.html">210_tk_list.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="210__tk__list_8c_source.html#l00078">78</a> of file <a class="el" href="210__tk__list_8c_source.html">210_tk_list.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="group__tk__list_ga241c80abbeebb821ce72427181d974c6_icgraph.png" border="0" usemap="#agroup__tk__list_ga241c80abbeebb821ce72427181d974c6_icgraph" alt=""/></div>
 <map name="agroup__tk__list_ga241c80abbeebb821ce72427181d974c6_icgraph" id="agroup__tk__list_ga241c80abbeebb821ce72427181d974c6_icgraph">
 <area shape="rect" title="Get last token in list." alt="" coords="791,5,873,31"/>
-<area shape="rect" href="group__tk__list.html#gacfc1c62b2b36d20b8ae3ac3c253fb2b5" title=" " alt="" coords="660,5,743,31"/>
+<area shape="rect" href="group__tk__list.html#gacfc1c62b2b36d20b8ae3ac3c253fb2b5" title="Add token to list." alt="" coords="660,5,743,31"/>
 <area shape="poly" title=" " alt="" coords="777,21,743,21,743,15,777,15"/>
-<area shape="rect" href="group__tokenizer.html#gac7e43dc3da1f3162f45536e737c83148" title=" " alt="" coords="517,5,612,31"/>
+<area shape="rect" href="group__tokenizer.html#gac7e43dc3da1f3162f45536e737c83148" title="Get tokens from line." alt="" coords="517,5,612,31"/>
 <area shape="poly" title=" " alt="" coords="646,21,612,21,612,15,646,15"/>
-<area shape="rect" href="group__tokenizer.html#gad54fbbb5fa283dba9909ddee5af8e96e" title=" " alt="" coords="371,5,469,31"/>
+<area shape="rect" href="group__tokenizer.html#gad54fbbb5fa283dba9909ddee5af8e96e" title="Tokenizer." alt="" coords="371,5,469,31"/>
 <area shape="poly" title=" " alt="" coords="504,21,470,21,470,15,504,15"/>
 <area shape="rect" href="group__parser.html#ga0c8ac350deba72c9149a366e25354f88" title=" " alt="" coords="244,5,323,31"/>
 <area shape="poly" title=" " alt="" coords="357,21,323,21,323,15,357,15"/>
-<area shape="rect" href="group__main.html#ga3c4c12893e05d8e00d1a3a74cbdaf5a2" title=" " alt="" coords="108,5,196,31"/>
+<area shape="rect" href="group__main.html#ga3c4c12893e05d8e00d1a3a74cbdaf5a2" title="Minishell loop." alt="" coords="108,5,196,31"/>
 <area shape="poly" title=" " alt="" coords="230,21,196,21,196,15,230,15"/>
 <area shape="rect" href="group__main.html#ga647f21a28344e1d9c643f4115516d7c9" title="Minishell main function." alt="" coords="5,5,60,31"/>
 <area shape="poly" title=" " alt="" coords="94,21,60,21,60,15,94,15"/>
@@ -223,7 +242,13 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Create new token. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<ul>
+<li>Allocates memory for a t_token struct</li>
+<li>Stores line in name</li>
+<li>Stores type in type</li>
+<li>Stores len in len</li>
+<li>If first character is not a quote, set to_del to 1</li>
+<li>Set next to NULL (Sentinel value) <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">line</td><td>Line buffer </td></tr>
     <tr><td class="paramname">type</td><td><a class="el" href="structToken.html" title="Structure to build linked list of tokens.">Token</a> type </td></tr>
@@ -233,14 +258,8 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__minishell.html#gga4b3d00327cec9ed72e1618372ac5038dac7f69f7c9e5aea9b8f54cf02870e2bf8">SUCCESS(Pointer to a t_token struct)</a> </dd>
 <dd>
-<a class="el" href="group__minishell.html#gga4b3d00327cec9ed72e1618372ac5038daa5571864412c8275a2e18a931fddcaa6">FAILURE(NULL)</a></dd></dl>
-<ul>
-<li>Allocates memory for a t_token struct</li>
-<li>Stores line in name</li>
-<li>Stores type in type</li>
-<li>Stores len in len</li>
-<li>If first character is not a quote, set to_del to 1</li>
-<li>Set next to NULL (Sentinel value) <dl class="section note"><dt>Note</dt><dd>Used in <a class="el" href="group__tokenizer.html#gac7e43dc3da1f3162f45536e737c83148">ft_get_tkns()</a> </dd></dl>
+<a class="el" href="group__minishell.html#gga4b3d00327cec9ed72e1618372ac5038daa5571864412c8275a2e18a931fddcaa6">FAILURE(NULL)</a> </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Used in <a class="el" href="group__tokenizer.html#gac7e43dc3da1f3162f45536e737c83148" title="Get tokens from line.">ft_get_tkns()</a> </dd></dl>
 </li>
 </ul>
 
@@ -277,13 +296,13 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="group__tk__list_ga4c42f84cb9d01ff4c5a02b447ba4d680_icgraph.png" border="0" usemap="#agroup__tk__list_ga4c42f84cb9d01ff4c5a02b447ba4d680_icgraph" alt=""/></div>
 <map name="agroup__tk__list_ga4c42f84cb9d01ff4c5a02b447ba4d680_icgraph" id="agroup__tk__list_ga4c42f84cb9d01ff4c5a02b447ba4d680_icgraph">
 <area shape="rect" title="Create new token." alt="" coords="660,5,745,31"/>
-<area shape="rect" href="group__tokenizer.html#gac7e43dc3da1f3162f45536e737c83148" title=" " alt="" coords="517,5,612,31"/>
+<area shape="rect" href="group__tokenizer.html#gac7e43dc3da1f3162f45536e737c83148" title="Get tokens from line." alt="" coords="517,5,612,31"/>
 <area shape="poly" title=" " alt="" coords="646,21,612,21,612,15,646,15"/>
-<area shape="rect" href="group__tokenizer.html#gad54fbbb5fa283dba9909ddee5af8e96e" title=" " alt="" coords="371,5,469,31"/>
+<area shape="rect" href="group__tokenizer.html#gad54fbbb5fa283dba9909ddee5af8e96e" title="Tokenizer." alt="" coords="371,5,469,31"/>
 <area shape="poly" title=" " alt="" coords="504,21,470,21,470,15,504,15"/>
 <area shape="rect" href="group__parser.html#ga0c8ac350deba72c9149a366e25354f88" title=" " alt="" coords="244,5,323,31"/>
 <area shape="poly" title=" " alt="" coords="357,21,323,21,323,15,357,15"/>
-<area shape="rect" href="group__main.html#ga3c4c12893e05d8e00d1a3a74cbdaf5a2" title=" " alt="" coords="108,5,196,31"/>
+<area shape="rect" href="group__main.html#ga3c4c12893e05d8e00d1a3a74cbdaf5a2" title="Minishell loop." alt="" coords="108,5,196,31"/>
 <area shape="poly" title=" " alt="" coords="230,21,196,21,196,15,230,15"/>
 <area shape="rect" href="group__main.html#ga647f21a28344e1d9c643f4115516d7c9" title="Minishell main function." alt="" coords="5,5,60,31"/>
 <area shape="poly" title=" " alt="" coords="94,21,60,21,60,15,94,15"/>

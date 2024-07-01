@@ -86,6 +86,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:gabdb2fd607199d7f814010936ed338371"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize minishell.  <br /></td></tr>
 <tr class="separator:gabdb2fd607199d7f814010936ed338371"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac164cd7d42f45efc3c1cf6a8cc74a296" id="r_gac164cd7d42f45efc3c1cf6a8cc74a296"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gac164cd7d42f45efc3c1cf6a8cc74a296">ft_reset_redir</a> (<a class="el" href="group__minishell.html#ga4fac5b0c1334043d22fc2631fd6277c7">t_cmd</a> *cmds, int n_cmds)</td></tr>
+<tr class="memdesc:gac164cd7d42f45efc3c1cf6a8cc74a296"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize in &amp; out redirections.  <br /></td></tr>
 <tr class="separator:gac164cd7d42f45efc3c1cf6a8cc74a296"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -142,7 +143,7 @@ Here is the call graph for this function:</div>
 <area shape="poly" title=" " alt="" coords="39,130,65,85,85,61,111,41,153,23,198,14,241,10,280,10,280,16,242,15,198,19,154,28,113,46,89,65,69,88,44,133"/>
 <area shape="rect" href="group__error.html#gac47de99d45d512bc26c9d02d999b2ae8" title="Error printing." alt="" coords="304,107,360,132"/>
 <area shape="poly" title=" " alt="" coords="64,140,290,120,291,125,64,145"/>
-<area shape="rect" href="group__termios.html#gabd71d24f33afb9df35c83ceab21e89ca" title=" " alt="" coords="112,157,228,183"/>
+<area shape="rect" href="group__termios.html#gabd71d24f33afb9df35c83ceab21e89ca" title="Get Termios Interface State of a given fd." alt="" coords="112,157,228,183"/>
 <area shape="poly" title=" " alt="" coords="65,147,99,154,98,159,64,153"/>
 <area shape="rect" href="group__env__get.html#gabfc48f0f69e58321053149c82def705e" title=" " alt="" coords="127,259,213,284"/>
 <area shape="poly" title=" " alt="" coords="46,156,74,195,114,237,131,250,128,254,110,241,70,198,42,159"/>
@@ -207,7 +208,17 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="010__init_8c_source.html#l00054">54</a> of file <a class="el" href="010__init_8c_source.html">010_init.c</a>.</p>
+<p>Initialize in &amp; out redirections. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cmds</td><td>Pointer to an array of t_cmd structs </td></tr>
+    <tr><td class="paramname">n_cmds</td><td>Number of commands in the array </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Used in <a class="el" href="group__minishell.html#ga0c8ac350deba72c9149a366e25354f88">ft_parser()</a> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="010__init_8c_source.html#l00053">53</a> of file <a class="el" href="010__init_8c_source.html">010_init.c</a>.</p>
 
 </div>
 </div>
