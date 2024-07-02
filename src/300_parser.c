@@ -39,7 +39,6 @@ static int	ft_parse_cmds(t_token *tks, t_cmd *cmds, int i, int j);
 ///	- Free tks
 /// @param sh		Pointer to a t_shell struct
 /// @param line_buf	Line buffer
-/// @var tks		Pointer to a t_token struct
 /// @return			SUCCESS(0)
 /// @return			FAILURE(1)
 ///	@note			Used in ft_sh_loop()
@@ -129,8 +128,6 @@ static int	ft_count_cmds(t_token *tks)
 ///		- Increment command counter
 /// @param sh		Pointer to a t_shell struct
 /// @param tks		Pointer to a t_token struct
-/// @var prev		Pointer to the previous token
-/// @var i			Count of commands
 /// @note			Used in ft_parser()
 static void	ft_count_args(t_shell *sh, t_token *tks)
 {

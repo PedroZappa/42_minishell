@@ -31,13 +31,13 @@ void	ft_sigset(void)
 }
 
 /// @brief			Signal handler
-/// @param signo	Signal number
 /// @details		On SIGINT
 ///	- Replace contents of rl_line_buffer with empty string
 ///	- Write newline
 ///	- Announce new line
 ///	- Redisplay line w/ cleared rl_line_buffer
 ///	- Set g_exit to EXIT_SIGINT
+/// @param signo	Signal number
 ///	@note			Used in ft_sgnal_handler()
 static void	ft_signal_handler(int signo)
 {
@@ -61,12 +61,12 @@ void	ft_fork_sigset()
 }
 
 /// @brief			Fork signal handler
-/// @param sig		Signal number
 /// @details		On SIGQUIT
 /// - Write "Quit\n"
 ///	- Announce new line
 ///	- Redisplay line w/ cleared rl_line_buffer
 /// - Set g_exit to EXIT_SIGQUIT
+/// @param sig		Signal number
 /// @note			Used in ft_sigset() and ft_exec_fork()
 void	ft_fork_sighandler(int sig)
 {

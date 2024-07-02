@@ -19,6 +19,12 @@
 
 #include "../inc/minishell.h"
 
+/// @brief			Execute one command as a child process
+/// @details
+/// - Handle pipes and redirections (TODO)
+/// - Execute command
+/// - Free shell struct
+/// - Exit
 void	ft_exec_child(t_shell *sh, int *outpipe)
 {
 	(void)outpipe;

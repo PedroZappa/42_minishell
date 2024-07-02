@@ -52,9 +52,6 @@ int	ft_execute(t_shell *sh)
 /// - Append / to each path
 /// - Copy paths to array of paths
 /// @param envp		Pointer to array of environment variables
-/// @var path		Pointer to array of paths
-/// @var to_split	Pointer to temporary string
-/// @var i			PATH indexer
 /// @return			SUCCESS(Pointer to array of paths)
 ///	@return			FAILURE(NULL)
 /// @note			Used in ft_execute()

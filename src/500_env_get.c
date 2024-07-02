@@ -23,8 +23,6 @@ static char	*ft_extract_var(char *select, char **env);
 
 /// @brief			Initialize env
 /// @param env		Pointer to environment variables array
-/// @var new_env	Pointer for memory allocation
-/// @var n			Gets the count of environment variable
 /// @return			SUCCESS(Pointer to new env array)
 ///					FAILURE(NULL)
 /// @details		- Count variables
@@ -57,7 +55,6 @@ char	**ft_init_env(char **env)
 /// @param var		Var to get
 /// @param envp		Pointer to array of pointers, primary env
 /// @param envt		Pointer to array of pointers, temporary env
-/// @var var2get	Variable to extract from env
 /// @return			SUCCESS(var2get)
 ///					FAILURE(NULL)
 /// @details		- Extract from envp
@@ -76,9 +73,6 @@ char	*ft_get_var(char *var, char **envp, char**envt)
 /// @brief			Extract selected variable from env
 /// @param select	Var to be extracted
 /// @param env		Pointer to array of environment variables
-/// @var tmp		Pointer to temporary variable
-/// @var var		Pointer to return variable
-/// @var len		Length of the selected variable
 /// @return			SUCCESS(requested var)
 ///					FAILURE(NULL)
 /// @detail			- Check input for NULL

@@ -26,9 +26,6 @@ static char	**ft_env_add_var(char **env, char *new_var);
 /// @param var		Pointer to variable to be set
 /// @param val		Pointer to value to be set
 /// @param env		Pointer to array of environment variables
-/// @var new		Pointer for local string manipulation
-/// @var max		Stores max length of new variable
-/// @var i			Environment variables iterator
 /// @return			SUCCESS(0) 
 ///					FAILURE(-1)
 /// @details		Build new variable string
@@ -66,8 +63,6 @@ int	ft_set_var(char *var, char *val, char ***env)
 /// @brief			Extract variable index from env
 /// @param var		Pointer to variable string
 /// @param env		Pointer to array of environment variables
-/// @var i			Environment variables iterator
-/// @var len		To store variable length
 /// @return			SUCCESS(var index in env)
 ///					FAILURE(-1)
 /// @details		- Check if env is NULL
@@ -97,8 +92,6 @@ int	ft_var_from_env(char *var, char **env)
 /// @brief			Add new variable to env
 /// @param env		Pointer to array of environment variables
 /// @param new_var	Pointer to new variable to add to env
-/// @var new_env	Pointer to new array of environment variables
-/// @var i			Environment variables iterator
 /// @return			SUCCESS(Pointer to new env array)
 ///					FAILURE(NULL)
 /// @details		- Loop through old environment variables

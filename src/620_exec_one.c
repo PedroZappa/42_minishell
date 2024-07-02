@@ -24,8 +24,6 @@
 /// - Check command type
 /// - Execute command
 /// @param sh		Pointer to a t_shell struct
-/// @var cmd
-/// Command type
 /// @return			SUCCESS(0)
 ///	@return			FAILURE(1)
 ///	@note			Used in ft_execute()
@@ -50,8 +48,6 @@ int	ft_exec_one(t_shell *sh)
 ///		- Execute command
 ///	- Wait for child process
 /// @param sh		Pointer to a t_shell struct
-/// @var pid		
-/// Process ID
 /// @return			SUCCESS(0)
 /// @return			FAILURE(1)
 int	ft_exec_fork(t_shell *sh)

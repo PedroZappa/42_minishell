@@ -14,7 +14,6 @@
 
 /// @brief			Check command type
 /// @param cmd		Command name
-/// @var type		Command type
 /// @return			SUCCESS(cmd type)
 /// @note			Used in ft_exec_one()
 int	ft_exec_check(char *cmd)
