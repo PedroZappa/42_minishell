@@ -1,0 +1,23 @@
+digraph "ft_check_syntax"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="ft_check_syntax",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Check if a given token's list is a valid command syntactically."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="ft_syntax_err",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__error.html#ga55bf2d68d178053b81b3ab6a793394b9",tooltip="Create error message."];
+  Node2 -> Node3 [id="edge2_Node000002_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="ft_err",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group__error.html#gac47de99d45d512bc26c9d02d999b2ae8",tooltip="Error printing."];
+  Node3 -> Node4 [id="edge3_Node000003_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="ft_putstr_fd",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ft__putstr__fd_8c.html#a00b0638f31a75c7a30f77f33888bfb73",tooltip=" "];
+  Node4 -> Node5 [id="edge4_Node000004_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="ft_putchar_fd",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ft__putchar__fd_8c.html#a03ef80b25dc4a521379fa92ad97bad21",tooltip=" "];
+  Node2 -> Node6 [id="edge5_Node000002_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="ft_strjoin",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ft__strjoin_8c.html#a91e6e3e428bcc9f2291b700e1829b82b",tooltip=" "];
+  Node6 -> Node7 [id="edge6_Node000006_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="ft_memcpy",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ft__memcpy_8c.html#a41a6f05af30cf85ff63a08e383826322",tooltip=" "];
+  Node6 -> Node8 [id="edge7_Node000006_Node000008",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="ft_strlen",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ft__strlen_8c.html#abbb8c6c4ed85d892e7f1509f65f5768a",tooltip=" "];
+}
