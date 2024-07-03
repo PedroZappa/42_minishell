@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 10:12:55 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/03 10:49:10 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/03 12:01:34 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -31,7 +31,6 @@
 int	ft_pwd(t_shell *sh, int n)
 {
 	char	*pwd;
-	char	*tmp;
 	int		i;
 
 	i = 0;
@@ -43,12 +42,11 @@ int	ft_pwd(t_shell *sh, int n)
 	{
 		free(pwd);
 		pwd = ft_get_var("PWD", sh->envp, NULL);
-		tmp = ft_strjoin_free(pwd, "\n");
-		ft_putstr_fd(pwd, STDOUT_FILENO);
+		ft_putendl_fd(pwd, STDOUT_FILENO);
 		return (SUCCESS);
 	}
 	else
-		ft_putstr_fd(pwd, STDOUT_FILENO);
+		ft_putendl_fd(pwd, STDOUT_FILENO);
 	free(pwd);
 	return (SUCCESS);
 }
