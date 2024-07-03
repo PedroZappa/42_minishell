@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/29 20:35:29 by passunca          #+#    #+#              #
-#    Updated: 2024/06/30 21:32:57 by passunca         ###   ########.fr        #
+#    Updated: 2024/07/03 10:50:41 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,7 @@ FILES			+= 620_exec_one.c
 FILES			+= 640_exec_child.c
 FILES			+= 650_execve.c
 FILES			+= 700_exit.c
+FILES			+= 710_pwd.c
 FILES			+= 800_errors.c
 FILES			+= 900_free.c
 
