@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/03 10:24:55 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/03 10:49:43 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -328,7 +328,7 @@ int			ft_exit(t_shell *sh, int n);
 /// static void	ft_kill(t_shell *sh, int sig);
 
 /// @file	710_pwd.c
-int			ft_pwd(t_shell *sh);
+int			ft_pwd(t_shell *sh, int n);
 
 //=============================================================================/
 //	800		Errors & Info													   /

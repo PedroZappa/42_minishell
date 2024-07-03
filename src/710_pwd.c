@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 10:12:55 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/03 10:45:11 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/03 10:49:10 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -28,7 +28,7 @@
 /// @param n		Command index
 /// @return			SUCCESS(0)
 /// @return			FAILURE(1)
-int	bi_pwd(t_shell *sh, int n)
+int	ft_pwd(t_shell *sh, int n)
 {
 	char	*pwd;
 	char	*tmp;

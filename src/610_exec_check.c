@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 12:14:42 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/30 12:15:06 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/03 10:48:20 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	ft_exec_check(char *cmd)
 	type = CMD_EXEC;
 	if (ft_strncmp(cmd, "exit", 4) == SUCCESS)
 		type = CMD_EXIT;
+	if (ft_strncmp(cmd, "pwd", 3) == SUCCESS)
+		type = CMD_PWD;
 	return (type);
 }
 
