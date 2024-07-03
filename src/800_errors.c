@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 17:35:23 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/23 11:04:59 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/03 10:24:14 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -50,6 +50,23 @@ int	ft_syntax_err(char *tkn, int err)
 	free(start);
 	free(end);
 	return (SUCCESS);
+}
+
+int	ft_flag_err(char *cmd, char *cmd_flag, int err)
+{
+	char	*tmp;
+	char	*msg;
+	int		ret;
+
+	msg = ft_strjoin(cmd_flag, "': flag/option not supported");
+	tmp = ft_strjoin(": '", msg);
+	free(msg);
+	msg = ft_strjoin(cmd, tmp);
+	ret = ft_err(msg, err);
+	free(msg);
+	free(tmp);
+	return (ret);
+
 }
 
 /** @} */

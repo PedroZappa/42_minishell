@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/30 21:40:51 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/03 10:24:55 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -327,6 +327,9 @@ void		ft_execve(char **path, char **argv, char **envp);
 int			ft_exit(t_shell *sh, int n);
 /// static void	ft_kill(t_shell *sh, int sig);
 
+/// @file	710_pwd.c
+int			ft_pwd(t_shell *sh);
+
 //=============================================================================/
 //	800		Errors & Info													   /
 //=============================================================================/
@@ -334,6 +337,7 @@ int			ft_exit(t_shell *sh, int n);
 /// @file	800_errors.c
 int			ft_err(char *msg, int status);
 int			ft_syntax_err(char *tkn, int err);
+int			ft_flag_err(char *cmd, char *cmd_flag, int err);
 
 //=============================================================================/
 //	900		Free															   /
