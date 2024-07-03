@@ -120,8 +120,18 @@ end
 
 ### 310_readline.c
 define get_prompt
-	display pwd
 	display prompt
+	display pwd
+	display ret
+	display tmp
+	display trim
+end
+
+define trim_cwd
+	display cwd
+	display cwd[len]
+	display tmp
+	display len
 end
 
 ### 500_env.c

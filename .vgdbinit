@@ -1,4 +1,4 @@
-break ft_get_prompt
+break ft_trim_cwd
 fs cmd
 info break
 info thread
