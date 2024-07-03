@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/03 10:57:59 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/03 12:32:20 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -272,6 +272,7 @@ int			ft_parser(t_shell *sh, char **line_buf);
 
 /// @file	310_readline.c
 void		ft_readline(char ***line_buf);
+// static char	*ft_get_prompt(char *prompt);
 
 //=============================================================================/
 //	400		Signal  														   /

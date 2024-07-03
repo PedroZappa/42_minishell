@@ -1,4 +1,4 @@
-break ft_tokenizer
+break ft_get_prompt
 fs cmd
 info break
 info thread

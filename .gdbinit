@@ -118,6 +118,12 @@ define parse_cmds
 	display j
 end
 
+### 310_readline.c
+define get_prompt
+	display pwd
+	display prompt
+end
+
 ### 500_env.c
 define get_var
 	display *var
