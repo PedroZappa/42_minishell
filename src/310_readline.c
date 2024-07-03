@@ -30,7 +30,7 @@ void		ft_readline(char ***line_buf)
 {
 	char	*prompt;
 
-	prompt = ft_get_prompt(MAG"$>"NC);
+	prompt = ft_get_prompt(MAG"$> "NC);
 	**line_buf = readline(prompt);
 	ft_free(prompt);
 	if (!**line_buf)
@@ -60,29 +60,29 @@ static char	*ft_get_prompt(char *prompt)
 
 static char	*ft_trim_cwd(char *cwd)
 {
-	// char	*ret;
+	char	*ret;
 	char	*tmp;
 	int		len;
-	// int		i;
+	int		i;
 
 	len = (ft_strlen(cwd) - 1);
 	while (cwd[len] && (cwd[len] != '/'))
 		--len;
 	tmp = ft_substr(cwd, len, (ft_strlen(cwd) - len));
-	// len = ft_strlen(tmp);
-	// ret = malloc(2 * (len + 1));
-	// if (!ret)
-	// 	return (NULL);
-	// ret[0] = '.';
-	// ret[1] = '.';
-	// i = 0;
-	// while (i < len)
-	// {
-	// 	ret[i + 2] = tmp[i];
-	// 	++i;
-	// }
-	// ret[i + 2] = '\0';
-	// if (tmp)
-	// 	ft_free(tmp);
-	return (tmp);
+	len = ft_strlen(tmp);
+	ret = malloc(2 * (len + 1));
+	if (!ret)
+		return (NULL);
+	ret[0] = '.';
+	ret[1] = '.';
+	i = 0;
+	while (i < len)
+	{
+		ret[i + 2] = tmp[i];
+		++i;
+	}
+	ret[i + 2] = '\0';
+	if (tmp)
+		ft_free(tmp);
+	return (ret);
 }
