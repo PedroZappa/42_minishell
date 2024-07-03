@@ -47,6 +47,9 @@ int	ft_exec_one(t_shell *sh)
 ///		- Set signal handlers
 ///		- Execute command
 ///	- Wait for child process
+///	- Handle exit status
+///		- If program was terminated by signal: Return the signal number
+///		- Else check if program exited: Return exit status
 /// @param sh		Pointer to a t_shell struct
 /// @return			SUCCESS(0)
 /// @return			FAILURE(1)
@@ -68,5 +71,9 @@ int	ft_exec_fork(t_shell *sh)
 		ft_exec_child(sh, NULL);
 	}
 	wait(&g_exit);
+	if (WIFSIGNALED(g_exit))
+		g_exit = (128 + WTERMSIG(g_exit));
+	else if (WIFEXITED(g_exit))
+		g_exit = WEXITSTATUS(g_exit);
 	return (SUCCESS);
 }
