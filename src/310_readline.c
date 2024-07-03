@@ -42,15 +42,12 @@ static char	*ft_get_prompt(char *prompt)
 {
 	char	*pwd;
 	char	*ret;
-	char	*tmp;
 	char	*trim;
 
 	pwd = NULL;
 	pwd = getcwd(NULL, 0);
-	tmp = ft_strdup(pwd);
+	trim = ft_trim_cwd(pwd);
 	ft_free(pwd);
-	trim = ft_trim_cwd(tmp);
-	ft_free(tmp);
 	if (trim)
 	{
 		ret = ft_strjoin(trim, prompt);
