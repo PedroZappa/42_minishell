@@ -15,7 +15,7 @@
 #==============================================================================#
 
 MAKE	= make -C
-SHELL	:= bash
+SHELL	:= bash --rcfile ~/.bashrc
 
 # Default test values
 IN_PATH		?= $(SRC_PATH)
@@ -74,6 +74,8 @@ OBJS	= $(SRC:$(SRC_PATH)/%.c=$(BUILD_PATH)/%.o)
 
 LIBFT_PATH	= $(LIBS_PATH)/libft
 LIBFT_ARC	= $(LIBFT_PATH)/libft.a
+
+REALLYSH_PATH	= $(LIBS_PATH)/reallysh
 
 #==============================================================================#
 #                              COMPILER & FLAGS                                #
@@ -184,6 +186,30 @@ check_ext_func: all		## Check for external functions
 
 ##@ Test Rules 🧪
 
+reallyshell: all		## Test w/ reallyshell
+	if ! test -d "$(REALLYSH_PATH)"; then make get_reallyshell; fi
+	@echo "[$(YEL)Testing with reallyshell$(D)]"
+	reallyshell
+
+get_reallyshell:
+	@echo "* $(CYA)Getting reallyshell submodule$(D)]"
+	@if test ! -d "$(REALLYSH_PATH)"; then \
+		cd ~ && \
+		git clone https://github.com/BEQSONA-cmd/Minishell_Tester.git && \
+		cd Minishell_Tester && \
+		./install.sh; \
+		if ! grep -q "alias m_test=" ~/.bashrc; then \
+			echo "alias m_test='~/Minishell_Tester/start.sh'" >> ~/.bashrc; \
+		fi; \
+		if ! grep -q "alias reallyshell=" ~/.bashrc; then \
+			echo "alias reallyshell='~/Minishell_Tester/connect.sh'" >> ~/.bashrc; \
+		fi; \
+		echo "* $(GRN)reallyshell submodule download$(D): $(_SUCCESS)"; \
+	else \
+		echo "* $(GRN)reallyshell submodule already exists 🖔"; \
+		echo " $(RED)$(D) [$(GRN)Nothing to be done!$(D)]"; \
+	fi
+
 ##@ Debug Rules 
 
 gdb: all $(NAME) $(TEMP_PATH)			## Debug w/ gdb
@@ -263,6 +289,9 @@ fclean: clean			## Remove executable and .gdbinit
 
 libclean: fclean	## Remove libs
 	$(RM) $(LIBS_PATH)
+	@if [ -d "$$HOME/Minishell_Tester" ]; then \
+		$(RM) -rf "$$HOME/Minishell_Tester"; \
+	fi
 	@echo "* $(YEL)Removing lib folder & files!$(D) : $(_SUCCESS)"
 
 re: fclean all	## Purge & Recompile
