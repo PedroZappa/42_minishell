@@ -186,10 +186,17 @@ check_ext_func: all		## Check for external functions
 
 ##@ Test Rules 🧪
 
+sync_shell: all		## Test w/ syncshell
+	@echo "[$(YEL)Testing with syncshell$(D)]"
+	tmux split-window -h "./$(NAME)"
+	tmux setw synchronize-panes on
+	clear && bash
+
 reallyshell: all		## Test w/ reallyshell
 	if ! test -d "$(REALLYSH_PATH)"; then make get_reallyshell; fi
 	@echo "[$(YEL)Testing with reallyshell$(D)]"
-	reallyshell
+	tmux split-window -h "~/Minishell_Tester/connect.sh"
+	$(HOME)/Minishell_Tester/start.sh
 
 get_reallyshell:
 	@echo "* $(CYA)Getting reallyshell submodule$(D)]"
