@@ -1,4 +1,4 @@
-break ft_trim_cwd
+break ft_execute
 fs cmd
 info break
 info thread

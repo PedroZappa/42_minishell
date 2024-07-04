@@ -107,9 +107,9 @@ VGDB_ARGS 	= --suppressions=readline.supp \
 
 ##@ minishell Compilation Rules 🏗
 
-all: $(BUILD_PATH) $(NAME)	## Compile
+all: deps $(BUILD_PATH) $(NAME)	## Compile
 
-$(NAME): deps $(BUILD_PATH) $(LIBFT_ARC) $(OBJS)			## Compile
+$(NAME): $(BUILD_PATH) $(LIBFT_ARC) $(OBJS)			## Compile
 	@echo "$(YEL)Compiling $(MAG)$(NAME)$(YEL) mandatory version$(D)"
 	$(CC) $(CFLAGS) $(DFLAGS) $(OBJS) $(INC) $(LIBFT_ARC) $(RFLAGS) -o $(NAME)
 	@echo "[$(_SUCCESS) compiling $(MAG)$(NAME)$(D) $(YEL)🖔$(D)]"
@@ -279,7 +279,7 @@ help: 			## Display this help page
 ## Tweaked from source:
 ### https://www.padok.fr/en/blog/beautiful-makefile-awk
 
-.PHONY: bonus extrall clean fclean re help
+.PHONY: bonus clean fclean re help
 
 #==============================================================================#
 #                                  UTILS                                       #

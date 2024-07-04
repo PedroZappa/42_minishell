@@ -26,6 +26,7 @@ define sh_loop
 	display *sh
 	display line_buf
 	display status
+	p_cmds
 end
 
 ### 010_init.c
@@ -66,6 +67,15 @@ define get_tk
 	display i
 end
 
+define p_tk
+	print tk
+	set $node = tk
+	while ($node != 0)
+		print *$node
+		set $node = $node->next
+	end
+end
+
 define p_tks
 	print tks
 	set $node = tks
@@ -73,6 +83,19 @@ define p_tks
 		print *$node
 		set $node = $node->next
 	end
+end
+
+define p_cmds
+	print *sh->cmds->argv@sh->cmds->argc
+end
+
+define print_string_array
+  set $array = sh->cmds->argv
+  set $count = 0
+  while $array[$count]
+    printf "%d: %s\n", $count, $array[$count]
+    set $count = $count + 1
+  end
 end
 
 # 210_tk_list.c
@@ -99,7 +122,7 @@ end
 define parser
 	display *sh
 	display *line_buf
-	display 
+	display *sh->cmds
 end
 
 define count_args
@@ -178,6 +201,17 @@ end
 define ft_kill
 	display *sh
 	display sig
+end
+
+### 720_cd.c
+define cd
+	display *sh
+	display cmd_n
+end
+
+define chdir
+	display *pwd
+	display chdir_ret
 end
 
 ### 900_free.c
