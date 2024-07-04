@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 20:40:17 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/22 09:59:44 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/04 08:40:24 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -68,7 +68,6 @@ static int	ft_sh_loop(t_shell *sh)
 	{
 		ft_sigset();
 		status = ft_parser(sh, &line_buf);
-		// ft_free(line_buf);
 		if (status == FAILURE)
 			continue ;
 		if (sh->n_cmds > NO_CMDS)
