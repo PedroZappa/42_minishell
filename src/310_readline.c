@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 11:46:35 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/03 14:36:02 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/04 10:35:31 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -86,3 +86,5 @@ static char	*ft_trim_cwd(char *cwd)
 		ft_free(tmp);
 	return (ret);
 }
+
+/** @} */
