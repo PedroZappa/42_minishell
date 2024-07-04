@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/03 12:32:20 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/04 11:41:27 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -45,6 +45,7 @@
 # define INIT_ERR		"Init Error\n"
 # define ENV_INIT_ERR	"Env Init Error\n"
 # define ENV_NULL_ERR	"Null Env Error\n"
+# define ENV_VAR_ERR	"Null Env Error\n"
 # define TKNZR_ERR		"Tokenizer Error\n"
 # define MALLOC_ERR		"Malloc Error\n"
 # define TERMIOS_ERR	"Termios Error\n"
@@ -331,6 +332,10 @@ int			ft_exit(t_shell *sh, int n);
 
 /// @file	710_pwd.c
 int			ft_pwd(t_shell *sh, int n);
+
+/// @file	720_cd.c
+int			ft_cd(t_shell *sh, int cmd_n);
+// static int	ft_chdir(char ***env, char *path);
 
 //=============================================================================/
 //	800		Errors & Info													   /
