@@ -78,12 +78,9 @@ static char	*ft_trim_cwd(char *cwd)
 		return (NULL);
 	ret[0] = '.';
 	ret[1] = '.';
-	i = 0;
-	while (i < len)
-	{
+	i = -1;
+	while (++i < len)
 		ret[i + 2] = tmp[i];
-		++i;
-	}
 	ret[i + 2] = '\0';
 	if (tmp)
 		ft_free(tmp);
