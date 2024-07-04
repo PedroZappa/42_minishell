@@ -37,7 +37,7 @@ int	ft_cd(t_shell *sh, int cmd_n)
 	char	*home;
 	int		chdir;
 
-	ft_set_var(sh->cmds->argv[sh->cmds->argc - 1], "_", &sh->envp);
+	ft_set_var(sh->cmds[cmd_n].argv[sh->cmds[cmd_n].argc - 1], "_", &sh->envp);
 	if (!sh->cmds->argv[1])
 	{
 		home = ft_get_var("HOME", sh->envp, NULL);
@@ -62,7 +62,7 @@ static int	ft_chdir(char ***env, char *path)
 	pwd = NULL;
 	pwd = getcwd(NULL, 0);
 	chdir_ret = chdir(path);
-	if (!chdir_ret)
+	if (chdir_ret == -1)
 	{
 		ft_free(pwd);
 		pwd = ft_strjoin(path, ": No such directory");
@@ -71,10 +71,12 @@ static int	ft_chdir(char ***env, char *path)
 		return (FAILURE);
 	}
 	ft_set_var(path, "OLDPWD", env);
+	ft_free(pwd);
+	pwd = NULL;
 	pwd = getcwd(NULL, 0);
 	ft_set_var(pwd, "PWD", env);
 	ft_free(pwd);
-	return (SUCCESS);
+	return (chdir_ret);
 }
 
 /** @} */

@@ -104,6 +104,8 @@ int	ft_exec(t_shell *sh, int cmd, int n)
 		return (ft_exit(sh, n));
 	if (cmd == CMD_PWD)
 		g_exit = ft_pwd(sh, n);
+	if (cmd == CMD_CD)
+		g_exit = ft_cd(sh, n);
 	return (SUCCESS);
 }
 

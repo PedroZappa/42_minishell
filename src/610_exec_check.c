@@ -25,6 +25,8 @@ int	ft_exec_check(char *cmd)
 		type = CMD_EXIT;
 	if (ft_strncmp(cmd, "pwd", 3) == SUCCESS)
 		type = CMD_PWD;
+	if (ft_strncmp(cmd, "cd", 2) == SUCCESS)
+		type = CMD_CD;
 	return (type);
 }
 
