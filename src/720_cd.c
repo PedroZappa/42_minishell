@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 08:19:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/04 11:47:54 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/04 11:55:05 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -47,10 +47,10 @@ int	ft_cd(t_shell *sh, int cmd_n)
 		ft_free(home);
 		return (chdir);
 	}
-	if (sh->cmds->argc > 2)
+	if (sh->cmds[cmd_n].argc > 2)
 		return (ft_err(ARG_ERR, FAILURE));
-	if (sh->cmds->argv[1][0] == '\0')
-		return (ft_chdir(&sh->envp, sh->cmds->argv[1]));
+	if (sh->cmds[cmd_n].argv[1][0] == '\0')
+		return (ft_chdir(&sh->envp, sh->cmds[cmd_n].argv[1]));
 	return (ft_chdir(&sh->envp, sh->cmds->argv[1]));
 }
 
