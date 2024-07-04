@@ -107,7 +107,8 @@ static int	ft_count_cmds(t_token *tks)
 	{
 		if (!count)
 			count = 1;
-		if ((tks->type == TK_PIPE) || (tks->type == TK_OR))
+		if ((tks->type == TK_AND) || (tks->type == TK_OR)
+			|| (tks->type == TK_PIPE))
 			++count;
 		tks = tks->next;
 	}
