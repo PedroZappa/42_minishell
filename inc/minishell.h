@@ -272,7 +272,7 @@ int			ft_parser(t_shell *sh, char **line_buf);
 /// static int	ft_parse_cmds(t_token *tks, t_cmd *cmds, int i, int j);
 
 /// @file	310_readline.c
-void		ft_readline(char ***line_buf);
+void		ft_readline(char ***line_buf, char *home);
 // static char	*ft_get_prompt(char *prompt);
 
 //=============================================================================/

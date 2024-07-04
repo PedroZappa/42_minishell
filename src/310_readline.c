@@ -19,18 +19,18 @@
 
 #include "../inc/minishell.h"
 
-static char	*ft_get_prompt(char *prompt);
+static char	*ft_get_prompt(char *prompt, char **home);
 static char	*ft_trim_cwd(char *cwd);
 
 
 /// @brief			Readline wrapper
 /// @param line_buf	Line buffer
 /// @note			Used in ft_parser()
-void		ft_readline(char ***line_buf)
+void		ft_readline(char ***line_buf, char *home)
 {
 	char	*prompt;
 
-	prompt = ft_get_prompt(MAG"$> "NC);
+	prompt = ft_get_prompt(MAG"$> "NC, &home);
 	**line_buf = readline(prompt);
 	ft_free(prompt);
 	if (!**line_buf)
@@ -38,7 +38,7 @@ void		ft_readline(char ***line_buf)
 	add_history(**line_buf);
 }
 
-static char	*ft_get_prompt(char *prompt)
+static char	*ft_get_prompt(char *prompt, char **home)
 {
 	char	*pwd;
 	char	*ret;
@@ -47,12 +47,15 @@ static char	*ft_get_prompt(char *prompt)
 	pwd = NULL;
 	pwd = getcwd(NULL, 0);
 	trim = ft_trim_cwd(pwd);
-	ft_free(pwd);
 	if (trim)
 	{
+		if (ft_strncmp(pwd, *home, ft_strlen(pwd)) == SUCCESS)
+		{
+			trim[0] = '~';
+			trim[1] = '\0';
+		}
 		ret = ft_strjoin(trim, prompt);
-		ft_free(trim);
-		return (ret);
+		return (ft_free(pwd), ft_free(trim), ret);
 	}
 	else
 		return (free(pwd), free(trim), ft_err(pwd, 0), prompt);

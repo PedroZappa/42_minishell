@@ -9,6 +9,8 @@ set logging enabled on
 set print pretty on
 # set print elements 2
 set print array on
+#
+skip -gfi *libreadline.so.8
 
 #
 ##
@@ -145,8 +147,9 @@ end
 define get_prompt
 	display prompt
 	display pwd
+	display *home
 	display ret
-	display tmp
+	display ret+3
 	display trim
 end
 
