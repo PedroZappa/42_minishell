@@ -52,7 +52,8 @@ int	ft_tokenizer(t_shell *sh, char **line, t_token **tks)
 		// else
 		// 	tk->name = ft_tk_expander(sh, name);
 		tk = tk->next;
-		// free(name);
+		// if (name)
+		// 	free(name);
 	}
 	return (SUCCESS);
 }

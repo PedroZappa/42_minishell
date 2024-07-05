@@ -223,6 +223,11 @@ define free
 	display status
 end
 
+define free_tks
+	display **tk
+	display *tmp
+end
+
 #
 ##
 ### Go GDB Go! I Choose YOU! 
