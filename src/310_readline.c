@@ -21,7 +21,7 @@
 
 static char	*ft_get_prompt(char *prompt, char **home);
 static char	*ft_trim_cwd(char *cwd, char *home);
-// static char	*ft_build_cwd(char **cwd, int len);
+static char	*ft_build_cwd(char **cwd, int len);
 
 /// @brief			Readline wrapper
 /// @param line_buf	Line buffer
@@ -70,38 +70,37 @@ static char	*ft_get_prompt(char *prompt, char **home)
 static char	*ft_trim_cwd(char *cwd, char *home)
 {
 	char	*ret;
-	// int		home_len;
+	int		home_len;
 
 	(void)home;
 	ret = NULL;
 	if (!cwd)
 		return (ret);
-	// home_len = ft_strlen(home);
-	// ret = ft_build_cwd(&cwd, home_len);
-	// if (!ret)
-	// 	ret = ft_strdup(cwd);
-	ret = ft_strdup(cwd);
+	home_len = ft_strlen(home);
+	ret = ft_build_cwd(&cwd, home_len);
+	if (!ret)
+		ret = ft_strdup(cwd);
 	return (ret);
 }
 
-// static char	*ft_build_cwd(char **cwd, int home_len)
-// {
-// 	char	*ret;
-// 	int		cwd_len;
-// 	int		i;
-//
-// 	cwd_len = ft_strlen(*cwd);
-// 	ret = malloc(sizeof(char) * ((cwd_len - home_len) + 1));
-// 	if (!ret)
-// 		return (NULL);
-// 	ret[0] = '~';
-// 	i = -1;
-// 	while (++i < home_len)
-// 		ret[i + 1] = (*cwd)[i];
-// 	ret[home_len + 1] = '\0';
-// 	free(*cwd);
-// 	*cwd = NULL;
-// 	return (ret);
-// }
+static char	*ft_build_cwd(char **cwd, int home_len)
+{
+	char	*ret;
+	char	*trim;
+	int		cwd_len;
+	int		i;
+	
+	trim = *cwd;
+	cwd_len = ft_strlen(*cwd);
+	ret = malloc(sizeof(char) * ((cwd_len - home_len) + 3));
+	if (!ret)
+		return (NULL);
+	ret[0] = '~';
+	i = -1;
+	while (++i < cwd_len - home_len)
+		ret[i + 1] = trim[home_len + i];
+	ret[i + 1] = '\0';
+	return (ret);
+}
 
 /** @} */
