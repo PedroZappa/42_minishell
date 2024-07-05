@@ -63,15 +63,14 @@ int	ft_free_tks(t_token **tk)
 {
 	t_token	*tmp;
 
-	if (!tk)
+	if (!tk || !*tk)
 		return (FAILURE);
 	while (*tk)
 	{
 		tmp = (*tk)->next;
-		// ft_free((*tk)->name);
 		free((*tk)->name);
 		(*tk)->name = NULL;
-		ft_free(*tk);
+		free(*tk);
 		*tk = tmp;
 	}
 	return (SUCCESS);

@@ -226,6 +226,8 @@ end
 define free_tks
 	display **tk
 	display *tmp
+	display tk->name
+	display (*tk)->name
 end
 
 #

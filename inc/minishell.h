@@ -255,6 +255,7 @@ int			ft_tokenizer(t_shell *sh, char **line, t_token **tks);
 /// @file	210_tk_list.c
 t_token		*ft_tk_new(char *line, t_token_type type, int len);
 void		ft_tk_add(t_token **tk_list, t_token *tks);
+void		ft_tk_add_free(t_token **tk_list, t_token *tk, t_tk_ops *tk_op);
 t_token		*ft_tk_last(t_token *tk);
 
 /// @file	220_tk_expander.c

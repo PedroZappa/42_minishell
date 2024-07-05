@@ -69,6 +69,17 @@ void	ft_tk_add(t_token **tk_list, t_token *tk)
 		*tk_list = tk;
 }
 
+/// @brief			Add token to list and free local token
+/// @param tk_list	Pointer to a list of t_token structs
+/// @param tk		Pointer to a t_token struct
+/// @param tk_op	Pointer to a t_tk_ops struct
+/// @note			Used in ft_get_tkns()
+void	ft_tk_add_free(t_token **tk_list, t_token *tk, t_tk_ops *tk_op)
+{
+	ft_tk_add(tk_list, tk);
+	ft_free(tk_op->tkn);
+}
+
 /// @brief			Get last token in list
 /// @details		- Traverse list until last token is reached
 /// @param tk		Pointer to a t_token struct
