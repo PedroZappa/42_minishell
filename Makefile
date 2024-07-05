@@ -188,9 +188,9 @@ check_ext_func: all		## Check for external functions
 
 sync_shell: all		## Test w/ syncshell
 	@echo "[$(YEL)Testing with syncshell$(D)]"
-	tmux split-window -h "./$(NAME)"
+	tmux split-window -h "bash"
 	tmux setw synchronize-panes on
-	clear && bash
+	clear && ./$(NAME)
 
 reallyshell: all		## Test w/ reallyshell
 	if ! test -d "$(REALLYSH_PATH)"; then make get_reallyshell; fi
