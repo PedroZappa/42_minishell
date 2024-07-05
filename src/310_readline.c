@@ -73,7 +73,7 @@ static char	*ft_trim_cwd(char *cwd)
 		--len;
 	tmp = ft_substr(cwd, len, (ft_strlen(cwd) - len));
 	len = ft_strlen(tmp);
-	ret = malloc(2 * (len + 1));
+	ret = malloc(2 + (len + 1));
 	if (!ret)
 		return (NULL);
 	ret[0] = '.';
