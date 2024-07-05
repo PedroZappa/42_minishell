@@ -21,7 +21,7 @@
 
 static char	*ft_get_prompt(char *prompt, char **home);
 static char	*ft_trim_cwd(char *cwd);
-
+static char	*ft_build_cwd(char **cwd, int len);
 
 /// @brief			Readline wrapper
 /// @param line_buf	Line buffer
@@ -64,14 +64,31 @@ static char	*ft_get_prompt(char *prompt, char **home)
 static char	*ft_trim_cwd(char *cwd)
 {
 	char	*ret;
-	char	*tmp;
+	int		slash;
 	int		len;
-	int		i;
 
+	slash = 0;
 	len = (ft_strlen(cwd) - 1);
 	while (cwd[len] && (cwd[len] != '/'))
+	{
+		if (cwd[len] == '/')
+			slash = 1;
 		--len;
-	tmp = ft_substr(cwd, len, (ft_strlen(cwd) - len));
+	}
+	if (slash)
+		ret = ft_build_cwd(&cwd, len);
+	else
+		ret = ft_strdup(cwd);
+	return (ret);
+}
+
+static char	*ft_build_cwd(char **cwd, int len)
+{
+	char	*tmp;
+	char	*ret;
+	int		i;
+
+	tmp = ft_substr(*cwd, len, (ft_strlen(*cwd) - len));
 	len = ft_strlen(tmp);
 	ret = malloc(2 + (len + 1));
 	if (!ret)
@@ -82,8 +99,8 @@ static char	*ft_trim_cwd(char *cwd)
 	while (++i < len)
 		ret[i + 2] = tmp[i];
 	ret[i + 2] = '\0';
-	if (tmp)
-		ft_free(tmp);
+	if (ret)
+		ft_free(ret);
 	return (ret);
 }
 
