@@ -20,11 +20,12 @@
 #include "../inc/minishell.h"
 
 static char	*ft_get_prompt(char *prompt, char **home);
-static char	*ft_trim_cwd(char *cwd);
-static char	*ft_build_cwd(char **cwd, int len);
+static char	*ft_trim_cwd(char *cwd, char *home);
+// static char	*ft_build_cwd(char **cwd, int len);
 
 /// @brief			Readline wrapper
 /// @param line_buf	Line buffer
+/// @param home		Home directory
 /// @note			Used in ft_parser()
 void		ft_readline(char ***line_buf, char *home)
 {
@@ -38,6 +39,11 @@ void		ft_readline(char ***line_buf, char *home)
 	add_history(**line_buf);
 }
 
+/// @brief			Get prompt
+/// @param prompt	Prompt string
+/// @param home		Home directory
+/// @return			Prompt
+/// @note			Used in ft_readline()
 static char	*ft_get_prompt(char *prompt, char **home)
 {
 	char	*pwd;
@@ -46,7 +52,7 @@ static char	*ft_get_prompt(char *prompt, char **home)
 
 	pwd = NULL;
 	pwd = getcwd(NULL, 0);
-	trim = ft_trim_cwd(pwd);
+	trim = ft_trim_cwd(pwd, *home);
 	if (trim)
 	{
 		if (ft_strncmp(pwd, *home, ft_strlen(pwd)) == SUCCESS)
@@ -61,47 +67,41 @@ static char	*ft_get_prompt(char *prompt, char **home)
 		return (free(pwd), free(trim), ft_err(pwd, 0), prompt);
 }
 
-static char	*ft_trim_cwd(char *cwd)
+static char	*ft_trim_cwd(char *cwd, char *home)
 {
 	char	*ret;
-	int		slash;
-	int		len;
+	// int		home_len;
 
-	slash = 0;
-	len = (ft_strlen(cwd) - 1);
-	while (cwd[len] && (cwd[len] != '/'))
-	{
-		if (cwd[len] == '/')
-			slash = 1;
-		--len;
-	}
-	if (slash)
-		ret = ft_build_cwd(&cwd, len);
-	else
-		ret = ft_strdup(cwd);
+	(void)home;
+	ret = NULL;
+	if (!cwd)
+		return (ret);
+	// home_len = ft_strlen(home);
+	// ret = ft_build_cwd(&cwd, home_len);
+	// if (!ret)
+	// 	ret = ft_strdup(cwd);
+	ret = ft_strdup(cwd);
 	return (ret);
 }
 
-static char	*ft_build_cwd(char **cwd, int len)
-{
-	char	*tmp;
-	char	*ret;
-	int		i;
-
-	tmp = ft_substr(*cwd, len, (ft_strlen(*cwd) - len));
-	len = ft_strlen(tmp);
-	ret = malloc(2 + (len + 1));
-	if (!ret)
-		return (NULL);
-	ret[0] = '.';
-	ret[1] = '.';
-	i = -1;
-	while (++i < len)
-		ret[i + 2] = tmp[i];
-	ret[i + 2] = '\0';
-	if (ret)
-		ft_free(ret);
-	return (ret);
-}
+// static char	*ft_build_cwd(char **cwd, int home_len)
+// {
+// 	char	*ret;
+// 	int		cwd_len;
+// 	int		i;
+//
+// 	cwd_len = ft_strlen(*cwd);
+// 	ret = malloc(sizeof(char) * ((cwd_len - home_len) + 1));
+// 	if (!ret)
+// 		return (NULL);
+// 	ret[0] = '~';
+// 	i = -1;
+// 	while (++i < home_len)
+// 		ret[i + 1] = (*cwd)[i];
+// 	ret[home_len + 1] = '\0';
+// 	free(*cwd);
+// 	*cwd = NULL;
+// 	return (ret);
+// }
 
 /** @} */
