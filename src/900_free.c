@@ -68,8 +68,7 @@ int	ft_free_tks(t_token **tk)
 	while (*tk)
 	{
 		tmp = (*tk)->next;
-		free((*tk)->name);
-		(*tk)->name = NULL;
+		ft_free((*tk)->name);
 		free(*tk);
 		*tk = tmp;
 	}
