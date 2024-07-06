@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:53:41 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/23 12:05:22 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/06 21:44:09 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -41,7 +41,6 @@ int	ft_init(t_shell *sh, char **envp)
 		return (ft_err(ENV_INIT_ERR, errno), FAILURE);
 	sh->home = ft_get_var("HOME", sh->envp, NULL);
 	sh->user = ft_get_var("USER", sh->envp, NULL);
-	sh->host = ft_get_var("HOST", sh->envp, NULL);
 	// sh->heredoc = ft_strdup("");
 	ft_get_termios(STDIN_FILENO, &sh->termios);
 	rl_editing_mode = VI;
