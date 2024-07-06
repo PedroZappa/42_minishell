@@ -21,7 +21,7 @@
 
 static char	*ft_get_prompt(char *prompt, char **home);
 static char	*ft_trim_cwd(char *cwd, char *home);
-static char	*ft_build_cwd(char **cwd, int len);
+static char	*ft_build_cwd(char **cwd, char *home);
 
 /// @brief			Readline wrapper
 /// @param line_buf	Line buffer
@@ -70,28 +70,28 @@ static char	*ft_get_prompt(char *prompt, char **home)
 static char	*ft_trim_cwd(char *cwd, char *home)
 {
 	char	*ret;
-	int		home_len;
 
 	(void)home;
 	ret = NULL;
 	if (!cwd)
 		return (ret);
-	home_len = ft_strlen(home);
-	ret = ft_build_cwd(&cwd, home_len);
+	ret = ft_build_cwd(&cwd, home);
 	if (!ret)
 		ret = ft_strdup(cwd);
 	return (ret);
 }
 
-static char	*ft_build_cwd(char **cwd, int home_len)
+static char	*ft_build_cwd(char **cwd, char *home)
 {
 	char	*ret;
 	char	*trim;
 	int		cwd_len;
+	int		home_len;
 	int		i;
 	
 	trim = *cwd;
 	cwd_len = ft_strlen(*cwd);
+	home_len = ft_strlen(home);
 	ret = malloc(sizeof(char) * ((cwd_len - home_len) + 3));
 	if (!ret)
 		return (NULL);
