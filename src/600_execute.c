@@ -136,6 +136,8 @@ int	ft_exec(t_shell *sh, int cmd, int n)
 		g_exit = ft_pwd(sh, n);
 	if (cmd == CMD_CD)
 		g_exit = ft_cd(sh, n);
+	if (cmd == CMD_ENV)
+		g_exit = ft_env(sh, n);
 	return (SUCCESS);
 }
 

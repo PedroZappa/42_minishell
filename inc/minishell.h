@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/04 11:41:27 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/06 20:10:17 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -342,6 +342,9 @@ int			ft_pwd(t_shell *sh, int n);
 /// @file	720_cd.c
 int			ft_cd(t_shell *sh, int cmd_n);
 // static int	ft_chdir(char ***env, char *path);
+
+// @file	730_env.c
+int			ft_env(t_shell *sh, int n);
 
 //=============================================================================/
 //	800		Errors & Info													   /

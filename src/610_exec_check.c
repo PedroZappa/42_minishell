@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 12:14:42 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/03 10:48:20 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/06 20:26:22 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	ft_exec_check(char *cmd)
 		type = CMD_PWD;
 	if (ft_strncmp(cmd, "cd", 2) == SUCCESS)
 		type = CMD_CD;
+	if (ft_strncmp(cmd, "env", 3) == SUCCESS)
+		type = CMD_ENV;
 	return (type);
 }
 
