@@ -147,17 +147,27 @@ end
 define get_prompt
 	display prompt
 	display pwd
-	display *home
-	display ret
-	display ret+3
 	display trim
+	display ret
+	display sh->home
+	display sh->user
 end
 
 define trim_cwd
+	display ****sh
 	display cwd
-	display cwd[len]
 	display tmp
-	display len
+	display ret
+end
+
+define add_user_host
+	display *****sh
+	display sh->user
+	display sh->host
+	display prompt_len
+	display user_len
+	display ret
+
 end
 
 ### 500_env.c

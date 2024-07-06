@@ -22,7 +22,7 @@
 static char	*ft_get_prompt(t_shell ***sh, char *prompt);
 static char	*ft_trim_cwd(t_shell ****sh, char *cwd);
 static char	*ft_build_cwd(t_shell *****sh, char **cwd);
-// static char	*ft_add_user_host(t_shell *****sh, char *prompt);
+static char	*ft_add_user_host(t_shell *****sh, char *prompt);
 
 /// @brief			Readline wrapper
 /// @param line_buf	Line buffer
@@ -56,11 +56,6 @@ static char	*ft_get_prompt(t_shell ***sh, char *prompt)
 	trim = ft_trim_cwd(&sh, pwd);
 	if (trim)
 	{
-		if (ft_strncmp(pwd, (**sh)->home, ft_strlen(pwd)) == SUCCESS)
-		{
-			trim[0] = '~';
-			trim[1] = '\0';
-		}
 		ret = ft_strjoin(trim, prompt);
 		return (ft_free(pwd), ft_free(trim), ret);
 	}
@@ -70,17 +65,18 @@ static char	*ft_get_prompt(t_shell ***sh, char *prompt)
 
 static char	*ft_trim_cwd(t_shell ****sh, char *cwd)
 {
-	// char	*tmp;
+	char	*tmp;
 	char	*ret;
 
 	ret = NULL;
 	if (!cwd)
 		return (ret);
-	// tmp = ft_build_cwd(&sh, &cwd);
-	ret = ft_build_cwd(&sh, &cwd);
-	if (!ret)
+	tmp = ft_build_cwd(&sh, &cwd);
+	// ret = ft_build_cwd(&sh, &cwd);
+	if (!tmp)
 		ret = ft_strdup(cwd);
-	// ret = ft_add_user_host(&sh, tmp);
+	ret = ft_add_user_host(&sh, tmp);
+	free(tmp);
 	return (ret);
 }
 
@@ -105,37 +101,33 @@ static char	*ft_build_cwd(t_shell *****sh, char **cwd)
 	ret[i + 1] = '\0';
 	return (ret);
 }
-//
-// static char	*ft_add_user_host(t_shell *****sh, char *prompt)
-// {
-// 	char	*ret;
-// 	char	*user;
-// 	char	*host;
-// 	int		user_len;
-// 	// int		host_len;
-// 	int		total_len;
-// 	int		prompt_len;
-// 	int		i;
-// 	int		j;
-//
-// 	i = 0;
-// 	user_len = ft_strlen((****sh)->user);
-// 	// host_len = ft_strlen((****sh)->host);
-// 	prompt_len = ft_strlen(prompt);
-// 	total_len = user_len + 1;
-// 	ret = malloc(sizeof(char) * (total_len + prompt_len + 1));
-//     ret[i++] = '@';
-//     // for (j = 0; j < host_len; j++, i++)
-//     //     ret[i] = (****sh)->host[j];
-//     ret[i++] = ':';
-//     for (j = 0; j < prompt_len; j++, i++)
-//         ret[i] = prompt[j];
-//     ret[i] = '\0';
-// 	user = ft_strjoin((****sh)->user, "@");
-// 	host = ft_strjoin((****sh)->host, ":");
-// 	ret = ft_strjoin(user, host);
-// 	ret = ft_strjoin(ret, prompt);
-// 	return (ft_free(user), ft_free(host), ret);
-// }
+
+static char	*ft_add_user_host(t_shell *****sh, char *prompt)
+{
+	char	*ret;
+	int		user_len;
+	// int		host_len;
+	int		total_len;
+	int		prompt_len;
+	int		i;
+	int		j;
+
+	user_len = ft_strlen((****sh)->user);
+	// host_len = ft_strlen((****sh)->host);
+	prompt_len = ft_strlen(prompt);
+	total_len = user_len + 1;
+	ret = malloc(sizeof(char) * (total_len + prompt_len + 2));
+	if (!ret)
+		return (NULL);
+	i = -1;
+	while (++i < user_len)
+		ret[i] = (****sh)->user[i];
+    ret[i++] = '@';
+    ret[i++] = ':';
+    for (j = 0; j < prompt_len; j++, i++)
+        ret[i] = prompt[j];
+    ret[i] = '\0';
+	return (ret);
+}
 
 /** @} */
