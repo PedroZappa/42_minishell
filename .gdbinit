@@ -33,8 +33,7 @@ end
 
 ### 010_init.c
 define init
-	display sh
-	display sh->home
+	display *sh
 	display *envp
 end
 
