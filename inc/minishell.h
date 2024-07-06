@@ -208,7 +208,6 @@ typedef struct s_cmd
 /// @param path			Pointer to PATH array
 /// @param home			Pointer to HOME address
 /// @param user			Pointer to USER name
-/// @param host			Pointer to HOST name
 /// @param heredoc		Pointer to HEREDOC
 /// @param exit_status	Exit status
 /// ...
@@ -222,7 +221,6 @@ typedef struct s_shell
 	char	**path;
 	char	*home;
 	char	*user;
-	char	*host;
 	char	*heredoc;
 	int		exit_status;
 }	t_shell;

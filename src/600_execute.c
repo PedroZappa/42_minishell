@@ -91,24 +91,6 @@ static int	ft_path_from_env(char **envp)
 	return (-1);
 }
 
-/// @brief			Execute one builtin command
-/// @param sh		Pointer to a t_shell struct
-/// @param cmd		Command type
-/// @param n		Command index (to handle multiple commands)
-/// @return			SUCCESS(0)
-///	@return			FAILURE(1)
-///	@note			Used in ft_execute()
-int	ft_exec(t_shell *sh, int cmd, int n)
-{
-	if (cmd == CMD_EXIT)
-		return (ft_exit(sh, n));
-	if (cmd == CMD_PWD)
-		g_exit = ft_pwd(sh, n);
-	if (cmd == CMD_CD)
-		g_exit = ft_cd(sh, n);
-	return (SUCCESS);
-}
-
 /// @brief			Execute a command
 /// @details
 /// - Set statbuf to 0
@@ -137,6 +119,24 @@ void	ft_exec_cmd(t_shell *sh, int id, int i)
 	}
 	else
 		ft_exec(sh, id, i);
+}
+
+/// @brief			Execute one builtin command
+/// @param sh		Pointer to a t_shell struct
+/// @param cmd		Command type
+/// @param n		Command index (to handle multiple commands)
+/// @return			SUCCESS(0)
+///	@return			FAILURE(1)
+///	@note			Used in ft_execute()
+int	ft_exec(t_shell *sh, int cmd, int n)
+{
+	if (cmd == CMD_EXIT)
+		return (ft_exit(sh, n));
+	if (cmd == CMD_PWD)
+		g_exit = ft_pwd(sh, n);
+	if (cmd == CMD_CD)
+		g_exit = ft_cd(sh, n);
+	return (SUCCESS);
 }
 
 /** @} */
