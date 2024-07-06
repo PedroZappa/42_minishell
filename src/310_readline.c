@@ -19,19 +19,20 @@
 
 #include "../inc/minishell.h"
 
-static char	*ft_get_prompt(char *prompt, char **home);
-static char	*ft_trim_cwd(char *cwd, char *home);
-static char	*ft_build_cwd(char **cwd, char *home);
+static char	*ft_get_prompt(t_shell ***sh, char *prompt);
+static char	*ft_trim_cwd(t_shell ****sh, char *cwd);
+static char	*ft_build_cwd(t_shell *****sh, char **cwd);
+// static char	*ft_add_user_host(t_shell *****sh, char *prompt);
 
 /// @brief			Readline wrapper
 /// @param line_buf	Line buffer
 /// @param home		Home directory
 /// @note			Used in ft_parser()
-void		ft_readline(char ***line_buf, char *home)
+void		ft_readline(char ***line_buf, t_shell **sh)
 {
 	char	*prompt;
 
-	prompt = ft_get_prompt(MAG"$> "NC, &home);
+	prompt = ft_get_prompt(&sh, MAG"$> "NC);
 	**line_buf = readline(prompt);
 	ft_free(prompt);
 	if (!**line_buf)
@@ -44,7 +45,7 @@ void		ft_readline(char ***line_buf, char *home)
 /// @param home		Home directory
 /// @return			Prompt
 /// @note			Used in ft_readline()
-static char	*ft_get_prompt(char *prompt, char **home)
+static char	*ft_get_prompt(t_shell ***sh, char *prompt)
 {
 	char	*pwd;
 	char	*ret;
@@ -52,10 +53,10 @@ static char	*ft_get_prompt(char *prompt, char **home)
 
 	pwd = NULL;
 	pwd = getcwd(NULL, 0);
-	trim = ft_trim_cwd(pwd, *home);
+	trim = ft_trim_cwd(&sh, pwd);
 	if (trim)
 	{
-		if (ft_strncmp(pwd, *home, ft_strlen(pwd)) == SUCCESS)
+		if (ft_strncmp(pwd, (**sh)->home, ft_strlen(pwd)) == SUCCESS)
 		{
 			trim[0] = '~';
 			trim[1] = '\0';
@@ -67,21 +68,23 @@ static char	*ft_get_prompt(char *prompt, char **home)
 		return (free(pwd), free(trim), ft_err(pwd, 0), prompt);
 }
 
-static char	*ft_trim_cwd(char *cwd, char *home)
+static char	*ft_trim_cwd(t_shell ****sh, char *cwd)
 {
+	// char	*tmp;
 	char	*ret;
 
-	(void)home;
 	ret = NULL;
 	if (!cwd)
 		return (ret);
-	ret = ft_build_cwd(&cwd, home);
+	// tmp = ft_build_cwd(&sh, &cwd);
+	ret = ft_build_cwd(&sh, &cwd);
 	if (!ret)
 		ret = ft_strdup(cwd);
+	// ret = ft_add_user_host(&sh, tmp);
 	return (ret);
 }
 
-static char	*ft_build_cwd(char **cwd, char *home)
+static char	*ft_build_cwd(t_shell *****sh, char **cwd)
 {
 	char	*ret;
 	char	*trim;
@@ -90,8 +93,8 @@ static char	*ft_build_cwd(char **cwd, char *home)
 	int		i;
 	
 	trim = *cwd;
-	cwd_len = ft_strlen(*cwd);
-	home_len = ft_strlen(home);
+	cwd_len = ft_strlen(*cwd); 
+	home_len = ft_strlen((****sh)->home);
 	ret = malloc(sizeof(char) * ((cwd_len - home_len) + 3));
 	if (!ret)
 		return (NULL);
@@ -102,5 +105,37 @@ static char	*ft_build_cwd(char **cwd, char *home)
 	ret[i + 1] = '\0';
 	return (ret);
 }
+//
+// static char	*ft_add_user_host(t_shell *****sh, char *prompt)
+// {
+// 	char	*ret;
+// 	char	*user;
+// 	char	*host;
+// 	int		user_len;
+// 	// int		host_len;
+// 	int		total_len;
+// 	int		prompt_len;
+// 	int		i;
+// 	int		j;
+//
+// 	i = 0;
+// 	user_len = ft_strlen((****sh)->user);
+// 	// host_len = ft_strlen((****sh)->host);
+// 	prompt_len = ft_strlen(prompt);
+// 	total_len = user_len + 1;
+// 	ret = malloc(sizeof(char) * (total_len + prompt_len + 1));
+//     ret[i++] = '@';
+//     // for (j = 0; j < host_len; j++, i++)
+//     //     ret[i] = (****sh)->host[j];
+//     ret[i++] = ':';
+//     for (j = 0; j < prompt_len; j++, i++)
+//         ret[i] = prompt[j];
+//     ret[i] = '\0';
+// 	user = ft_strjoin((****sh)->user, "@");
+// 	host = ft_strjoin((****sh)->host, ":");
+// 	ret = ft_strjoin(user, host);
+// 	ret = ft_strjoin(ret, prompt);
+// 	return (ft_free(user), ft_free(host), ret);
+// }
 
 /** @} */

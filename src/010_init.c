@@ -40,7 +40,9 @@ int	ft_init(t_shell *sh, char **envp)
 	if (!sh->envp || !sh->envt)
 		return (ft_err(ENV_INIT_ERR, errno), FAILURE);
 	sh->home = ft_get_var("HOME", sh->envp, NULL);
-	sh->heredoc = ft_strdup("");
+	sh->user = ft_get_var("USER", sh->envp, NULL);
+	// sh->host = ft_get_var("HOST", sh->envp, NULL);
+	// sh->heredoc = ft_strdup("");
 	ft_get_termios(STDIN_FILENO, &sh->termios);
 	rl_editing_mode = VI;
 	return (SUCCESS);

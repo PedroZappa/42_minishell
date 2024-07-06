@@ -207,6 +207,8 @@ typedef struct s_cmd
 /// @param envt			Pointer to Temporary Environment Variables
 /// @param path			Pointer to PATH array
 /// @param home			Pointer to HOME address
+/// @param user			Pointer to USER name
+/// @param host			Pointer to HOST name
 /// @param heredoc		Pointer to HEREDOC
 /// @param exit_status	Exit status
 /// ...
@@ -219,6 +221,8 @@ typedef struct s_shell
 	char	**envt;
 	char	**path;
 	char	*home;
+	char	*user;
+	char	*host;
 	char	*heredoc;
 	int		exit_status;
 }	t_shell;
@@ -273,7 +277,7 @@ int			ft_parser(t_shell *sh, char **line_buf);
 /// static int	ft_parse_cmds(t_token *tks, t_cmd *cmds, int i, int j);
 
 /// @file	310_readline.c
-void		ft_readline(char ***line_buf, char *home);
+void		ft_readline(char ***line_buf, t_shell **sh);
 // static char	*ft_get_prompt(char *prompt);
 
 //=============================================================================/

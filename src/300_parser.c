@@ -47,7 +47,7 @@ int	ft_parser(t_shell *sh, char **line_buf)
 	t_token	*tks;
 
 	tks = NULL;
-	ft_readline(&line_buf, sh->home);
+	ft_readline(&line_buf, &sh);
 	if (ft_tokenizer(sh, line_buf, &tks))
 		return (ft_free_tks(&tks), FAILURE);
 	if (ft_check_syntax(tks))
