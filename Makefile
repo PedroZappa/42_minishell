@@ -261,11 +261,10 @@ get_log:
 	fi
 
 vgdb_cmd: $(NAME) $(TEMP_PATH)
-	printf "target remote | vgdb --pid=" > $(TEMP_PATH)/gdb_commands.txt
-	printf "$(shell pgrep -f valgrind)" >> $(TEMP_PATH)/gdb_commands.txt
-	printf "\n" >> $(TEMP_PATH)/gdb_commands.txt
-	# printf "break main\n" >> $(TEMP_PATH)/gdb_commands.txt
-	cat .vgdbinit >> $(TEMP_PATH)/gdb_commands.txt
+	@printf "target remote | vgdb --pid=" > $(TEMP_PATH)/gdb_commands.txt
+	@printf "$(shell pgrep -f valgrind)" >> $(TEMP_PATH)/gdb_commands.txt
+	@printf "\n" >> $(TEMP_PATH)/gdb_commands.txt
+	@cat .vgdbinit >> $(TEMP_PATH)/gdb_commands.txt
 
 ##@ Clean-up Rules 󰃢
 
