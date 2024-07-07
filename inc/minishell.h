@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/07 10:46:50 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/07 11:31:42 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -129,6 +129,7 @@ typedef enum e_cmd_type
 	CMD_EXPORT,
 	CMD_UNSET,
 	CMD_ENV,
+	CMD_CLEAR,
 	CMD_EXIT,
 	CMD_HELP,
 }	t_cmd_type;
@@ -344,9 +345,11 @@ int			ft_pwd(t_shell *sh, int n);
 int			ft_cd(t_shell *sh, int cmd_n);
 // static int	ft_chdir(char ***env, char *path);
 
-// @file	730_env.c
+/// @file	730_env.c
 int			ft_env(t_shell *sh, int n);
 
+/// @file	740_clear.c
+int			ft_clear(int n);
 //=============================================================================/
 //	800		Errors & Info													   /
 //=============================================================================/
