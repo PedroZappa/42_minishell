@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 11:46:35 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/07 11:36:47 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/07 11:42:08 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -37,7 +37,8 @@ void	ft_readline(char ***line_buf, t_shell **sh)
 	ft_free(prompt);
 	if (!**line_buf)
 		**line_buf = ft_strdup("exit");
-	add_history(**line_buf);
+	if (ft_strlen(**line_buf) > 0)
+		add_history(**line_buf);
 }
 
 /// @brief			Get prompt
