@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 17:35:23 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/07 10:50:11 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/07 11:05:02 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -42,13 +42,9 @@ int	ft_err(char *msg, int status)
 /// @return			SUCCESS(0)
 int	ft_syntax_err(char *tkn, int err)
 {
-	char	*start;
-	char	*end;
-
-	start = ft_strjoin_free("Syntax error near unexpected token'", tkn);
-	end = ft_strjoin_free(start, "'");
-	ft_err(end, err);
-	return (SUCCESS);
+	ft_fprintf(STDERR_FILENO,
+			"bash : syntax error near unexpected token '%s'\n", tkn);
+	return (err);
 }
 
 /// @brief			Print invalid flag error
@@ -61,7 +57,6 @@ int	ft_syntax_err(char *tkn, int err)
 /// @return			SUCCESS(ret)
 int	ft_flag_err(char *cmd, char *cmd_flag, int err)
 {
-	(void)err;
 	ft_fprintf(STDERR_FILENO, "%s: %s: options & flags not supported\n",
 		cmd, cmd_flag);
 	return (err);
