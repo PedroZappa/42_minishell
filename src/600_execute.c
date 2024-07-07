@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 16:10:50 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/03 10:48:57 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/07 11:17:47 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -104,7 +104,7 @@ static int	ft_path_from_env(char **envp)
 /// @note			Used in ft_exec_child()
 void	ft_exec_cmd(t_shell *sh, int id, int i)
 {
-	t_stat statbuf;
+	t_stat	statbuf;
 
 	memset(&statbuf, 0, sizeof(t_stat));
 	if (id == CMD_EXEC)

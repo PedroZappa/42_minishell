@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 17:35:23 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/07 11:05:52 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/07 11:16:02 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -42,7 +42,7 @@ int	ft_err(char *msg, int status)
 int	ft_syntax_err(char *tkn, int err)
 {
 	ft_fprintf(STDERR_FILENO,
-			"bash : syntax error near unexpected token '%s'\n", tkn);
+		"bash : syntax error near unexpected token '%s'\n", tkn);
 	return (err);
 }
 

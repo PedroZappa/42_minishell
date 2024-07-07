@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:12:55 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/23 11:27:09 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/07 11:16:23 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -32,7 +32,6 @@ void	ft_free_sh(t_shell *sh)
 		// free(sh->heredoc);
 		free(sh->home);
 		free(sh->user);
-		// free(sh->host);
 		free(sh);
 	}
 }

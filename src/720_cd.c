@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 08:19:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/07 10:58:58 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/07 11:16:59 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -17,7 +17,7 @@
 * @version		1.0
 ***/
 
-# include "../inc/minishell.h"
+#include "../inc/minishell.h"
 #include <unistd.h>
 
 static int	ft_chdir(char ***env, char *path);

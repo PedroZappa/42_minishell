@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:46:27 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/22 10:05:25 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/07 11:15:31 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -54,7 +54,7 @@ static void	ft_signal_handler(int signo)
 /// @brief			Fork signal setter
 /// @details		Handles SIGINT and SIGQUIT
 /// @note			Used in ft_exec_fork()
-void	ft_fork_sigset()
+void	ft_fork_sigset(void)
 {
 	signal(SIGINT, ft_fork_sighandler);
 	signal(SIGQUIT, ft_fork_sighandler);

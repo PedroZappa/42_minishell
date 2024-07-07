@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 11:46:35 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/04 10:35:31 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/07 11:13:20 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -21,14 +21,14 @@
 
 static char	*ft_get_bash(t_shell ***sh, char *prompt);
 static char	*ft_bash(t_shell ****sh, char *cwd);
-static char	*ft_build_bash(t_shell *****sh, char **cwd);
-static char	*ft_add_user_host(t_shell *****sh, char *prompt);
+static char	*ft_build_bash(t_shell *****sh, char **cwd, int i);
+static char	*ft_add_user_host(t_shell *****sh, char *prompt, int i);
 
 /// @brief			Readline wrapper
 /// @param line_buf	Line buffer
 /// @param home		Home directory
 /// @note			Used in ft_parser()
-void		ft_readline(char ***line_buf, t_shell **sh)
+void	ft_readline(char ***line_buf, t_shell **sh)
 {
 	char	*prompt;
 
@@ -72,14 +72,16 @@ static char	*ft_bash(t_shell ****sh, char *cwd)
 {
 	char	*tmp;
 	char	*ret;
+	int		i;
 
+	i = 0;
 	ret = NULL;
 	if (!cwd)
 		return (ret);
-	tmp = ft_build_bash(&sh, &cwd);
+	tmp = ft_build_bash(&sh, &cwd, i);
 	if (!tmp)
 		ret = ft_strdup(cwd);
-	ret = ft_add_user_host(&sh, tmp);
+	ret = ft_add_user_host(&sh, tmp, i);
 	free(tmp);
 	return (ret);
 }
@@ -89,16 +91,15 @@ static char	*ft_bash(t_shell ****sh, char *cwd)
 /// @param cwd		Pointer to cwd string
 /// @return			Bash prompt
 /// @note			Used in ft_gwt_prompt()
-static char	*ft_build_bash(t_shell *****sh, char **cwd)
+static char	*ft_build_bash(t_shell *****sh, char **cwd, int i)
 {
 	char	*bash;
 	char	*local_cwd;
 	int		cwd_len;
 	int		home_len;
-	int		i;
-	
+
 	local_cwd = *cwd;
-	cwd_len = ft_strlen(*cwd); 
+	cwd_len = ft_strlen(*cwd);
 	home_len = ft_strlen((****sh)->home);
 	bash = malloc(sizeof(char) * ((cwd_len - home_len) + 2));
 	if (!bash)
@@ -116,13 +117,12 @@ static char	*ft_build_bash(t_shell *****sh, char **cwd)
 /// @param prompt	Prompt string
 /// @return			Prompt
 /// @note			Used in ft_bash()
-static char	*ft_add_user_host(t_shell *****sh, char *prompt)
+static char	*ft_add_user_host(t_shell *****sh, char *prompt, int i)
 {
 	char	*ret;
 	int		user_len;
 	int		total_len;
 	int		prompt_len;
-	int		i;
 	int		j;
 
 	user_len = ft_strlen((****sh)->user);
@@ -134,14 +134,14 @@ static char	*ft_add_user_host(t_shell *****sh, char *prompt)
 	i = -1;
 	while (++i < user_len)
 		ret[i] = (****sh)->user[i];
-    ret[i++] = ':';
+	ret[i++] = ':';
 	j = -1;
 	while (++j < prompt_len)
 	{
 		ret[i] = prompt[j];
 		++i;
 	}
-    ret[i] = '\0';
+	ret[i] = '\0';
 	return (ret);
 }
 
