@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 11:46:35 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/07 11:13:20 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/07 11:20:12 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -101,9 +101,7 @@ static char	*ft_build_bash(t_shell *****sh, char **cwd, int i)
 	local_cwd = *cwd;
 	cwd_len = ft_strlen(*cwd);
 	home_len = ft_strlen((****sh)->home);
-	bash = malloc(sizeof(char) * ((cwd_len - home_len) + 2));
-	if (!bash)
-		return (NULL);
+	bash = ft_calloc((cwd_len - home_len + 2), sizeof(char));
 	bash[0] = '~';
 	i = -1;
 	while (++i < cwd_len - home_len)
@@ -128,9 +126,7 @@ static char	*ft_add_user_host(t_shell *****sh, char *prompt, int i)
 	user_len = ft_strlen((****sh)->user);
 	prompt_len = ft_strlen(prompt);
 	total_len = user_len + 1;
-	ret = malloc(sizeof(char) * (total_len + prompt_len + 2));
-	if (!ret)
-		return (NULL);
+	ret = ft_calloc(total_len + prompt_len + 2, sizeof(char));
 	i = -1;
 	while (++i < user_len)
 		ret[i] = (****sh)->user[i];
