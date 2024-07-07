@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/06 20:10:17 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/07 10:46:50 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -36,6 +36,7 @@
 # include <sys/stat.h> // stat()
 # include "../lib/libft/libft/libft.h" // libft library
 # include "../lib/libft/ft_printf/ft_printf.h" // ft_printf
+# include "../lib/libft/ft_fprintf/ft_fprintf.h" // ft_fprintf
 
 //=============================================================================/
 //									Defines									   /

@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 20:05:44 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/06 20:25:18 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/07 10:52:34 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 ///	@note			Used in ft_execute()
 int	ft_env(t_shell *sh, int n)
 {
-	int env_i;
-	int i;
+	int	env_i;
+	int	i;
 
 	ft_set_var("env", "_", &sh->envp);
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 08:19:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/04 11:55:05 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/07 10:58:58 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -18,6 +18,7 @@
 ***/
 
 # include "../inc/minishell.h"
+#include <unistd.h>
 
 static int	ft_chdir(char ***env, char *path);
 
@@ -65,9 +66,7 @@ static int	ft_chdir(char ***env, char *path)
 	if (chdir_ret == -1)
 	{
 		ft_free(pwd);
-		pwd = ft_strjoin(path, ": No such directory");
-		ft_err(pwd, FAILURE);
-		ft_free(pwd);
+		ft_fprintf(STDERR_FILENO, "cd: %s: No such file or directory\n", path);
 		return (FAILURE);
 	}
 	ft_set_var(path, "OLDPWD", env);

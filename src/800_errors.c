@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 17:35:23 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/03 10:47:12 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/07 10:50:11 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -61,15 +61,10 @@ int	ft_syntax_err(char *tkn, int err)
 /// @return			SUCCESS(ret)
 int	ft_flag_err(char *cmd, char *cmd_flag, int err)
 {
-	char	*tmp;
-	char	*msg;
-	int		ret;
-
-	msg = ft_strjoin_free(cmd_flag, "': flag/option not supported");
-	tmp = ft_strjoin_free(": '", msg);
-	msg = ft_strjoin_free(cmd, tmp);
-	ret = ft_err(msg, err);
-	return (ret);
+	(void)err;
+	ft_fprintf(STDERR_FILENO, "%s: %s: options & flags not supported\n",
+		cmd, cmd_flag);
+	return (err);
 }
 
 /** @} */
