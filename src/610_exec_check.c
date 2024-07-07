@@ -6,9 +6,16 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 12:14:42 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/07 11:27:31 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/07 11:55:30 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/**
+* @defgroup 	exec_check Execute
+* @{
+*
+* @brief		Check command type
+* @version		1.0
+***/
 
 #include "../inc/minishell.h"
 

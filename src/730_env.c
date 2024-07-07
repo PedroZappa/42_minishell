@@ -6,9 +6,16 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 20:05:44 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/07 10:52:34 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/07 11:55:00 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/**
+* @defgroup 	env		env built-in
+* @{
+*
+* @brief		Env built-in
+* @version		1.0
+***/
 
 #include "../inc/minishell.h"
 
@@ -39,3 +46,5 @@ int	ft_env(t_shell *sh, int n)
 	}
 	return (env_i);
 }
+
+/** @} */
