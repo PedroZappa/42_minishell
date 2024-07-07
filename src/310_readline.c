@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 11:46:35 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/07 11:42:08 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/07 11:52:46 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -22,7 +22,7 @@
 static char	*ft_get_bash(t_shell ***sh, char *prompt);
 static char	*ft_bash(t_shell ****sh, char *cwd);
 static char	*ft_build_bash(t_shell *****sh, char **cwd, int i);
-static char	*ft_add_user_host(t_shell *****sh, char *prompt, int i);
+static char	*ft_add_user(t_shell *****sh, char *prompt, int i);
 
 /// @brief			Readline wrapper
 /// @param line_buf	Line buffer
@@ -82,7 +82,7 @@ static char	*ft_bash(t_shell ****sh, char *cwd)
 	tmp = ft_build_bash(&sh, &cwd, i);
 	if (!tmp)
 		ret = ft_strdup(cwd);
-	ret = ft_add_user_host(&sh, tmp, i);
+	ret = ft_add_user(&sh, tmp, i);
 	free(tmp);
 	return (ret);
 }
@@ -116,7 +116,7 @@ static char	*ft_build_bash(t_shell *****sh, char **cwd, int i)
 /// @param prompt	Prompt string
 /// @return			Prompt
 /// @note			Used in ft_bash()
-static char	*ft_add_user_host(t_shell *****sh, char *prompt, int i)
+static char	*ft_add_user(t_shell *****sh, char *prompt, int i)
 {
 	char	*ret;
 	int		user_len;

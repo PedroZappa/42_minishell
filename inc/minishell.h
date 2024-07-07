@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/07 11:37:39 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/07 11:53:17 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -280,8 +280,8 @@ int			ft_parser(t_shell *sh, char **line_buf);
 void		ft_readline(char ***line_buf, t_shell **sh);
 // static char	*ft_get_bash(t_shell ***sh, char *prompt);
 // static char	*ft_bash(t_shell ****sh, char *cwd);
-// static char	*ft_build_bash(t_shell *****sh, char **cwd);
-// static char	*ft_add_user_host(t_shell *****sh, char *prompt);
+// static char	*ft_build_bash(t_shell *****sh, char **cwd, int i);
+// static char	*ft_add_user(t_shell *****sh, char *prompt, int i);
 
 //=============================================================================/
 //	400		Signal  														   /
