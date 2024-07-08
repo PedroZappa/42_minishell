@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 20:34:20 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/24 15:47:32 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/08 14:49:58 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -77,7 +77,8 @@ void	ft_tk_add(t_token **tk_list, t_token *tk)
 void	ft_tk_add_free(t_token **tk_list, t_token *tk, t_tk_ops *tk_op)
 {
 	ft_tk_add(tk_list, tk);
-	ft_free(tk_op->tkn);
+	if (tk_op->tkn && (tk_op->type == TK_CMD))
+		ft_free(tk_op->tkn);
 }
 
 /// @brief			Get last token in list

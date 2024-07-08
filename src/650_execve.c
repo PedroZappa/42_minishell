@@ -77,10 +77,10 @@ void	ft_execve_path(char **path, char **argv, char **envp)
 			break ;
 		execve_err = execve(exec_path, argv, envp);
 		++i;
+		free(exec_path);
 	}
 	if (execve_err == EXECVE_ERR)
 		g_exit = errno;
-	free(exec_path);
 }
 
 /** @} */

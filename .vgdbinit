@@ -1,4 +1,4 @@
-break ft_split_path
+break ft_get_tkns
 fs cmd
 info break
 info thread

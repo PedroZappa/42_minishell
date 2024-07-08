@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:44:44 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/23 17:29:17 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/08 15:11:49 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -84,8 +84,8 @@ static int	ft_get_tkns(char *line, t_token **tks)
 	while (line && *line)
 	{
 		tk = ft_get_tk(line);
-		if ((tk.tkn != NO_TOKEN) && (tmp != line))
-			ft_tk_add_free(tks, ft_tk_new(tmp, TK_CMD, (line - tmp)), &tk);
+		// if ((tk.tkn != NO_TOKEN) && (tmp != line))
+		// 	ft_tk_add_free(tks, ft_tk_new(tmp, TK_CMD, (line - tmp)), &tk);
 		if (tk.tkn != NO_TOKEN)
 		{
 			line += tk.len;
@@ -127,11 +127,11 @@ static t_tk_ops	ft_get_tk(char *tk)
 		ret = (t_tk_ops){ft_substr(tk, 0, i), TK_CMD, i};
 	}
 	else
-		ret = (t_tk_ops){ft_substr(tk, 0, 1), TK_BLANK, 1};
+		ret = (t_tk_ops){"", TK_BLANK, 1};
 	i = -1;
 	while (ops[++i].tkn)
 		if (!ft_strncmp(tk, ops[i].tkn, ops[i].len))
-			return (ft_free(ret.tkn), ops[i]);
+			return (ret);
 	return (ret);
 }
 

@@ -117,6 +117,10 @@ define tk_add
 	display *curr
 end
 
+define ft_add_tk_free
+	display tk
+end
+
 define tk_last
 	display tk
 end

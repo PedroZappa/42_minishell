@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/29 20:35:29 by passunca          #+#    #+#              #
-#    Updated: 2024/07/08 08:42:10 by passunca         ###   ########.fr        #
+#    Updated: 2024/07/08 14:28:01 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,6 +88,7 @@ CC			= cc
 
 CFLAGS		= -Wall -Wextra -Werror
 DFLAGS		= -g
+# DFLAGS		+= -fsanitize=address
 RFLAGS		= -lreadline
 INC			= -I $(INC_PATH)
 
