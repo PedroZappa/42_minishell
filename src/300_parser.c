@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:48:25 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/30 12:08:01 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/08 11:33:31 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -39,7 +39,7 @@ static int	ft_parse_cmds(t_token *tks, t_cmd *cmds, int i, int j);
 ///	- Free tks
 /// @param sh		Pointer to a t_shell struct
 /// @param line_buf	Line buffer
-/// @return			SUCCESS(0)
+/// @return			SUCCESS(0
 /// @return			FAILURE(1)
 ///	@note			Used in ft_sh_loop()
 int	ft_parser(t_shell *sh, char **line_buf)
