@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:53:41 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/06 21:44:09 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/08 20:32:32 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -18,6 +18,8 @@
 ***/
 
 #include "../inc/minishell.h"
+
+static void	ft_shlvl(t_shell *sh);
 
 /// @brief		Initialize minishell
 /// @details
@@ -36,6 +38,7 @@
 int	ft_init(t_shell *sh, char **envp)
 {
 	sh->envp = ft_init_env(envp);
+	ft_shlvl(sh);
 	sh->envt = ft_calloc(1, sizeof(char *));
 	if (!sh->envp || !sh->envt)
 		return (ft_err(ENV_INIT_ERR, errno), FAILURE);
@@ -46,6 +49,35 @@ int	ft_init(t_shell *sh, char **envp)
 	rl_editing_mode = VI;
 	return (SUCCESS);
 }
+
+/// @brief		Initialize shell level
+/// @param sh	Pointer to a t_shell struct
+/// @note		Used in main()
+static void	ft_shlvl(t_shell *sh)
+{
+	char	*shlvl;
+	char	*new;
+	int		i;
+
+	shlvl = ft_get_var("SHLVL", sh->envp, NULL);
+	if (shlvl)
+	{
+		i = ft_atoi(shlvl + 1);
+		new = ft_itoa(i);
+		if (!new)
+		{
+			ft_err(MALLOC_ERR, errno);
+			return ;
+		}
+		ft_set_var("SHLVL", new, &sh->envp);
+		free(new);
+		free(shlvl);
+	}
+	else
+		ft_set_var("SHLVL", "1", &sh->envp);
+}
+
+/** @} */
 
 /// @brief Initialize in & out redirections
 /// @param cmds Pointer to an array of t_cmd structs
@@ -65,5 +97,3 @@ void	ft_reset_redir(t_cmd *cmds, int n_cmds)
 		cmds[i].out.flag = -1;
 	}
 }
-
-/** @} */
