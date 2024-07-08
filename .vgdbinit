@@ -1,4 +1,4 @@
-break ft_get_tkns
+break ft_get_tk
 fs cmd
 info break
 info thread

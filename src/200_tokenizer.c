@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:44:44 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/08 19:35:17 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/08 20:08:38 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -26,6 +26,7 @@ static int		ft_has_match(char **line);
 
 /// @brief			Tokenizer
 /// @details
+/// - Initializes t_tk_ops array with all supported tokens
 /// - Get tokens from line
 /// - Handle Token Expansion
 /// 	- Expand ~ (HOME)
@@ -127,7 +128,6 @@ static int	ft_get_tkns(char *line, t_token **tks, t_tk_ops *ops)
 
 /// @brief			Find matching token operation
 /// @details
-/// - Initializes t_tk_ops array with all supported tokens
 ///	- Compares tk with each token in the array
 /// @param tk		Token string
 /// @return			SUCCESS(t_tk_ops struct with op data)
@@ -149,8 +149,8 @@ static t_tk_ops	ft_get_tk(char *tk, t_tk_ops **ops)
 	else
 		ret = (t_tk_ops){"", TK_BLANK, 1};
 	i = -1;
-	while (ops[++i]->tkn)
-		if (!ft_strncmp(tk, ops[i]->tkn, ops[i]->len))
+	while ((ops[++i] != NULL) && !ret.tkn)
+		if (ops[i]->tkn && !ft_strncmp(tk, ops[i]->tkn, ops[i]->len))
 			return (ret);
 	return (ret);
 }
