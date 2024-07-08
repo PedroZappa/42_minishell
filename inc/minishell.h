@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/07 11:53:17 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/08 08:41:48 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -323,6 +323,9 @@ int			ft_exec_check(char *cmd);
 /// @file	620_exec_one.c
 int			ft_exec_one(t_shell *sh);
 int			ft_exec_fork(t_shell *sh);
+
+/// @file	630_exec_many.c
+int			ft_exec_many(t_shell *sh);
 
 /// @file	640_exec_child.c
 void		ft_exec_child(t_shell *sh, int *outpipe);

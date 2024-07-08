@@ -40,6 +40,8 @@ int	ft_execute(t_shell *sh)
 	sh->path = ft_split_path(sh->envp);
 	if (ft_exec_one(sh))
 		return (FAILURE);
+	else if (ft_exec_many(sh))
+		return (FAILURE);
 	ft_set_termios(STDIN_FILENO, TCSAFLUSH, &sh->termios);
 	return (SUCCESS);
 }
