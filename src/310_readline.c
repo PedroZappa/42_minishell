@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 11:46:35 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/08 11:22:55 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/08 11:24:09 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -127,7 +127,7 @@ static char	*ft_add_user(t_shell *****sh, char *prompt, int i)
 	user_len = ft_strlen((****sh)->user);
 	prompt_len = ft_strlen(prompt);
 	total_len = user_len + 1;
-	ret = ft_calloc((total_len + prompt_len + 2), sizeof(char));
+	ret = ft_calloc((total_len + prompt_len + 5), sizeof(char));
 	i = -1;
 	while (++i < user_len)
 		ret[i] = (****sh)->user[i];
