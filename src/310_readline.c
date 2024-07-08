@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 11:46:35 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/07 17:24:26 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/08 11:22:55 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -131,6 +131,9 @@ static char	*ft_add_user(t_shell *****sh, char *prompt, int i)
 	i = -1;
 	while (++i < user_len)
 		ret[i] = (****sh)->user[i];
+	ret[i++] = '@';
+	ret[i++] = '4';
+	ret[i++] = '2';
 	ret[i++] = ':';
 	j = -1;
 	while (++j < prompt_len)
