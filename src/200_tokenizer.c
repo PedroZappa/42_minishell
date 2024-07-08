@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:44:44 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/08 15:11:49 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/08 19:35:17 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -19,9 +19,9 @@
 
 #include "../inc/minishell.h"
 
-static int		ft_get_tkns(char *line, t_token **tks);
-static t_tk_ops	ft_get_tk(char *tk);
 static void		ft_init_ops(t_tk_ops *ops);
+static int		ft_get_tkns(char *line, t_token **tks, t_tk_ops *ops);
+static t_tk_ops	ft_get_tk(char *tk, t_tk_ops **ops);
 static int		ft_has_match(char **line);
 
 /// @brief			Tokenizer
@@ -38,10 +38,12 @@ static int		ft_has_match(char **line);
 ///	@note			Used in ft_parser()
 int	ft_tokenizer(t_shell *sh, char **line, t_token **tks)
 {
-	t_token	*tk;
-	char	*name;
+	t_tk_ops	ops[16];
+	t_token		*tk;
+	char		*name;
 
-	if (ft_get_tkns(*line, tks) != SUCCESS)
+	ft_init_ops(ops);
+	if (ft_get_tkns(*line, tks, ops) != SUCCESS)
 		return (ft_err(TKNZR_ERR, errno));
 	tk = *tks;
 	while (tk)
@@ -57,6 +59,28 @@ int	ft_tokenizer(t_shell *sh, char **line, t_token **tks)
 		tk = tk->next;
 	}
 	return (SUCCESS);
+}
+
+/// @brief			Initialize t_tk_ops array with all supported tokens
+/// @param ops		Pointer to an array of t_tk_ops structs
+static void	ft_init_ops(t_tk_ops *ops)
+{
+	ops[0] = (t_tk_ops){"<<", TK_IN, 2};
+	ops[1] = (t_tk_ops){"<", TK_IN, 1};
+	ops[2] = (t_tk_ops){">>", TK_OUT, 2};
+	ops[3] = (t_tk_ops){">|", TK_OUT, 2};
+	ops[4] = (t_tk_ops){"<>", TK_OUT, 2};
+	ops[5] = (t_tk_ops){">", TK_OUT, 1};
+	ops[6] = (t_tk_ops){"||", TK_OR, 2};
+	ops[7] = (t_tk_ops){"&&", TK_AND, 2};
+	ops[8] = (t_tk_ops){"|", TK_PIPE, 1};
+	ops[9] = (t_tk_ops){" ", TK_BLANK, 1};
+	ops[10] = (t_tk_ops){"\n", TK_BLANK, 1};
+	ops[11] = (t_tk_ops){"\v", TK_BLANK, 1};
+	ops[12] = (t_tk_ops){"\t", TK_BLANK, 1};
+	ops[13] = (t_tk_ops){"\r", TK_BLANK, 1};
+	ops[14] = (t_tk_ops){"\f", TK_BLANK, 1};
+	ops[15] = (t_tk_ops){NULL, 0, 1};
 }
 
 /// @brief			Get tokens from line
@@ -75,7 +99,7 @@ int	ft_tokenizer(t_shell *sh, char **line, t_token **tks)
 /// @return			SUCCESS(0) on success,
 ///					FAILURE(1) on failure
 ///	@note			Used in ft_tokenizer()
-static int	ft_get_tkns(char *line, t_token **tks)
+static int	ft_get_tkns(char *line, t_token **tks, t_tk_ops *ops)
 {
 	char		*tmp;
 	t_tk_ops	tk;
@@ -83,9 +107,7 @@ static int	ft_get_tkns(char *line, t_token **tks)
 	tmp = line;
 	while (line && *line)
 	{
-		tk = ft_get_tk(line);
-		// if ((tk.tkn != NO_TOKEN) && (tmp != line))
-		// 	ft_tk_add_free(tks, ft_tk_new(tmp, TK_CMD, (line - tmp)), &tk);
+		tk = ft_get_tk(line, &ops);
 		if (tk.tkn != NO_TOKEN)
 		{
 			line += tk.len;
@@ -111,13 +133,11 @@ static int	ft_get_tkns(char *line, t_token **tks)
 /// @return			SUCCESS(t_tk_ops struct with op data)
 ///					FAILURE(empty t_tk_ops struct)
 /// @note			Used in ft_get_tkns()
-static t_tk_ops	ft_get_tk(char *tk)
+static t_tk_ops	ft_get_tk(char *tk, t_tk_ops **ops)
 {
-	t_tk_ops	ops[16];
 	t_tk_ops	ret;
 	int			i;
 
-	ft_init_ops(ops);
 	ret = (t_tk_ops){NULL, TK_CMD, 0};
 	i = 0;
 	if (!ft_isspace(tk[0]))
@@ -129,32 +149,10 @@ static t_tk_ops	ft_get_tk(char *tk)
 	else
 		ret = (t_tk_ops){"", TK_BLANK, 1};
 	i = -1;
-	while (ops[++i].tkn)
-		if (!ft_strncmp(tk, ops[i].tkn, ops[i].len))
+	while (ops[++i]->tkn)
+		if (!ft_strncmp(tk, ops[i]->tkn, ops[i]->len))
 			return (ret);
 	return (ret);
-}
-
-/// @brief			Initialize t_tk_ops array with all supported tokens
-/// @param ops		Pointer to an array of t_tk_ops structs
-static void	ft_init_ops(t_tk_ops *ops)
-{
-	ops[0] = (t_tk_ops){"<<", TK_IN, 2};
-	ops[1] = (t_tk_ops){"<", TK_IN, 1};
-	ops[2] = (t_tk_ops){">>", TK_OUT, 2};
-	ops[3] = (t_tk_ops){">|", TK_OUT, 2};
-	ops[4] = (t_tk_ops){"<>", TK_OUT, 2};
-	ops[5] = (t_tk_ops){">", TK_OUT, 1};
-	ops[6] = (t_tk_ops){"||", TK_OR, 2};
-	ops[7] = (t_tk_ops){"&&", TK_AND, 2};
-	ops[8] = (t_tk_ops){"|", TK_PIPE, 1};
-	ops[9] = (t_tk_ops){" ", TK_BLANK, 1};
-	ops[10] = (t_tk_ops){"\n", TK_BLANK, 1};
-	ops[11] = (t_tk_ops){"\v", TK_BLANK, 1};
-	ops[12] = (t_tk_ops){"\t", TK_BLANK, 1};
-	ops[13] = (t_tk_ops){"\r", TK_BLANK, 1};
-	ops[14] = (t_tk_ops){"\f", TK_BLANK, 1};
-	ops[15] = (t_tk_ops){NULL, 0, 1};
 }
 
 /// @brief			Check if line contains a matching closing quote
