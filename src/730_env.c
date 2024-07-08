@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 20:05:44 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/08 11:45:32 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/08 20:18:38 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -26,14 +26,13 @@
 /// @param sh		Pointer to a t_shell struct
 /// @param n		Command index
 /// @return			SUCCESS(env_i)
+/// @return			FAILURE(1)
 ///	@note			Used in ft_execute()
 int	ft_env(t_shell *sh, int n)
 {
 	int	env_i;
-	// int	i;
 
 	ft_set_var("env", "_", &sh->envp);
-	// i = 0;
 	if (sh->cmds[n].argv[1])
 		return (ft_flag_err(sh->cmds[n].argv[0], sh->cmds[n].argv[1], 1));
 	env_i = 0;

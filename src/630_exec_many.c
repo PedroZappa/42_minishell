@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 08:39:57 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/08 08:41:05 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/08 20:19:05 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -19,7 +19,7 @@
 
 #include "../inc/minishell.h"
 
-int		ft_exec_many(t_shell *sh)
+int	ft_exec_many(t_shell *sh)
 {
 	(void)sh;
 	return (SUCCESS);

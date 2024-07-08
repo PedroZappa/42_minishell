@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:25:33 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/07 11:42:39 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/08 20:19:35 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -29,7 +29,7 @@
 int	ft_clear(int n)
 {
 	(void)n;
-    ft_printf("\033[H\033[J");
+	ft_printf("\033[H\033[J");
 	return (SUCCESS);
 }
 
