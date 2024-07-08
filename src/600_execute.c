@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 16:10:50 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/07 11:29:34 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/08 11:14:32 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -89,7 +89,7 @@ static int	ft_path_from_env(char **envp)
 	i = 0;
 	while (envp && envp[i])
 		if (!ft_strncmp("PATH=", envp[i++], 5))
-			return (i);
+			return (i - 1);
 	return (-1);
 }
 
@@ -113,7 +113,8 @@ void	ft_exec_cmd(t_shell *sh, int id, int i)
 	{
 		if (!sh->cmds[i].argv[0][0])
 			return ;
-		stat(sh->cmds[i].argv[0], &statbuf);
+		if (stat(sh->cmds[i].argv[0], &statbuf) < 0)
+			errno = ENOENT;
 		ft_execve(sh->path, sh->cmds[i].argv, sh->envp);
 		// TODO: Handle errors
 		ft_free_sh(sh);
