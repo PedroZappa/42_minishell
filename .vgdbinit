@@ -1,4 +1,4 @@
-break ft_init
+break ft_split_path
 fs cmd
 info break
 info thread

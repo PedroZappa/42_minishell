@@ -5,6 +5,8 @@
 #
 set trace-commands on
 set logging enabled on
+show follow-fork-mode
+set follow-fork-mode child
 
 set print pretty on
 # set print elements 2
@@ -192,9 +194,27 @@ define execute
 	display *sh->path
 end
 
+define split_path
+	display *envp
+	display *path
+	display to_split
+	display i
+end
+
+define path_from_env
+	display *envp
+	display envp[i]
+	display i
+end
+
 define exec_one
 	display *sh
 	display cmd
+end
+
+define exec_fork
+	display *sh
+	display pid
 end
 
 define exec
