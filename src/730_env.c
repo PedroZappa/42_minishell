@@ -32,18 +32,14 @@ int	ft_env(t_shell *sh, int n)
 	int	env_i;
 	int	i;
 
-	ft_set_var("env", "_", &sh->envp);
+	ft_set_var("_", "env", &sh->envp);
 	i = 0;
-	while (sh->cmds[n].argv[++i])
-		if (sh->cmds[n].argv[i][0] == '-')
-			return (ft_flag_err(sh->cmds[n].argv[0], sh->cmds[n].argv[i], 1));
+	if (sh->cmds[n].argv[1])
+		return (ft_flag_err(sh->cmds[n].argv[0], sh->cmds[n].argv[1], 1));
 	env_i = 0;
 	while (sh->envp[env_i])
-	{
 		if (ft_strchr(sh->envp[env_i], '='))
 			ft_putendl_fd(sh->envp[env_i++], STDOUT_FILENO);
-		++env_i;
-	}
 	return (env_i);
 }
 
