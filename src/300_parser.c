@@ -50,6 +50,7 @@ int	ft_parser(t_shell *sh, char **line_buf)
 	ft_readline(&line_buf, &sh);
 	if (ft_tokenizer(sh, line_buf, &tks))
 		return (ft_free_tks(&tks), FAILURE);
+	ft_free(*line_buf);
 	if (ft_check_syntax(tks))
 		return (ft_free_tks(&tks), FAILURE);
 	sh->n_cmds = ft_count_cmds(tks);
