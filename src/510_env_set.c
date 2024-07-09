@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 09:15:42 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/22 10:18:15 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/09 20:42:17 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -26,7 +26,7 @@ static char	**ft_env_add_var(char **env, char *new_var);
 /// @param var		Pointer to variable to be set
 /// @param val		Pointer to value to be set
 /// @param env		Pointer to array of environment variables
-/// @return			SUCCESS(0) 
+/// @return			SUCCESS(0)
 ///					FAILURE(-1)
 /// @details		Build new variable string
 ///					- If val exists	concatenate "=" and val to var;
@@ -126,7 +126,37 @@ static char	**ft_env_add_var(char **env, char *new_var)
 	return (new_env);
 }
 
-/*  TODO: Implement me!!
- * char **ft_env_del_var(char **env, char *to_del, int j); */
+/// @brief			Delete variable from env and return new env
+/// @param env		Pointer to array of environment variables
+/// @param to_del	Pointer to variable to delete
+///	@return			SUCCESS(Pointer to new env array)
+///	@return			FAILURE(NULL)
+char **ft_env_del_var(char **env, char *to_del)
+{
+	char **new_env;
+	char *var;
+	int i;
+	int j;
+
+	i = 0;
+	while (env[i])
+		++i;
+	new_env = ft_calloc(i, sizeof(char *));
+	if (!new_env)
+		return (ft_err(MALLOC_ERR, errno), NULL);
+	j = 0;
+	i = -1;
+	while (env[++i])
+	{
+		var = ft_substr(env[i], 0,
+				(ft_strlen(env[i] - ft_strlen(ft_strchr(env[i], '=')))));
+		if (ft_strncmp(var, to_del, ft_max(ft_strlen(var), ft_strlen(to_del))))
+			new_env[j++] = ft_strdup(env[i]);
+		free(var);
+	}
+	new_env[j] = NULL;
+	ft_free_arr(env);
+	return (new_env);
+}
 
 /** @} */
