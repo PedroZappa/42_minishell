@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 22:02:06 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/22 10:09:05 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/09 21:14:35 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -102,6 +102,36 @@ static char	*ft_extract_var(char *select, char **envp)
 	}
 	free(tmp);
 	return (var);
+}
+
+/// @brief			Find variable index in env
+/// @details		- Check if env is NULL
+/// 				- Get length of variable to search for
+///					- Loop through environment variables
+///						- If variable is found and it ends with = or \0,
+///						return its index,
+/// @param var		Pointer to variable string
+/// @param env		Pointer to array of environment variables
+/// @return			SUCCESS(var index in env)
+///					FAILURE(-1)
+///	@note			Used in ft_get_var() ...
+int	ft_get_var_index(char *var, char **env)
+{
+	int key_len;
+	int i;
+
+	if (!env)
+		return (NO_ENV);
+	key_len = ft_strlen(var);
+	i = -1;
+	while (env[++i])
+	{
+		if ((ft_strncmp(var, env[i], key_len) \
+			&& (((env[i][key_len] == '=') \
+			|| (env[i][key_len] == '\0')))))
+			return (i);
+	}
+	return (NO_VAR);
 }
 
 /** @} */

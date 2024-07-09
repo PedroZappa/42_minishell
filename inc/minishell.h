@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/09 16:39:21 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/09 21:14:02 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -294,10 +294,12 @@ void		ft_fork_sighandler(int sig);
 char		**ft_init_env(char **env);
 char		*ft_get_var(char *var, char **envp, char**envt);
 // static char	*ft_extract_var(char *select, char **env);
+int	ft_get_var_index(char *var, char **env);
 
 /// @file	510_env_set.c
 int			ft_set_var(char *var, char *val, char ***env);
 int			ft_var_from_env(char *var, char **env);
+char		**ft_env_del_var(char **env, char *to_del);
 // static char	**ft_env_add_var(char **env, char *new_var);
 
 //=============================================================================/

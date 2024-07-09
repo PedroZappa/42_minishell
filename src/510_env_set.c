@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 09:15:42 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/09 20:42:17 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/09 21:13:25 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -127,6 +127,10 @@ static char	**ft_env_add_var(char **env, char *new_var)
 }
 
 /// @brief			Delete variable from env and return new env
+/// @details		
+/// - Loop through old environment variables and count them
+/// - Allocate space
+/// - Copy old env to new array
 /// @param env		Pointer to array of environment variables
 /// @param to_del	Pointer to variable to delete
 ///	@return			SUCCESS(Pointer to new env array)
@@ -158,5 +162,3 @@ char **ft_env_del_var(char **env, char *to_del)
 	ft_free_arr(env);
 	return (new_env);
 }
-
-/** @} */
