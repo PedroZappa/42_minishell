@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 16:10:50 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/08 11:14:32 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/09 15:26:11 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -143,6 +143,8 @@ int	ft_exec(t_shell *sh, int cmd, int n)
 		g_exit = ft_env(sh, n);
 	if (cmd == CMD_CLEAR)
 		g_exit = ft_clear(n);
+	if (cmd == CMD_ECHO)
+		g_exit = ft_echo(sh, n);
 	return (SUCCESS);
 }
 
