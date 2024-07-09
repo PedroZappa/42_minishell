@@ -289,7 +289,7 @@ void		ft_readline(char ***line_buf, t_shell **sh);
 
 /// @file	400_signal.c
 void		ft_sigset(void);
-void		ft_fork_sigset();
+void		ft_fork_sigset(void);
 void		ft_fork_sighandler(int sig);
 
 //=============================================================================/
