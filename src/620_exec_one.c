@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:51:40 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/08 20:17:00 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/09 16:17:24 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -18,6 +18,8 @@
 ***/
 
 #include "../inc/minishell.h"
+
+static int	ft_update_last_cmd(t_shell *sh);
 
 /// @brief			Execute one command
 /// @details	
@@ -42,6 +44,7 @@ int	ft_exec_one(t_shell *sh)
 	}
 	else if (ft_exec_fork(sh))
 		return (ft_free_arr(sh->path), FAILURE);
+	ft_update_last_cmd(sh);
 	return (ft_free_arr(sh->path), SUCCESS);
 }
 
@@ -80,5 +83,22 @@ int	ft_exec_fork(t_shell *sh)
 		g_exit = (128 + WTERMSIG(g_exit));
 	else if (WIFEXITED(g_exit))
 		g_exit = WEXITSTATUS(g_exit);
+	return (SUCCESS);
+}
+
+/// @brief			Update '_' variable (last argument)
+/// @param sh		Pointer to a t_shell struct
+/// @param n		Command index
+/// @return			SUCCESS(0)
+/// @note			Used in ft_exec_one()
+static int	ft_update_last_cmd(t_shell *sh)
+{
+	int	i;
+
+	i = (sh->cmds[0].argc - 1);
+	while ((i > 0) && (!ft_strncmp(sh->cmds[0].argv[i], "", 1)))
+		--i;
+	if (i > 0)
+		ft_set_var("_", sh->cmds[0].argv[i], &sh->envp);
 	return (SUCCESS);
 }

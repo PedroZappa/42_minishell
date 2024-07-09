@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/09 16:01:30 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/09 16:39:21 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -350,6 +350,12 @@ int			ft_clear(int n);
 
 /// @file	750_echo.c
 int			ft_echo(t_shell *sh, int n);
+
+/// @file	760_export.c
+int			ft_export(t_shell *sh, int n);
+
+/// @file	770_unset.c
+int			ft_unset(t_shell *sh, int n);
 
 //=============================================================================/
 //	800		Errors & Info													   /

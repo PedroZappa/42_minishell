@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/29 20:35:29 by passunca          #+#    #+#              #
-#    Updated: 2024/07/09 15:25:23 by passunca         ###   ########.fr        #
+#    Updated: 2024/07/09 16:38:34 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,8 @@ FILES			+= 720_cd.c
 FILES			+= 730_env.c
 FILES			+= 740_clear.c
 FILES			+= 750_echo.c
+FILES			+= 760_export.c
+FILES			+= 770_unset.c
 FILES			+= 800_errors.c
 FILES			+= 900_free.c
 
