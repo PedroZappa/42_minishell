@@ -65,7 +65,7 @@ static int	ft_chdir(char ***env, char *path)
 	if (chdir_ret == -1)
 	{
 		ft_free(pwd);
-		ft_fprintf(STDERR_FILENO, "cd: %s: No such file or directory\n", path);
+		ft_fprintf(STDERR_FILENO, "%s: No such file or directory\n", path);
 		return (FAILURE);
 	}
 	ft_set_var(path, "OLDPWD", env);
