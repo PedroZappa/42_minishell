@@ -33,7 +33,12 @@ int	ft_echo(t_shell *sh, int n)
 	while (sh->cmds[n].argv[i++] && ft_is_nflag(sh->cmds[n].argv[i]))
 		sentinel = '\0';
 	while (sh->cmds[n].argv[i])
-		ft_putstr_fd(sh->cmds[n].argv[i++], STDOUT_FILENO);
+	{
+		ft_putstr_fd(sh->cmds[n].argv[i], STDOUT_FILENO);
+		if (sh->cmds[n].argv[i + 1])
+			write(STDOUT_FILENO, " ", 1);
+		++i;
+	}
 	ft_putchar_fd(sentinel, STDOUT_FILENO);
 	return (SUCCESS);
 }
