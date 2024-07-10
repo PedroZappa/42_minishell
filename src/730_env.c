@@ -32,7 +32,8 @@ int	ft_env(t_shell *sh, int n)
 {
 	int	env_i;
 
-	ft_set_var("_", "env", &sh->envp);
+	// ft_set_var("_", "env", &sh->envp);
+	ft_set_var("_", sh->cmds[n].argv[sh->cmds[n].argc - 1], &sh->envp);
 	if (sh->cmds[n].argv[1])
 		return (ft_flag_err(sh->cmds[n].argv[0], sh->cmds[n].argv[1], 1));
 	env_i = 0;

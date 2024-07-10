@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/09 21:14:02 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/10 16:30:57 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -58,6 +58,7 @@
 # define CMD_ERR		"Command not found\n"
 # define REDIR_ERR		"Redirection error\n"
 # define ARG_ERR		"Invalid arguments\n"
+# define SYNTAX_ERR		"Syntax error\n"
 
 /// Constants
 # define CHARSET "?%*+,.-/#:@~ \t"

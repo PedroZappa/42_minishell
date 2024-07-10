@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 12:14:42 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/09 15:24:10 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:06:07 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -40,6 +40,10 @@ int	ft_exec_check(char *cmd)
 		type = CMD_CLEAR;
 	if (ft_strncmp(cmd, "echo", 4) == SUCCESS)
 		type = CMD_ECHO;
+	if (ft_strncmp(cmd, "export", 6) == SUCCESS)
+		type = CMD_EXPORT;
+	if (ft_strncmp(cmd, "unset", 5) == SUCCESS)
+		type = CMD_UNSET;
 	return (type);
 }
 
