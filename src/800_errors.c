@@ -55,7 +55,7 @@ int	ft_syntax_err(char *tkn, int err)
 /// @return			SUCCESS(ret)
 int	ft_flag_err(char *cmd, char *cmd_flag, int err)
 {
-	ft_fprintf(STDERR_FILENO, "%s: %s: options & flags not supported\n",
+	ft_fprintf(STDERR_FILENO, "%s: ’%s’: options & flags not supported\n",
 		cmd, cmd_flag);
 	return (err);
 }
