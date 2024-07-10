@@ -22,6 +22,7 @@ int	ft_unset(t_shell *sh, int n)
 	char	*var;
 	int	i;
 
+	i = 0;
 	ft_set_var(sh->cmds[n].argv[sh->cmds[n].argc - 1], "_", &sh->envp);
 	if (!sh->cmds[n].argv[1] || !sh->envp)
 		return (FAILURE);
