@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 08:19:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/09 16:21:34 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:31:36 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -37,7 +37,6 @@ int	ft_cd(t_shell *sh, int cmd_n)
 	char	*home;
 	int		chdir;
 
-	ft_set_var("_", sh->cmds[cmd_n].argv[sh->cmds[cmd_n].argc - 1], &sh->envp);
 	if (!sh->cmds->argv[1])
 	{
 		home = ft_get_var("HOME", sh->envp, NULL);
@@ -65,7 +64,7 @@ static int	ft_chdir(char ***env, char *path)
 	if (chdir_ret == -1)
 	{
 		ft_free(pwd);
-		ft_fprintf(STDERR_FILENO, "%s: No such file or directory\n", path);
+		ft_fprintf(STDERR_FILENO, "bash: %s: No such file or directory\n", path);
 		return (FAILURE);
 	}
 	ft_set_var(path, "OLDPWD", env);

@@ -6,13 +6,21 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 16:37:35 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/09 21:20:05 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:26:56 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
 /// @brief			Unset built-in
+/// @details
+/// - If flags are parsed return error
+/// - Loop through envp looking for var
+///		- If there is no "=" in var:
+///			- Check if var is in envp
+///				- If yes, delete it
+///			- Check if var is in envt	
+///				- If yes, delete it
 /// @param sh		Pointer to a t_shell struct
 /// @param n		Command index
 /// @return			SUCCESS(0)
@@ -23,12 +31,11 @@ int	ft_unset(t_shell *sh, int n)
 	int	i;
 
 	i = 0;
-	ft_set_var("_", sh->cmds[n].argv[sh->cmds[n].argc - 1], &sh->envp);
 	if (!sh->cmds[n].argv[1] || !sh->envp)
 		return (FAILURE);
 	while (sh->cmds[n].argv[++i])
 		if (sh->cmds[n].argv[i][0] == '-')
-			return (ft_flag_err(sh->cmds[n].argv[0], sh->cmds[n].argv[1], 1));
+			return (ft_flag_err(sh->cmds[n].argv[0], sh->cmds[n].argv[i], 1));
 	i = 0;
 	while (sh->cmds[n].argv[++i])
 	{

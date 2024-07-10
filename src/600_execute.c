@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 16:10:50 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/10 17:06:46 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:31:16 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -68,7 +68,7 @@ static char	**ft_split_path(char **envp)
 	{
 		to_split = ft_strdup(envp[i] + 5);
 		path = ft_split(to_split, ':');
-		free(to_split);
+		ft_free(to_split);
 		i = -1;
 		while (path[++i])
 			path[i] = ft_strjoin_free(path[i], ft_strdup("/"));
