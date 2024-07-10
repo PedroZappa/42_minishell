@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:51:40 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/09 16:17:24 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:15:11 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -37,7 +37,9 @@ int	ft_exec_one(t_shell *sh)
 	if (sh->cmds[0].argv[0])
 		cmd = ft_exec_check(sh->cmds[0].argv[0]);
 	if ((cmd == CMD_EXIT) || (cmd == CMD_PWD) || (cmd == CMD_CD)
-		|| (cmd == CMD_ENV) || (cmd == CMD_CLEAR))
+		|| (cmd == CMD_ENV) || (cmd == CMD_CLEAR)
+		||((cmd == CMD_EXPORT) && sh->cmds[0].argv[1])
+		||((cmd == CMD_UNSET) && sh->cmds[0].argv[1]))
 	{
 		if (ft_exec(sh, cmd, 0))
 			return (ft_free_arr(sh->path), FAILURE);
