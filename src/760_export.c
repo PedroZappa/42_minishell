@@ -16,5 +16,6 @@ int	ft_export(t_shell *sh, int n)
 {
 	(void)sh;
 	(void)n;
+	ft_set_var("_", sh->cmds[n].argv[sh->cmds[n].argc - 1], &sh->envp);
 	return (SUCCESS);
 }

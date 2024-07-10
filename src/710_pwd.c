@@ -33,6 +33,7 @@ int	ft_pwd(t_shell *sh, int n)
 	char	*pwd;
 	int		i;
 
+	ft_set_var("_", sh->cmds[n].argv[sh->cmds[n].argc - 1], &sh->envp);
 	i = 0;
 	while (sh->cmds[n].argv[++i])
 		if (sh->cmds[n].argv[i][0] == '-')

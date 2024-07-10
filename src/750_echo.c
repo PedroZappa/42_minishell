@@ -28,6 +28,7 @@ int	ft_echo(t_shell *sh, int n)
 	int	sentinel;
 	int	i;
 
+	ft_set_var("_", sh->cmds[n].argv[sh->cmds[n].argc - 1], &sh->envp);
 	i = 0;
 	sentinel = '\n';
 	while (sh->cmds[n].argv[i++] && ft_is_nflag(sh->cmds[n].argv[i]))
