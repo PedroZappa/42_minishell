@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 11:52:07 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/11 15:22:54 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/11 15:56:46 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -62,18 +62,20 @@ static void	ft_print_export(char *var)
 {
 	char	*key;
 	char	*value;
+	int		key_len;
 
 	if ((var[0] != '_') && (var[1] != '='))
 	{
-		key = ft_substr(var, 0, (ft_strchr(var, '=') - var));
-		value = ft_substr(var, (ft_strchr(var, '=') + 1 - var), ft_strlen(var));
+		key_len = (ft_strchr(var, '=') + 1 - var);
+		key = ft_substr(var, 0, key_len);
+		value = ft_substr(var, key_len, ft_strlen(var));
 		ft_fprintf(STDOUT_FILENO, "declare -x %s\"%s\"\n", key, value);
 		free(key);
 		free(value);
 	}
 }
 
-/// @brief			Sort array of environment variables
+/// @brief			Select Sort array of environment variables
 /// @param sh		Pointer to a t_shell struct
 /// @param n		Command index
 static char	**ft_sort_env(char **env, int n)
@@ -81,22 +83,22 @@ static char	**ft_sort_env(char **env, int n)
 	int	ret;
 	int	key_len;
 	int	next_len;
-	int	i;
-	int	j;
+	int	max;
+	int	next;
 
 	while (env[n] && env[n + 1])
 	{
-		j = n;
-		i = j;
-		while (env[++j])
+		next = n;
+		max = next;
+		while (env[++next])
 		{
-			key_len = (ft_strchr(env[i], '=') - env[i]);
-			next_len = (ft_strchr(env[j], '=') - env[j]);
-			ret = ft_strncmp(env[i], env[j], ft_min(key_len, next_len));
+			key_len = (ft_strchr(env[max], '=') - env[max]);
+			next_len = (ft_strchr(env[next], '=') - env[next]);
+			ret = ft_strncmp(env[max], env[next], ft_min(key_len, next_len));
 			if ((ret > 0) || ((ret == 0) && (key_len > next_len)))
-				i = j;
+				max = next;
 		}
-		ft_swapstrs(&env[n++], &env[i]);
+		ft_swapstrs(&env[n++], &env[max]);
 	}
 	return (env);
 }
