@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/11 10:55:39 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/11 11:52:49 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -362,7 +362,9 @@ int			ft_echo(t_shell *sh, int n);
 int			ft_export(t_shell *sh, int n);
 // static int	ft_export_status(t_shell *sh, int n);
 // static char	**ft_sort_env(char **env, int n);
-int	ft_build_var(t_shell *sh, int n, int i);
+
+/// @file	761_export_status.c
+int			ft_export_status(t_shell *sh, int n);
 
 /// @file	770_unset.c
 int			ft_unset(t_shell *sh, int n);

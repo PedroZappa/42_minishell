@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 16:05:04 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/11 10:54:22 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/11 11:59:14 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -19,8 +19,9 @@
 
 #include "../inc/minishell.h"
 
-static int	ft_export_status(t_shell *sh, int n);
-static char	**ft_sort_env(char **env, int n);
+static int	ft_isvalid_var(char *var);
+static void	ft_update_var(t_shell *sh, int n, int i);
+static void	ft_export_var(t_shell *sh, int n, int i);
 
 /// @brief		Export environment variables built-in
 /// @details
@@ -30,74 +31,92 @@ static char	**ft_sort_env(char **env, int n);
 /// @param n		Command index
 int	ft_export(t_shell *sh, int n)
 {
+	int	i;
+
 	if (!sh->envp || !sh->cmds[n].argv[1] || !sh->cmds[n].argv[1][0])
 		return (ft_export_status(sh, n));
 	ft_build_var(sh, n, 1);
-	return (SUCCESS);
-}
-
-/// @brief		Export environment variables
-/// @details
-/// - Check if command has argument
-///		- Initialize a copy of envp
-///		- Sort envp
-///		- Print sorted envp vars if key has value
-///	- Else print syntax error
-/// @param sh		Pointer to a t_shell struct
-/// @param n		Command index
-static int	ft_export_status(t_shell *sh, int n)
-{
-	char	**sorted;
-	char	*equal;
-	int		i;
-
 	i = 0;
-	if (!sh->cmds[n].argv[1])
+	while (sh->cmds[n].argv[++i])
 	{
-		if (!sh->envp)
-			return (ft_err(ENV_INIT_ERR, FAILURE));
-		sorted = ft_init_env(sh->envp);
-		sorted = ft_sort_env(sorted, 0);
-		i = -1;
-		while (sorted[++i])
+		if (sh->cmds[n].argv[i][0] == '-')
+			return (ft_flag_err(sh->cmds[n].argv[0], sh->cmds[n].argv[i], 1));
+		if (ft_isvalid_var(sh->cmds[n].argv[i]) == FAILURE)
+			return (ft_fprintf(STDERR_FILENO,
+				"export: : ’%s’: not a valid identifier\n", 
+				sh->cmds[n].argv[i]), FAILURE);
+		else
 		{
-			equal = ft_strchr(sorted[i], '=');
-			if (equal && *(equal + 1))
-				ft_fprintf(STDOUT_FILENO, "declare -x %s\n", sorted[i]);
+			if (ft_strchr(sh->cmds[n].argv[i], '='))
+				ft_update_var(sh, n, i);
+			else
+				ft_export_var(sh, n, i);
 		}
-		ft_free_arr(sorted);
 	}
-	else if (sh->cmds[n].argv[1][0] == '\0')
-		return (ft_err(SYNTAX_ERR, FAILURE));
 	return (SUCCESS);
 }
 
-/// @brief			Sort array of environment variables
-/// @param sh		Pointer to a t_shell struct
-/// @param n		Command index
-static char	**ft_sort_env(char **env, int n)
+/// @brief		Check if variable is valid
+/// @param var	Variable to check
+/// @return		SUCCESS(0)
+/// @return		FAILURE(1)
+static int	ft_isvalid_var(char *var)
 {
-	int	ret;
-	int	var_len;
-	int	next_len;
 	int	i;
-	int	j;
 
-	while (env[n] && env[n + 1])
+	if (*var && (!ft_isalpha(*var) || (*var == '_')))
+		return (FAILURE);
+	i = -1;
+	while (var[++i] && (var[i] != '+') && (var[i] != '='))
+		if (!ft_isalnum(var[i]) && var[i] != '_')
+			return (FAILURE);
+	return (SUCCESS);
+}
+
+/// @brief		Update variable
+/// @param sh	Pointer to a t_shell struct
+/// @param n	Command index
+/// @param i	Argument index to start from
+static void	ft_update_var(t_shell *sh, int n, int i)
+{
+	int		key_len;
+	char	*key;
+	char	*value;
+
+	key_len = ft_strlen(ft_strchr(sh->cmds[n].argv[i], '='));
+	key = ft_substr(sh->cmds[n].argv[i], 0, key_len);
+	value = ft_strdup(ft_strchr(sh->cmds[n].argv[i], '=') + 1);
+	ft_set_var(key, value, &sh->envp);
+	if (ft_get_var_index(key, sh->envt) >= 0)
+		sh->envt = ft_env_del_var(sh->envt, key);
+	ft_free(key);
+	ft_free(value);
+}
+
+/// @brief		Export new variable
+/// @param sh	Pointer to a t_shell struct
+/// @param n	Command index
+/// @param i	Argument index to start from
+static void	ft_export_var(t_shell *sh, int n, int i)
+{
+	char	*key;
+	char	*value;
+	int		j;
+
+	key = sh->cmds[n].argv[i];
+	j = ft_get_var_index(key, sh->envp);
+	if (j >= 0)
+		return ;
+	j = ft_get_var_index(key, sh->envt);
+	if (!j)
+		ft_set_var(key, NULL, &sh->envp);
+	else
 	{
-		j = n;
-		i = j;
-		while (env[++j])
-		{
-			var_len = (ft_strchr(env[i], '=') - env[i]);
-			next_len = (ft_strchr(env[j], '=') - env[j]);
-			ret = ft_strncmp(env[i], env[j], ft_min(var_len, next_len));
-			if ((ret > 0) || ((ret == 0) && (var_len > next_len)))
-				i = j;
-		}
-		ft_swapstrs(&env[n++], &env[i]);
+		value = ft_get_var(key, NULL, sh->envt);
+		ft_set_var(key, value, &sh->envp);
+		sh->envt = ft_env_del_var(sh->envt, key);
+		ft_free(value);
 	}
-	return (env);
 }
 
 /** @} */
