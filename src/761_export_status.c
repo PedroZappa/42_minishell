@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 11:52:07 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/11 15:56:46 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/11 16:03:21 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -58,6 +58,36 @@ int	ft_export_status(t_shell *sh, int n)
 	return (SUCCESS);
 }
 
+/// @brief			Select Sort array of environment variables
+/// @param sh		Pointer to a t_shell struct
+/// @param n		Command index
+static char	**ft_sort_env(char **env, int n)
+{
+	int	ret;
+	int	key_len;
+	int	next_len;
+	int	min;
+	int	next;
+
+	while (env[n] && env[n + 1])
+	{
+		next = n;
+		min = next;
+		while (env[++next])
+		{
+			key_len = (ft_strchr(env[min], '=') - env[min]);
+			next_len = (ft_strchr(env[next], '=') - env[next]);
+			ret = ft_strncmp(env[min], env[next], ft_min(key_len, next_len));
+			if ((ret > 0) || ((ret == 0) && (key_len > next_len)))
+				min = next;
+		}
+		ft_swapstrs(&env[n++], &env[min]);
+	}
+	return (env);
+}
+
+/// @brief		Print variable export style
+/// @param var	Pointer to a variable
 static void	ft_print_export(char *var)
 {
 	char	*key;
@@ -73,34 +103,6 @@ static void	ft_print_export(char *var)
 		free(key);
 		free(value);
 	}
-}
-
-/// @brief			Select Sort array of environment variables
-/// @param sh		Pointer to a t_shell struct
-/// @param n		Command index
-static char	**ft_sort_env(char **env, int n)
-{
-	int	ret;
-	int	key_len;
-	int	next_len;
-	int	max;
-	int	next;
-
-	while (env[n] && env[n + 1])
-	{
-		next = n;
-		max = next;
-		while (env[++next])
-		{
-			key_len = (ft_strchr(env[max], '=') - env[max]);
-			next_len = (ft_strchr(env[next], '=') - env[next]);
-			ret = ft_strncmp(env[max], env[next], ft_min(key_len, next_len));
-			if ((ret > 0) || ((ret == 0) && (key_len > next_len)))
-				max = next;
-		}
-		ft_swapstrs(&env[n++], &env[max]);
-	}
-	return (env);
 }
 
 /** @} */
