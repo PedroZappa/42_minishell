@@ -1,5 +1,5 @@
-break ft_get_tk
+break ft_export
 fs cmd
-info break
 info thread
+info break
 continue

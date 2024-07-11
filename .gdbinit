@@ -192,6 +192,28 @@ define extract_var
 	display len
 end
 
+### 520_build_var.c
+define build_var
+	display *sh
+	display n
+	display i
+	display *sh->cmds[n].argv@sh->cmds[n].argc
+	display sh->cmds[n].argv[i]
+end
+
+define append_var
+	display *sh
+	display *sh->cmds[n].argv@sh->cmds[n].argc
+	display sh->cmds[n].argv[i]
+	display n
+	display i
+	display key
+	display new_val
+	display old_val
+	display plus_pos
+	display key_len
+end
+
 # 600_execute.c
 define execute
 	display *sh
@@ -248,6 +270,63 @@ end
 define chdir
 	display *pwd
 	display chdir_ret
+end
+
+### 760_export.c
+define export
+	display *sh
+	display n
+	display *sh->cmds[n].argv@sh->cmds[n].argc
+	display sh->cmds[n].argv[i]
+end
+
+define isvalid_var
+	display var
+	display var[i]
+	display i
+end
+
+define update_var
+	display *sh
+	display n
+	display i
+	display key_len
+	display key
+	display value
+end
+
+define export_var
+	display *sh
+	display n
+	display i
+	display key
+	display value
+	display j
+end
+
+### 761_export_status.c
+define export_status
+	display *sh
+	display n
+	display **sorted
+	display *sorted[i]
+	display *equal
+	display *(equal + 1)
+	display n
+end
+
+define sort_env
+	display **env
+	display n
+	display ret
+	display var_len
+	display next_len
+	display i
+	display j
+	display env[n]
+	display env[n + 1]
+	display env[i]
+	display env[j]
 end
 
 ### 900_free.c
