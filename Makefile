@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/29 20:35:29 by passunca          #+#    #+#              #
-#    Updated: 2024/07/09 16:38:34 by passunca         ###   ########.fr        #
+#    Updated: 2024/07/11 10:56:14 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ FILES			+= 310_readline.c
 FILES			+= 400_signal.c
 FILES			+= 500_env_get.c
 FILES			+= 510_env_set.c
+FILES			+= 520_build_var.c
 FILES			+= 600_execute.c
 FILES			+= 610_exec_check.c
 FILES			+= 620_exec_one.c
