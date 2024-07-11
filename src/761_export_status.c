@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 11:52:07 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/11 15:16:34 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/11 15:22:54 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -79,7 +79,7 @@ static void	ft_print_export(char *var)
 static char	**ft_sort_env(char **env, int n)
 {
 	int	ret;
-	int	var_len;
+	int	key_len;
 	int	next_len;
 	int	i;
 	int	j;
@@ -90,10 +90,10 @@ static char	**ft_sort_env(char **env, int n)
 		i = j;
 		while (env[++j])
 		{
-			var_len = (ft_strchr(env[i], '=') - env[i]);
+			key_len = (ft_strchr(env[i], '=') - env[i]);
 			next_len = (ft_strchr(env[j], '=') - env[j]);
-			ret = ft_strncmp(env[i], env[j], ft_min(var_len, next_len));
-			if ((ret > 0) || ((ret == 0) && (var_len > next_len)))
+			ret = ft_strncmp(env[i], env[j], ft_min(key_len, next_len));
+			if ((ret > 0) || ((ret == 0) && (key_len > next_len)))
 				i = j;
 		}
 		ft_swapstrs(&env[n++], &env[i]);
