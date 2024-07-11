@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 22:02:06 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/09 21:14:35 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/11 16:17:48 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -126,9 +126,8 @@ int	ft_get_var_index(char *var, char **env)
 	i = -1;
 	while (env[++i])
 	{
-		if ((ft_strncmp(var, env[i], key_len) \
-			&& (((env[i][key_len] == '=') \
-			|| (env[i][key_len] == '\0')))))
+		if (((ft_strncmp(var, env[i], key_len) == SUCCESS) \
+			&& (((env[i][key_len] == '=') || (env[i][key_len] == '\0')))))
 			return (i);
 	}
 	return (NO_VAR);
