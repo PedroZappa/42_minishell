@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 09:15:42 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/09 21:13:25 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/11 16:55:32 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -53,7 +53,7 @@ int	ft_set_var(char *var, char *val, char ***env)
 	else
 	{
 		max = ft_max(ft_strlen(new), ft_strlen((*env)[i]));
-		if (ft_strncmp(new, (*env)[i], max != SUCCESS))
+		if (ft_strncmp(new, (*env)[i], max) != SUCCESS)
 			ft_swapstrs(&(*env)[i], &new);
 		free(new);
 	}

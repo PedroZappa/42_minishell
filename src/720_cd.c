@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 08:19:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/10 17:31:36 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/11 16:51:27 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -67,11 +67,11 @@ static int	ft_chdir(char ***env, char *path)
 		ft_fprintf(STDERR_FILENO, "bash: %s: No such file or directory\n", path);
 		return (FAILURE);
 	}
-	ft_set_var(path, "OLDPWD", env);
+	ft_set_var("OLDPWD", path, env);
 	ft_free(pwd);
 	pwd = NULL;
 	pwd = getcwd(NULL, 0);
-	ft_set_var(pwd, "PWD", env);
+	ft_set_var("PWD", pwd, env);
 	ft_free(pwd);
 	return (chdir_ret);
 }
