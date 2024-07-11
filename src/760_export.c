@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 16:05:04 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/11 14:33:22 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/11 16:19:12 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -64,11 +64,11 @@ static int	ft_isvalid_var(char *var)
 {
 	int	i;
 
-	if (*var && !ft_isalpha(*var))
+	if (*var && (!ft_isalpha(*var) || (*var == '_')))
 		return (FAILURE);
 	i = -1;
 	while (var[++i] && (var[i] != '=') && (var[i] != '+'))
-		if (!ft_isalnum(var[i]) && var[i] != '_')
+		if (!ft_isalnum(var[i]) && (var[i] != '_'))
 			return (FAILURE);
 	return (SUCCESS);
 }
