@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 11:52:07 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/11 11:55:39 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/11 15:16:34 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -20,6 +20,7 @@
 #include "../inc/minishell.h"
 
 static char	**ft_sort_env(char **env, int n);
+static void	ft_print_export(char *var);
 
 /// @brief		Export environment variables
 /// @details
@@ -48,13 +49,28 @@ int	ft_export_status(t_shell *sh, int n)
 		{
 			equal = ft_strchr(sorted[i], '=');
 			if (equal && *(equal + 1))
-				ft_fprintf(STDOUT_FILENO, "declare -x %s\n", sorted[i]);
+				ft_print_export(sorted[i]);
 		}
 		ft_free_arr(sorted);
 	}
 	else if (sh->cmds[n].argv[1][0] == '\0')
 		return (ft_err(SYNTAX_ERR, FAILURE));
 	return (SUCCESS);
+}
+
+static void	ft_print_export(char *var)
+{
+	char	*key;
+	char	*value;
+
+	if ((var[0] != '_') && (var[1] != '='))
+	{
+		key = ft_substr(var, 0, (ft_strchr(var, '=') - var));
+		value = ft_substr(var, (ft_strchr(var, '=') + 1 - var), ft_strlen(var));
+		ft_fprintf(STDOUT_FILENO, "declare -x %s\"%s\"\n", key, value);
+		free(key);
+		free(value);
+	}
 }
 
 /// @brief			Sort array of environment variables
