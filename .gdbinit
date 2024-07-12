@@ -272,6 +272,17 @@ define chdir
 	display chdir_ret
 end
 
+###730_env.c
+define env
+	display *sh
+	display n
+	display key_len
+	display i
+	display *sh->cmds[n].argv@sh->cmds[n].argc
+	display sh->cmds[n].argv[i]
+	display sh->envp[i]
+end
+
 ### 760_export.c
 define export
 	display *sh

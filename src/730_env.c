@@ -30,6 +30,7 @@
 ///	@note			Used in ft_execute()
 int	ft_env(t_shell *sh, int n)
 {
+	char	*equal;
 	size_t	key_len;
 	int		i;
 
@@ -38,9 +39,13 @@ int	ft_env(t_shell *sh, int n)
 	i = 0;
 	while (sh->envp[i])
 	{
-		key_len = (ft_strchr(sh->envp[i], '=') - sh->envp[i]);
+		equal = ft_strchr(sh->envp[i], '=');
+		if (!equal)
+			return (i);
+		else
+			key_len = (ft_strchr(sh->envp[i], '=') - sh->envp[i]);
 		if (ft_strchr(sh->envp[i], '=')
-			&& (ft_strlen(sh->envp[i]) != key_len))
+			&& (ft_strlen(sh->envp[i]) > key_len))
 			ft_putendl_fd(sh->envp[i++], STDOUT_FILENO);
 	}
 	return (i);
