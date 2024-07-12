@@ -24,9 +24,6 @@ static void	ft_update_var(t_shell *sh, int n, int i);
 static void	ft_export_var(t_shell *sh, int n, int i);
 
 /// @brief		Export environment variables built-in
-/// @details
-/// - Set environment variable "_"
-///
 /// @param sh		Pointer to a t_shell struct
 /// @param n		Command index
 int	ft_export(t_shell *sh, int n)
