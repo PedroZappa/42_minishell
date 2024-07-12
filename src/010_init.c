@@ -55,20 +55,25 @@ int	ft_init(t_shell *sh, char **envp)
 /// @note		Used in main()
 static void	ft_shlvl(t_shell *sh)
 {
-	char	*shlvl;
-	char	*new;
-	int		i;
+	static int	lvl;
+	char		*shlvl;
+	char		*new;
+	int			i;
 
+	lvl = 0;
 	shlvl = ft_get_var("SHLVL", sh->envp, NULL);
 	if (shlvl)
 	{
-		i = ft_atoi(shlvl + 1);
+		if (!lvl)
+		{
+			lvl = 1;
+			i = ft_atoi(shlvl);
+		}
+		else
+			i = (ft_atoi(shlvl) + 1);
 		new = ft_itoa(i);
 		if (!new)
-		{
 			ft_err(MALLOC_ERR, errno);
-			return ;
-		}
 		ft_set_var("SHLVL", new, &sh->envp);
 		free(new);
 		free(shlvl);
