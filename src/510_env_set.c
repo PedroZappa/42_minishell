@@ -162,3 +162,5 @@ char **ft_env_del_var(char **env, char *to_del)
 	ft_free_arr(env);
 	return (new_env);
 }
+
+/** @} */
