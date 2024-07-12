@@ -34,7 +34,6 @@ static void	ft_print_export(char *var);
 int	ft_export_status(t_shell *sh, int n)
 {
 	char	**sorted;
-	char	*equal;
 	int		i;
 
 	i = 0;
@@ -46,11 +45,7 @@ int	ft_export_status(t_shell *sh, int n)
 		sorted = ft_sort_env(sorted, 0);
 		i = -1;
 		while (sorted[++i])
-		{
-			equal = ft_strchr(sorted[i], '=');
-			if (equal && *(equal + 1))
-				ft_print_export(sorted[i]);
-		}
+			ft_print_export(sorted[i]);
 		ft_free_arr(sorted);
 	}
 	else if (sh->cmds[n].argv[1][0] == '\0')
@@ -96,12 +91,17 @@ static void	ft_print_export(char *var)
 
 	if ((var[0] != '_') && (var[1] != '='))
 	{
-		key_len = (ft_strchr(var, '=') + 1 - var);
-		key = ft_substr(var, 0, key_len);
-		value = ft_substr(var, key_len, ft_strlen(var));
-		ft_fprintf(STDOUT_FILENO, "declare -x %s\"%s\"\n", key, value);
-		free(key);
-		free(value);
+		if (!ft_strchr(var, '='))
+			ft_fprintf(STDOUT_FILENO, "declare -x %s\n", var);
+		else
+		{
+			key_len = (ft_strchr(var, '=') + 1 - var);
+			key = ft_substr(var, 0, key_len);
+			value = ft_substr(var, key_len, ft_strlen(var));
+			ft_fprintf(STDOUT_FILENO, "declare -x %s\"%s\"\n", key, value);
+			free(key);
+			free(value);
+		}
 	}
 }
 
