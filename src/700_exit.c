@@ -27,10 +27,15 @@ static void	ft_kill(t_shell *sh, int sig);
 int	ft_exit(t_shell *sh, int n)
 {
 	if (sh->cmds[n].argc == 1)
-		ft_kill(sh, SUCCESS);
-	else if (sh->cmds[n].argc > 1)
-		return (ft_err("exit: too many arguments\n", FAILURE));
-	// TODO: Handle numeric argument
+		ft_kill(sh, ft_abs(*sh->cmds[n].argv[1]));
+	else if (sh->cmds[n].argc == 2)
+	{
+		if (ft_atoi(sh->cmds[n].argv[1]) < 0)
+			return (ft_err(ARG_ERR, FAILURE));
+	}	
+	else if (sh->cmds[n].argc > 2)
+		ft_fprintf(STDERR_FILENO, "exit\nbash: %s: too many arguments\n",
+			sh->cmds[n].argv[0], sh->cmds[n].argv[1]);
 	return (SUCCESS);
 }
 
