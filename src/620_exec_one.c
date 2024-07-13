@@ -97,10 +97,10 @@ static int	ft_update_last_cmd(t_shell *sh)
 {
 	int	i;
 
-	i = (sh->cmds[0].argc - 1);
-	while ((i > 0) && (!ft_strncmp(sh->cmds[0].argv[i], "", 1)))
+	i = (sh->cmds[0].argc);
+	while ((i > 0) && (!ft_strncmp(sh->cmds[0].argv[0], "", 1)))
 		--i;
 	if (i > 0)
-		ft_set_var("_", sh->cmds[0].argv[i], &sh->envp);
+		ft_set_var("_", sh->cmds[0].argv[0], &sh->envp);
 	return (SUCCESS);
 }

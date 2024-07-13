@@ -163,4 +163,32 @@ char **ft_env_del_var(char **env, char *to_del)
 	return (new_env);
 }
 
+void	ft_build_last_cmd(t_shell *sh, int n)
+{
+	char	*exec_path;
+	int		i;
+
+	if (sh->cmds[n].argv[0])
+	{
+		i = -1;
+		while (sh->path[++i])
+		{
+			exec_path = ft_strjoin(sh->path[i], sh->cmds[n].argv[0]);
+			if (exec_path)
+			{
+				if (access(exec_path, X_OK) == 0)
+				{
+					ft_set_var("_", exec_path, &sh->envp);
+					ft_free(sh->cmds[n].argv[0]);
+					sh->cmds[n].argv[0] = exec_path;
+					break ;
+				}
+				ft_free(exec_path);
+			}
+		}
+	}
+	else
+		ft_set_var("_", sh->cmds[n].argv[0], &sh->envp);
+}
+
 /** @} */

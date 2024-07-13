@@ -249,6 +249,12 @@ define exec
 	display n
 end
 
+### 620_exec_one.c
+define update_last_cmd
+	display *sh
+	display i
+end
+
 # 700_exit.c
 define exit
 	display *sh
