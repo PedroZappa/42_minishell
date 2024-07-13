@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 11:53:41 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/13 12:03:11 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/13 12:04:51 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -24,6 +24,9 @@ static char	**ft_expand_squote_c(char *tkn, int *i);
 static char	**ft_expand_dquote_c(char *tkn, int *n_tkns, int *i);
 static char	**ft_expand_c(char *tkn, int *i);
 
+/// @brief			Token expander initializer
+/// @param tkns		Token string
+///
 char **ft_expander_init(char *tkns)
 {
 	char	**sub_tkns;
