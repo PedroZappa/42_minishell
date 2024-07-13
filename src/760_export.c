@@ -32,7 +32,7 @@ int	ft_export(t_shell *sh, int n)
 
 	if (!sh->envp || !sh->cmds[n].argv[1] || !sh->cmds[n].argv[1][0])
 		return (ft_export_status(sh, n));
-	ft_build_var(sh, n, 1);
+	ft_append(sh, n, 1);
 	i = 0;
 	while (sh->cmds[n].argv[++i])
 	{

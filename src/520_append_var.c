@@ -24,7 +24,7 @@ static void	ft_append_var(t_shell *sh, int n, int i);
 /// @brief			Build array of environment variables
 /// @param sh		Pointer to a t_shell struct
 /// @param n		Command index
-int	ft_build_var(t_shell *sh, int n, int i)
+int	ft_append(t_shell *sh, int n, int i)
 {
 	if (!sh->envp || !sh->cmds[n].argv[0])
 		return (ft_err(ENV_INIT_ERR, FAILURE));
