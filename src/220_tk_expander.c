@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 17:54:18 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/13 11:54:31 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/13 12:30:59 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -36,7 +36,7 @@ char	*ft_tk_expander(t_shell *sh, char *tk_str)
 	int		i;
 
 	sub_tkns = NULL;
-	sub_tkns = ft_expander_init(tk_str);
+	sub_tkns = ft_expander_checker(tk_str);
 	i = -1;
 	curr_tk = i;
 	while (tk_str[i])

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   230_tk_expander_init.c                             :+:      :+:    :+:   */
+/*   230_tk_expander_checker.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 11:53:41 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/13 12:28:17 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/13 12:31:02 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -27,7 +27,7 @@ static void	ft_expander_check_c(char *tkn, int *i);
 /// @brief			Token expander initializer
 /// @param tkns		Token string
 ///
-char **ft_expander_init(char *tkns)
+char **ft_expander_checker(char *tkns)
 {
 	char	**sub_tkns;
 	int		n_tkns;
