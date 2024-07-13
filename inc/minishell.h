@@ -258,7 +258,10 @@ void		ft_tk_add_free(t_token **tk_list, t_token *tk, t_tk_ops *tk_op);
 t_token		*ft_tk_last(t_token *tk);
 
 /// @file	220_tk_expander.c
-char		*ft_tk_expander(t_shell *sh, char *tk);
+char		*ft_tk_expander(t_shell *sh, char *str);
+char		*ft_expand_dollar(char *tkn, int *i);
+void		ft_expand_squote(char ***sub_tkns, char *tkn, int *i, int *next_tk);
+void		ft_expand_dquote(char ***sub_tkns, char *tkn, int *i, int *next_tk);
 
 //=============================================================================/
 //	300		Parser  														   /
