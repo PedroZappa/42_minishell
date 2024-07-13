@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 11:53:41 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/13 12:04:51 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/13 12:24:18 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -19,10 +19,10 @@
 
 #include "../inc/minishell.h"
 
-static char	*ft_expand_dollar_c(char *tkn, int *i);
-static char	**ft_expand_squote_c(char *tkn, int *i);
-static char	**ft_expand_dquote_c(char *tkn, int *n_tkns, int *i);
-static char	**ft_expand_c(char *tkn, int *i);
+static void	ft_expand_dollar_c(char *tkn, int *i);
+static void	ft_expand_squote_c(char *tkn, int *i);
+static void	ft_expand_dquote_c(char *tkn, int *n_tkns, int *i);
+static void	ft_expand_c(char *tkn, int *i);
 
 /// @brief			Token expander initializer
 /// @param tkns		Token string
@@ -54,33 +54,37 @@ char **ft_expander_init(char *tkns)
 	return (sub_tkns);
 }
 
-static char	*ft_expand_dollar_c(char *tkn, int *i)
+/// @brief		Dollar sign expansion
+/// @param tkn	Token string
+/// @param i	Index
+/// @return		Expansion string
+static void	ft_expand_dollar_c(char *tkn, int *i)
+{
+	++(*i);
+	if (tkn[*i] && (ft_check_alpha_c(tkn[*i]) == SUCCESS))
+		while (tkn[*i] && (ft_check_alnum_c(tkn[*i]) == SUCCESS))
+			++(*i);
+	else if ((tkn[*i] != '\'') && (tkn[*i] != '\"'))
+		++(*i);
+}
+
+static void	ft_expand_squote_c(char *tkn, int *i)
 {
 	(void)tkn;
 	(void)i;
-	return (NULL);
 }
 
-static char	**ft_expand_squote_c(char *tkn, int *i)
-{
-	(void)tkn;
-	(void)i;
-	return (NULL);
-}
-
-static char	**ft_expand_dquote_c(char *tkn, int *n_tkns, int *i)
+static void	ft_expand_dquote_c(char *tkn, int *n_tkns, int *i)
 {
 	(void)tkn;
 	(void)n_tkns;
 	(void)i;
-	return (NULL);
 }
 
-static char	**ft_expand_c(char *tkn, int *i)
+static void	ft_expand_c(char *tkn, int *i)
 {
 	(void)tkn;
 	(void)i;
-	return (NULL);
 }
 
 /** @} */
