@@ -24,7 +24,7 @@ static void	ft_expander_check_squote_c(char *tkn, int *i);
 static void	ft_expander_check_dquote_c(char *tkn, int *n_tkns, int *i);
 static void	ft_expander_check_c(char *tkn, int *i);
 
-/// @brief			Token expander initializer
+/// @brief			Gets the numnber of tokens for expansion
 /// @param tkns		Token string
 ///
 char **ft_expander_init(char *tkns)
@@ -33,8 +33,8 @@ char **ft_expander_init(char *tkns)
 	int		n_tkns;
 	int		i;
 
-	n_tkns = -1;
 	i = 0;
+	n_tkns = 0;
 	while (tkns[i])
 	{
 		n_tkns++;
@@ -47,7 +47,6 @@ char **ft_expander_init(char *tkns)
 		else
 			ft_expander_check_c(tkns, &i);
 	}
-	++n_tkns;
 	sub_tkns = ft_calloc((n_tkns + 1), sizeof(char *));
 	if (!sub_tkns)
 		return (ft_err(MALLOC_ERR, errno), NULL);
