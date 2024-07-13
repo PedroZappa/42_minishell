@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/13 12:31:05 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/13 12:45:55 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -264,7 +264,7 @@ void		ft_expand_squote(char ***sub_tkns, char *tkn, int *i, int *curr_tk);
 void		ft_expand_dquote(char ***sub_tkns, char *tkn, int *i, int *curr_tk);
 
 /// @file	230_tk_expander_init.c
-char		**ft_expander_checker(char *tkns);
+char		**ft_expander_init(char *tkns);
 // static void	ft_expander_check_dollar_c(char *tkn, int *i);
 // static void	ft_expander_check_squote_c(char *tkn, int *i);
 // static void	ft_expander_check_dquote_c(char *tkn, int *n_tkns, int *i);

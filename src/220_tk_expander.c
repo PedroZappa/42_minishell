@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 17:54:18 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/13 12:30:59 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/13 12:46:27 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -36,7 +36,7 @@ char	*ft_tk_expander(t_shell *sh, char *tk_str)
 	int		i;
 
 	sub_tkns = NULL;
-	sub_tkns = ft_expander_checker(tk_str);
+	sub_tkns = ft_expander_init(tk_str);
 	i = -1;
 	curr_tk = i;
 	while (tk_str[i])
@@ -56,9 +56,18 @@ char	*ft_tk_expander(t_shell *sh, char *tk_str)
 
 char	*ft_expand_dollar(char *tkn, int *i)
 {
-	(void)tkn;
-	(void)i;
-	return (NULL);
+	char	*ret;
+	int		tkn_start;
+
+	tkn_start = *i;
+	++(*i);
+	if (tkn[*i] && (ft_check_alpha_c(tkn[*i]) == SUCCESS))
+		while (tkn[*i] && (ft_check_alnum_c(tkn[*i]) == SUCCESS))
+			++(*i);
+	else if ((tkn[*i] != '\'') && (tkn[*i] != '\"'))
+		++(*i);
+	ret = ft_substr(tkn, tkn_start, (*i - tkn_start));
+	return (ret);
 }
 
 void ft_expand_squote(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
