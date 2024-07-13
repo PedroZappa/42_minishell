@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 17:54:18 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/13 12:46:27 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/13 22:01:28 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -48,6 +48,8 @@ char	*ft_tk_expander(t_shell *sh, char *tk_str)
 			ft_expand_squote(&sub_tkns, tk_str, &i, &curr_tk);
 		else if (tk_str[i] == '\"')
 			ft_expand_dquote(&sub_tkns, tk_str, &i, &curr_tk);
+		else
+			ft_expand_else(&sub_tkns, tk_str, &i, &curr_tk);
 	}
 	ret = ft_expand_var(sh, &sub_tkns);
 	free(sub_tkns);
@@ -56,8 +58,9 @@ char	*ft_tk_expander(t_shell *sh, char *tk_str)
 
 char	*ft_expand_dollar(char *tkn, int *i)
 {
-	char	*ret;
 	int		tkn_start;
+	int		tkn_len;
+	char	*ret;
 
 	tkn_start = *i;
 	++(*i);
@@ -66,7 +69,8 @@ char	*ft_expand_dollar(char *tkn, int *i)
 			++(*i);
 	else if ((tkn[*i] != '\'') && (tkn[*i] != '\"'))
 		++(*i);
-	ret = ft_substr(tkn, tkn_start, (*i - tkn_start));
+	tkn_len = (*i - tkn_start);
+	ret = ft_substr(tkn, tkn_start, tkn_len);
 	return (ret);
 }
 
@@ -86,10 +90,25 @@ void ft_expand_dquote(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
 	(void)curr_tk;
 }
 
+void ft_expand_else(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
+{
+	int	tkn_start;
+	int	tkn_len;
+
+	tkn_start = *i;
+	(*i)++;
+	while (tkn[*i] && (tkn[*i] != '$')
+		&& (tkn[*i] != '\'') && (tkn[*i] != '\"'))
+		++(*i);
+	tkn_len = (*i - tkn_start);
+	(*sub_tkns)[(*curr_tk)] = ft_substr(tkn, tkn_start, tkn_len);
+
+}
+
 static char *ft_expand_var(t_shell *sh, char ***tkns)
 {
 	(void)sh;
 	(void)tkns;
-	return (NULL);
+	return (**tkns);
 }
 /** @} */

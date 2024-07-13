@@ -262,6 +262,7 @@ char		*ft_tk_expander(t_shell *sh, char *str);
 char		*ft_expand_dollar(char *tkn, int *i);
 void		ft_expand_squote(char ***sub_tkns, char *tkn, int *i, int *curr_tk);
 void		ft_expand_dquote(char ***sub_tkns, char *tkn, int *i, int *curr_tk);
+void		ft_expand_else(char ***sub_tkns, char *tkn, int *i, int *curr_tk);
 
 /// @file	230_tk_expander_init.c
 char		**ft_expander_init(char *tkns);

@@ -52,7 +52,7 @@ define tokenizer
 	display *line
 	display **tks
 	display *tk
-	display name
+	display tkn_str
 end
 
 define get_tkns
@@ -92,15 +92,6 @@ define p_cmds
 	print *sh->cmds->argv@sh->cmds->argc
 end
 
-define print_string_array
-  set $array = sh->cmds->argv
-  set $count = 0
-  while $array[$count]
-    printf "%d: %s\n", $count, $array[$count]
-    set $count = $count + 1
-  end
-end
-
 # 210_tk_list.c
 define tk_new
 	display line
@@ -123,6 +114,44 @@ end
 
 define tk_last
 	display tk
+end
+
+# 220_tk_expander.c
+define tk_expander
+	display sh
+	display tk_str
+	display tk_str[i]
+	display **sub_tkns
+	display *sub_tkns
+	display sub_tkns
+	display *ret
+	display curr_tk
+	display *curr_tk
+	display i
+end
+
+define expand_dollar
+	display tkn
+	display *i
+	display tkn[*i]
+	display tkn_start
+	display tkn_len
+	display *ret
+end
+
+# 230_tk_expander_init.c
+define expander_init
+	display tkns
+	display tkns[i]
+	display **sub_tkns
+	display n_tkns
+	display i
+end
+
+define expander_check_dollar_c
+	display tkn
+	display tkn[*i]
+	display *i
 end
 
 ### 300_parser.c

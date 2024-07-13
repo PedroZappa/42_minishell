@@ -41,7 +41,7 @@ int	ft_tokenizer(t_shell *sh, char **line, t_token **tks)
 {
 	t_tk_ops	ops[16];
 	t_token		*tk;
-	char		*name;
+	char		*tkn_str;
 
 	ft_init_ops(ops);
 	if (ft_get_tkns(*line, tks, ops) != SUCCESS)
@@ -49,14 +49,14 @@ int	ft_tokenizer(t_shell *sh, char **line, t_token **tks)
 	tk = *tks;
 	while (tk)
 	{
-		name = tk->name;
-		if (name[0] == '~' && (ft_strlen(name) == 1) && (sh->home))
+		tkn_str = tk->name;
+		if (tkn_str[0] == '~' && (ft_strlen(tkn_str) == 1) && (sh->home))
 		{
 			ft_free(tk->name);
 			tk->name = ft_strdup(sh->home);
 		}
-		// else
-		// 	tk->name = ft_tk_expander(sh, name);
+		else
+			tk->name = ft_tk_expander(sh, tkn_str);
 		tk = tk->next;
 	}
 	return (SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 11:53:41 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/13 12:46:20 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/13 21:41:24 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -37,7 +37,7 @@ char **ft_expander_init(char *tkns)
 	i = 0;
 	while (tkns[i])
 	{
-		++n_tkns;
+		n_tkns++;
 		if (tkns[i] == '$')
 			ft_expander_check_dollar_c(tkns, &i);
 		else if (tkns[i] == '\'')
@@ -47,6 +47,7 @@ char **ft_expander_init(char *tkns)
 		else
 			ft_expander_check_c(tkns, &i);
 	}
+	++n_tkns;
 	sub_tkns = ft_calloc((n_tkns + 1), sizeof(char *));
 	if (!sub_tkns)
 		return (ft_err(MALLOC_ERR, errno), NULL);
@@ -60,18 +61,20 @@ char **ft_expander_init(char *tkns)
 /// @return		Expansion string
 static void	ft_expander_check_dollar_c(char *tkn, int *i)
 {
-	++(*i);
+	(*i)++;
 	if (tkn[*i] && (ft_check_alpha_c(tkn[*i]) == SUCCESS))
 		while (tkn[*i] && (ft_check_alnum_c(tkn[*i]) == SUCCESS))
-			++(*i);
+			(*i)++;
 	else if ((tkn[*i] != '\'') && (tkn[*i] != '\"'))
-		++(*i);
+		(*i)++;
 }
 
 static void	ft_expander_check_squote_c(char *tkn, int *i)
 {
-	(void)tkn;
-	(void)i;
+	++(*i);
+	while (tkn[*i] && (tkn[*i] != '\''))
+		++(*i);
+	++(*i);
 }
 
 static void	ft_expander_check_dquote_c(char *tkn, int *n_tkns, int *i)
@@ -83,8 +86,10 @@ static void	ft_expander_check_dquote_c(char *tkn, int *n_tkns, int *i)
 
 static void	ft_expander_check_c(char *tkn, int *i)
 {
-	(void)tkn;
-	(void)i;
+	(*i)++;
+	while (tkn[*i] && (tkn[*i] != '$')
+		&& (tkn[*i] != '\'') && (tkn[*i] != '\"'))
+		(*i)++;
 }
 
 /** @} */
