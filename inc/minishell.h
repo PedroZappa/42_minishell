@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/11 11:52:49 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/13 11:55:15 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -260,9 +260,12 @@ t_token		*ft_tk_last(t_token *tk);
 /// @file	220_tk_expander.c
 char		*ft_tk_expander(t_shell *sh, char *str);
 char		*ft_expand_dollar(char *tkn, int *i);
-void		ft_expand_squote(char ***sub_tkns, char *tkn, int *i, int *next_tk);
-void		ft_expand_dquote(char ***sub_tkns, char *tkn, int *i, int *next_tk);
+void		ft_expand_squote(char ***sub_tkns, char *tkn, int *i, int *curr_tk);
+void		ft_expand_dquote(char ***sub_tkns, char *tkn, int *i, int *curr_tk);
 
+/// @file	230_tk_expander_init.c
+char		**ft_expander_init(char *tkns);
+///
 //=============================================================================/
 //	300		Parser  														   /
 //=============================================================================/
