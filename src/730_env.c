@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 20:05:44 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/11 17:00:14 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/13 09:48:39 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -31,22 +31,18 @@
 int	ft_env(t_shell *sh, int n)
 {
 	char	*equal;
-	size_t	key_len;
 	int		i;
 
 	if (sh->cmds[n].argv[1])
 		return (ft_flag_err(sh->cmds[n].argv[0], sh->cmds[n].argv[1], 1));
-	i = 0;
-	while (sh->envp[i])
+	i = -1;
+	while (sh->envp[++i])
 	{
 		equal = ft_strchr(sh->envp[i], '=');
 		if (!equal)
 			return (i);
-		else
-			key_len = (ft_strchr(sh->envp[i], '=') - sh->envp[i]);
-		if (ft_strchr(sh->envp[i], '=')
-			&& (ft_strlen(sh->envp[i]) > key_len))
-			ft_putendl_fd(sh->envp[i++], STDOUT_FILENO);
+		if (equal && *(equal + 1) != '\0')
+			ft_putendl_fd(sh->envp[i], STDOUT_FILENO);
 	}
 	return (i);
 }

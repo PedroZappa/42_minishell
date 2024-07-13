@@ -281,6 +281,9 @@ define env
 	display *sh->cmds[n].argv@sh->cmds[n].argc
 	display sh->cmds[n].argv[i]
 	display sh->envp[i]
+	display sh->envp[i][key_len]
+	display sh->envp[i][key_len + 1]
+	display sh->envp[i][key_len + 2]
 end
 
 ### 760_export.c
