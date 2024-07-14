@@ -23,7 +23,7 @@
 /// @param c		Character to check
 /// @return			SUCCESS(0)
 /// @return			FAILURE(1)
-int	ft_check_alpha_c(char c)
+int	ft_check_alpha(char c)
 {
 	if (ft_isalpha(c) || c == '_')
 		return (SUCCESS);
@@ -34,7 +34,7 @@ int	ft_check_alpha_c(char c)
 /// @param c		Character to check
 /// @return			SUCCESS(0)
 /// @return			FAILURE(1)
-int	ft_check_alnum_c(char c)
+int	ft_check_alnum(char c)
 {
 	if (ft_isalnum(c) || c == '_')
 		return (SUCCESS);

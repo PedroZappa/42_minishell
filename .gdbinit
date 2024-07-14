@@ -122,8 +122,8 @@ define tk_expander
 	display tk_str
 	display tk_str[i]
 	display **sub_tkns
-	display *sub_tkns
-	display sub_tkns
+	display sub_tkns[curr_tk]
+	display *sub_tkns@i
 	display *ret
 	display curr_tk
 	display *curr_tk
@@ -139,16 +139,66 @@ define expand_dollar
 	display *ret
 end
 
+define expand_other
+	display sub_tkns
+	display (*sub_tkns)[(*curr_tk)]
+	display tkn
+	display *i
+	display tkn[*i]
+	display tkn_start
+	display tkn_len
+end
+
+define expand_var
+	display **tkns@3
+	display **tkns
+	display *tkns
+	display tkns
+end
+
 # 230_tk_expander_init.c
 define expander_init
 	display tkns
 	display tkns[i]
+	display sub_tkns
+	display sub_tkns[n_tkns]
 	display **sub_tkns
 	display n_tkns
 	display i
 end
 
-define expander_check_dollar_c
+define expand_check_dollar
+	display tkn
+	display tkn[*i]
+	display *i
+end
+
+define expand_check_other
+	display tkn
+	display tkn[*i]
+	display *i
+end
+
+### 300_parser.c
+define parser
+	display *sh
+	display *line_buf
+	display *sh->cmds
+end
+
+define count_args
+	display *sh
+	display *tks
+	display *prev
+	display i
+end
+
+define parse_cmds
+	display *tks
+	display *cmds
+	display *cmds->argv
+	display cmds[i].argv[j]
+define expand_check_dollar
 	display tkn
 	display tkn[*i]
 	display *i

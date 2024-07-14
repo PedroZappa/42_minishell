@@ -37,8 +37,8 @@ char	*ft_tk_expander(t_shell *sh, char *tk_str)
 
 	sub_tkns = NULL;
 	sub_tkns = ft_expander_init(tk_str);
-	i = -1;
-	curr_tk = i;
+	i = 0;
+	curr_tk = -1;
 	while (tk_str[i])
 	{
 		++curr_tk;
@@ -49,7 +49,7 @@ char	*ft_tk_expander(t_shell *sh, char *tk_str)
 		else if (tk_str[i] == '\"')
 			ft_expand_dquote(&sub_tkns, tk_str, &i, &curr_tk);
 		else
-			ft_expand_else(&sub_tkns, tk_str, &i, &curr_tk);
+			ft_expand_other(&sub_tkns, tk_str, &i, &curr_tk);
 	}
 	ret = ft_expand_var(sh, &sub_tkns);
 	free(sub_tkns);
@@ -64,8 +64,8 @@ char	*ft_expand_dollar(char *tkn, int *i)
 
 	tkn_start = *i;
 	++(*i);
-	if (tkn[*i] && (ft_check_alpha_c(tkn[*i]) == SUCCESS))
-		while (tkn[*i] && (ft_check_alnum_c(tkn[*i]) == SUCCESS))
+	if (tkn[*i] && (ft_check_alpha(tkn[*i]) == SUCCESS))
+		while (tkn[*i] && (ft_check_alnum(tkn[*i]) == SUCCESS))
 			++(*i);
 	else if ((tkn[*i] != '\'') && (tkn[*i] != '\"'))
 		++(*i);
@@ -90,7 +90,7 @@ void ft_expand_dquote(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
 	(void)curr_tk;
 }
 
-void ft_expand_else(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
+void ft_expand_other(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
 {
 	int	tkn_start;
 	int	tkn_len;
@@ -109,6 +109,6 @@ static char *ft_expand_var(t_shell *sh, char ***tkns)
 {
 	(void)sh;
 	(void)tkns;
-	return (**tkns);
+	return ((**tkns));
 }
 /** @} */
