@@ -57,6 +57,10 @@ char	*ft_tk_expander(t_shell *sh, char *tk_str)
 	return (ret);
 }
 
+/// @brief		Dollar sign expansion
+/// @param tkn	Token string
+/// @param i	Reference to index
+/// @return		Expanded token
 char	*ft_expand_dollar(char *tkn, int *i)
 {
 	int		tkn_start;
@@ -91,6 +95,11 @@ void ft_expand_dquote(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
 	(void)curr_tk;
 }
 
+/// @brief			Save unexpanded token
+/// @param sub_tkns	Pointer to array of sub-tokens
+/// @param tkn		Token string
+/// @param i		Reference to index
+/// @param curr_tk	Current token
 void ft_expand_other(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
 {
 	int	tkn_start;
@@ -106,25 +115,46 @@ void ft_expand_other(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
 
 }
 
-static char *ft_expand_var(t_shell *sh, char ***tkns)
+/// @brief			Initialize expander
+/// @details
+/// - Allocate emptry return string
+///- Loop through tokens
+///		- If token is $, expand
+///		- else handle single and double quotes  TODO:
+///		- Join expanded token to return string
+/// @param sh		Pointer to a t_shell struct
+/// @param sub_tkns	Pointer to array of token strings
+static char *ft_expand_var(t_shell *sh, char ***sub_tkns)
 {
+	char	*ret;
 	char	*curr;
 	int		i;
 
+	ret = ft_strdup("");
 	i = -1;
-	while ((*tkns)[++i])
+	while ((*sub_tkns)[++i])
 	{
-		curr = (*tkns)[i];
-		if ((*tkns)[i][0] == '$')
+		curr = (*sub_tkns)[i];
+		if ((*sub_tkns)[i][0] == '$')
 		{
-			(*tkns)[i] = ft_fill_var(sh, (*tkns)[i]);
-			if (!(*tkns)[i])
-				(*tkns)[i] = ft_strdup("");
+			(*sub_tkns)[i] = ft_fill_var(sh, curr);
+			if (!(*sub_tkns)[i])
+				(*sub_tkns)[i] = ft_strdup("");
 		}
+		// TODO: Else Handle Single & Double Quotes
+		ret = ft_strjoin_free(ret, (*sub_tkns)[i]);
 	}
-	return ((**tkns));
+	return (ret);
 }
 
+/// @brief			Fill expanded variable
+/// @details
+/// Conditionally extract variable
+/// - If first character is a letter or _ get var from env
+/// - If it is ?, get exit code
+/// - Else, return the string
+/// @param sh		Pointer to a t_shell struct
+/// @param tkn		Token string
 static char	*ft_fill_var(t_shell *sh, char *tkn)
 {
 	char	*var;
@@ -133,7 +163,12 @@ static char	*ft_fill_var(t_shell *sh, char *tkn)
 	i = 1;
 	var = NULL;
 	if (ft_check_alpha(tkn[i]) == SUCCESS)
-		var = ft_get_var(tkn, sh->envp, sh->envt);
+		var = ft_get_var((tkn + 1), sh->envp, sh->envt);
+	else if (tkn[i] == '?') 
+		var = ft_itoa(WEXITSTATUS(g_exit));
+	else
+		var = ft_strdup(tkn);
+	// TODO: Other Else ifs ...
 	ft_free(tkn);
 	return (var);
 }

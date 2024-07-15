@@ -156,7 +156,7 @@ define expand_var
 end
 
 define fill_var
-	display *tkn
+	display tkn
 	display tkn[i]
 	display var
 	display i

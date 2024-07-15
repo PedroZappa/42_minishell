@@ -80,25 +80,25 @@ char	*ft_get_var(char *var, char **envp, char**envt)
 ///					- Take its length
 ///					- If selectec var is found set it to var and break
 /// @note			Used in ft_get_var()
-static char	*ft_extract_var(char *select, char **envp)
+static char	*ft_extract_var(char *select, char **env)
 {
 	char	*tmp;
 	char	*var;
 	int		len;
 
-	if ((select == NULL) || (envp == NULL))
+	if ((select == NULL) || (env == NULL))
 		return (NULL);
 	tmp = ft_strjoin(select, "=");
 	len = ft_strlen(tmp);
 	var = NULL;
-	while (*envp)
+	while (*env)
 	{
-		if (!ft_strncmp(tmp, *envp, len))
+		if (!ft_strncmp(tmp, *env, len))
 		{
-			var = ft_strdup(*envp + len);
+			var = ft_strdup(*env + len);
 			break ;
 		}
-		++envp;
+		++env;
 	}
 	free(tmp);
 	return (var);

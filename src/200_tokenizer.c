@@ -55,8 +55,8 @@ int	ft_tokenizer(t_shell *sh, char **line, t_token **tks)
 			ft_free(tk->name);
 			tk->name = ft_strdup(sh->home);
 		}
-		// else
-		// 	tk->name = ft_tk_expander(sh, tkn_str);
+		else
+			tk->name = ft_tk_expander(sh, tkn_str);
 		ft_free(tkn_str);
 		tk = tk->next;
 	}

@@ -24,10 +24,18 @@ static void	ft_expand_check_squote(char *tkn, int *i);
 static void	ft_expand_check_dquote(char *tkn, int *n_tkns, int *i);
 static void	ft_expand_check_other(char *tkn, int *i);
 
-/// @brief			Gets the numnber of tokens for expansion
-/// @param tkns		Token string
-/// @return			Alloced array of sub-tokens
-char **ft_expander_init(char *tkns)
+/// @brief			Gets the number of tokens for expansion memory allocation
+/// @details		
+/// Loops through tokens
+///		- Count tokens
+///		- Handle dollar sign 
+///		- Handle single quotes
+///		- Handle double quotes
+///		- Handle other strings
+///	Allocates memory
+/// @param tkn_str		Token string
+/// @return				Alloced array of sub-tokens
+char **ft_expander_init(char *tkn_str)
 {
 	char	**sub_tkns;
 	int		n_tkns;
@@ -35,17 +43,17 @@ char **ft_expander_init(char *tkns)
 
 	i = 0;
 	n_tkns = 0;
-	while (tkns[i])
+	while (tkn_str[i])
 	{
 		n_tkns++;
-		if (tkns[i] == '$')
-			ft_expand_check_dollar(tkns, &i);
-		else if (tkns[i] == '\'')
-			ft_expand_check_squote(tkns, &i);
-		else if (tkns[i] == '\"')
-			ft_expand_check_dquote(tkns, &n_tkns, &i);
+		if (tkn_str[i] == '$')
+			ft_expand_check_dollar(tkn_str, &i);
+		else if (tkn_str[i] == '\'')
+			ft_expand_check_squote(tkn_str, &i);
+		else if (tkn_str[i] == '\"')
+			ft_expand_check_dquote(tkn_str, &n_tkns, &i);
 		else
-			ft_expand_check_other(tkns, &i);
+			ft_expand_check_other(tkn_str, &i);
 	}
 	sub_tkns = ft_calloc((n_tkns + 1), sizeof(char *));
 	if (!sub_tkns)
@@ -54,10 +62,9 @@ char **ft_expander_init(char *tkns)
 	return (sub_tkns);
 }
 
-/// @brief		Dollar sign expansion
+/// @brief		Dollar sign checking
 /// @param tkn	Token string
-/// @param i	Index
-/// @return		Expansion string
+/// @param i	Reference to index
 static void	ft_expand_check_dollar(char *tkn, int *i)
 {
 	++(*i);
@@ -68,6 +75,9 @@ static void	ft_expand_check_dollar(char *tkn, int *i)
 		++(*i);
 }
 
+/// @brief		Single quote checking
+/// @param tkn	Token string
+/// @param i	Reference to index
 static void	ft_expand_check_squote(char *tkn, int *i)
 {
 	++(*i);
@@ -83,6 +93,9 @@ static void	ft_expand_check_dquote(char *tkn, int *n_tkns, int *i)
 	(void)i;
 }
 
+/// @brief		Other string checking
+/// @param tkn	Token string
+/// @param i	Reference to index
 static void	ft_expand_check_other(char *tkn, int *i)
 {
 	++(*i);
