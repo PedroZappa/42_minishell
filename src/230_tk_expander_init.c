@@ -35,7 +35,7 @@ static void	ft_expand_check_other(char *tkn, int *i);
 ///	Allocates memory
 /// @param tkn_str		Token string
 /// @return				Alloced array of sub-tokens
-char **ft_expander_init(char *tkn_str)
+char	**ft_expander_init(char *tkn_str)
 {
 	char	**sub_tkns;
 	int		n_tkns;

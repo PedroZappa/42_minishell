@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/13 12:45:55 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/15 20:18:41 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -265,14 +265,17 @@ void		ft_expand_squote(char ***sub_tkns, char *tkn, int *i, int *curr_tk);
 void		ft_expand_dquote(char ***sub_tkns, char *tkn, int *i, int *curr_tk);
 void		ft_expand_other(char ***sub_tkns, char *tkn, int *i, int *curr_tk);
 
-/// @file	230_tk_expander_init.c
+/// @file	230_tk_expander_check.c
 char		**ft_expander_init(char *tkns);
 // static void	ft_expand_check_dollar(char *tkn, int *i);
 // static void	ft_expand_check_squote(char *tkn, int *i);
 // static void	ft_expand_check_dquote(char *tkn, int *n_tkns, int *i);
 // static void	ft_expand_check_other(char *tkn, int *i);
 
-/// @file	240_tk_expander_checker.c
+/// @file	240_tk_expander_var.c
+char		*ft_expand_var(t_shell *sh, char ***sub_tkns);
+
+/// @file	250_tk_expander_utils.c
 int			ft_check_alpha(char c);
 int			ft_check_alnum(char c);
 

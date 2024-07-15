@@ -38,8 +38,8 @@ int	ft_exec_one(t_shell *sh)
 		cmd = ft_exec_check(sh->cmds[0].argv[0]);
 	if ((cmd == CMD_EXIT) || (cmd == CMD_PWD) || (cmd == CMD_CD)
 		|| (cmd == CMD_ENV) || (cmd == CMD_CLEAR)
-		||((cmd == CMD_EXPORT) && sh->cmds[0].argv[1])
-		||((cmd == CMD_UNSET) && sh->cmds[0].argv[1]))
+		|| ((cmd == CMD_EXPORT) && sh->cmds[0].argv[1])
+		|| ((cmd == CMD_UNSET) && sh->cmds[0].argv[1]))
 	{
 		if (ft_exec(sh, cmd, 0))
 			return (ft_free_arr(sh->path), FAILURE);

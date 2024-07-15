@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 22:02:06 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/11 16:17:48 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/15 20:20:39 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -117,8 +117,8 @@ static char	*ft_extract_var(char *select, char **env)
 ///	@note			Used in ft_get_var() ...
 int	ft_get_var_index(char *var, char **env)
 {
-	int key_len;
-	int i;
+	int	key_len;
+	int	i;
 
 	if (!env)
 		return (NO_ENV);

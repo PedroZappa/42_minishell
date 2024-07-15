@@ -135,12 +135,12 @@ static char	**ft_env_add_var(char **env, char *new_var)
 /// @param to_del	Pointer to variable to delete
 ///	@return			SUCCESS(Pointer to new env array)
 ///	@return			FAILURE(NULL)
-char **ft_env_del_var(char **env, char *to_del)
+char	**ft_env_del_var(char **env, char *to_del)
 {
-	char **new_env;
-	char *var;
-	int i;
-	int j;
+	char	**new_env;
+	char	*var;
+	int		i;
+	int		j;
 
 	i = 0;
 	while (env[i])

@@ -32,7 +32,7 @@ int	ft_env(t_shell *sh, int n)
 {
 	char	*equal;
 	int		i;
-	
+
 	ft_build_last_cmd(sh, n);
 	if (sh->cmds[n].argv[1])
 		return (ft_flag_err(sh->cmds[n].argv[0], sh->cmds[n].argv[1], 1));

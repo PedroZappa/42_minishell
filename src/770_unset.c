@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 16:37:35 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/10 17:26:56 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/15 20:21:33 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 int	ft_unset(t_shell *sh, int n)
 {
 	char	*var;
-	int	i;
+	int		i;
 
 	i = 0;
 	if (!sh->cmds[n].argv[1] || !sh->envp)

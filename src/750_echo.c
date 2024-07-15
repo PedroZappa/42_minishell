@@ -50,7 +50,7 @@ int	ft_echo(t_shell *sh, int n)
 static int	ft_is_nflag(char *arg)
 {
 	int	i;
-	
+
 	if (arg[0] != '-')
 		return (!FAILURE);
 	i = 0;
