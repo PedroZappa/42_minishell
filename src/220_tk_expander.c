@@ -20,6 +20,7 @@
 #include "../inc/minishell.h"
 
 static char *ft_expand_var(t_shell *sh, char ***tkns);
+static char	*ft_fill_var(t_shell *sh, char *tkn);
 
 /// @brief		Token expander
 /// @details
@@ -107,8 +108,34 @@ void ft_expand_other(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
 
 static char *ft_expand_var(t_shell *sh, char ***tkns)
 {
-	(void)sh;
-	(void)tkns;
+	char	*curr;
+	int		i;
+
+	i = -1;
+	while ((*tkns)[++i])
+	{
+		curr = (*tkns)[i];
+		if ((*tkns)[i][0] == '$')
+		{
+			(*tkns)[i] = ft_fill_var(sh, (*tkns)[i]);
+			if (!(*tkns)[i])
+				(*tkns)[i] = ft_strdup("");
+		}
+	}
 	return ((**tkns));
 }
+
+static char	*ft_fill_var(t_shell *sh, char *tkn)
+{
+	char	*var;
+	int		i;
+
+	i = 1;
+	var = NULL;
+	if (ft_check_alpha(tkn[i]) == SUCCESS)
+		var = ft_get_var(tkn, sh->envp, sh->envt);
+	ft_free(tkn);
+	return (var);
+}
+
 /** @} */

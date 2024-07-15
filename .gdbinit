@@ -151,9 +151,15 @@ end
 
 define expand_var
 	display **tkns@3
-	display **tkns
-	display *tkns
 	display tkns
+	display curr
+end
+
+define fill_var
+	display *tkn
+	display tkn[i]
+	display var
+	display i
 end
 
 # 230_tk_expander_init.c
@@ -198,6 +204,8 @@ define parse_cmds
 	display *cmds
 	display *cmds->argv
 	display cmds[i].argv[j]
+end
+
 define expand_check_dollar
 	display tkn
 	display tkn[*i]
@@ -256,7 +264,7 @@ end
 
 ### 500_env.c
 define get_var
-	display *var
+	display var
 	display *envp
 	display *envt
 	display var2get
