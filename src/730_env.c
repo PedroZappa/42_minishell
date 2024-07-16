@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 20:05:44 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/13 09:48:39 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/16 14:24:23 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -33,7 +33,7 @@ int	ft_env(t_shell *sh, int n)
 	char	*equal;
 	int		i;
 
-	ft_build_last_cmd(sh, n);
+	ft_set_var("_", sh->cmds[n].argv[0], &sh->envp);
 	if (sh->cmds[n].argv[1])
 		return (ft_flag_err(sh->cmds[n].argv[0], sh->cmds[n].argv[1], 1));
 	i = -1;

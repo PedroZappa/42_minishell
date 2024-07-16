@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/15 20:18:41 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/16 14:30:17 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -321,14 +321,14 @@ int			ft_set_var(char *var, char *val, char ***env);
 int			ft_var_from_env(char *var, char **env);
 char		**ft_env_del_var(char **env, char *to_del);
 // static char	**ft_env_add_var(char **env, char *new_var);
-void		ft_build_last_cmd(t_shell *sh, int n);
-int			ft_update_last_cmd(t_shell *sh);
-
-
 
 /// @file	520_build_var.c
 int			ft_append(t_shell *sh, int n, int i);
 // static void	ft_append_var(t_shell *sh, int n, int i);
+
+/// @file	530_last_cmd.c
+void		ft_build_last_cmd(t_shell *sh, int n);
+int			ft_update_last_cmd(t_shell *sh);
 
 //=============================================================================/
 //	600		Executer														   /

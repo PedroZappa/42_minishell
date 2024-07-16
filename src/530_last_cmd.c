@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 14:19:46 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/16 14:21:17 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/16 14:42:19 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -30,7 +30,8 @@ void	ft_build_last_cmd(t_shell *sh, int n)
 		i = -1;
 		while (sh->path[++i])
 		{
-			exec_path = ft_strjoin(sh->path[i], sh->cmds[n].argv[0]);
+			exec_path = ft_strjoin(sh->path[i],
+					sh->cmds[n].argv[sh->cmds[n].argc]);
 			if (exec_path)
 			{
 				if (access(exec_path, X_OK) == 0)
@@ -61,7 +62,7 @@ int	ft_update_last_cmd(t_shell *sh)
 	int	i;
 
 	i = (sh->cmds[0].argc);
-	while ((i > 0) && (!ft_strncmp(sh->cmds[0].argv[0], "", 1)))
+	while ((i > 0) && (!ft_strncmp(sh->cmds[0].argv[i], "", 1)))
 		--i;
 	if (i > 0)
 		ft_set_var("_", sh->cmds[0].argv[i], &sh->envp);

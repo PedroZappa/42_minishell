@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 10:12:55 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/03 12:01:34 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/16 14:25:25 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -33,6 +33,7 @@ int	ft_pwd(t_shell *sh, int n)
 	char	*pwd;
 	int		i;
 
+	ft_set_var("_", sh->cmds[n].argv[0], &sh->envp);
 	i = 0;
 	while (sh->cmds[n].argv[++i])
 		if (sh->cmds[n].argv[i][0] == '-')
