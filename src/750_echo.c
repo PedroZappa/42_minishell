@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 15:24:56 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/10 17:31:54 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/16 15:02:55 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static int	ft_is_nflag(char *arg);
 /// @details
 /// - Skip dash
 /// - Check for 'n's (however many)
-///
 /// @param sh		Pointer to a t_shell struct
 /// @param n		Command index
 /// @return			SUCCESS(0)
@@ -28,10 +27,10 @@ int	ft_echo(t_shell *sh, int n)
 	int	sentinel;
 	int	i;
 
-	ft_update_last_cmd(sh);
+	ft_set_var("_", sh->cmds[n].argv[0], &sh->envp);
 	i = 0;
 	sentinel = '\n';
-	while (sh->cmds[n].argv[i++] && ft_is_nflag(sh->cmds[n].argv[i]))
+	while (sh->cmds[n].argv[++i] && ft_is_nflag(sh->cmds[n].argv[i]))
 		sentinel = '\0';
 	while (sh->cmds[n].argv[i])
 	{
