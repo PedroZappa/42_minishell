@@ -28,6 +28,7 @@ int	ft_echo(t_shell *sh, int n)
 	int	sentinel;
 	int	i;
 
+	ft_update_last_cmd(sh);
 	i = 0;
 	sentinel = '\n';
 	while (sh->cmds[n].argv[i++] && ft_is_nflag(sh->cmds[n].argv[i]))

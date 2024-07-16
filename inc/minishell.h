@@ -322,6 +322,9 @@ int			ft_var_from_env(char *var, char **env);
 char		**ft_env_del_var(char **env, char *to_del);
 // static char	**ft_env_add_var(char **env, char *new_var);
 void		ft_build_last_cmd(t_shell *sh, int n);
+int			ft_update_last_cmd(t_shell *sh);
+
+
 
 /// @file	520_build_var.c
 int			ft_append(t_shell *sh, int n, int i);

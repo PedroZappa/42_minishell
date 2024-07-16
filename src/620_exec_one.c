@@ -19,8 +19,6 @@
 
 #include "../inc/minishell.h"
 
-static int	ft_update_last_cmd(t_shell *sh);
-
 /// @brief			Execute one command
 /// @details	
 /// - Check command type
@@ -88,22 +86,4 @@ int	ft_exec_fork(t_shell *sh)
 	return (SUCCESS);
 }
 
-/// @brief			Update '_' variable (last argument)
-/// @details
-/// - Check for non-empty argument
-/// - Set '_' variable
-/// @param sh		Pointer to a t_shell struct
-/// @param n		Command index
-/// @return			SUCCESS(0)
-/// @note			Used in ft_exec_one()
-static int	ft_update_last_cmd(t_shell *sh)
-{
-	int	i;
-
-	i = (sh->cmds[0].argc);
-	while ((i > 0) && (!ft_strncmp(sh->cmds[0].argv[0], "", 1)))
-		--i;
-	if (i > 0)
-		ft_set_var("_", sh->cmds[0].argv[0], &sh->envp);
-	return (SUCCESS);
-}
+/** @} */

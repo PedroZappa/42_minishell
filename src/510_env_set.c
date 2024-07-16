@@ -23,17 +23,17 @@
 static char	**ft_env_add_var(char **env, char *new_var);
 
 /// @brief			Set environment variable
-/// @param var		Pointer to variable to be set
-/// @param val		Pointer to value to be set
-/// @param env		Pointer to array of environment variables
-/// @return			SUCCESS(0)
-///					FAILURE(-1)
 /// @details		Build new variable string
 ///					- If val exists	concatenate "=" and val to var;
 ///					- else just copy var;
 ///					- Get var's index in env
 ///					- If var is not found in env, add it
 ///					- Else, if it exists and has a new value, update it
+/// @param var		Pointer to variable to be set
+/// @param val		Pointer to value to be set
+/// @param env		Pointer to array of environment variables
+/// @return			SUCCESS(0)
+///					FAILURE(-1)
 ///	@note			Used in ...
 int	ft_set_var(char *var, char *val, char ***env)
 {
@@ -61,15 +61,15 @@ int	ft_set_var(char *var, char *val, char ***env)
 }
 
 /// @brief			Extract variable index from env
-/// @param var		Pointer to variable string
-/// @param env		Pointer to array of environment variables
-/// @return			SUCCESS(var index in env)
-///					FAILURE(-1)
 /// @details		- Check if env is NULL
 /// 				- Get variable to search for length
 ///					- Loop through environment variables
 ///						- If variable is found and it ends with = or \0,
 ///						return its index,
+/// @param var		Pointer to variable string
+/// @param env		Pointer to array of environment variables
+/// @return			SUCCESS(var index in env)
+///					FAILURE(-1)
 ///	@note			Used in ft_set_var() ...
 int	ft_var_from_env(char *var, char **env)
 {
@@ -90,10 +90,6 @@ int	ft_var_from_env(char *var, char **env)
 }
 
 /// @brief			Add new variable to env
-/// @param env		Pointer to array of environment variables
-/// @param new_var	Pointer to new variable to add to env
-/// @return			SUCCESS(Pointer to new env array)
-///					FAILURE(NULL)
 /// @details		- Loop through old environment variables
 ///					- Count variables in old env
 ///					- Increment var count by 2 to account for new var & NULL
@@ -102,6 +98,10 @@ int	ft_var_from_env(char *var, char **env)
 ///					- Add new var
 ///					- NULL terminal new array
 ///					- Free old env
+/// @param env		Pointer to array of environment variables
+/// @param new_var	Pointer to new variable to add to env
+/// @return			SUCCESS(Pointer to new env array)
+///					FAILURE(NULL)
 ///	@note			Used in ft_set_var() ...
 static char	**ft_env_add_var(char **env, char *new_var)
 {
@@ -163,6 +163,7 @@ char	**ft_env_del_var(char **env, char *to_del)
 	return (new_env);
 }
 
+/// @brief			Build last command
 void	ft_build_last_cmd(t_shell *sh, int n)
 {
 	char	*exec_path;
@@ -188,7 +189,27 @@ void	ft_build_last_cmd(t_shell *sh, int n)
 		}
 	}
 	else
-		ft_set_var("_", sh->cmds[n].argv[0], &sh->envp);
+		ft_set_var("_", sh->cmds[n].argv[sh->cmds[n].argc], &sh->envp);
+}
+
+/// @brief			Update '_' variable (last argument)
+/// @details
+/// - Check for non-empty argument
+/// - Set '_' variable
+/// @param sh		Pointer to a t_shell struct
+/// @param n		Command index
+/// @return			SUCCESS(0)
+/// @note			Used in ft_exec_one()
+int	ft_update_last_cmd(t_shell *sh)
+{
+	int	i;
+
+	i = (sh->cmds[0].argc);
+	while ((i > 0) && (!ft_strncmp(sh->cmds[0].argv[0], "", 1)))
+		--i;
+	if (i > 0)
+		ft_set_var("_", sh->cmds[0].argv[i], &sh->envp);
+	return (SUCCESS);
 }
 
 /** @} */
