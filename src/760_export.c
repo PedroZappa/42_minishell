@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 16:05:04 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/11 16:34:09 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/16 15:28:27 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -39,9 +39,9 @@ int	ft_export(t_shell *sh, int n)
 		if (sh->cmds[n].argv[i][0] == '-')
 			return (ft_flag_err(sh->cmds[n].argv[0], sh->cmds[n].argv[i], 1));
 		if (ft_isvalid_var(sh->cmds[n].argv[i]) == FAILURE)
-			return (ft_fprintf(STDERR_FILENO,
+			ft_fprintf(STDERR_FILENO,
 					"bash: %s: '%s': not a valid identifier\n",
-					sh->cmds[n].argv[0], sh->cmds[n].argv[i]), FAILURE);
+					sh->cmds[n].argv[0], sh->cmds[n].argv[i]);
 		else
 		{
 			if (ft_strchr(sh->cmds[n].argv[i], '='))
