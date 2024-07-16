@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 09:15:42 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/11 16:55:32 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/16 14:22:37 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -15,7 +15,6 @@
 *
 * @brief		Set environment variable
 * @version		1.0
-* @author		passunca
 ***/
 
 #include "../inc/minishell.h"
@@ -161,55 +160,6 @@ char	**ft_env_del_var(char **env, char *to_del)
 	new_env[j] = NULL;
 	ft_free_arr(env);
 	return (new_env);
-}
-
-/// @brief			Build last command
-void	ft_build_last_cmd(t_shell *sh, int n)
-{
-	char	*exec_path;
-	int		i;
-
-	if (sh->cmds[n].argv[0])
-	{
-		i = -1;
-		while (sh->path[++i])
-		{
-			exec_path = ft_strjoin(sh->path[i], sh->cmds[n].argv[0]);
-			if (exec_path)
-			{
-				if (access(exec_path, X_OK) == 0)
-				{
-					ft_set_var("_", exec_path, &sh->envp);
-					ft_free(sh->cmds[n].argv[0]);
-					sh->cmds[n].argv[0] = exec_path;
-					break ;
-				}
-				ft_free(exec_path);
-			}
-		}
-	}
-	else
-		ft_set_var("_", sh->cmds[n].argv[sh->cmds[n].argc], &sh->envp);
-}
-
-/// @brief			Update '_' variable (last argument)
-/// @details
-/// - Check for non-empty argument
-/// - Set '_' variable
-/// @param sh		Pointer to a t_shell struct
-/// @param n		Command index
-/// @return			SUCCESS(0)
-/// @note			Used in ft_exec_one()
-int	ft_update_last_cmd(t_shell *sh)
-{
-	int	i;
-
-	i = (sh->cmds[0].argc);
-	while ((i > 0) && (!ft_strncmp(sh->cmds[0].argv[0], "", 1)))
-		--i;
-	if (i > 0)
-		ft_set_var("_", sh->cmds[0].argv[i], &sh->envp);
-	return (SUCCESS);
 }
 
 /** @} */
