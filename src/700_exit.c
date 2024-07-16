@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 21:22:16 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/22 10:25:58 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/16 14:56:54 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -20,6 +20,8 @@
 #include "../inc/minishell.h"
 
 static void	ft_kill(t_shell *sh, int sig);
+
+// TODO: Fix break if exit is not exactly exit
 
 /// @brief			exit built-in
 /// @param sh		Pointer to a t_shell struct
