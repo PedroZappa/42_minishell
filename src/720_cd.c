@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 08:19:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/11 16:51:27 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/16 14:48:32 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -37,6 +37,7 @@ int	ft_cd(t_shell *sh, int cmd_n)
 	char	*home;
 	int		chdir;
 
+	ft_set_var("_", sh->cmds[cmd_n].argv[0], &sh->envp);
 	if (!sh->cmds->argv[1])
 	{
 		home = ft_get_var("HOME", sh->envp, NULL);
