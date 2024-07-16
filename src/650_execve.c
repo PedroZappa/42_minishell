@@ -75,7 +75,8 @@ void	ft_execve_path(char **path, char **argv, char **envp)
 		exec_path = ft_strjoin(path[i], *argv);
 		if (!exec_path)
 			break ;
-		execve_err = execve(exec_path, argv, envp);
+		if (access(exec_path, X_OK) == 0)
+			execve_err = execve(exec_path, argv, envp);
 		++i;
 		free(exec_path);
 	}
