@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:51:40 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/10 17:15:11 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/16 15:39:56 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -44,6 +44,8 @@ int	ft_exec_one(t_shell *sh)
 	}
 	else if (ft_exec_fork(sh))
 		return (ft_free_arr(sh->path), FAILURE);
+	else
+		ft_cmd_err(sh->cmds[0].argv[0], 1);
 	ft_update_last_cmd(sh);
 	return (ft_free_arr(sh->path), SUCCESS);
 }

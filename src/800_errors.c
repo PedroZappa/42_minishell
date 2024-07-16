@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 17:35:23 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/07 11:16:02 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/16 15:38:00 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -57,6 +57,18 @@ int	ft_flag_err(char *cmd, char *cmd_flag, int err)
 {
 	ft_fprintf(STDERR_FILENO, "%s: ’%s’: options & flags not supported\n",
 		cmd, cmd_flag);
+	return (err);
+}
+
+/// @brief			Print invalid command error
+/// @details
+/// - Print error message
+/// @param cmd		Command name
+/// @param err		Error number
+/// @return			SUCCESS(err)
+int	ft_cmd_err(char *cmd, int err)
+{
+	ft_fprintf(STDERR_FILENO, "%s: command not found\n", cmd);
 	return (err);
 }
 

@@ -40,8 +40,8 @@ int	ft_export(t_shell *sh, int n)
 			return (ft_flag_err(sh->cmds[n].argv[0], sh->cmds[n].argv[i], 1));
 		if (ft_isvalid_var(sh->cmds[n].argv[i]) == FAILURE)
 			ft_fprintf(STDERR_FILENO,
-					"bash: %s: '%s': not a valid identifier\n",
-					sh->cmds[n].argv[0], sh->cmds[n].argv[i]);
+				"bash: %s: '%s': not a valid identifier\n",
+				sh->cmds[n].argv[0], sh->cmds[n].argv[i]);
 		else
 		{
 			if (ft_strchr(sh->cmds[n].argv[i], '='))
