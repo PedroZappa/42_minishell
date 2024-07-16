@@ -89,6 +89,9 @@ int	ft_exec_fork(t_shell *sh)
 }
 
 /// @brief			Update '_' variable (last argument)
+/// @details
+/// - Check for non-empty argument
+/// - Set '_' variable
 /// @param sh		Pointer to a t_shell struct
 /// @param n		Command index
 /// @return			SUCCESS(0)
