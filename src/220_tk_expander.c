@@ -50,7 +50,9 @@ char	*ft_tk_expander(t_shell *sh, char *tk_str)
 			ft_expand_other(&sub_tkns, tk_str, &i, &curr_tk);
 	}
 	ret = ft_expand_var(sh, &sub_tkns);
+	i = 0;
 	free(sub_tkns);
+	free(tk_str);
 	return (ret);
 }
 
