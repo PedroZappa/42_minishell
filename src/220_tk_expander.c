@@ -78,10 +78,16 @@ char	*ft_expand_dollar(char *tkn, int *i)
 
 void	ft_expand_squote(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
 {
-	(void)sub_tkns;
-	(void)tkn;
-	(void)i;
-	(void)curr_tk;
+	int tkn_start;
+	int	tkn_len;
+
+	tkn_start = *i;
+	++(*i);
+	while (tkn[*i] && (tkn[*i] != '\'') && (tkn[*i] != '\"'))
+		++(*i);
+	++(*i);
+	tkn_len = (*i - tkn_start);
+	(*sub_tkns)[(*curr_tk)] = ft_substr(tkn, tkn_start, tkn_len);
 }
 
 void	ft_expand_dquote(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
