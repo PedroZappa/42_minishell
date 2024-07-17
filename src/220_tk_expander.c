@@ -51,9 +51,7 @@ char	*ft_tk_expander(t_shell *sh, char *tk_str)
 	}
 	ret = ft_expand_var(sh, &sub_tkns);
 	i = 0;
-	free(sub_tkns);
-	free(tk_str);
-	return (ret);
+	return (free(sub_tkns), free(tk_str), ret);
 }
 
 /// @brief		Dollar sign expansion
