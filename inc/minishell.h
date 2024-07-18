@@ -404,6 +404,7 @@ int			ft_err(char *msg, int status);
 int			ft_syntax_err(char *tkn, int err);
 int			ft_flag_err(char *cmd, char *cmd_flag, int err);
 int			ft_cmd_err(char *cmd, int err);
+int			ft_bash_err(char *cmd, char *arg, int err);
 
 //=============================================================================/
 //	900		Free															   /

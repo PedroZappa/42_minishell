@@ -164,8 +164,8 @@ end
 
 # 230_tk_expander_init.c
 define expander_init
-	display tkns
-	display tkns[i]
+	display tkn_str
+	display tkn_str[i]
 	display sub_tkns
 	display sub_tkns[n_tkns]
 	display **sub_tkns
@@ -365,7 +365,7 @@ define chdir
 	display chdir_ret
 end
 
-###730_env.c
+### 730_env.c
 define env
 	display *sh
 	display n
@@ -377,6 +377,20 @@ define env
 	display sh->envp[i][key_len]
 	display sh->envp[i][key_len + 1]
 	display sh->envp[i][key_len + 2]
+end
+
+### 750_echo.c 
+define echo
+	display *sh
+	display n
+	display *sh->cmds[n].argv@sh->cmds[n].argc
+	display sh->cmds[n].argv[i]
+end
+
+define rm_squotes
+	display arg
+	display	unquoted
+	display len
 end
 
 ### 760_export.c

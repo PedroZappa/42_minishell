@@ -9,10 +9,18 @@
 /*   Updated: 2024/07/16 15:02:55 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/**
+* @defgroup main Main
+* @{
+*
+* @brief		Minishell main function
+* @version		1.0
+***/
 
 #include "../inc/minishell.h"
 
 static int	ft_is_nflag(char *arg);
+static char	*ft_rm_squotes(char *arg);
 
 /// @brief			Echo built-in
 /// @details
@@ -28,10 +36,16 @@ int	ft_echo(t_shell *sh, int n)
 	int	i;
 
 	ft_set_var("_", sh->cmds[n].argv[0], &sh->envp);
-	i = 0;
 	sentinel = '\n';
+	i = -1;
+	while (sh->cmds[n].argv[++i])
+		if (sh->cmds[n].argv[i][0] == '\'')
+			sh->cmds[n].argv[i] = ft_rm_squotes(sh->cmds[n].argv[i]);
+	i = 0;
 	while (sh->cmds[n].argv[++i] && ft_is_nflag(sh->cmds[n].argv[i]))
 		sentinel = '\0';
+	if (sentinel == '\0')
+		i = 2;
 	while (sh->cmds[n].argv[i])
 	{
 		ft_putstr_fd(sh->cmds[n].argv[i], STDOUT_FILENO);
@@ -59,3 +73,22 @@ static int	ft_is_nflag(char *arg)
 			return (!FAILURE);
 	return (!SUCCESS);
 }
+
+/// @brief		Remove single quotes
+/// @param arg	Argument to remove single quotes
+/// @return		SUCCESS(1)
+/// @return		FAILURE(0)
+static char	*ft_rm_squotes(char *arg)
+{
+	char	*unquoted;
+	int		len;
+
+	len = ft_strlen(arg);
+	unquoted = ft_substr(arg, 1, (len - 2));
+	if (!unquoted)
+		return (NULL);
+	free(arg);
+	return (unquoted);
+}
+
+/** @} */
