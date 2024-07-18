@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 11:46:35 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/08 14:52:29 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/18 16:26:48 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -32,7 +32,7 @@ void	ft_readline(char ***line_buf, t_shell **sh)
 {
 	char	*prompt;
 
-	prompt = ft_get_bash(&sh, MAG"$> "NC);
+	prompt = ft_get_bash(&sh, GRN"$> "NC);
 	**line_buf = readline(prompt);
 	ft_free(prompt);
 	if (!**line_buf)
