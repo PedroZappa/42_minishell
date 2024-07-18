@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 11:53:41 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/13 21:41:24 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/18 17:22:49 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -88,9 +88,27 @@ static void	ft_expand_check_squote(char *tkn, int *i)
 
 static void	ft_expand_check_dquote(char *tkn, int *n_tkns, int *i)
 {
-	(void)tkn;
-	(void)n_tkns;
-	(void)i;
+	int dollar;
+
+	dollar = 0;
+	++(*i);
+	while (tkn[*i] && (tkn[*i] != '\"'))
+	{
+		if (tkn[*i] == '$')
+		{
+			ft_expand_check_dollar(tkn, i);
+			++(*i);
+			if (dollar == 0)
+				++(*n_tkns);
+			dollar = 1;
+		}
+		else
+		{
+			dollar = 0;
+			++(*i);
+		}
+	}
+	++(*i);
 }
 
 /// @brief		Other string checking
