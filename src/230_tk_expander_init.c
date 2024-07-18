@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 11:53:41 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/18 17:22:49 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/18 17:24:46 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -86,6 +86,10 @@ static void	ft_expand_check_squote(char *tkn, int *i)
 	++(*i);
 }
 
+/// @brief			Double quote checking
+/// @param tkn		Token string
+/// @param n_tkns	Reference to number of tokens
+/// @param i		Reference to index
 static void	ft_expand_check_dquote(char *tkn, int *n_tkns, int *i)
 {
 	int dollar;
@@ -111,7 +115,7 @@ static void	ft_expand_check_dquote(char *tkn, int *n_tkns, int *i)
 	++(*i);
 }
 
-/// @brief		Other string checking
+/// @brief		Check for every other char except $ and " and '
 /// @param tkn	Token string
 /// @param i	Reference to index
 static void	ft_expand_check_other(char *tkn, int *i)
