@@ -91,6 +91,8 @@ static int	ft_check_syntax(t_token *tk)
 			&& ((tk->type == TK_OR) || (tk->next->type == TK_OR)))
 			return (ft_syntax_err(tk->name, FAILURE));
 		tk = tk->next;
+		// if ((ft_strcmp(tk->name, "cd") == 0) && (tk->next->name[1] == '~'))
+		// 	return (ft_syntax_err(tk->name, FAILURE));
 	}
 	return (SUCCESS);
 }

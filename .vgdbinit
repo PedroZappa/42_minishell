@@ -1,4 +1,4 @@
-break ft_expander_init
+break ft_get_tk
 fs cmd
 info thread
 info break

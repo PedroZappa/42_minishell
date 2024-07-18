@@ -145,7 +145,10 @@ static t_tk_ops	ft_get_tk(char *tk, t_tk_ops **ops)
 	i = 0;
 	if (!ft_isspace(tk[0]))
 	{
-		while (tk[i] && (!ft_isspace(tk[i])))
+		if ((tk[i++] == '\'') || (tk[i++] == '\"'))
+			while ((tk[i] && (tk[i] != '\'')) && (tk[i] != '\"'))
+				++i;
+		while (tk[i] && !ft_isspace(tk[i]))
 			++i;
 		ret = (t_tk_ops){ft_substr(tk, 0, i), TK_CMD, i};
 	}
