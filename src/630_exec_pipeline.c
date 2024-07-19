@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   630_exec_many.c                                    :+:      :+:    :+:   */
+/*   630_exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -19,7 +19,7 @@
 
 #include "../inc/minishell.h"
 
-int	ft_exec_many(t_shell *sh)
+int	ft_exec_pipeline(t_shell *sh)
 {
 	(void)sh;
 	return (SUCCESS);

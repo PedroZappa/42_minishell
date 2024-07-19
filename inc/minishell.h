@@ -347,8 +347,8 @@ int			ft_exec_check(char *cmd);
 int			ft_exec_one(t_shell *sh);
 int			ft_exec_fork(t_shell *sh);
 
-/// @file	630_exec_many.c
-int			ft_exec_many(t_shell *sh);
+/// @file	630_exec_pipeline.c
+int			ft_exec_pipeline(t_shell *sh);
 
 /// @file	640_exec_child.c
 void		ft_exec_child(t_shell *sh, int *outpipe);
