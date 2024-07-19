@@ -39,8 +39,7 @@ void	ft_exec_cmd(t_shell *sh, int id, int i)
 	{
 		if (!sh->cmds[i].argv[0][0])
 			return ;
-		if (stat(sh->cmds[i].argv[0], &statbuf) < 0)
-			errno = ENOENT;
+		stat(sh->cmds[i].argv[0], &statbuf);
 		ft_execve(sh->path, sh->cmds[i].argv, sh->envp);
 		// TODO: Handle errors
 		ft_free_sh(sh);

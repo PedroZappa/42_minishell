@@ -337,8 +337,6 @@ int			ft_update_last_cmd(t_shell *sh);
 int			ft_execute(t_shell *sh);
 // static char	**ft_split_path(char **envp);
 // static int	ft_path_from_env(char **envp);
-int			ft_exec(t_shell *sh, int cmd, int i);
-void		ft_exec_cmd(t_shell *sh, int id, int i);
 
 /// @file	610_exec_check.c
 int			ft_exec_check(char *cmd);
