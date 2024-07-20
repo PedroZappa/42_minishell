@@ -26,7 +26,7 @@
 /// @param sh		Pointer to a t_shell struct
 /// @param tkn_str	Pointer to token string
 /// @return			Expanded token string
-char	*ft_tk_expander(t_shell *sh, char *tk_str)
+char	*ft_expander(t_shell *sh, char *tk_str)
 {
 	char	**sub_tkns;
 	char	*ret;
