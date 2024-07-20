@@ -92,7 +92,7 @@ static void	ft_expand_check_squote(char *tkn, int *i)
 /// @param i		Reference to index
 static void	ft_expand_check_dquote(char *tkn, int *n_tkns, int *i)
 {
-	int dollar;
+	int	dollar;
 
 	dollar = 0;
 	++(*i);

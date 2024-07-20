@@ -79,7 +79,7 @@ int	ft_cmd_err(char *cmd, int err)
 /// @return			SUCCESS(err)
 int	ft_bash_err(char *cmd, char *arg, int err)
 {
-	ft_fprintf(STDERR_FILENO, 
+	ft_fprintf(STDERR_FILENO,
 		"bash: %s: %s: No such file or directory\n", cmd, arg);
 	return (err);
 }

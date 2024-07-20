@@ -78,7 +78,7 @@ char	*ft_expand_dollar(char *tkn, int *i)
 
 void	ft_expand_squote(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
 {
-	int tkn_start;
+	int	tkn_start;
 	int	tkn_len;
 
 	tkn_start = *i;
@@ -92,7 +92,7 @@ void	ft_expand_squote(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
 
 void	ft_expand_dquote(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
 {
-	int dollar;
+	int	dollar;
 	int	j;
 
 	dollar = 0;

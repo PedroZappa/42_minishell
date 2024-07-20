@@ -101,7 +101,8 @@ static char	*ft_unquote(char *tkn)
 	len = ft_strlen(tkn);
 	if (tkn[0] == '\'' && (tkn[(len - 1)] == '\"'))
 		ret = ft_substr(tkn, 0, (len - 1));
-	else if ((tkn[0] == '\'') || ((tkn[0] == '\"') && (tkn[(len - 1)] == '\"')))
+	else if ((tkn[0] == '\'') || ((tkn[0] == '\"')
+			&& (tkn[(len - 1)] == '\"')))
 		ret = ft_substr(tkn, 1, (len - 2));
 	else if (tkn[0] != '\"' && (tkn[(len - 1)] == '\"'))
 		ret = ft_substr(tkn, 0, (len - 1));
