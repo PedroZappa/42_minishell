@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/29 20:35:29 by passunca          #+#    #+#              #
-#    Updated: 2024/07/16 15:15:03 by passunca         ###   ########.fr        #
+#    Updated: 2024/07/20 17:01:33 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ FILES			+= 220_tk_expander.c
 FILES			+= 230_tk_expander_init.c
 FILES			+= 240_tk_expander_var.c
 FILES			+= 250_tk_expander_utils.c
+FILES			+= 260_tk_rm_blank.c
 FILES			+= 300_parser.c
 FILES			+= 310_readline.c
 FILES			+= 400_signal.c

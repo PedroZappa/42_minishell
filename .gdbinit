@@ -117,7 +117,7 @@ define tk_last
 end
 
 # 220_tk_expander.c
-define tk_expander
+define expander
 	display sh
 	display tk_str
 	display tk_str[i]

@@ -278,6 +278,9 @@ char		*ft_expand_var(t_shell *sh, char ***sub_tkns);
 int			ft_check_alpha(char c);
 int			ft_check_alnum(char c);
 
+/// @file	260_tk_rm_blanks.c
+void		ft_rm_blank_tks(t_token **tk_list);
+
 //=============================================================================/
 //	300		Parser  														   /
 //=============================================================================/
