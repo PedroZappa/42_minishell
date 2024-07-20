@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 17:54:18 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/15 20:21:08 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/20 18:35:28 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -103,9 +103,9 @@ void	ft_expand_dquote(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
 		if (tkn[*i] == '$')
 		{
 			if (dollar == 0)
-				(*sub_tkns)[(*curr_tk++)] = ft_substr(tkn, j, (*i - j));
+				(*sub_tkns)[(*curr_tk)++] = ft_substr(tkn, j, (*i - j));
 			dollar = 1;
-			(*sub_tkns)[(*curr_tk++)] = ft_expand_dollar(tkn, i);
+			(*sub_tkns)[(*curr_tk)++] = ft_expand_dollar(tkn, i);
 			j = *i;
 		}
 		else

@@ -139,6 +139,28 @@ define expand_dollar
 	display *ret
 end
 
+define expand_squote
+	display sub_tkns
+	display (*sub_tkns)[(*curr_tk)]
+	display tkn
+	display tkn[*i]
+	display *i
+	display curr_tk
+	display tkn_start
+	display tkn_len
+end
+
+define expand_dquote
+	display sub_tkns
+	display **sub_tkns@5
+	display tkn
+	display tkn[*i]
+	display *i
+	display *curr_tk
+	display dollar
+	display j
+end
+
 define expand_other
 	display sub_tkns
 	display (*sub_tkns)[(*curr_tk)]
@@ -167,7 +189,7 @@ define expander_init
 	display tkn_str
 	display tkn_str[i]
 	display sub_tkns
-	display sub_tkns[n_tkns]
+	display *sub_tkns@n_tkns
 	display **sub_tkns
 	display n_tkns
 	display i
@@ -177,6 +199,14 @@ define expand_check_dollar
 	display tkn
 	display tkn[*i]
 	display *i
+end
+
+define expand_check_dquote
+	display tkn
+	display tkn[*i]
+	display n_tkns
+	display *i
+	display dollar
 end
 
 define expand_check_other
