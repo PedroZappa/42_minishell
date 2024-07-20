@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 15:24:56 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/16 15:02:55 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/20 17:21:40 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -39,7 +39,8 @@ int	ft_echo(t_shell *sh, int n)
 	sentinel = '\n';
 	i = -1;
 	while (sh->cmds[n].argv[++i])
-		if ((sh->cmds[n].argv[i][0] == '\'') || (sh->cmds[n].argv[i][0] == '"'))
+		if ((sh->cmds[n].argv[i][0] == '\'')
+			|| (sh->cmds[n].argv[i][0] == '\"'))
 			sh->cmds[n].argv[i] = ft_rm_squotes(sh->cmds[n].argv[i]);
 	i = 0;
 	while (sh->cmds[n].argv[++i] && ft_is_nflag(sh->cmds[n].argv[i]))
