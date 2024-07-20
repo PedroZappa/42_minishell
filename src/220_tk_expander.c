@@ -92,10 +92,30 @@ void	ft_expand_squote(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
 
 void	ft_expand_dquote(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
 {
-	(void)tkn;
-	(void)sub_tkns;
-	(void)i;
-	(void)curr_tk;
+	int dollar;
+	int	j;
+
+	dollar = 0;
+	j = *i;
+	++(*i);
+	while (tkn[*i] && (tkn[*i] != '\"'))
+	{
+		if (tkn[*i] == '$')
+		{
+			if (dollar == 0)
+				(*sub_tkns)[(*curr_tk++)] = ft_substr(tkn, j, (*i - j));
+			dollar = 1;
+			(*sub_tkns)[(*curr_tk++)] = ft_expand_dollar(tkn, i);
+			j = *i;
+		}
+		else
+		{
+			dollar = 0;
+			++(*i);
+		}
+	}
+	++(*i);
+	(*sub_tkns)[(*curr_tk)] = ft_substr(tkn, j, (*i - j));
 }
 
 /// @brief			Save unexpanded token
