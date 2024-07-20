@@ -81,6 +81,17 @@ static char	*ft_fill_var(t_shell *sh, char *tkn)
 	return (var);
 }
 
+/// @brief			Unquote single and double quotes
+/// @details
+/// - Get length of token
+/// - If token starts with a '\' & ends with a '"'
+///		- Remove last '"'
+///	- If token starts with a '\'' quote | if both first and last chars are '"'
+///		- Remove both first and last '"'
+///	- If token DOESN'T start with '"' and ends with a '"'
+///		- Remove last '"'
+///	- Else
+///		- Return token as is
 static char	*ft_unquote(char *tkn)
 {
 	char	*ret;
