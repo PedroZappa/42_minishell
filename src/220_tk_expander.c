@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 17:54:18 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/20 18:35:28 by passunca         ###   ########.fr       */
+/*   Updated: 2024/07/20 21:35:33 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -92,30 +92,25 @@ void	ft_expand_squote(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
 
 void	ft_expand_dquote(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
 {
-	int	dollar;
-	int	j;
+	int	start;
 
-	dollar = 0;
-	j = *i;
+	start = *i;
 	++(*i);
 	while (tkn[*i] && (tkn[*i] != '\"'))
 	{
 		if (tkn[*i] == '$')
 		{
-			if (dollar == 0)
-				(*sub_tkns)[(*curr_tk)++] = ft_substr(tkn, j, (*i - j));
-			dollar = 1;
+			if (*i > start)
+				(*sub_tkns)[(*curr_tk)++] = ft_substr(tkn, start, (*i - start));
 			(*sub_tkns)[(*curr_tk)++] = ft_expand_dollar(tkn, i);
-			j = *i;
+			start = *i;
 		}
 		else
-		{
-			dollar = 0;
 			++(*i);
-		}
 	}
+	if (*i > start)
+		(*sub_tkns)[(*curr_tk)] = ft_substr(tkn, start, (*i + 1 - start));
 	++(*i);
-	(*sub_tkns)[(*curr_tk)] = ft_substr(tkn, j, (*i - j));
 }
 
 /// @brief			Save unexpanded token
