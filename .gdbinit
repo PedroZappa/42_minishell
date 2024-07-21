@@ -172,7 +172,7 @@ define expand_other
 end
 
 define expand_var
-	display **tkns@3
+	display **sub_tkns@5
 	display tkns
 	display curr
 end
@@ -233,6 +233,7 @@ define parse_cmds
 	display *tks
 	display *cmds
 	display *cmds->argv
+	display *cmds->argv@cmds->argc
 	display cmds[i].argv[j]
 end
 
@@ -413,6 +414,7 @@ end
 define echo
 	display *sh
 	display n
+	display i
 	display *sh->cmds[n].argv@sh->cmds[n].argc
 	display sh->cmds[n].argv[i]
 end
@@ -487,7 +489,7 @@ define free
 end
 
 define free_tks
-	display **tk
+	display **t k
 	display *tmp
 	display tk->name
 	display (*tk)->name

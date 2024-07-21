@@ -109,8 +109,12 @@ void	ft_expand_dquote(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
 			++(*i);
 	}
 	if (*i > start)
-		(*sub_tkns)[(*curr_tk)] = ft_substr(tkn, start, (*i + 1 - start));
-	++(*i);
+		(*sub_tkns)[(*curr_tk)] = ft_substr(tkn, start, (*i - start));
+	if (tkn[*i] == '\"')
+	{
+		(*sub_tkns)[(*curr_tk)] = ft_substr(tkn, start, 1);
+		++(*i);
+	}
 }
 
 /// @brief			Save unexpanded token
