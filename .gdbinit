@@ -157,7 +157,6 @@ define expand_dquote
 	display tkn[*i]
 	display *i
 	display *curr_tk
-	display dollar
 	display j
 end
 
