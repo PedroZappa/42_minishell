@@ -157,7 +157,6 @@ define expand_dquote
 	display tkn[*i]
 	display *i
 	display *curr_tk
-	display j
 end
 
 define expand_other
@@ -168,19 +167,6 @@ define expand_other
 	display tkn[*i]
 	display tkn_start
 	display tkn_len
-end
-
-define expand_var
-	display **sub_tkns@5
-	display tkns
-	display curr
-end
-
-define fill_var
-	display tkn
-	display tkn[i]
-	display var
-	display i
 end
 
 # 230_tk_expander_init.c
@@ -212,6 +198,29 @@ define expand_check_other
 	display tkn
 	display tkn[*i]
 	display *i
+end
+
+### 240_tk_expander_var.c
+define expand_var
+	display **sub_tkns@5
+	display ret
+	display curr
+	display i
+end
+
+define fill_var
+	display tkn
+	display tkn[i]
+	display var
+	display i
+end
+
+define unquote
+	display tkn
+	display ret
+	display len
+	display tkn[0]
+	display tkn[(len -1)]
 end
 
 ### 300_parser.c
