@@ -96,7 +96,7 @@ void	ft_expand_dquote(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
 
 	start = *i;
 	if (tkn[*i] == '\"')
-		(*sub_tkns)[(*curr_tk)] = ft_substr(tkn, start, 1);
+		(*sub_tkns)[(*curr_tk)++] = ft_substr(tkn, start, 1);
 	++(*i);
 	while (tkn[*i] && (tkn[*i] != '\"'))
 	{
