@@ -94,10 +94,10 @@ void	ft_expand_dquote(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
 {
 	int	start;
 
-	start = *i;
-	if (tkn[*i] == '\"')
-		(*sub_tkns)[(*curr_tk)++] = ft_substr(tkn, start, 1);
+	// if (tkn[*i] == '\"')
+	// 	(*sub_tkns)[(*curr_tk)++] = ft_substr(tkn, start, 1);
 	++(*i);
+	start = *i;
 	while (tkn[*i] && (tkn[*i] != '\"'))
 	{
 		if (tkn[*i] == '$')
@@ -111,13 +111,14 @@ void	ft_expand_dquote(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
 			++(*i);
 	}
 	++(*i);
-	if (*i > start)
-		(*sub_tkns)[(*curr_tk)] = ft_substr(tkn, start, (*i - start));
-	if (tkn[*i] == '\"')
-	{
-		(*sub_tkns)[(*curr_tk)] = ft_substr(tkn, start, 1);
-		++(*i);
-	}
+	// if (*i > start)
+	// 	(*sub_tkns)[(*curr_tk)] = ft_substr(tkn, start, (*i - start));
+	// if (tkn[*i] == '\"')
+	// {
+	// 	(*sub_tkns)[(*curr_tk)] = ft_substr(tkn, start, 1);
+	// 	++(*i);
+	// }
+	++(*i);
 }
 
 /// @brief			Save unexpanded token

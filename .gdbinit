@@ -189,7 +189,7 @@ end
 define expand_check_dquote
 	display tkn
 	display tkn[*i]
-	display n_tkns
+	display *n_tkns
 	display *i
 	display dollar
 end

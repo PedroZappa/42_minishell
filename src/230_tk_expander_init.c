@@ -112,7 +112,7 @@ static void	ft_expand_check_dquote(char *tkn, int *n_tkns, int *i)
 			++(*i);
 		}
 	}
-	++(*i);
+	// ++(*i);
 }
 
 /// @brief		Check for every other char except $ and " and '
