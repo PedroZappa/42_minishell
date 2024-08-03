@@ -8,6 +8,7 @@ set logging enabled on
 show follow-fork-mode
 set follow-fork-mode child
 
+
 set print pretty on
 # set print elements 2
 set print array on
