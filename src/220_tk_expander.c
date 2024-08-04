@@ -36,10 +36,11 @@ char	*ft_expander(t_shell *sh, char *tk_str)
 	sub_tkns = NULL;
 	sub_tkns = ft_expander_init(tk_str);
 	i = 0;
-	curr_tk = -1;
+	// curr_tk = -1;
+	curr_tk = 0;
 	while (tk_str[i])
 	{
-		++curr_tk;
+		// ++curr_tk;
 		if (tk_str[i] == '$')
 			sub_tkns[curr_tk] = ft_expand_dollar(tk_str, &i);
 		else if (tk_str[i] == '\'')
@@ -109,7 +110,7 @@ void	ft_expand_dquote(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
 			++(*i);
 	}
 	if (*i > start)
-		(*sub_tkns)[(*curr_tk)++] = ft_substr(tkn, start, (*i - start));
+		(*sub_tkns)[(*curr_tk)] = ft_substr(tkn, start, (*i - start));
 	++(*i);
 }
 

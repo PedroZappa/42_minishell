@@ -124,7 +124,7 @@ define expander
 	display tk_str[i]
 	display **sub_tkns
 	display sub_tkns[curr_tk]
-	display *sub_tkns@i
+	display *sub_tkns@5
 	display *ret
 	display curr_tk
 	display *curr_tk
@@ -157,7 +157,8 @@ define expand_dquote
 	display tkn
 	display tkn[*i]
 	display *i
-	display *curr_tk
+	display start
+	displa *curr_tk
 end
 
 define expand_other
