@@ -88,7 +88,7 @@ void	ft_expand_squote(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
 		++(*i);
 	++(*i);
 	tkn_len = (*i - tkn_start);
-	(*sub_tkns)[(*curr_tk)] = ft_substr(tkn, tkn_start, tkn_len);
+	(*sub_tkns)[(*curr_tk)++] = ft_substr(tkn, tkn_start, tkn_len);
 }
 
 void	ft_expand_dquote(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
@@ -110,7 +110,7 @@ void	ft_expand_dquote(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
 			++(*i);
 	}
 	if (*i > start)
-		(*sub_tkns)[(*curr_tk)] = ft_substr(tkn, start, (*i - start));
+		(*sub_tkns)[(*curr_tk)++] = ft_substr(tkn, start, (*i - start));
 	++(*i);
 }
 
@@ -130,7 +130,7 @@ void	ft_expand_other(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
 		&& (tkn[*i] != '\'') && (tkn[*i] != '\"'))
 		++(*i);
 	tkn_len = (*i - tkn_start);
-	(*sub_tkns)[(*curr_tk)] = ft_substr(tkn, tkn_start, tkn_len);
+	(*sub_tkns)[(*curr_tk++)] = ft_substr(tkn, tkn_start, tkn_len);
 }
 
 /** @} */
