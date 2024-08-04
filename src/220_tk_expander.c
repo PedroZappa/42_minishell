@@ -36,13 +36,14 @@ char	*ft_expander(t_shell *sh, char *tk_str)
 	sub_tkns = NULL;
 	sub_tkns = ft_expander_init(tk_str);
 	i = 0;
-	// curr_tk = -1;
 	curr_tk = 0;
 	while (tk_str[i])
 	{
-		// ++curr_tk;
 		if (tk_str[i] == '$')
+		{
 			sub_tkns[curr_tk] = ft_expand_dollar(tk_str, &i);
+			++curr_tk;
+		}
 		else if (tk_str[i] == '\'')
 			ft_expand_squote(&sub_tkns, tk_str, &i, &curr_tk);
 		else if (tk_str[i] == '\"')
@@ -51,7 +52,6 @@ char	*ft_expander(t_shell *sh, char *tk_str)
 			ft_expand_other(&sub_tkns, tk_str, &i, &curr_tk);
 	}
 	ret = ft_expand_var(sh, &sub_tkns);
-	i = 0;
 	return (free(sub_tkns), free(tk_str), ret);
 }
 
@@ -130,7 +130,7 @@ void	ft_expand_other(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
 		&& (tkn[*i] != '\'') && (tkn[*i] != '\"'))
 		++(*i);
 	tkn_len = (*i - tkn_start);
-	(*sub_tkns)[(*curr_tk++)] = ft_substr(tkn, tkn_start, tkn_len);
+	(*sub_tkns)[(*curr_tk)++] = ft_substr(tkn, tkn_start, tkn_len);
 }
 
 /** @} */
