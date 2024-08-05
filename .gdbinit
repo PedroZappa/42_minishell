@@ -20,6 +20,10 @@ skip -gfi *libreadline.so.8
 ### Custom Commands
 ##
 #
+define xx
+	kill
+	exit
+end
 ### 000_main.c
 define main
 	display argc
@@ -205,9 +209,13 @@ end
 ### 240_tk_expander_var.c
 define expand_var
 	display **sub_tkns@5
+	display sub_tkns
+	display *sub_tkns
+	display **sub_tkns
 	display ret
 	display curr
 	display i
+	display (*sub_tkns)[i]
 end
 
 define fill_var
