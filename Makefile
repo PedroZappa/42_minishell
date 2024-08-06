@@ -99,7 +99,7 @@ CC			= cc
 
 CFLAGS		= -Wall -Wextra -Werror
 DFLAGS		= -g
-# DFLAGS		+= -fsanitize=address
+DFLAGS		+= -fsanitize=address
 RFLAGS		= -lreadline
 INC			= -I $(INC_PATH)
 

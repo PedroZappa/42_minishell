@@ -38,8 +38,8 @@ char	*ft_expand_var(t_shell *sh, char ***sub_tkns)
 	int		i;
 
 	ret = ft_strdup("");
-	i = -1;
-	while ((*sub_tkns)[++i])
+	i = 0;
+	while ((*sub_tkns)[i])
 	{
 		curr = (*sub_tkns)[i];
 		if (((*sub_tkns)[i][0] == '$') && ((*sub_tkns)[i][1] || (*sub_tkns)[i + 1]))
@@ -51,6 +51,7 @@ char	*ft_expand_var(t_shell *sh, char ***sub_tkns)
 		else
 			(*sub_tkns)[i] = ft_unquote(curr);
 		ret = ft_strjoin_free(ret, (*sub_tkns)[i]);
+		++i;
 	}
 	return (ret);
 }

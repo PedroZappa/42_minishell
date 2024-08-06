@@ -55,7 +55,7 @@ char	**ft_expander_init(char *tkn_str)
 		else
 			ft_expand_check_other(tkn_str, &i);
 	}
-	sub_tkns = ft_calloc((n_tkns + 1), sizeof(char *));
+	sub_tkns = ft_calloc((n_tkns + 2), sizeof(char *));
 	if (!sub_tkns)
 		return (ft_err(MALLOC_ERR, errno), NULL);
 	sub_tkns[n_tkns] = NULL;
