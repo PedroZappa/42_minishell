@@ -3,11 +3,16 @@
 ### GDB Settings
 ##
 #
+set prompt (zdb) 
+set editing on
+# set verbose on
+set tui border-kind acs
+set tui active-border-mode bold-standout
+set tui border-mode reverse
 set trace-commands on
 set logging enabled on
 show follow-fork-mode
 set follow-fork-mode child
-
 
 set print pretty on
 # set print elements 2
@@ -380,7 +385,7 @@ define exec_fork
 end
 
 define exec
-	display *sh
+	display *shset editing on
 	display *cmd
 	display n
 end
