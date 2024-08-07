@@ -125,17 +125,14 @@ static char	*ft_add_user(t_shell *sh, char *prompt, int i)
 	int		j;
 
 	user_len = ft_strlen(sh->user);
-	printf("%s\n", sh->user);
 	prompt_len = ft_strlen(prompt);
 	total_len = user_len + 1;
-	ret = ft_calloc((total_len + prompt_len + 5), sizeof(char));
+	ret = ft_calloc(total_len + prompt_len + 5, sizeof(char));
 	i = -1;
 	while (++i < user_len)
 		ret[i] = sh->user[i];
-	ret[i++] = '@';
-	ret[i++] = '4';
-	ret[i++] = '2';
-	ret[i++] = ':';
+	ft_strcpy(ret + i, "@42:");
+	i += 4;
 	j = -1;
 	while (++j < prompt_len)
 	{
