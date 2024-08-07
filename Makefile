@@ -222,7 +222,7 @@ gdb: all $(NAME) $(TEMP_PATH)			## Debug w/ gdb
 	tmux resize-pane -L 5
 	make get_log
 
-vgdb: $(BUILD) $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck) & gdb
+vgdb: all $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck) & gdb
 	tmux split-window -h "valgrind $(VGDB_ARGS) ./$(NAME) $(ARG)"
 	make vgdb_cmd
 	tmux split-window -v "gdb --tui -x $(TEMP_PATH)/gdb_commands.txt $(NAME)"
