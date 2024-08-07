@@ -99,9 +99,11 @@ CC			= cc
 
 CFLAGS		= -Wall -Wextra -Werror
 DFLAGS		= -g
-DFLAGS		+= -fsanitize=address
 RFLAGS		= -lreadline
 INC			= -I $(INC_PATH)
+
+BUILD ?= all
+ASAN_FLAGS	= -fsanitize=address
 
 #==============================================================================#
 #                                COMMANDS                                      #
@@ -131,6 +133,12 @@ $(NAME): $(BUILD_PATH) $(LIBFT_ARC) $(OBJS)			## Compile
 	$(CC) $(CFLAGS) $(DFLAGS) $(OBJS) $(INC) $(LIBFT_ARC) $(RFLAGS) -o $(NAME)
 	@echo "[$(_SUCCESS) compiling $(MAG)$(NAME)$(D) $(YEL)🖔$(D)]"
 	make norm
+
+asan: CFLAGS += $(ASAN_FLAGS)
+asan: $(BUILD_PATH) $(LIBFT_ARC) $(OBJS)   ## Compile with Address Sanitizer
+	@echo "$(YEL)Compiling $(MAG)$(NAME)$(YEL) with Address Sanitizer$(D)"
+	$(CC) $(CFLAGS) $(OBJS) $(INC) $(LIBFT_ARC) $(RFLAGS) -o $(NAME)
+	@echo "[$(_SUCCESS) compiling $(MAG)$(NAME)$(D) with Address Sanitizer $(YEL)🖔$(D)]"
 
 deps:		## Download/Update deps
 	@if test ! -d "$(LIBFT_PATH)"; then make get_libft; \
@@ -201,36 +209,11 @@ check_ext_func: all		## Check for external functions
 
 ##@ Test Rules 🧪
 
-sync_shell: all		## Test w/ syncshell
+sync_shell: $(BUILD)		## Test w/ syncshell
 	@echo "[$(YEL)Testing with syncshell$(D)]"
 	tmux split-window -h "bash"
 	tmux setw synchronize-panes on
 	clear && ./$(NAME)
-
-reallyshell: all		## Test w/ reallyshell
-	if ! test -d "$(REALLYSH_PATH)"; then make get_reallyshell; fi
-	@echo "[$(YEL)Testing with reallyshell$(D)]"
-	tmux split-window -h "~/Minishell_Tester/connect.sh"
-	$(HOME)/Minishell_Tester/start.sh
-
-get_reallyshell:
-	@echo "* $(CYA)Getting reallyshell submodule$(D)]"
-	@if test ! -d "$(REALLYSH_PATH)"; then \
-		cd ~ && \
-		git clone https://github.com/BEQSONA-cmd/Minishell_Tester.git && \
-		cd Minishell_Tester && \
-		./install.sh; \
-		if ! grep -q "alias m_test=" ~/.bashrc; then \
-			echo "alias m_test='~/Minishell_Tester/start.sh'" >> ~/.bashrc; \
-		fi; \
-		if ! grep -q "alias reallyshell=" ~/.bashrc; then \
-			echo "alias reallyshell='~/Minishell_Tester/connect.sh'" >> ~/.bashrc; \
-		fi; \
-		echo "* $(GRN)reallyshell submodule download$(D): $(_SUCCESS)"; \
-	else \
-		echo "* $(GRN)reallyshell submodule already exists 🖔"; \
-		echo " $(RED)$(D) [$(GRN)Nothing to be done!$(D)]"; \
-	fi
 
 ##@ Debug Rules 
 
@@ -239,7 +222,7 @@ gdb: all $(NAME) $(TEMP_PATH)			## Debug w/ gdb
 	tmux resize-pane -L 5
 	make get_log
 
-vgdb: all $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck) & gdb
+vgdb: $(BUILD) $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck) & gdb
 	tmux split-window -h "valgrind $(VGDB_ARGS) ./$(NAME) $(ARG)"
 	make vgdb_cmd
 	tmux split-window -v "gdb --tui -x $(TEMP_PATH)/gdb_commands.txt $(NAME)"
