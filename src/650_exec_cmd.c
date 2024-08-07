@@ -33,17 +33,22 @@
 void	ft_exec_cmd(t_shell *sh, int id, int i)
 {
 	t_stat	statbuf;
+	int		stat_ret;
 
 	memset(&statbuf, 0, sizeof(t_stat));
 	if (id == CMD_EXEC)
 	{
 		if (!sh->cmds[i].argv[0][0])
 			return ;
-		stat(sh->cmds[i].argv[0], &statbuf);
+		stat_ret = stat(sh->cmds[i].argv[0], &statbuf);
+		if (!stat_ret)
+		{
+			ft_free_sh(sh);
+			exit(CMD_NOT_FOUND);
+		}
 		ft_execve(sh->path, sh->cmds[i].argv, sh->envp);
-		// TODO: Handle errors
 		ft_free_sh(sh);
-		exit(CMD_NOT_FOUND);
+		exit(SUCCESS);
 	}
 	else
 		ft_exec(sh, id, i);
