@@ -26,3 +26,9 @@
 
 ## GCC cleanup __attribute__
 - [Using the __cleanup__ variable attribute in GCC](https://echorand.me/site/notes/articles/c_cleanup/cleanup_attribute_c.html)
+
+TO Verify
+
+Token Priority
+
+Redirect -> Pipe -> Command
