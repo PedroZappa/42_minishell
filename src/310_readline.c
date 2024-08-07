@@ -19,20 +19,20 @@
 
 #include "../inc/minishell.h"
 
-static char	*ft_get_bash(t_shell ***sh, char *prompt);
-static char	*ft_bash(t_shell ****sh, char *cwd);
-static char	*ft_build_bash(t_shell *****sh, char **cwd, int i);
-static char	*ft_add_user(t_shell *****sh, char *prompt, int i);
+static char	*ft_get_bash(t_shell *sh, char *prompt);
+static char	*ft_bash(t_shell *sh, char *cwd);
+static char	*ft_build_bash(t_shell *sh, char **cwd, int i);
+static char	*ft_add_user(t_shell *sh, char *prompt, int i);
 
 /// @brief			Readline wrapper
 /// @param line_buf	Line buffer
 /// @param home		Home directory
 /// @note			Used in ft_parser()
-void	ft_readline(char ***line_buf, t_shell **sh)
+void	ft_readline(char ***line_buf, t_shell *sh)
 {
 	char	*prompt;
 
-	prompt = ft_get_bash(&sh, GRN"$> "NC);
+	prompt = ft_get_bash(sh, GRN"$> "NC);
 	**line_buf = readline(prompt);
 	ft_free(prompt);
 	if (!**line_buf)
@@ -46,7 +46,7 @@ void	ft_readline(char ***line_buf, t_shell **sh)
 /// @param home		Home directory
 /// @return			Prompt
 /// @note			Used in ft_readline()
-static char	*ft_get_bash(t_shell ***sh, char *prompt)
+static char	*ft_get_bash(t_shell *sh, char *prompt)
 {
 	char	*pwd;
 	char	*ret;
@@ -54,14 +54,14 @@ static char	*ft_get_bash(t_shell ***sh, char *prompt)
 
 	pwd = NULL;
 	pwd = getcwd(NULL, 0);
-	bash = ft_bash(&sh, pwd);
+	bash = ft_bash(sh, pwd);
 	if (bash)
 	{
 		ret = ft_strjoin(bash, prompt);
 		return (ft_free(pwd), ft_free(bash), ret);
 	}
 	else
-		return (free(pwd), free(bash), ft_err(pwd, 0), prompt);
+		return (ft_free(pwd), ft_free(bash), ft_err(pwd, 0), prompt);
 }
 
 /// @brief			Build bash prompt
@@ -69,7 +69,7 @@ static char	*ft_get_bash(t_shell ***sh, char *prompt)
 /// @param cwd		Pointer to cwd string
 /// @return			Bash prompt
 /// @note			Used in ft_gwt_prompt()
-static char	*ft_bash(t_shell ****sh, char *cwd)
+static char	*ft_bash(t_shell *sh, char *cwd)
 {
 	char	*tmp;
 	char	*ret;
@@ -79,10 +79,10 @@ static char	*ft_bash(t_shell ****sh, char *cwd)
 	ret = NULL;
 	if (!cwd)
 		return (ret);
-	tmp = ft_build_bash(&sh, &cwd, i);
+	tmp = ft_build_bash(sh, &cwd, i);
 	if (!tmp)
 		ret = ft_strdup(cwd);
-	ret = ft_add_user(&sh, tmp, i);
+	ret = ft_add_user(sh, tmp, i);
 	free(tmp);
 	return (ret);
 }
@@ -92,7 +92,7 @@ static char	*ft_bash(t_shell ****sh, char *cwd)
 /// @param cwd		Pointer to cwd string
 /// @return			Bash prompt
 /// @note			Used in ft_gwt_prompt()
-static char	*ft_build_bash(t_shell *****sh, char **cwd, int i)
+static char	*ft_build_bash(t_shell *sh, char **cwd, int i)
 {
 	char	*bash;
 	char	*local_cwd;
@@ -101,7 +101,7 @@ static char	*ft_build_bash(t_shell *****sh, char **cwd, int i)
 
 	local_cwd = *cwd;
 	cwd_len = ft_strlen(*cwd);
-	home_len = ft_strlen((****sh)->home);
+	home_len = ft_strlen(sh->home);
 	bash = ft_calloc((cwd_len - home_len + 2), sizeof(char));
 	bash[0] = '~';
 	i = -1;
@@ -116,7 +116,7 @@ static char	*ft_build_bash(t_shell *****sh, char **cwd, int i)
 /// @param prompt	Prompt string
 /// @return			Prompt
 /// @note			Used in ft_bash()
-static char	*ft_add_user(t_shell *****sh, char *prompt, int i)
+static char	*ft_add_user(t_shell *sh, char *prompt, int i)
 {
 	char	*ret;
 	int		user_len;
@@ -124,13 +124,14 @@ static char	*ft_add_user(t_shell *****sh, char *prompt, int i)
 	int		prompt_len;
 	int		j;
 
-	user_len = ft_strlen((****sh)->user);
+	user_len = ft_strlen(sh->user);
+	printf("%s\n", sh->user);
 	prompt_len = ft_strlen(prompt);
 	total_len = user_len + 1;
 	ret = ft_calloc((total_len + prompt_len + 5), sizeof(char));
 	i = -1;
 	while (++i < user_len)
-		ret[i] = (****sh)->user[i];
+		ret[i] = sh->user[i];
 	ret[i++] = '@';
 	ret[i++] = '4';
 	ret[i++] = '2';
