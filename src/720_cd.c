@@ -102,7 +102,6 @@ int	ft_get_prev_dir(char ***env, char *old, char *pwd)
 	ft_set_var("PWD", old, env);
 	ft_putendl_fd(old, STDOUT_FILENO);
 	chdir_ret = chdir(old);
-	ft_free(old);
 	return (chdir_ret);
 }
 
