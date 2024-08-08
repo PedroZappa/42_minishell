@@ -37,14 +37,14 @@ static int		ft_has_match(char **line);
 /// @return			SUCCESS(0)
 ///	@return			FAILURE(errno)
 ///	@note			Used in ft_parser()
-int	ft_tokenizer(t_shell *sh, char **line, t_token **tks)
+int	ft_tokenizer(t_shell *sh, char *line, t_token **tks)
 {
 	t_tk_ops	ops[16];
 	t_token		*tk;
 	char		*tkn_str;
 
 	ft_init_ops(ops);
-	if (ft_get_tkns(*line, tks, ops) != SUCCESS)
+	if (ft_get_tkns(line, tks, ops) != SUCCESS)
 		return (ft_err(TKNZR_ERR, errno));
 	tk = *tks;
 	while (tk)

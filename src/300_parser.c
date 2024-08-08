@@ -42,7 +42,7 @@ static int	ft_parse_cmds(t_token *tks, t_cmd *cmds, int i, int j);
 /// @return			SUCCESS(0
 /// @return			FAILURE(1)
 ///	@note			Used in ft_sh_loop()
-int	ft_parser(t_shell *sh, char **line_buf)
+int	ft_parser(t_shell *sh, char *line_buf)
 {
 	t_token	*tks;
 
@@ -50,7 +50,7 @@ int	ft_parser(t_shell *sh, char **line_buf)
 	ft_readline(&line_buf, sh);
 	if (ft_tokenizer(sh, line_buf, &tks))
 		return (ft_free_tks(&tks), FAILURE);
-	ft_free(*line_buf);
+	ft_free(line_buf);
 	if (ft_check_syntax(tks))
 		return (ft_free_tks(&tks), FAILURE);
 	sh->n_cmds = ft_count_cmds(tks);

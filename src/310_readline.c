@@ -29,17 +29,17 @@ static char	*ft_add_user(t_shell *sh, char *prompt, int i);
 /// @param line_buf	Line buffer
 /// @param home		Home directory
 /// @note			Used in ft_parser()
-void	ft_readline(char ***line_buf, t_shell *sh)
+void	ft_readline(char **line_buf, t_shell *sh)
 {
 	char	*prompt;
 
-	prompt = ft_get_bash(sh, GRN"$> "NC);
-	**line_buf = readline(prompt);
+	prompt = ft_get_bash(sh, BGRN"$> "NC);
+	*line_buf = readline(prompt);
 	ft_free(prompt);
-	if (!**line_buf)
-		**line_buf = ft_strdup("exit");
-	if (ft_strlen(**line_buf) > 0)
-		add_history(**line_buf);
+	if (!*line_buf)
+		*line_buf = ft_strdup("exit");
+	if (ft_strlen(*line_buf) > 0)
+		add_history(*line_buf);
 }
 
 /// @brief			Get prompt

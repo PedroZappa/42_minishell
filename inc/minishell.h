@@ -249,7 +249,7 @@ void		ft_set_termios(int fd, int opts, t_term *termios);
 //=============================================================================/
 
 /// @file	200_tokenizer.c
-int			ft_tokenizer(t_shell *sh, char **line, t_token **tks);
+int			ft_tokenizer(t_shell *sh, char *line, t_token **tks);
 
 /// @file	210_tk_list.c
 t_token		*ft_tk_new(char *line, t_token_type type, int len);
@@ -286,18 +286,18 @@ void		ft_rm_blank_tks(t_token **tk_list);
 //=============================================================================/
 
 /// @file	300_parser.c
-int			ft_parser(t_shell *sh, char **line_buf);
+int			ft_parser(t_shell *sh, char *line_buf);
 /// static int	ft_check_syntax(t_token *tks);
 /// static int	ft_count_cmds(t_token *tks);
 /// static void	ft_count_args(t_shell *sh, t_token *tks);
 /// static int	ft_parse_cmds(t_token *tks, t_cmd *cmds, int i, int j);
 
 /// @file	310_readline.c
-void		ft_readline(char ***line_buf, t_shell *sh);
-// static char	*ft_get_bash(t_shell ***sh, char *prompt);
-// static char	*ft_bash(t_shell ****sh, char *cwd);
-// static char	*ft_build_bash(t_shell *****sh, char **cwd, int i);
-// static char	*ft_add_user(t_shell *****sh, char *prompt, int i);
+void		ft_readline(char **line_buf, t_shell *sh);
+// static char	*ft_get_bash(t_shell *sh, char *prompt);
+// static char	*ft_bash(t_shell *sh, char *cwd);
+// static char	*ft_build_bash(t_shell *sh, char **cwd, int i);
+// static char	*ft_add_user(t_shell *sh, char *prompt, int i);
 
 //=============================================================================/
 //	400		Signal  														   /

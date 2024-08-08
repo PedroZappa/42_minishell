@@ -67,7 +67,7 @@ static int	ft_sh_loop(t_shell *sh)
 	while (1)
 	{
 		ft_sigset();
-		status = ft_parser(sh, &line_buf);
+		status = ft_parser(sh, line_buf);
 		if (status == FAILURE)
 			continue ;
 		if (sh->n_cmds > NO_CMDS)
