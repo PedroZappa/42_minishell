@@ -210,6 +210,7 @@ check_ext_func: all		## Check for external functions
 ##@ Test Rules 🧪
 
 sync_shell: $(BUILD)		## Test w/ syncshell
+	tmux set-option remain-on-exit off
 	@echo "[$(YEL)Testing with syncshell$(D)]"
 	tmux split-window -h "bash"
 	tmux setw synchronize-panes on

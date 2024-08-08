@@ -57,36 +57,48 @@ int	ft_cd(t_shell *sh, int cmd_n)
 static int	ft_chdir(char ***env, char *path)
 {
 	char	*pwd;
+	char	*old;
 	int		chdir_ret;
 
 	pwd = NULL;
+	old = NULL;
 	pwd = getcwd(NULL, 0);
-	chdir_ret = chdir(path);
+	// chdir_ret = chdir(path);
 	if (path[0] == '-')
 	{
 		ft_free(pwd);
-		pwd = ft_get_var("OLDPWD", *env, NULL);
-		ft_putendl_fd(pwd, STDOUT_FILENO);
-		pwd = NULL;
-		pwd = getcwd(NULL, 0);
-		ft_set_var("PWD", pwd, env);
-		ft_free(pwd);
+		pwd = ft_get_var("PWD", *env, NULL);
+		ft_set_var("OLDPWD", pwd, env);
+		old = ft_get_var("OLDPWD", *env, NULL);
+		ft_set_var("PWD", old, env);
+		ft_putendl_fd(old, STDOUT_FILENO);
+		chdir_ret = chdir(old);
+		ft_free(old);
 		return (SUCCESS);
+	}
+	else 
+	{
+		chdir_ret = chdir(path);
+		ft_set_var("OLDPWD", path, env);
+		ft_free(old);
+		old = NULL;
+		old = getcwd(NULL, 0);
+		ft_set_var("PWD", old, env);
+		ft_free(old);
 	}
 	if (chdir_ret == -1)
 	{
-		ft_free(pwd);
+		ft_free(old);
 		ft_fprintf(STDERR_FILENO,
 			"bash: %s: No such file or directory\n", path);
 		return (FAILURE);
 	}
-	ft_set_var("OLDPWD", path, env);
-	ft_free(pwd);
-	pwd = NULL;
-	pwd = getcwd(NULL, 0);
-	ft_set_var("PWD", pwd, env);
-	ft_free(pwd);
 	return (chdir_ret);
 }
+
+// int	ft_get_prev_dir(char ***env, char *path)
+// {
+//
+// }
 
 /** @} */

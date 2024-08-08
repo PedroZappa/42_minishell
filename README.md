@@ -32,6 +32,7 @@
 ## General
 ```sh
 cat ""
+../
 ```
 ## Built-ins 
 ### [[echo]]
@@ -58,8 +59,6 @@ echo "yo $USER"
 echo "yo $USER "
 echo "$USER"'$USER'
 echo "$USER"'$USER'$USER
-
-NOT PASSING
 echo $USER$USER
 echo "$USER"$USER'$USER'
 ```
@@ -67,7 +66,6 @@ echo "$USER"$USER'$USER'
 ### [[cd]]
 ```sh
 cd -
-cd ..
 cd ""
 ```
 
