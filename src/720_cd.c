@@ -21,6 +21,7 @@
 #include "../inc/minishell.h"
 
 static int	ft_chdir(char ***env, char *path);
+static int	ft_get_prev_dir(char ***env, char *old, char *pwd);
 
 /// @brief			Change directory
 /// @details
@@ -64,16 +65,17 @@ static int	ft_chdir(char ***env, char *path)
 	pwd = NULL;
 	old = NULL;
 	pwd = getcwd(NULL, 0);
-	// chdir_ret = chdir(path);
+	chdir_ret = 0;
 	if (path[0] == '-')
 	{
-		old = ft_get_var("OLDPWD", *env, NULL);
-		ft_set_var("OLDPWD", pwd, env);
-		if (old == NULL)
-			old = pwd;
-		ft_set_var("PWD", old, env);
-		ft_putendl_fd(old, STDOUT_FILENO);
-		chdir_ret = chdir(old);
+		// old = ft_get_var("OLDPWD", *env, NULL);
+		// ft_set_var("OLDPWD", pwd, env);
+		// if (old == NULL)
+		// 	old = pwd;
+		// ft_set_var("PWD", old, env);
+		// ft_putendl_fd(old, STDOUT_FILENO);
+		// chdir_ret = chdir(old);
+		ft_get_prev_dir(env, old, pwd);
 	}
 	else 
 	{
@@ -96,9 +98,20 @@ static int	ft_chdir(char ***env, char *path)
 	return (chdir_ret);
 }
 
-// int	ft_get_prev_dir(char ***env, char *path)
-// {
-//
-// }
+int	ft_get_prev_dir(char ***env, char *old, char *pwd)
+{
+	int		chdir_ret;
+
+	chdir_ret = 0;
+	old = ft_get_var("OLDPWD", *env, NULL);
+	ft_set_var("OLDPWD", pwd, env);
+	if (old == NULL)
+		old = pwd;
+	ft_set_var("PWD", old, env);
+	ft_putendl_fd(old, STDOUT_FILENO);
+	chdir_ret = chdir(old);
+	ft_free(old);
+	return (chdir_ret);
+}
 
 /** @} */
