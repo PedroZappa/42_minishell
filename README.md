@@ -26,6 +26,52 @@
 
 ## GCC cleanup __attribute__
 - [Using the __cleanup__ variable attribute in GCC](https://echorand.me/site/notes/articles/c_cleanup/cleanup_attribute_c.html)
+# Tests
+
+# Tests
+## General
+```sh
+cat ""
+```
+## Built-ins 
+### [[echo]]
+```sh
+echo
+echo -n yo
+echo --n yo
+echo -nn yo
+echo '-n' yo
+echo '-n ' yo
+echo '-n  ' yo
+echo 'yo $USER'
+echo '$USER'$USER
+echo '$USER'"$USER"
+echo '$USER'"$USER"$USER
+echo "Yo"
+echo "$USER"
+echo "yo $USER"
+echo "-n" yo
+echo "-n " yo
+echo "-n  " yo
+echo zedro is $USER
+echo "yo $USER"
+echo "yo $USER "
+echo "$USER"'$USER'
+echo "$USER"'$USER'$USER
+
+NOT PASSING
+echo $USER$USER
+echo "$USER"$USER'$USER'
+```
+
+### [[cd]]
+```sh
+cd -
+cd ..
+cd ""
+```
+
+# Notes
 
 TO Verify
 
