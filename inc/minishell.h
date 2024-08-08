@@ -294,10 +294,6 @@ int			ft_parser(t_shell *sh, char *line_buf);
 
 /// @file	310_readline.c
 void		ft_readline(char **line_buf, t_shell *sh);
-// static char	*ft_get_bash(t_shell *sh, char *prompt);
-// static char	*ft_bash(t_shell *sh, char *cwd);
-// static char	*ft_build_bash(t_shell *sh, char **cwd, int i);
-// static char	*ft_add_user(t_shell *sh, char *prompt, int i);
 
 //=============================================================================/
 //	400		Signal  														   /
