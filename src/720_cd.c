@@ -74,8 +74,6 @@ static int	ft_chdir(char ***env, char *path)
 		ft_set_var("PWD", old, env);
 		ft_putendl_fd(old, STDOUT_FILENO);
 		chdir_ret = chdir(old);
-		
-		return (SUCCESS);
 	}
 	else 
 	{
@@ -93,6 +91,7 @@ static int	ft_chdir(char ***env, char *path)
 			"bash: %s: No such file or directory\n", path);
 		return (FAILURE);
 	}
+	ft_free(pwd);
 	ft_free(old);
 	return (chdir_ret);
 }
