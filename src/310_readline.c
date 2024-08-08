@@ -20,13 +20,33 @@
 
 #include "../inc/minishell.h"
 
+static char	*ft_build_cwd(t_shell *sh, char *cwd);
+static char	*ft_build_prompt(t_shell *sh);
+
+/// @brief			Readline wrapper
+/// @param line_buf	Line buffer
+/// @param home		Home directory
+/// @note			Used in ft_parser()
+void	ft_readline(char **line_buf, t_shell *sh)
+{
+	char	*prompt;
+
+	prompt = ft_build_prompt(sh);
+	*line_buf = readline(prompt);
+	ft_free(prompt);
+	if (!*line_buf)
+		*line_buf = ft_strdup("exit");
+	if (ft_strlen(*line_buf) > 0)
+		add_history(*line_buf);
+}
+
 /// @brief			Formats the Current Working Directory (cwd) 
 /// 						to omit the home path and replace it by '~'
 /// @param sh		Pointer to a t_shell struct
 /// @param cwd	String containing the path to the cwd
 /// @return			Formatted cwd
 /// @note			Used in ft_build_prompt()
-static char *ft_build_cwd(t_shell *sh, char *cwd)
+static char	*ft_build_cwd(t_shell *sh, char *cwd)
 {
 	char	*ret;
 	int		i;
@@ -52,7 +72,7 @@ static char *ft_build_cwd(t_shell *sh, char *cwd)
 /// @note			Used in ft_readline()
 static char	*ft_build_prompt(t_shell *sh)
 {
-	char 	*ret;
+	char	*ret;
 	char	*temp;
 	char	*cwd;
 	char	*pwd;
@@ -61,30 +81,13 @@ static char	*ft_build_prompt(t_shell *sh)
 	cwd = getcwd(NULL, 0);
 	if (cwd != NULL)
 	{
-		pwd = ft_current_path(sh, cwd);
+		pwd = ft_build_cwd(sh, cwd);
 		if (pwd)
 			temp = ft_strjoin_free(temp, pwd);
 		ft_free(cwd);
 	}
 	ret = ft_strjoin(temp, GRN"$> "NC);
 	return (ft_free(temp), ret);
-}
-
-/// @brief			Readline wrapper
-/// @param line_buf	Line buffer
-/// @param home		Home directory
-/// @note			Used in ft_parser()
-void	ft_readline(char **line_buf, t_shell *sh)
-{
-	char	*prompt;
-
-	prompt = ft_build_prompt(sh);
-	*line_buf = readline(prompt);
-	ft_free(prompt);
-	if (!*line_buf)
-		*line_buf = ft_strdup("exit");
-	if (ft_strlen(*line_buf) > 0)
-		add_history(*line_buf);
 }
 
 /** @} */
