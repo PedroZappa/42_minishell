@@ -22,7 +22,7 @@
 
 static char	*ft_get_bash(t_shell *sh, char *prompt);
 static char	*ft_bash(t_shell *sh, char *cwd);
-static char	*ft_build_bash(t_shell *sh, char **cwd, int i);
+static char	*ft_build_bash(t_shell *sh, char *cwd, int i);
 static char	*ft_add_user(t_shell *sh, char *prompt, int i);
 
 /// @brief			Readline wrapper
@@ -80,7 +80,7 @@ static char	*ft_bash(t_shell *sh, char *cwd)
 	ret = NULL;
 	if (!cwd)
 		return (ret);
-	tmp = ft_build_bash(sh, &cwd, i);
+	tmp = ft_build_bash(sh, cwd, i);
 	if (!tmp)
 		ret = ft_strdup(cwd);
 	ret = ft_add_user(sh, tmp, i);
@@ -89,24 +89,25 @@ static char	*ft_bash(t_shell *sh, char *cwd)
 }
 
 /// @brief			Build bash prompt
-/// @param sh		Pointer to a t_shell struct
 /// @param cwd		Pointer to cwd string
 /// @return			Bash prompt
 /// @note			Used in ft_gwt_prompt()
-static char	*ft_build_bash(t_shell *sh, char **cwd, int i)
+static char	*ft_build_bash(t_shell *sh, char *cwd, int i)
 {
 	char	*bash;
-	char	*local_cwd;
 	int		cwd_len;
+	int		home_len;
 
-	local_cwd = *cwd;
-	cwd_len = ft_strlen(*cwd);
-	bash = ft_calloc((cwd_len + 1), sizeof(char));
+	cwd_len = ft_strlen(cwd);
+	home_len = ft_strlen(sh->home);
+	if (strncmp(cwd, sh->home, ft_strlen(sh->home)))
+		home_len = 0;
+	bash = ft_calloc((cwd_len + (home_len > 0) + 1), sizeof(char));
 	i = -1;
-	(void)sh;
+	bash[0] = '~';
 	while (++i < cwd_len)
-		bash[i] = local_cwd[i];
-	bash[i] = '\0';
+		bash[i + (home_len > 0)] = cwd[i + home_len];
+	bash[i + (home_len > 0)] = '\0';
 	return (bash);
 }
 
