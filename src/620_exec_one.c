@@ -44,8 +44,6 @@ int	ft_exec_one(t_shell *sh)
 	}
 	else if (ft_exec_fork(sh))
 		return (ft_free_arr(sh->path), FAILURE);
-	else
-		ft_cmd_err(sh->cmds[0].argv[0], 1);
 	ft_update_last_cmd(sh);
 	return (ft_free_arr(sh->path), SUCCESS);
 }

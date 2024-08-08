@@ -62,6 +62,17 @@ static int	ft_chdir(char ***env, char *path)
 	pwd = NULL;
 	pwd = getcwd(NULL, 0);
 	chdir_ret = chdir(path);
+	if (path[0] == '-')
+	{
+		ft_free(pwd);
+		pwd = ft_get_var("OLDPWD", *env, NULL);
+		ft_putendl_fd(pwd, STDOUT_FILENO);
+		pwd = NULL;
+		pwd = getcwd(NULL, 0);
+		ft_set_var("PWD", pwd, env);
+		ft_free(pwd);
+		return (SUCCESS);
+	}
 	if (chdir_ret == -1)
 	{
 		ft_free(pwd);

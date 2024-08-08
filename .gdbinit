@@ -415,7 +415,8 @@ define cd
 end
 
 define chdir
-	display *pwd
+	display pwd
+	display *path
 	display chdir_ret
 end
 
