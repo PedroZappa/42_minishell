@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   310_readline.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gfragoso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 11:46:35 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/18 16:26:48 by passunca         ###   ########.fr       */
+/*   Updated: 2024/08/08 12:41:36 by gfragoso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 /**
 * @defgroup 	readline Readline
 * @{
@@ -97,17 +98,15 @@ static char	*ft_build_bash(t_shell *sh, char **cwd, int i)
 	char	*bash;
 	char	*local_cwd;
 	int		cwd_len;
-	int		home_len;
 
 	local_cwd = *cwd;
 	cwd_len = ft_strlen(*cwd);
-	home_len = ft_strlen(sh->home);
-	bash = ft_calloc((cwd_len - home_len + 2), sizeof(char));
-	bash[0] = '~';
+	bash = ft_calloc((cwd_len + 1), sizeof(char));
 	i = -1;
-	while (++i < cwd_len - home_len)
-		bash[i + 1] = local_cwd[home_len + i];
-	bash[i + 1] = '\0';
+	(void)sh;
+	while (++i < cwd_len)
+		bash[i] = local_cwd[i];
+	bash[i] = '\0';
 	return (bash);
 }
 
