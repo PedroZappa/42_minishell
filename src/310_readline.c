@@ -105,7 +105,7 @@ static char	*ft_build_bash(t_shell *sh, char *cwd, int i)
 	bash = ft_calloc((cwd_len + (home_len > 0) + 1), sizeof(char));
 	i = -1;
 	bash[0] = '~';
-	while (++i < cwd_len)
+	while (++i < (cwd_len - home_len))
 		bash[i + (home_len > 0)] = cwd[i + home_len];
 	bash[i + (home_len > 0)] = '\0';
 	return (bash);
