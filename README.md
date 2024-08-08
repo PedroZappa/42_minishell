@@ -32,6 +32,8 @@
 ## General
 ```sh
 cat ""
+
+# TODO:
 ../
 ```
 ## Built-ins 
@@ -61,11 +63,16 @@ echo "$USER"'$USER'
 echo "$USER"'$USER'$USER
 echo $USER$USER
 echo "$USER"$USER'$USER'
+
+# TODO:
 ```
 
 ### [[cd]]
 ```sh
+cd ~
 cd -
+
+# TODO:
 cd ""
 ```
 
