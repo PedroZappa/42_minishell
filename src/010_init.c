@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   010_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gfragoso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:53:41 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/08 20:32:32 by passunca         ###   ########.fr       */
+/*   Updated: 2024/08/08 12:10:37 by gfragoso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 /**
 * @defgroup init Init
 * @{
@@ -44,6 +45,7 @@ int	ft_init(t_shell *sh, char **envp)
 		return (ft_err(ENV_INIT_ERR, errno), FAILURE);
 	sh->home = ft_get_var("HOME", sh->envp, NULL);
 	sh->user = ft_get_var("USER", sh->envp, NULL);
+	ft_set_var("OLDPWD", NULL, &sh->envp);
 	// sh->heredoc = ft_strdup("");
 	ft_get_termios(STDIN_FILENO, &sh->termios);
 	rl_editing_mode = VI;

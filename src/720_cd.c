@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   720_cd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gfragoso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 08:19:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/16 14:48:32 by passunca         ###   ########.fr       */
+/*   Updated: 2024/08/08 12:33:16 by gfragoso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 /**
 * @defgroup 	readline Readline
 * @{
@@ -66,25 +67,24 @@ static int	ft_chdir(char ***env, char *path)
 	// chdir_ret = chdir(path);
 	if (path[0] == '-')
 	{
-		ft_free(pwd);
-		pwd = ft_get_var("PWD", *env, NULL);
-		ft_set_var("OLDPWD", pwd, env);
 		old = ft_get_var("OLDPWD", *env, NULL);
+		ft_set_var("OLDPWD", pwd, env);
+		if (old == NULL)
+			old = pwd;
 		ft_set_var("PWD", old, env);
 		ft_putendl_fd(old, STDOUT_FILENO);
 		chdir_ret = chdir(old);
-		ft_free(old);
+		
 		return (SUCCESS);
 	}
 	else 
 	{
 		chdir_ret = chdir(path);
-		ft_set_var("OLDPWD", path, env);
+		ft_set_var("OLDPWD", pwd, env);
 		ft_free(old);
 		old = NULL;
 		old = getcwd(NULL, 0);
 		ft_set_var("PWD", old, env);
-		ft_free(old);
 	}
 	if (chdir_ret == -1)
 	{
@@ -93,6 +93,7 @@ static int	ft_chdir(char ***env, char *path)
 			"bash: %s: No such file or directory\n", path);
 		return (FAILURE);
 	}
+	ft_free(old);
 	return (chdir_ret);
 }
 

@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   510_env_set.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gfragoso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 09:15:42 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/16 14:22:37 by passunca         ###   ########.fr       */
+/*   Updated: 2024/08/08 12:33:06 by gfragoso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 /**
 * @defgroup env_set Set environment variable
 * @{
@@ -37,7 +38,7 @@ static char	**ft_env_add_var(char **env, char *new_var);
 int	ft_set_var(char *var, char *val, char ***env)
 {
 	char	*new;
-	int		max;
+	//int		max;
 	int		i;
 
 	if (!*env)
@@ -51,9 +52,7 @@ int	ft_set_var(char *var, char *val, char ***env)
 		(*env) = ft_env_add_var(*env, new);
 	else
 	{
-		max = ft_max(ft_strlen(new), ft_strlen((*env)[i]));
-		if (ft_strncmp(new, (*env)[i], max) != SUCCESS)
-			ft_swapstrs(&(*env)[i], &new);
+		ft_swapstrs(&(*env)[i], &new);
 		free(new);
 	}
 	return (SUCCESS);
