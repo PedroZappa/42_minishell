@@ -11,10 +11,10 @@
 /* ************************************************************************** */
 
 /**
-* @defgroup 	readline Readline
+* @defgroup 	cd Change directory
 * @{
 *
-* @brief		Readline functionality
+* @brief		Change directory
 * @version		1.0
 ***/
 
@@ -67,37 +67,29 @@ static int	ft_chdir(char ***env, char *path)
 	pwd = getcwd(NULL, 0);
 	chdir_ret = 0;
 	if (path[0] == '-')
-	{
-		// old = ft_get_var("OLDPWD", *env, NULL);
-		// ft_set_var("OLDPWD", pwd, env);
-		// if (old == NULL)
-		// 	old = pwd;
-		// ft_set_var("PWD", old, env);
-		// ft_putendl_fd(old, STDOUT_FILENO);
-		// chdir_ret = chdir(old);
 		ft_get_prev_dir(env, old, pwd);
-	}
-	else 
+	else
 	{
 		chdir_ret = chdir(path);
 		ft_set_var("OLDPWD", pwd, env);
 		ft_free(old);
-		old = NULL;
 		old = getcwd(NULL, 0);
 		ft_set_var("PWD", old, env);
 	}
 	if (chdir_ret == -1)
 	{
-		ft_free(old);
 		ft_fprintf(STDERR_FILENO,
 			"bash: %s: No such file or directory\n", path);
-		return (FAILURE);
+		return (ft_free(old), FAILURE);
 	}
-	ft_free(pwd);
-	ft_free(old);
-	return (chdir_ret);
+	return (ft_free(pwd), ft_free(old), chdir_ret);
 }
 
+/// @brief			Get previous directory
+/// @param env		Pointer to array of environment variables
+/// @param old		Pointer to old directory
+/// @param pwd		Pointer to current directory
+/// @return			SUCCESS(chdir_ret)
 int	ft_get_prev_dir(char ***env, char *old, char *pwd)
 {
 	int		chdir_ret;

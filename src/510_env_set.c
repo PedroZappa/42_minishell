@@ -38,7 +38,6 @@ static char	**ft_env_add_var(char **env, char *new_var);
 int	ft_set_var(char *var, char *val, char ***env)
 {
 	char	*new;
-	//int		max;
 	int		i;
 
 	if (!*env)

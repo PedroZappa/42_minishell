@@ -42,7 +42,8 @@ char	*ft_expand_var(t_shell *sh, char ***sub_tkns)
 	while ((*sub_tkns)[i])
 	{
 		curr = (*sub_tkns)[i];
-		if (((*sub_tkns)[i][0] == '$') && ((*sub_tkns)[i][1] || (*sub_tkns)[i + 1]))
+		if (((*sub_tkns)[i][0] == '$') \
+			&& ((*sub_tkns)[i][1] || (*sub_tkns)[i + 1]))
 		{
 			(*sub_tkns)[i] = ft_fill_var(sh, curr);
 			if (!(*sub_tkns)[i])
