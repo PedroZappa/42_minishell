@@ -89,7 +89,7 @@ OBJS	= $(SRC:$(SRC_PATH)/%.c=$(BUILD_PATH)/%.o)
 LIBFT_PATH	= $(LIBS_PATH)/libft
 LIBFT_ARC	= $(LIBFT_PATH)/libft.a
 
-REALLYSH_PATH	= $(LIBS_PATH)/reallysh
+TESTER_PATH	= $(LIBS_PATH)/minishell_tester
 
 #==============================================================================#
 #                              COMPILER & FLAGS                                #
@@ -215,6 +215,20 @@ sync_shell: $(BUILD)		## Test w/ syncshell
 	tmux split-window -h "bash"
 	tmux setw synchronize-panes on
 	clear && ./$(NAME)
+
+tester: $(BUILD) get_minishell_tester			## Test w/ tester
+	cd $(TESTER_PATH) && pip3 install -r requirements.txt 
+	python3 $(TESTER_PATH)/src/__main__.py .
+
+get_minishell_tester:
+	@echo "* $(CYA)Getting Minishell Tester$(D)]"
+	@if test ! -d "$(TESTER_PATH)"; then \
+		git clone git@github.com:PedroZappa/minishell_tester.git $(TESTER_PATH); \
+		echo "* $(GRN)Minishell Tester download$(D): $(_SUCCESS)"; \
+	else \
+		echo "* $(GRN)Minishell Tester already exists 🖔"; \
+	echo " $(RED)$(D) [$(GRN)Nothing to be done!$(D)]"; \
+	fi
 
 ##@ Debug Rules 
 
