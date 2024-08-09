@@ -38,17 +38,8 @@ int	ft_pwd(t_shell *sh, int n)
 	while (sh->cmds[n].argv[++i])
 		if (sh->cmds[n].argv[i][0] == '-')
 			return (ft_flag_err(sh->cmds[n].argv[0], sh->cmds[n].argv[i], 1));
-	pwd = getcwd(NULL, 0);
-	if (!pwd)
-	{
-		free(pwd);
-		pwd = ft_get_var("PWD", sh->envp, NULL);
-		ft_putendl_fd(pwd, STDOUT_FILENO);
-		return (SUCCESS);
-	}
-	else
-		ft_putendl_fd(pwd, STDOUT_FILENO);
-	free(pwd);
+	pwd = ft_get_var("PWD", sh->envp, NULL);
+	ft_putendl_fd(pwd, STDOUT_FILENO);
 	return (SUCCESS);
 }
 

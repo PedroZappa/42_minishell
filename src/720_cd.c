@@ -72,7 +72,6 @@ static int	ft_chdir(char ***env, char *path)
 	{
 		chdir_ret = chdir(path);
 		ft_set_var("OLDPWD", pwd, env);
-		ft_free(old);
 		old = getcwd(NULL, 0);
 		ft_set_var("PWD", old, env);
 	}
