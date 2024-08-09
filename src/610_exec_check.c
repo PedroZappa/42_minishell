@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   610_exec_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gfragoso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 12:14:42 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/16 15:08:59 by passunca         ###   ########.fr       */
+/*   Updated: 2024/08/09 11:42:10 by gfragoso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 /**
 * @defgroup 	exec_check Execute
 * @{
@@ -18,6 +19,22 @@
 ***/
 
 #include "../inc/minishell.h"
+
+int	ft_exec_check_path(int type, char *cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd[i])
+	{
+		if (cmd[i] == '/')
+			return CMD_PATH;
+		if (cmd[i] == ' ')
+			return type;
+		i++;
+	}
+	return (type);
+}
 
 /// @brief			Check command type
 /// @param cmd		Command name
@@ -44,6 +61,7 @@ int	ft_exec_check(char *cmd)
 		type = CMD_EXPORT;
 	if (ft_strncmp(cmd, "unset", 6) == SUCCESS)
 		type = CMD_UNSET;
+	type = ft_exec_check_path(type, cmd);
 	return (type);
 }
 

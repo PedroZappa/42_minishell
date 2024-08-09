@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gfragoso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/16 15:37:11 by passunca         ###   ########.fr       */
+/*   Updated: 2024/08/09 11:44:32 by gfragoso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 /**
 * @defgroup 	minishell	minishell header
 * @{
@@ -127,6 +128,7 @@ typedef enum e_cmd_type
 	CMD_CLEAR,
 	CMD_EXIT,
 	CMD_HELP,
+	CMD_PATH,
 }	t_cmd_type;
 
 //=============================================================================/
@@ -391,6 +393,9 @@ int			ft_export_status(t_shell *sh, int n);
 
 /// @file	770_unset.c
 int			ft_unset(t_shell *sh, int n);
+
+/// @file	780_path.c 
+int			ft_path(t_shell *sh, int n);
 
 //=============================================================================/
 //	800		Errors & Info													   /

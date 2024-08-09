@@ -50,7 +50,7 @@ int	ft_tokenizer(t_shell *sh, char *line, t_token **tks)
 	while (tk)
 	{
 		tkn_str = tk->name;
-		if ((((tkn_str[0] == '~') && (tkn_str[1] == '/'))
+		if (((tkn_str[0] == '~' && tkn_str[1] == '/')
 				|| (tkn_str[0] == '~')) && sh->home)
 		{
 			ft_free(tk->name);

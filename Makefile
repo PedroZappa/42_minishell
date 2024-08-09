@@ -80,6 +80,7 @@ FILES			+= 750_echo.c
 FILES			+= 760_export.c
 FILES			+= 761_export_status.c
 FILES			+= 770_unset.c
+FILES			+= 780_path.c
 FILES			+= 800_errors.c
 FILES			+= 900_free.c
 

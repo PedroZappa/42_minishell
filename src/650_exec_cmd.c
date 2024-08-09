@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   650_exec_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gfragoso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:13:26 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/16 15:14:07 by passunca         ###   ########.fr       */
+/*   Updated: 2024/08/09 11:44:02 by gfragoso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 /**
 * @defgroup 	650_exec_cmd	Execute commands
 * @{
@@ -79,6 +80,8 @@ int	ft_exec(t_shell *sh, int cmd, int n)
 		g_exit = ft_export(sh, n);
 	if (cmd == CMD_UNSET)
 		g_exit = ft_unset(sh, n);
+	if (cmd == CMD_PATH)
+		g_exit = ft_path(sh, n);
 	return (SUCCESS);
 }
 
