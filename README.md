@@ -72,9 +72,9 @@ echo "$USER"$USER'$USER'
 ```sh
 cd ~
 cd -
+cd ""
 
 # TODO:
-cd ""
 ```
 
 # Notes
