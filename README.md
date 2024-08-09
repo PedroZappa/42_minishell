@@ -35,6 +35,7 @@ cat ""
 
 # TODO:
 ../
+$PWD
 ```
 ## Built-ins 
 ### [[echo]]
