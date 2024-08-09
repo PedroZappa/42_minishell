@@ -36,6 +36,7 @@ cat ""
 # TODO:
 ../
 $PWD
+cd /lib/ && pwd
 ```
 ## Built-ins 
 ### [[echo]]
