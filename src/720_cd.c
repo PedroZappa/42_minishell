@@ -76,7 +76,7 @@ static int	ft_chdir(char ***env, char *path)
 		old = getcwd(NULL, 0);
 		ft_set_var("PWD", old, env);
 	}
-	if (chdir_ret == -1)
+	if (chdir_ret == -1 && path[0])
 	{
 		ft_fprintf(STDERR_FILENO,
 			"bash: %s: No such file or directory\n", path);
