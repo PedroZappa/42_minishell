@@ -114,6 +114,7 @@ typedef enum e_token_type
 	TK_PIPE,
 	TK_OR,
 	TK_AND,
+	TK_WILD,
 }	t_token_type;
 
 typedef enum e_cmd_type

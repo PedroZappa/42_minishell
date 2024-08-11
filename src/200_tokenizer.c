@@ -69,6 +69,7 @@ int	ft_tokenizer(t_shell *sh, char *line, t_token **tks)
 /// @param ops		Pointer to an array of t_tk_ops structs
 static void	ft_init_ops(t_tk_ops *ops)
 {
+	ops[0] = (t_tk_ops){"*", TK_WILD, 1};
 	ops[0] = (t_tk_ops){"<<", TK_IN, 2};
 	ops[1] = (t_tk_ops){"<", TK_IN, 1};
 	ops[2] = (t_tk_ops){">>", TK_OUT, 2};
