@@ -28,9 +28,9 @@ int	ft_exec_check_path(int type, char *cmd)
 	while (cmd[i])
 	{
 		if (cmd[i] == '/')
-			return CMD_PATH;
+			return (CMD_PATH);
 		if (cmd[i] == ' ')
-			return type;
+			return (type);
 		i++;
 	}
 	return (type);
