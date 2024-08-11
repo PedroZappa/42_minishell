@@ -1,5 +1,4 @@
-set confirm off
-break ft_cd
+break ft_expand_var
 fs cmd
 info thread
 info break

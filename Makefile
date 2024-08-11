@@ -116,7 +116,7 @@ AR		= ar rcs
 MKDIR_P	= mkdir -p
 
 ### Valgrind
-VAL_ARGS 	= --suppressions=readline.supp --log-file=gdb.txt 
+VAL_ARGS 	= --suppressions=readline.supp
 VAL_LEAK		= --leak-check=full --show-leak-kinds=all
 VGDB_ARGS		= --vgdb-error=0 $(VAL_LEAK) $(VAL_ARGS)
 
@@ -216,8 +216,8 @@ sync_shell: $(BUILD)		## Test w/ syncshell
 	tmux setw synchronize-panes on
 	clear && ./$(NAME)
 
-sync_valgrind: $(BUILD)		## Test w/ valgrind
-	tmux set-option remain-on-exit off
+sync_valgrind: $(BUILD)		## Test bash & minishell w/ valgrind
+	tmux set-option remain-on-exit on
 	@echo "[$(YEL)Testing with valgrind$(D)]"
 	tmux split-window -h "valgrind $(VAL_ARGS) $(VAL_LEAK) bash"
 	tmux setw synchronize-panes on
@@ -245,7 +245,7 @@ gdb: all $(NAME) $(TEMP_PATH)			## Debug w/ gdb
 	make get_log
 
 vgdb: all $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck) & gdb
-	tmux split-window -h "valgrind $(VGDB_ARGS) ./$(NAME) $(ARG)"
+	tmux split-window -h "valgrind $(VGDB_ARGS) --log-file=gdb.txt ./$(NAME) $(ARG)"
 	make vgdb_cmd
 	tmux split-window -v "gdb --tui -x $(TEMP_PATH)/gdb_commands.txt $(NAME)"
 	tmux resize-pane -U 18

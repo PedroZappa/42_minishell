@@ -409,7 +409,7 @@ define ft_kill
 end
 
 ### 720_cd.c
-define cd
+define ft_cd
 	display *sh
 	display cmd_n
 end
@@ -435,7 +435,7 @@ define env
 end
 
 ### 750_echo.c 
-define echo
+define ft_echo
 	display *sh
 	display n
 	display i
