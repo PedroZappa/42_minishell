@@ -10,7 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+* @defgroup 	path Path
+* @{
+*
+* @brief		Check if path exists
+* @version		1.0
+***/
+
 #include "../inc/minishell.h"
+
 
 int	ft_path(t_shell *sh, int n)
 {
