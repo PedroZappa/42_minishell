@@ -103,7 +103,7 @@ DFLAGS		= -g
 RFLAGS		= -lreadline
 INC			= -I $(INC_PATH)
 
-BUILD ?= all
+BUILD 		?= all
 ASAN_FLAGS	= -fsanitize=address
 
 #==============================================================================#
@@ -116,10 +116,9 @@ AR		= ar rcs
 MKDIR_P	= mkdir -p
 
 ### Valgrind
-VAL_LEAk	= --leak-check=full --show-leak-kinds=all
-VGDB_ARGS 	= --suppressions=readline.supp \
-			  --vgdb-error=0 \
-			  --log-file=gdb.txt \
+VAL_ARGS 	= --suppressions=readline.supp --log-file=gdb.txt 
+VAL_LEAK		= --leak-check=full --show-leak-kinds=all
+VGDB_ARGS		= --vgdb-error=0 $(VAL_LEAK) $(VAL_ARGS)
 
 #==============================================================================#
 #                                  RULES                                       #
@@ -217,6 +216,13 @@ sync_shell: $(BUILD)		## Test w/ syncshell
 	tmux setw synchronize-panes on
 	clear && ./$(NAME)
 
+sync_valgrind: $(BUILD)		## Test w/ valgrind
+	tmux set-option remain-on-exit off
+	@echo "[$(YEL)Testing with valgrind$(D)]"
+	tmux split-window -h "valgrind $(VAL_ARGS) $(VAL_LEAK) bash"
+	tmux setw synchronize-panes on
+	clear && valgrind $(VAL_ARGS) $(VAL_LEAK) ./$(NAME)
+
 tester: $(BUILD) get_minishell_tester			## Test w/ tester
 	cd $(TESTER_PATH) && pip3 install -r requirements.txt 
 	python3 $(TESTER_PATH)/src/__main__.py .
@@ -247,13 +253,7 @@ vgdb: all $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck) & gdb
 
 valgrind: all $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck)
 	tmux set-option remain-on-exit on
-	tmux split-window -h "valgrind --leak-check=full --show-leak-kinds=all --suppressions=readline.supp -s ./$(NAME) $(ARG)"
-
-helgrind: all $(NAME) $(TEMP_PATH)			## Debug threads w/ helgrind
-	tmux set-option remain-on-exit on
-	tmux split-window -h "valgrind --log-file=gdb.txt --tool=helgrind -s ./$(NAME) $(ARG)"
-	tmux resize-pane -R 55
-	make get_log
+	tmux split-window -h "valgrind $(VAL_ARGS) $(VAL_LEAK) ./$(NAME) $(ARG)"
 
 massif: all $(TEMP_PATH)		## Run Valgrind w/ Massif (gather profiling information)
 	@TIMESTAMP=$(shell date +%Y%m%d%H%M%S); \
