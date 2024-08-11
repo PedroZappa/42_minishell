@@ -55,7 +55,7 @@ static char	*ft_build_cwd(t_shell *sh, char *cwd)
 
 	cwd_len = ft_strlen(cwd);
 	home_len = ft_strlen(sh->home);
-	if (strncmp(cwd, sh->home, home_len) != 0)
+	if (ft_strncmp(cwd, sh->home, home_len) != 0)
 		home_len = 0;
 	ret = ft_calloc((cwd_len - home_len + (home_len > 0) + 1), sizeof(char));
 	i = -1;

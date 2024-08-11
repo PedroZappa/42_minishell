@@ -20,7 +20,7 @@
 #include "../inc/minishell.h"
 
 static char	*ft_fill_var(t_shell *sh, char *tkn);
-static char	*ft_unquote(char *tkn);
+// static char	*ft_unquote(char *tkn);
 
 /// @brief			Initialize expander
 /// @details
@@ -49,8 +49,8 @@ char	*ft_expand_var(t_shell *sh, char ***sub_tkns)
 			if (!(*sub_tkns)[i])
 				(*sub_tkns)[i] = ft_strdup("");
 		}
-		else
-			(*sub_tkns)[i] = ft_unquote(curr);
+		// else
+		// 	(*sub_tkns)[i] = ft_unquote(curr);
 		ret = ft_strjoin_free(ret, (*sub_tkns)[i]);
 		++i;
 	}
@@ -94,24 +94,24 @@ static char	*ft_fill_var(t_shell *sh, char *tkn)
 ///		- Remove last '"'
 ///	- Else
 ///		- Return token as is
-static char	*ft_unquote(char *tkn)
-{
-	char	*ret;
-	int		len;
-
-	ret = NULL;
-	len = ft_strlen(tkn);
-	if (tkn[0] == '\'' && (tkn[(len - 1)] == '\"'))
-		ret = ft_substr(tkn, 0, (len - 1));
-	else if ((tkn[0] == '\'') || ((tkn[0] == '\"')
-			&& (tkn[(len - 1)] == '\"')))
-		ret = ft_substr(tkn, 1, (len - 2));
-	else if (tkn[0] != '\"' && (tkn[(len - 1)] == '\"'))
-		ret = ft_substr(tkn, 0, (len - 1));
-	else
-		ret = ft_strdup(tkn);
-	ft_free(tkn);
-	return (ret);
-}
+// static char	*ft_unquote(char *tkn)
+// {
+// 	char	*ret;
+// 	int		len;
+//
+// 	ret = NULL;
+// 	len = ft_strlen(tkn);
+// 	if (tkn[0] == '\'' && (tkn[(len - 1)] == '\"'))
+// 		ret = ft_substr(tkn, 0, (len - 1));
+// 	else if ((tkn[0] == '\'') || ((tkn[0] == '\"')
+// 			&& (tkn[(len - 1)] == '\"')))
+// 		ret = ft_substr(tkn, 1, (len - 2));
+// 	else if (tkn[0] != '\"' && (tkn[(len - 1)] == '\"'))
+// 		ret = ft_substr(tkn, 0, (len - 1));
+// 	else
+// 		ret = ft_strdup(tkn);
+// 	ft_free(tkn);
+// 	return (ret);
+// }
 
 /** @} */
