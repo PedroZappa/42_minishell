@@ -269,7 +269,7 @@ end
 ### 300_parser.c
 define parser
 	display *sh
-	display *line_buf
+	display line_buf
 	display *sh->cmds
 end
 

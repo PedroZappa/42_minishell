@@ -219,7 +219,7 @@ sync_shell: $(BUILD)		## Test w/ syncshell
 sync_valgrind: $(BUILD)		## Test bash & minishell w/ valgrind
 	tmux set-option remain-on-exit on
 	@echo "[$(YEL)Testing with valgrind$(D)]"
-	tmux split-window -h "valgrind $(VAL_ARGS) $(VAL_LEAK) bash"
+	tmux split-window -h "valgrind $(VAL_ARGS) bash"
 	tmux setw synchronize-panes on
 	clear && valgrind $(VAL_ARGS) $(VAL_LEAK) ./$(NAME)
 

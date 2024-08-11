@@ -39,8 +39,7 @@ int	ft_echo(t_shell *sh, int n)
 	sentinel = '\n';
 	i = -1;
 	while (sh->cmds[n].argv[++i])
-		if ((sh->cmds[n].argv[i][0] == '\'')
-			|| (sh->cmds[n].argv[i][0] == '\"'))
+		if (sh->cmds[n].argv[i][0] == '\"')
 			sh->cmds[n].argv[i] = ft_rm_squotes(sh->cmds[n].argv[i]);
 	i = 0;
 	while (sh->cmds[n].argv[++i] && ft_is_nflag(sh->cmds[n].argv[i]))
