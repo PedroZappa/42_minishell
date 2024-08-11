@@ -20,7 +20,10 @@
 
 #include "../inc/minishell.h"
 
-
+/// @brief			Check if path exists
+/// @param sh		Pointer to a t_shell struct
+/// @param n		Command index
+/// @return			SUCCESS(stat_ret)
 int	ft_path(t_shell *sh, int n)
 {
 	t_stat	sb;
@@ -36,3 +39,5 @@ int	ft_path(t_shell *sh, int n)
 			sh->cmds[n].argv[0]);
 	return (stat_ret);
 }
+
+/** @} */
