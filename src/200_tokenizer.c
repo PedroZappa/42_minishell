@@ -39,7 +39,7 @@ static int		ft_has_match(char **line);
 ///	@note			Used in ft_parser()
 int	ft_tokenizer(t_shell *sh, char *line, t_token **tks)
 {
-	t_tk_ops	ops[16];
+	t_tk_ops	ops[17];
 	t_token		*tk;
 	char		*tkn_str;
 
