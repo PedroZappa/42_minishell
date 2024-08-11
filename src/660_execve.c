@@ -23,12 +23,6 @@ void	ft_execve_abs(char **cmd, char **envp);
 void	ft_execve_path(char **path, char **argv, char **envp);
 
 /// @brief			Execute command with execve w/ absolute or relative path
-/// @details
-/// - If command name starts with '.' or '/'
-/// 	- Execute command with absolute path
-/// - Else if PATH is not NULL
-/// 	- Execute command with relative path
-/// - Else
 /// @param path		Pointer to PATH array
 /// @param argv		Pointer to command arguments array
 /// @param envp		Pointer to environment variables array
@@ -52,13 +46,6 @@ void	ft_execve_abs(char **argv, char **envp)
 }
 
 /// @brief			Execute command with relative path
-/// @details
-/// - Loop through PATH array searching for executable
-///		- Concatenate PATH and command
-///		- Attempt execve
-///		- If execve fails increment PATH index and try again
-///	- If after PATH search execve fails, set errno
-///	- Free exec_path
 /// @param path		Pointer to PATH array
 /// @param argv		Pointer to command arguments array
 /// @param envp		Pointer to environment variables array

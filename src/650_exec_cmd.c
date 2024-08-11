@@ -21,12 +21,6 @@
 #include "../inc/minishell.h"
 
 /// @brief			Execute a command
-/// @details
-/// - Set statbuf to 0
-/// - If command type is CMD_EXEC
-/// 	- Execute command
-/// - Else
-/// 	- Execute builtin
 /// @param sh		Pointer to a t_shell struct
 /// @param id		Command type
 /// @param i		Command index
