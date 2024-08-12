@@ -20,7 +20,7 @@
 #include "../inc/minishell.h"
 
 static char	*ft_fill_var(t_shell *sh, char *tkn);
-// static char	*ft_unquote(char *tkn);
+static char	*ft_unquote(char *tkn);
 
 /// @brief			Initialize expander
 /// @details
@@ -49,8 +49,8 @@ char	*ft_expand_var(t_shell *sh, char ***sub_tkns)
 			if (!(*sub_tkns)[i])
 				(*sub_tkns)[i] = ft_strdup("");
 		}
-		// else
-		// 	(*sub_tkns)[i] = ft_unquote(curr);
+		else
+			(*sub_tkns)[i] = ft_unquote(curr);
 		ret = ft_strjoin_free(ret, (*sub_tkns)[i]);
 		++i;
 	}
@@ -84,34 +84,26 @@ static char	*ft_fill_var(t_shell *sh, char *tkn)
 }
 
 /// @brief			Unquote single and double quotes
-/// @details
-/// - Get length of token
-/// - If token starts with a '\' & ends with a '"'
-///		- Remove last '"'
-///	- If token starts with a '\'' quote | if both first and last chars are '"'
-///		- Remove both first and last '"'
-///	- If token DOESN'T start with '"' and ends with a '"'
-///		- Remove last '"'
-///	- Else
-///		- Return token as is
-// static char	*ft_unquote(char *tkn)
-// {
-// 	char	*ret;
-// 	int		len;
-//
-// 	ret = NULL;
-// 	len = ft_strlen(tkn);
-// 	if (tkn[0] == '\'' && (tkn[(len - 1)] == '\"'))
-// 		ret = ft_substr(tkn, 0, (len - 1));
-// 	else if ((tkn[0] == '\'') || ((tkn[0] == '\"')
-// 			&& (tkn[(len - 1)] == '\"')))
-// 		ret = ft_substr(tkn, 1, (len - 2));
-// 	else if (tkn[0] != '\"' && (tkn[(len - 1)] == '\"'))
-// 		ret = ft_substr(tkn, 0, (len - 1));
-// 	else
-// 		ret = ft_strdup(tkn);
-// 	ft_free(tkn);
-// 	return (ret);
-// }
+/// @param tkn		Token string
+/// @return			Unquoted string
+static char	*ft_unquote(char *tkn)
+{
+	char	*ret;
+	int		len;
+
+	ret = NULL;
+	len = ft_strlen(tkn);
+	if (tkn[0] == '\'' && (tkn[(len - 1)] == '\"'))
+		ret = ft_substr(tkn, 0, (len - 1));
+	else if ((tkn[0] == '\'') || ((tkn[0] == '\"')
+			&& (tkn[(len - 1)] == '\"')))
+		ret = ft_substr(tkn, 1, (len - 2));
+	else if (tkn[0] != '\"' && (tkn[(len - 1)] == '\"'))
+		ret = ft_substr(tkn, 0, (len - 1));
+	else
+		ret = ft_strdup(tkn);
+	ft_free(tkn);
+	return (ret);
+}
 
 /** @} */
