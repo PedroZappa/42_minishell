@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 08:39:57 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/08 20:19:05 by passunca         ###   ########.fr       */
+/*   Updated: 2024/08/16 12:21:23 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -23,6 +23,7 @@ int		ft_exec_first(t_shell *sh, int *pipeout);
 int		ft_exec_mid(t_shell *sh, int *pipe0, int *pipe1);
 int		ft_exec_last(t_shell *sh, int *pipein);
 void	ft_exec_child_first(t_shell *sh, int *pipeout);
+int		ft_exec_child_mid(t_shell *s, char **path, int **pipes, int i);
 
 /// @brief			Execute a pipeline of commands
 /// @param sh		Pointer to a t_shell struct
@@ -75,9 +76,19 @@ int	ft_exec_first(t_shell *sh, int *pipeout)
 
 int	ft_exec_mid(t_shell *sh, int *pipe0, int *pipe1)
 {
+	pid_t	pid;
+	int		n;
 	(void)sh;
 	(void)pipe0;
 	(void)pipe1;
+
+	if (!pipe0 || !pipe1)
+		return (FAILURE);
+	pid = fork();
+	if (pid == PID_FAIL)
+		return (FAILURE);
+	if (pid == SUCCESS)
+		ft_exec_child_mid(sh, pipe1, n);
 	return (SUCCESS);
 }
 
@@ -92,6 +103,15 @@ void	ft_exec_child_first(t_shell *sh, int *pipeout)
 {
 	(void)sh;
 	(void)pipeout;
+}
+
+int	ft_exec_child_mid(t_shell *s, char **path, int **pipes, int i)
+{
+	(void)s;
+	(void)path;
+	(void)pipes;
+	(void)i;
+	return (SUCCESS);
 }
 
 /** @} */
