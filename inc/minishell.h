@@ -78,6 +78,7 @@
 # define NO_PIPE 0
 # define CMD_FAIL -1
 # define PID_FAIL -1
+# define PIPE_FAIL -1
 # define EXECVE_ERR -1
 # define IGNORE_SIGQUIT	-1
 

@@ -19,13 +19,15 @@
 
 #include "../inc/minishell.h"
 
-int	ft_exec_first(t_shell *sh, char **path, int *pipeout);
-int	ft_exec_mid(t_shell *sh, int *pipe0, int *pipe1);
-int	ft_exec_last(t_shell *sh, int *pipein);
+int		ft_exec_first(t_shell *sh, int *pipeout);
+int		ft_exec_mid(t_shell *sh, int *pipe0, int *pipe1);
+int		ft_exec_last(t_shell *sh, int *pipein);
+void	ft_exec_child_first(t_shell *sh, int *pipeout);
 
 /// @brief			Execute a pipeline of commands
 /// @param sh		Pointer to a t_shell struct
 /// @return			SUCCESS(0)
+///					FAILURE(1)
 int	ft_exec_pipeline(t_shell *sh)
 {
 	int	pipe0[2];
@@ -33,7 +35,7 @@ int	ft_exec_pipeline(t_shell *sh)
 	int	cmd_idx;
 
 	ft_fork_sigset();
-	if (ft_exec_first(sh, sh->path, pipe0) == FAILURE)
+	if (ft_exec_first(sh, pipe0) == FAILURE)
 		return (FAILURE);
 	cmd_idx = ft_exec_mid(sh, pipe0, pipe1);
 	if (cmd_idx == CMD_FAIL)
@@ -55,11 +57,19 @@ int	ft_exec_pipeline(t_shell *sh)
 	return (SUCCESS);
 }
 
-int	ft_exec_first(t_shell *sh, char **path, int *pipeout)
+// TODO: Create Child Error Handler
+int	ft_exec_first(t_shell *sh, int *pipeout)
 {
+	pid_t	pid;
+
 	(void)sh;
-	(void)path;
-	(void)pipeout;
+	if (pipe(pipeout) == PIPE_FAIL)
+		return (FAILURE);
+	pid = fork();
+	if (pid == PID_FAIL)
+		return (FAILURE);
+	if (pid == SUCCESS)
+		ft_exec_child_first(sh, pipeout);
 	return (SUCCESS);
 }
 
@@ -76,6 +86,12 @@ int	ft_exec_last(t_shell *sh, int *pipein)
 	(void)sh;
 	(void)pipein;
 	return (SUCCESS);
+}
+
+void	ft_exec_child_first(t_shell *sh, int *pipeout)
+{
+	(void)sh;
+	(void)pipeout;
 }
 
 /** @} */
