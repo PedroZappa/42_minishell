@@ -6,7 +6,7 @@
 /*   By: gfragoso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/08/09 11:44:32 by gfragoso         ###   ########.fr       */
+/*   Updated: 2024/08/16 11:23:07 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -361,6 +361,10 @@ int			ft_exec(t_shell *sh, int cmd, int n);
 
 /// @file	660_execve.c
 void		ft_execve(char **path, char **argv, char **envp);
+
+/// @file	670_pipes.c
+void	ft_close_pipes(int *pipe0, int *pipe1);
+
 
 //=============================================================================/
 //	700		Builtins														   /
