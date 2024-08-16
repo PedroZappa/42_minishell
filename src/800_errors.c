@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 17:35:23 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/16 15:38:00 by passunca         ###   ########.fr       */
+/*   Updated: 2024/08/16 11:35:25 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -82,6 +82,16 @@ int	ft_bash_err(char *cmd, char *arg, int err)
 	ft_fprintf(STDERR_FILENO,
 		"bash: %s: %s: No such file or directory\n", cmd, arg);
 	return (err);
+}
+
+/// @brief			Print pipe error
+/// @param path		Path to be freed
+/// @return			FAILURE(1)
+int	ft_pipe_err(char **path)
+{
+	write(2, "Error: pipe failed\n", 19);
+	g_exit = 1;
+	return (ft_free_arr(path), FAILURE);
 }
 
 /** @} */
