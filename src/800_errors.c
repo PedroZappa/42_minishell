@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 17:35:23 by passunca          #+#    #+#             */
-/*   Updated: 2024/08/16 11:35:25 by passunca         ###   ########.fr       */
+/*   Updated: 2024/08/16 11:37:10 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -89,7 +89,7 @@ int	ft_bash_err(char *cmd, char *arg, int err)
 /// @return			FAILURE(1)
 int	ft_pipe_err(char **path)
 {
-	write(2, "Error: pipe failed\n", 19);
+	ft_fprintf(STDERR_FILENO, "Error: pipe failure\n");
 	g_exit = 1;
 	return (ft_free_arr(path), FAILURE);
 }
