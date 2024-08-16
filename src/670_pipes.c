@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 11:19:37 by passunca          #+#    #+#             */
-/*   Updated: 2024/08/16 11:22:18 by passunca         ###   ########.fr       */
+/*   Updated: 2024/08/16 11:25:16 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,15 @@ void	ft_close_pipes(int *pipe0, int *pipe1)
 		close(pipe1[0]);
 		close(pipe1[1]);
 	}
+}
+
+/// @brief			Set pipes
+/// @param pipe		Pointer to a pipe
+/// @param end		End of pipe (read or write)
+/// @return			SUCCESS(0)
+int	ft_pipe_setter(int *pipe, int end)
+{
+	if (pipe[end] != end)
+		return (dup2(pipe[end], end));
+	return (SUCCESS);
 }
