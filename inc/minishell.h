@@ -6,7 +6,7 @@
 /*   By: gfragoso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/08/16 11:26:14 by passunca         ###   ########.fr       */
+/*   Updated: 2024/08/16 11:39:15 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -363,9 +363,8 @@ int			ft_exec(t_shell *sh, int cmd, int n);
 void		ft_execve(char **path, char **argv, char **envp);
 
 /// @file	670_pipes.c
-int		ft_pipe_setter(int *pipe, int end);
-void	ft_close_pipes(int *pipe0, int *pipe1);
-
+int			ft_pipe_setter(int *pipe, int end);
+void		ft_close_pipes(int *pipe0, int *pipe1);
 
 //=============================================================================/
 //	700		Builtins														   /
@@ -415,6 +414,7 @@ int			ft_syntax_err(char *tkn, int err);
 int			ft_flag_err(char *cmd, char *cmd_flag, int err);
 int			ft_cmd_err(char *cmd, int err);
 int			ft_bash_err(char *cmd, char *arg, int err);
+int			ft_pipe_err(char **path);
 
 //=============================================================================/
 //	900		Free															   /

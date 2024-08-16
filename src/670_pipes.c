@@ -6,15 +6,30 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 11:19:37 by passunca          #+#    #+#             */
-/*   Updated: 2024/08/16 11:26:02 by passunca         ###   ########.fr       */
+/*   Updated: 2024/08/16 11:40:45 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
+/// TODO: Handle pipe error 
+int	**ft_pipe_init(char **path, int *pipe1, int *pipe2)
+{
+	int	**pipes;
+
+	pipes = malloc(sizeof(int *) * 2);
+	if (!pipes)
+		return (ft_err(MALLOC_ERR, errno), NULL);
+	if (pipe(pipe2) == -1)
+		return (ft_pipe_err(path), NULL);
+	pipes[0] = pipe1;
+	pipes[1] = pipe2;
+	return (pipes);
+}
+
 /// @brief			Set pipes
 /// @param pipe		Pointer to a pipe
-/// @param end		End of pipe (read or write)
+/// @param end		End of pipe (stdin or stdout)
 /// @return			SUCCESS(0)
 int	ft_pipe_setter(int *pipe, int end)
 {
