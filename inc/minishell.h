@@ -6,7 +6,7 @@
 /*   By: gfragoso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/08/17 10:20:21 by passunca         ###   ########.fr       */
+/*   Updated: 2024/08/17 11:52:59 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,10 +172,9 @@ typedef struct s_tk_ops
 /// @brief	   		Structure to save redirection data
 /// @param name  	Redirection name
 /// @param flag
-/// Redirection status flag:
+/// Redirection status flag (to use with open() & signal handling):
 /// - -1: Ignores SIGQUIT
-/// - 0: No redirection
-/// - 1: Input redirection
+/// -  i: Command index for redirection
 /// @param heredoc	Pointer to Heredoc redirection node (see t_list)
 typedef struct s_redir
 {
