@@ -408,13 +408,16 @@ int			ft_path(t_shell *sh, int n);
 //	800		Errors & Info													   /
 //=============================================================================/
 
-/// @file	800_errors.c
+/// @file	800_error.c
 int			ft_err(char *msg, int status);
 int			ft_syntax_err(char *tkn, int err);
 int			ft_flag_err(char *cmd, char *cmd_flag, int err);
 int			ft_cmd_err(char *cmd, int err);
+
+/// @file	810_error2.c
 int			ft_bash_err(char *cmd, char *arg, int err);
 int			ft_pipe_err(char **path);
+int			ft_child_err(char *msg, int err_code, int exit_status);	
 
 //=============================================================================/
 //	900		Free															   /

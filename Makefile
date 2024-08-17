@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/29 20:35:29 by passunca          #+#    #+#              #
-#    Updated: 2024/07/20 17:01:33 by passunca         ###   ########.fr        #
+#    Updated: 2024/08/17 09:32:27 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,7 +82,8 @@ FILES			+= 760_export.c
 FILES			+= 761_export_status.c
 FILES			+= 770_unset.c
 FILES			+= 780_path.c
-FILES			+= 800_errors.c
+FILES			+= 800_error.c
+FILES			+= 810_error2.c
 FILES			+= 900_free.c
 
 SRC		= $(addprefix $(SRC_PATH)/, $(FILES))

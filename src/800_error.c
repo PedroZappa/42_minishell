@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   800_errors.c                                       :+:      :+:    :+:   */
+/*   800_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 17:35:23 by passunca          #+#    #+#             */
-/*   Updated: 2024/08/16 11:37:10 by passunca         ###   ########.fr       */
+/*   Updated: 2024/08/17 09:31:18 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -70,28 +70,6 @@ int	ft_cmd_err(char *cmd, int err)
 {
 	ft_fprintf(STDERR_FILENO, "%s: command not found\n", cmd);
 	return (err);
-}
-
-/// @brief			Print invalid command error with argument
-/// @param cmd		Command name
-/// @param arg		Invalid Argument
-/// @param err		Error number
-/// @return			SUCCESS(err)
-int	ft_bash_err(char *cmd, char *arg, int err)
-{
-	ft_fprintf(STDERR_FILENO,
-		"bash: %s: %s: No such file or directory\n", cmd, arg);
-	return (err);
-}
-
-/// @brief			Print pipe error
-/// @param path		Path to be freed
-/// @return			FAILURE(1)
-int	ft_pipe_err(char **path)
-{
-	ft_fprintf(STDERR_FILENO, "Error: pipe failure\n");
-	g_exit = 1;
-	return (ft_free_arr(path), FAILURE);
 }
 
 /** @} */

@@ -58,7 +58,6 @@ int	ft_exec_pipeline(t_shell *sh)
 	return (SUCCESS);
 }
 
-// TODO: Create Child Error Handler
 int	ft_exec_first(t_shell *sh, int *pipeout)
 {
 	pid_t	pid;
@@ -68,6 +67,7 @@ int	ft_exec_first(t_shell *sh, int *pipeout)
 		return (FAILURE);
 	pid = fork();
 	if (pid == PID_FAIL)
+		// TODO: Create Child Error Handler
 		return (FAILURE);
 	if (pid == SUCCESS)
 		ft_exec_child_first(sh, pipeout);
@@ -77,11 +77,6 @@ int	ft_exec_first(t_shell *sh, int *pipeout)
 int	ft_exec_mid(t_shell *sh, int *pipe0, int *pipe1)
 {
 	pid_t	pid;
-	int		n;
-	(void)sh;
-	(void)pipe0;
-	(void)pipe1;
-	(void)n;
 
 	if (!pipe0 || !pipe1)
 		return (FAILURE);
