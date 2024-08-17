@@ -408,6 +408,14 @@ define ft_kill
 	display sig
 end
 
+### 710_pwd.c
+define pwd
+	display *pwd
+	display i
+	display sh->cmds[n].argv[0]
+	display sh->cmds[n].argv[i]
+end
+
 ### 720_cd.c
 define ft_cd
 	display *sh

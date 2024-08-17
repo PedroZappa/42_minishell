@@ -1,4 +1,4 @@
-break ft_env
+break ft_pwd
 fs cmd
 info thread
 info break
