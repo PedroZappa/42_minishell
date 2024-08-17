@@ -355,8 +355,8 @@ int			ft_exec_pipeline(t_shell *sh);
 /// @file	640_exec_child.c
 void		ft_exec_child(t_shell *sh, int *outpipe);
 void		ft_exec_child_first(t_shell *sh, int *pipeout);
-int			ft_exec_child_i(t_shell *sh, int **pipes, int i);
-int			ft_exec_child_last(t_shell *sh, int *pipein, int i);
+void		ft_exec_child_i(t_shell *sh, int **pipes, int i);
+void		ft_exec_child_last(t_shell *sh, int *pipein, int i);
 
 /// @file	650_exec_cmd.c
 void		ft_exec_cmd(t_shell *sh, int id, int i);

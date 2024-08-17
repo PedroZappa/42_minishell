@@ -19,10 +19,6 @@
 
 #include "../inc/minishell.h"
 
-void	ft_exec_child_first(t_shell *sh, int *outpipe);
-int		ft_exec_child_i(t_shell *sh, int **pipes, int i);
-int		ft_exec_child_last(t_shell *sh, int *inpipe, int i);
-
 void	ft_exec_child_first(t_shell *sh, int *outpipe)
 {
 	// TODO: Handle redirections
@@ -40,7 +36,7 @@ void	ft_exec_child_first(t_shell *sh, int *outpipe)
 	exit(SUCCESS);
 }
 
-int	ft_exec_child_i(t_shell *sh, int **pipes, int i)
+void	ft_exec_child_i(t_shell *sh, int **pipes, int i)
 {
 	// TODO: Handle redir in
 	// if (sh->cmds[i].in.name)
@@ -68,12 +64,25 @@ int	ft_exec_child_i(t_shell *sh, int **pipes, int i)
 	exit(SUCCESS);
 }
 
-int	ft_exec_child_last(t_shell *sh, int *inpipe, int i)
+void	ft_exec_child_last(t_shell *sh, int *inpipe, int i)
 {
-	(void)sh;
-	(void)inpipe;
-	(void)i;
-	return (SUCCESS);
+	// TODO: Handle redir in
+	// if (sh->cmds[i].in.name)
+	// 	ft_redir_in(sh, i);
+	// 	else if...
+	if (ft_pipe_setter(inpipe, STDIN_FILENO) == PIPE_FAIL)
+	{
+		ft_close_pipes(inpipe, NULL);
+		ft_fork_exit(sh, PIPE_ERR, FAILURE);
+	}
+	// TODO: Handle redir out
+	// if (sh->cmds[i].out.name)
+	// 	ft_redir_out(sh, i);
+	ft_close_pipes(inpipe, NULL);
+	if (sh->cmds[i].argv[0])
+		ft_exec_cmd(sh, ft_exec_check(sh->cmds[i].argv[0]), i);
+	ft_free_sh(sh);
+	exit(SUCCESS);
 }
 
 /** @} */
