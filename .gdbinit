@@ -424,14 +424,10 @@ end
 define env
 	display *sh
 	display n
-	display key_len
 	display i
 	display *sh->cmds[n].argv@sh->cmds[n].argc
 	display sh->cmds[n].argv[i]
 	display sh->envp[i]
-	display sh->envp[i][key_len]
-	display sh->envp[i][key_len + 1]
-	display sh->envp[i][key_len + 2]
 end
 
 ### 750_echo.c 

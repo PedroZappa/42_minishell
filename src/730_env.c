@@ -27,7 +27,6 @@
 ///	@note			Used in ft_execute()
 int	ft_env(t_shell *sh, int n)
 {
-	char	*equal;
 	int		i;
 
 	ft_set_var("_", sh->cmds[n].argv[0], &sh->envp);
@@ -37,13 +36,8 @@ int	ft_env(t_shell *sh, int n)
 			return (ft_flag_err(sh->cmds[n].argv[0], sh->cmds[n].argv[1], 1));
 	i = -1;
 	while (sh->envp[++i])
-	{
-		equal = ft_strchr(sh->envp[i], '=');
-		if (!equal)
-			return (i);
-		if (equal && *(equal + 1) != '\0')
+		if (ft_strchr(sh->envp[i], '='))
 			ft_fprintf(STDOUT_FILENO, "%s\n", sh->envp[i]);
-	}
 	return (i);
 }
 
