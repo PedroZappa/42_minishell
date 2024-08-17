@@ -363,6 +363,7 @@ int			ft_exec(t_shell *sh, int cmd, int n);
 void		ft_execve(char **path, char **argv, char **envp);
 
 /// @file	670_pipes.c
+int			**ft_pipe_init(char **path, int *pipe1, int *pipe2);
 int			ft_pipe_setter(int *pipe, int end);
 void		ft_close_pipes(int *pipe0, int *pipe1);
 

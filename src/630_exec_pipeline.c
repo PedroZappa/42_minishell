@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 08:39:57 by passunca          #+#    #+#             */
-/*   Updated: 2024/08/17 09:39:57 by passunca         ###   ########.fr       */
+/*   Updated: 2024/08/17 10:07:36 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -20,10 +20,11 @@
 #include "../inc/minishell.h"
 
 int		ft_exec_first(t_shell *sh, int *pipeout);
-int		ft_exec_mid(t_shell *sh, int *pipe0, int *pipe1);
+int		ft_exec_loop(t_shell *sh, int *pipe0, int *pipe1);
+int		ft_exec_cmd_i(t_shell *sh, int **pipes, int i);
 int		ft_exec_last(t_shell *sh, int *pipein);
 void	ft_exec_child_first(t_shell *sh, int *pipeout);
-int		ft_exec_child_mid(t_shell *sh, int **pipes, int i);
+int		ft_exec_child_i(t_shell *sh, int **pipes, int i);
 
 /// @brief			Execute a pipeline of commands
 /// @param sh		Pointer to a t_shell struct
@@ -38,7 +39,7 @@ int	ft_exec_pipeline(t_shell *sh)
 	ft_fork_sigset();
 	if (ft_exec_first(sh, pipe0) == FAILURE)
 		return (FAILURE);
-	cmd_idx = ft_exec_mid(sh, pipe0, pipe1);
+	cmd_idx = ft_exec_loop(sh, pipe0, pipe1);
 	if (cmd_idx == CMD_FAIL)
 		return (FAILURE);
 	if ((cmd_idx % 2 == 0) && (ft_exec_last(sh, pipe0) == FAILURE))
@@ -62,29 +63,57 @@ int	ft_exec_first(t_shell *sh, int *pipeout)
 {
 	pid_t	pid;
 
-	(void)sh;
 	if (pipe(pipeout) == PIPE_FAIL)
 		return (ft_return_err("", errno, FAILURE));
 	pid = fork();
 	if (pid == PID_FAIL)
-		// TODO: Create Child Error Handler
-		return (FAILURE);
+		return (ft_return_err("", errno, FAILURE));
 	if (pid == SUCCESS)
 		ft_exec_child_first(sh, pipeout);
+	close(pipeout[1]);
 	return (SUCCESS);
 }
 
-int	ft_exec_mid(t_shell *sh, int *pipe0, int *pipe1)
+int	ft_exec_loop(t_shell *sh, int *pipe0, int *pipe1)
+{
+	int	**pipes;
+	int	cmd_i;
+	int	i;
+
+	i = 0;
+	cmd_i = 0;
+	while(++i < (sh->n_cmds - 1))
+	{
+		if ((cmd_i % 2) == 0)
+		{
+			pipes = ft_pipe_init(sh->path, pipe0, pipe1);
+			if (ft_exec_cmd_i(sh, pipes, i) == FAILURE)
+				return (CMD_FAIL);
+		}
+		else
+		{
+			pipes = ft_pipe_init(sh->path, pipe0, pipe1);
+			if (ft_exec_cmd_i(sh, pipes, i) == FAILURE)
+				return (CMD_FAIL);
+		}
+		++cmd_i;
+	}
+	return (cmd_i);
+}
+
+int	ft_exec_cmd_i(t_shell *sh, int **pipes, int i)
 {
 	pid_t	pid;
 
-	if (!pipe0 || !pipe1)
-		return (FAILURE);
+	if (!pipes)
+		return (ft_return_err("", errno, FAILURE));
 	pid = fork();
 	if (pid == PID_FAIL)
-		return (FAILURE);
+		return (ft_return_err("", errno, FAILURE));
 	if (pid == SUCCESS)
-		ft_exec_child_mid(sh, &pipe1, 0);
+		ft_exec_child_i(sh, pipes, i);
+	ft_close_pipes(pipes[0], pipes[1]);
+	free(pipes);
 	return (SUCCESS);
 }
 
@@ -101,7 +130,7 @@ void	ft_exec_child_first(t_shell *sh, int *pipeout)
 	(void)pipeout;
 }
 
-int	ft_exec_child_mid(t_shell *sh, int **pipes, int i)
+int	ft_exec_child_i(t_shell *sh, int **pipes, int i)
 {
 	(void)sh;
 	(void)pipes;
