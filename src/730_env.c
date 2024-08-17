@@ -34,8 +34,10 @@ int	ft_env(t_shell *sh, int n)
 	int		i;
 
 	ft_set_var("_", sh->cmds[n].argv[0], &sh->envp);
-	if (sh->cmds[n].argv[1])
-		return (ft_flag_err(sh->cmds[n].argv[0], sh->cmds[n].argv[1], 1));
+	i = 0;
+	while (sh->cmds[n].argv[++i])
+		if (sh->cmds[n].argv[i][0] == '-')
+			return (ft_flag_err(sh->cmds[n].argv[0], sh->cmds[n].argv[1], 1));
 	i = -1;
 	while (sh->envp[++i])
 	{
@@ -43,7 +45,7 @@ int	ft_env(t_shell *sh, int n)
 		if (!equal)
 			return (i);
 		if (equal && *(equal + 1) != '\0')
-			ft_putendl_fd(sh->envp[i], STDOUT_FILENO);
+			ft_fprintf(STDOUT_FILENO, "%s\n", sh->envp[i]);
 	}
 	return (i);
 }
