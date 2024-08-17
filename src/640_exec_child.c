@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 19:12:07 by passunca          #+#    #+#             */
-/*   Updated: 2024/08/17 10:17:46 by passunca         ###   ########.fr       */
+/*   Updated: 2024/08/17 12:10:43 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -21,7 +21,10 @@
 
 void	ft_exec_child_first(t_shell *sh, int *outpipe)
 {
-	// TODO: Handle redirections
+	if (sh->cmds[0].in.name)
+		ft_redir_in(sh, 0);
+	if (sh->cmds[0].out.name)
+		ft_redir_out(sh, 0);
 	if (outpipe)
 	{
 		if (ft_pipe_setter(outpipe, STDOUT_FILENO) == PIPE_FAIL)
@@ -38,20 +41,16 @@ void	ft_exec_child_first(t_shell *sh, int *outpipe)
 
 void	ft_exec_child_i(t_shell *sh, int **pipes, int i)
 {
-	// TODO: Handle redir in
-	// if (sh->cmds[i].in.name)
-	// 	ft_redir_in(sh, i);
-	// 	else if...
-	if (ft_pipe_setter(pipes[0], STDIN_FILENO) == PIPE_FAIL)
+	if (sh->cmds[i].in.name)
+		ft_redir_in(sh, i);
+	else if (ft_pipe_setter(pipes[0], STDIN_FILENO) == PIPE_FAIL)
 	{
 		ft_close_pipes(pipes[0], pipes[1]);
 		ft_fork_exit(sh, PIPE_ERR, FAILURE);
 	}
-	// TODO: Handle redir out
-	// if (sh->cmds[i].out.name)
-	// 	ft_redir_out(sh, i);
-	// 	else if...
-	if (ft_pipe_setter(pipes[1], STDOUT_FILENO) == PIPE_FAIL)
+	if (sh->cmds[i].out.name)
+		ft_redir_out(sh, i);
+	else if (ft_pipe_setter(pipes[1], STDOUT_FILENO) == PIPE_FAIL)
 	{
 		ft_close_pipes(pipes[0], pipes[1]);
 		ft_fork_exit(sh, PIPE_ERR, FAILURE);
@@ -66,18 +65,15 @@ void	ft_exec_child_i(t_shell *sh, int **pipes, int i)
 
 void	ft_exec_child_last(t_shell *sh, int *inpipe, int i)
 {
-	// TODO: Handle redir in
-	// if (sh->cmds[i].in.name)
-	// 	ft_redir_in(sh, i);
-	// 	else if...
-	if (ft_pipe_setter(inpipe, STDIN_FILENO) == PIPE_FAIL)
+	if (sh->cmds[i].in.name)
+		ft_redir_in(sh, i);
+	else if (ft_pipe_setter(inpipe, STDIN_FILENO) == PIPE_FAIL)
 	{
 		ft_close_pipes(inpipe, NULL);
 		ft_fork_exit(sh, PIPE_ERR, FAILURE);
 	}
-	// TODO: Handle redir out
-	// if (sh->cmds[i].out.name)
-	// 	ft_redir_out(sh, i);
+	if (sh->cmds[i].out.name)
+		ft_redir_out(sh, i);
 	ft_close_pipes(inpipe, NULL);
 	if (sh->cmds[i].argv[0])
 		ft_exec_cmd(sh, ft_exec_check(sh->cmds[i].argv[0]), i);

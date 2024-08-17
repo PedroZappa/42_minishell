@@ -6,7 +6,7 @@
 /*   By: gfragoso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/08/17 11:52:59 by passunca         ###   ########.fr       */
+/*   Updated: 2024/08/17 12:11:49 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ typedef struct s_tk_ops
 
 /// @struct			Redirection
 /// @brief	   		Structure to save redirection data
-/// @param name  	Redirection name
+/// @param name  	Redirection name (to be used with open())
 /// @param flag
 /// Redirection status flag (to use with open() & signal handling):
 /// - -1: Ignores SIGQUIT
@@ -368,6 +368,10 @@ void		ft_execve(char **path, char **argv, char **envp);
 int			**ft_pipe_init(char **path, int *pipe1, int *pipe2);
 int			ft_pipe_setter(int *pipe, int end);
 void		ft_close_pipes(int *pipe0, int *pipe1);
+
+/// @file	680_redir.c
+void	ft_redir_in(t_shell *sh, int i);
+void	ft_redir_out(t_shell *sh, int i);
 
 //=============================================================================/
 //	700		Builtins														   /
