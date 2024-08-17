@@ -20,9 +20,6 @@
 #include "../inc/minishell.h"
 
 /// @brief			Env built-in
-/// @details
-/// - If command has options or flags return error
-/// - Print environment variables
 /// @param sh		Pointer to a t_shell struct
 /// @param n		Command index
 /// @return			SUCCESS(i)
