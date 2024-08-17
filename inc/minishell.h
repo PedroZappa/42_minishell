@@ -6,7 +6,7 @@
 /*   By: gfragoso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/08/17 09:40:03 by passunca         ###   ########.fr       */
+/*   Updated: 2024/08/17 10:20:21 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -354,6 +354,9 @@ int			ft_exec_pipeline(t_shell *sh);
 
 /// @file	640_exec_child.c
 void		ft_exec_child(t_shell *sh, int *outpipe);
+void		ft_exec_child_first(t_shell *sh, int *pipeout);
+int			ft_exec_child_i(t_shell *sh, int **pipes, int i);
+int			ft_exec_child_last(t_shell *sh, int *pipein, int i);
 
 /// @file	650_exec_cmd.c
 void		ft_exec_cmd(t_shell *sh, int id, int i);

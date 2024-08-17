@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 08:39:57 by passunca          #+#    #+#             */
-/*   Updated: 2024/08/17 10:07:36 by passunca         ###   ########.fr       */
+/*   Updated: 2024/08/17 10:19:27 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -23,8 +23,6 @@ int		ft_exec_first(t_shell *sh, int *pipeout);
 int		ft_exec_loop(t_shell *sh, int *pipe0, int *pipe1);
 int		ft_exec_cmd_i(t_shell *sh, int **pipes, int i);
 int		ft_exec_last(t_shell *sh, int *pipein);
-void	ft_exec_child_first(t_shell *sh, int *pipeout);
-int		ft_exec_child_i(t_shell *sh, int **pipes, int i);
 
 /// @brief			Execute a pipeline of commands
 /// @param sh		Pointer to a t_shell struct
@@ -82,7 +80,7 @@ int	ft_exec_loop(t_shell *sh, int *pipe0, int *pipe1)
 
 	i = 0;
 	cmd_i = 0;
-	while(++i < (sh->n_cmds - 1))
+	while (++i < (sh->n_cmds - 1))
 	{
 		if ((cmd_i % 2) == 0)
 		{
@@ -119,22 +117,16 @@ int	ft_exec_cmd_i(t_shell *sh, int **pipes, int i)
 
 int	ft_exec_last(t_shell *sh, int *pipein)
 {
-	(void)sh;
-	(void)pipein;
-	return (SUCCESS);
-}
+	pid_t	pid;
+	int		i;
 
-void	ft_exec_child_first(t_shell *sh, int *pipeout)
-{
-	(void)sh;
-	(void)pipeout;
-}
-
-int	ft_exec_child_i(t_shell *sh, int **pipes, int i)
-{
-	(void)sh;
-	(void)pipes;
-	(void)i;
+	i = (sh->n_cmds - 1);
+	pid = fork();
+	if (pid == PID_FAIL)
+		return (ft_return_err("", errno, FAILURE));
+	if (pid == SUCCESS)
+		ft_exec_child_last(sh, pipein, i);
+	ft_close_pipes(pipein, NULL);
 	return (SUCCESS);
 }
 
