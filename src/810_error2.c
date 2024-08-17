@@ -63,4 +63,15 @@ int	ft_return_err(char *msg, int err_code, int exit_status)
 	return (exit_status);
 }
 
+/// @brief				Print error message, free shell & exit
+/// @param sh			Pointer to a t_shell struct
+/// @param msg			Message to be printed
+/// @param err_code		Error Code
+void	ft_fork_exit(t_shell *sh, char *msg, int err_code)
+{
+	ft_return_err(msg, err_code, FAILURE);
+	ft_free_sh(sh);
+	exit(err_code);
+}
+
 /** @} */

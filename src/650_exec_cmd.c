@@ -27,15 +27,15 @@
 /// @note			Used in ft_exec_child()
 void	ft_exec_cmd(t_shell *sh, int id, int i)
 {
-	t_stat	statbuf;
+	t_stat	sb;
 	int		stat_ret;
 
-	memset(&statbuf, 0, sizeof(t_stat));
+	memset(&sb, 0, sizeof(t_stat));
 	if (id == CMD_EXEC)
 	{
 		if (!sh->cmds[i].argv[0][0])
 			return ;
-		stat_ret = stat(sh->cmds[i].argv[0], &statbuf);
+		stat_ret = stat(sh->cmds[i].argv[0], &sb);
 		if (!stat_ret)
 		{
 			ft_free_sh(sh);

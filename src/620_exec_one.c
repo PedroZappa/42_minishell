@@ -76,7 +76,7 @@ int	ft_exec_fork(t_shell *sh)
 	if (pid == SUCCESS)
 	{
 		ft_fork_sigset();
-		ft_exec_child(sh, NULL);
+		ft_exec_child_first(sh, NULL);
 	}
 	wait(&g_exit);
 	if (WIFSIGNALED(g_exit))
