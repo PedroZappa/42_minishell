@@ -6,7 +6,7 @@
 /*   By: gfragoso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/08/16 11:39:15 by passunca         ###   ########.fr       */
+/*   Updated: 2024/08/17 09:40:03 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -417,7 +417,7 @@ int			ft_cmd_err(char *cmd, int err);
 /// @file	810_error2.c
 int			ft_bash_err(char *cmd, char *arg, int err);
 int			ft_pipe_err(char **path);
-int			ft_child_err(char *msg, int err_code, int exit_status);	
+int			ft_return_err(char *msg, int err_code, int exit_status);	
 
 //=============================================================================/
 //	900		Free															   /

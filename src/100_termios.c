@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 17:10:25 by passunca          #+#    #+#             */
-/*   Updated: 2024/06/20 18:20:19 by passunca         ###   ########.fr       */
+/*   Updated: 2024/08/17 09:43:35 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -32,7 +32,7 @@ void	ft_get_termios(int fd, t_term *termios)
 
 	term_conn = tcgetattr(fd, termios);
 	if (term_conn != SUCCESS)
-		ft_err(TERMIOS_ERR, errno);
+		ft_return_err(TERMIOS_ERR, term_conn, FAILURE);
 }
 
 /// @brief			Set Termios Interface
@@ -48,7 +48,7 @@ void	ft_set_termios(int fd, int opts, t_term *termios)
 
 	term_conn = tcsetattr(fd, opts, termios);
 	if (term_conn != SUCCESS)
-		ft_err(TERMIOS_ERR, errno);
+		ft_return_err(TERMIOS_ERR, term_conn, FAILURE);
 }
 
 /** @} */

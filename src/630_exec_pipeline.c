@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 08:39:57 by passunca          #+#    #+#             */
-/*   Updated: 2024/08/16 12:21:23 by passunca         ###   ########.fr       */
+/*   Updated: 2024/08/17 09:39:57 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -64,7 +64,7 @@ int	ft_exec_first(t_shell *sh, int *pipeout)
 
 	(void)sh;
 	if (pipe(pipeout) == PIPE_FAIL)
-		return (FAILURE);
+		return (ft_return_err("", errno, FAILURE));
 	pid = fork();
 	if (pid == PID_FAIL)
 		// TODO: Create Child Error Handler

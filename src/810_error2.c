@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 09:30:27 by passunca          #+#    #+#             */
-/*   Updated: 2024/08/17 09:31:24 by passunca         ###   ########.fr       */
+/*   Updated: 2024/08/17 09:40:00 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_pipe_err(char **path)
 /// @param err_code		Error Code
 /// @param exit_status	Exit status
 /// @return			SUCCESS(0)
-int	ft_child_err(char *msg, int err_code, int exit_status)
+int	ft_return_err(char *msg, int err_code, int exit_status)
 {
 	if (!exit_status || !msg)
 		ft_fprintf(STDERR_FILENO, "bash: ");
