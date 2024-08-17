@@ -24,7 +24,6 @@
 /// @param n		Command index
 /// @return			SUCCESS(i)
 /// @return			FAILURE(1)
-///	@note			Used in ft_execute()
 int	ft_env(t_shell *sh, int n)
 {
 	int		i;
