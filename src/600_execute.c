@@ -38,8 +38,11 @@ static int	ft_path_from_env(char **envp);
 int	ft_execute(t_shell *sh)
 {
 	sh->path = ft_split_path(sh->envp);
-	if (ft_exec_one(sh))
-		return (FAILURE);
+	if (sh->n_cmds == 1)
+	{
+		if (ft_exec_one(sh))
+			return (FAILURE);
+	}
 	else if (ft_exec_pipeline(sh))
 		return (FAILURE);
 	ft_set_termios(STDIN_FILENO, TCSAFLUSH, &sh->termios);
