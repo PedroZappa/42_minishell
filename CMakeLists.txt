@@ -12,6 +12,7 @@ set(MINISHELL_EXEC "../minishell")
 add_custom_target(run_yo
 	COMMAND ${MINISHELL_EXEC}
 )
+add_library(${This}_lib STATIC ${MINISHELL_EXEC})
 
 # # Link GoogleTest libraries
 add_subdirectory(googletest)
