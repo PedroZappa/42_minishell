@@ -11,8 +11,8 @@
 - [PlantUML](https://plantuml.com/class-diagram)
 
 ### GoogleTest
-- [GoogleTest](https://github.com/google/googletest)
-- [Google Test Primer](https://google.github.io/googletest/primer.html)
+- [GoogleTest Repo](https://github.com/google/googletest)
+- [GoogleTest User's Guide](https://google.github.io/googletest/)
 
 # Docs
 ## General
