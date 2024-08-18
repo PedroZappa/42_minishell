@@ -13,6 +13,7 @@
 ### GoogleTest
 - [GoogleTest Repo](https://github.com/google/googletest)
 - [GoogleTest User's Guide](https://google.github.io/googletest/)
+- [Assertions Reference](https://google.github.io/googletest/reference/assertions.html)
 
 # Docs
 ## General
