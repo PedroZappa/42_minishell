@@ -241,8 +241,11 @@ get_minishell_tester:
 	fi
 
 googletest: $(BUILD_PATH) $(BUILD) get_googletest			## Test w/ googletest
-	mkdir -p build/ && \
-	cd build && cmake .. && cmake --build .
+	@if test ! -d "build/"; then \
+		mkdir -p build/ && \
+		cd build && cmake .. && cmake --build .; \
+	fi
+	@cd build && ctest
 
 get_googletest:
 	@echo "* $(CYA)Getting Google Test$(D)]"

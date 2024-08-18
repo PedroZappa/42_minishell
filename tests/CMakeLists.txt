@@ -15,7 +15,7 @@ set(Sources
 add_executable(${This} ${Sources})
 # LINK LIBRARIES
 target_link_libraries(${This}
-	minishell_lib
+	minishell
 	gtest_main
 )
 
