@@ -45,7 +45,6 @@ INC_PATH		= inc
 LIBS_PATH		= lib
 BUILD_PATH		= .build
 TEMP_PATH		= .temp
-TESTS_PATH		= files
 
 FILES			= 000_main.c
 FILES			+= 010_init.c
@@ -94,6 +93,7 @@ LIBFT_PATH	= $(LIBS_PATH)/libft
 LIBFT_ARC	= $(LIBFT_PATH)/libft.a
 
 TESTER_PATH	= $(LIBS_PATH)/minishell_tester
+GOOGLETEST_PATH	= googletest
 
 #==============================================================================#
 #                              COMPILER & FLAGS                                #
@@ -119,9 +119,9 @@ AR		= ar rcs
 MKDIR_P	= mkdir -p
 
 ### Valgrind
-VAL_ARGS 		= --suppressions=readline.supp
-VAL_LEAK		= --leak-check=full --show-leak-kinds=all
-VGDB_ARGS		= --vgdb-error=0 $(VAL_LEAK) $(VAL_ARGS)
+VAL_ARGS 	= --suppressions=
+VAL_LEAK	= --leak-check=full --show-leak-kinds=all
+VGDB_ARGS	= --vgdb-error=0 $(VAL_LEAK) $(VAL_ARGS)
 
 #==============================================================================#
 #                                  RULES                                       #
@@ -240,6 +240,20 @@ get_minishell_tester:
 	echo " $(RED)$(D) [$(GRN)Nothing to be done!$(D)]"; \
 	fi
 
+googletest: $(BUILD_PATH) $(BUILD) get_googletest			## Test w/ googletest
+	mkdir -p build/ && \
+	cd build && cmake .. && cmake --build .
+
+get_googletest:
+	@echo "* $(CYA)Getting Google Test$(D)]"
+	@if test ! -d "$(GOOGLETEST_PATH)"; then \
+		git clone https://github.com/google/googletest.git $(GOOGLETEST_PATH); \
+		echo "* $(GRN)Google Test download$(D): $(_SUCCESS)"; \
+	else \
+		echo "* $(GRN)Google Test already exists 🖔"; \
+	echo " $(RED)$(D) [$(GRN)Nothing to be done!$(D)]"; \
+	fi
+
 ##@ Debug Rules 
 
 gdb: all $(NAME) $(TEMP_PATH)			## Debug w/ gdb
@@ -312,9 +326,7 @@ fclean: clean			## Remove executable and .gdbinit
 
 libclean: fclean	## Remove libs
 	$(RM) $(LIBS_PATH)
-	@if [ -d "$$HOME/Minishell_Tester" ]; then \
-		$(RM) -rf "$$HOME/Minishell_Tester"; \
-	fi
+	$(RM) $(GOOGLETEST_PATH)
 	@echo "* $(YEL)Removing lib folder & files!$(D) : $(_SUCCESS)"
 
 re: fclean all	## Purge & Recompile
