@@ -1,9 +1,10 @@
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.8)
 
 set(${This} minishell_tester)
 # Find and include GoogleTest
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
+# Set compiler flags
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra -Werror")
 
 # BUILD SOURCES
@@ -18,6 +19,7 @@ add_executable(${This} ${Sources})
 
 # Link the test executable against GTest
 target_link_libraries(minishell_tester
+	minishell_lib
     GTest::gtest_main  # Link GoogleTest
 )
 
@@ -34,8 +36,3 @@ set_tests_properties(CompareWithBashTest PROPERTIES
 
 # BUILD EXECUTABLE
 add_executable(${This} ${Sources})
-
-add_test(Test
-	NAME ${This}
-	COMMAND ${This}
-)

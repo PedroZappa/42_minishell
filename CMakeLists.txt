@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.8)
 
 set(${This} minishell_tester)
 # List of languages supported by this project (C & C++).
@@ -32,6 +32,7 @@ target_compile_definitions(${This} PRIVATE BASH_PATH="${BASH_EXECUTABLE}")
 add_subdirectory(googletest)
 enable_testing()
 add_subdirectory(tests)
+
 add_test(
 	NAME Minishell_exec_test
     COMMAND ls
