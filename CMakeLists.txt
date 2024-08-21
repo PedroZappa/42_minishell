@@ -15,8 +15,7 @@ target_compile_options(c_flags INTERFACE
 
 # Import External Project
 include(ExternalProject)
-ExternalProject_Add(
-    external_project
+ExternalProject_Add(minishell
     SOURCE_DIR ${CMAKE_SOURCE_DIR}
     CONFIGURE_COMMAND ""
     BUILD_COMMAND ${MAKE}
