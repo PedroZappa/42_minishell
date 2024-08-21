@@ -62,19 +62,18 @@ static int	ft_chdir(char ***env, char *path)
 	char	*old;
 	int		chdir_ret;
 
-	pwd = NULL;
 	old = NULL;
-	pwd = getcwd(NULL, 0);
+	pwd = ft_get_var("PWD", *env, NULL);
 	chdir_ret = 0;
-	printf("%s\n", ft_resolve_path(pwd, path));
 	if (path[0] == '-')
 		ft_get_prev_dir(env, old, pwd);
 	else
 	{
-		chdir_ret = chdir(path);
+		old = ft_resolve_path(pwd, path);
+		chdir_ret = chdir(old);
 		ft_set_var("OLDPWD", pwd, env);
-		old = getcwd(NULL, 0);
-		ft_set_var("PWD", old, env);
+		if (chdir_ret == 0)
+			ft_set_var("PWD", old, env);
 	}
 	if (chdir_ret == -1 && path[0])
 	{

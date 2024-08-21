@@ -81,7 +81,7 @@ static char	*ft_build_prompt(t_shell *sh)
 	char	*pwd;
 
 	temp = ft_strjoin(sh->user, "@42:");
-	cwd = getcwd(NULL, 0);
+	cwd = ft_get_var("PWD", sh->envp, NULL);
 	if (cwd != NULL)
 	{
 		pwd = ft_build_cwd(sh, cwd);
