@@ -227,10 +227,13 @@ sync_valgrind: $(BUILD)		## Test bash & minishell w/ valgrind
 	clear && valgrind $(VAL_ARGS) $(VAL_LEAK) ./$(NAME)
 
 cmake: $(BUILD)	fclean		## Test w/ cmake
-	@if [ -d "build/" ]; then \
-		rm -rf build/; \
+	@if [ -f "minishell" ]; then \
+		$(RM) minishell/; \
 	fi
-	mkdir -p build/ && cd build/ && cmake .. && cmake --build .
+	@if [ -d "build/" ]; then \
+		$(RM) build/; \
+	fi
+	@mkdir -p build/ && cd build/ && cmake .. && cmake --build .
 
 tester: $(BUILD) get_minishell_tester			## Test w/ tester
 	cd $(TESTER_PATH) && pip3 install -r requirements.txt 

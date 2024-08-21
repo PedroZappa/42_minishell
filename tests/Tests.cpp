@@ -42,3 +42,7 @@ TEST(MiniShellTest, CompareOutputs) {
     // Compare outputs
     ASSERT_EQ(minishell_output, bash_output) << "Output mismatch between minishell and bash";
 }
+
+int main(int argc, char** argv) {
+	return 0;
+}

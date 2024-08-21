@@ -9,8 +9,10 @@ add_library(c_flags INTERFACE)
 target_compile_features(c_flags INTERFACE c_std_11)
 # Add Compiler warning flags
 set(gcc_flags "$<COMPILE_LANG_AND_ID:CXX,ARMClang,AppleClang,Clang,GNU,LCC>")
+set(lnk_flags "$<LINK_LANGUAGE:CXX,ARMClang,AppleClang,Clang,GNU,LCC>")
 target_compile_options(c_flags INTERFACE
   "$<${gcc_flags}:$<BUILD_INTERFACE:-Wall;-Wextra;-Werror>>"
+  "$<${lnk_flags}:$<BUILD_INTERFACE:-lgtest;-lgmock;-pthread>>"
 )
 
 # Import External Project
