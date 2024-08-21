@@ -23,8 +23,15 @@ ExternalProject_Add(minishell
     BUILD_IN_SOURCE 1
 )
 
-# ExternalProject_Get_property(minishell BINARY_DIR SOURCE_DIR)
-# set(MINISHELL_BINARY "${BINARY_DIR}/minishell")
+# Create Target for minishell executable
+add_custom_target(minishell_target
+    DEPENDS ${CMAKE_SOURCE_DIR}
+)
+
+# Create Interface Library
+add_library(external_lib INTERFACE)
+add_dependencies(external_lib minishell_target)
+target_link_libraries(external_lib INTERFACE ${CMAKE_SOURCE_DIR})
 
 message("Source dir of minishell = ${SOURCE_DIR}")
 message("Binary dir of minishell = ${MINISHELL_BINARY}")
@@ -36,5 +43,5 @@ add_subdirectory(tests)
 
 add_test(
 	NAME exec_test
-    COMMAND ls
+    COMMAND minishell
 )
