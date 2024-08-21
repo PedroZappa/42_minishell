@@ -58,10 +58,13 @@ static char	*ft_build_cwd(t_shell *sh, char *cwd)
 	if (ft_strncmp(cwd, sh->home, home_len) != 0)
 		home_len = 0;
 	ret = ft_calloc((cwd_len - home_len + (home_len > 0) + 1), sizeof(char));
-	i = -1;
+	i = 0;
 	ret[0] = '~';
-	while (++i < (cwd_len - home_len))
+	while (i < (cwd_len - home_len))
+	{
 		ret[i + (home_len > 0)] = cwd[i + home_len];
+		i++;
+	}
 	ret[i + (home_len > 0)] = '\0';
 	return (ret);
 }

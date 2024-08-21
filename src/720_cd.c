@@ -66,6 +66,7 @@ static int	ft_chdir(char ***env, char *path)
 	old = NULL;
 	pwd = getcwd(NULL, 0);
 	chdir_ret = 0;
+	printf("%s\n", ft_resolve_path(pwd, path));
 	if (path[0] == '-')
 		ft_get_prev_dir(env, old, pwd);
 	else
