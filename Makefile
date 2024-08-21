@@ -226,8 +226,8 @@ sync_valgrind: $(BUILD)		## Test bash & minishell w/ valgrind
 	tmux setw synchronize-panes on
 	clear && valgrind $(VAL_ARGS) $(VAL_LEAK) ./$(NAME)
 
-cmake: $(BUILD)			## Test w/ cmake
-	if [ -d "build/" ]; then \
+cmake: $(BUILD)	fclean		## Test w/ cmake
+	@if [ -d "build/" ]; then \
 		rm -rf build/; \
 	fi
 	mkdir -p build/ && cd build/ && cmake .. && cmake --build .
