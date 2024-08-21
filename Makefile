@@ -226,6 +226,12 @@ sync_valgrind: $(BUILD)		## Test bash & minishell w/ valgrind
 	tmux setw synchronize-panes on
 	clear && valgrind $(VAL_ARGS) $(VAL_LEAK) ./$(NAME)
 
+cmake: $(BUILD)			## Test w/ cmake
+	if [ -d "build/" ]; then \
+		rm -rf build/; \
+	fi
+	mkdir -p build/ && cd build/ && cmake .. && cmake --build .
+
 tester: $(BUILD) get_minishell_tester			## Test w/ tester
 	cd $(TESTER_PATH) && pip3 install -r requirements.txt 
 	python3 $(TESTER_PATH)/src/__main__.py .
