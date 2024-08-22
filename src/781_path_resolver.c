@@ -83,7 +83,7 @@ char	**ft_path_arr_reduce(char **elems, size_t final_size)
 		}
 		i++;
 	}
-	ret[j] = '\0';
+	ret[j] = NULL;
 	return (ret);
 }
 
