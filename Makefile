@@ -26,6 +26,7 @@ ARG			=
 #==============================================================================#
 
 NAME 			= minishell
+TESTER			= minishell_tester
 
 ### Message Vars
 _SUCCESS 		= [$(GRN)SUCCESS$(D)]
@@ -235,6 +236,9 @@ cmake: $(BUILD) get_googletest get_boost
 
 ctest: cmake			## Test w/ ctest
 	@cd tests/build && ctest
+
+tester: $(BUILD) cmake	## Test w/ googletest
+	./tests/build/$(TESTER)
 
 get_googletest: $(BUILD_PATH) $(BUILD)
 	@echo "* $(CYA)Getting googletest$(D): $(_INFO)"
