@@ -22,6 +22,7 @@
 
 static int	ft_chdir(char ***env, char *path);
 static int	ft_get_prev_dir(char ***env, char *old, char *pwd);
+static void	ft_chdir_err(char *path);
 
 /// @brief			Change directory
 /// @details
@@ -71,14 +72,15 @@ static int	ft_chdir(char ***env, char *path)
 	{
 		old = ft_path_resolve(pwd, path);
 		chdir_ret = chdir(old);
-		ft_set_var("OLDPWD", pwd, env);
 		if (chdir_ret == 0)
+		{
+			ft_set_var("OLDPWD", pwd, env);
 			ft_set_var("PWD", old, env);
+		}
 	}
 	if (chdir_ret == -1 && path[0])
 	{
-		ft_fprintf(STDERR_FILENO,
-			"bash: %s: No such file or directory\n", path);
+		ft_chdir_err(path);
 		return (ft_free(pwd), ft_free(old), FAILURE);
 	}
 	return (ft_free(pwd), ft_free(old), chdir_ret);
@@ -95,14 +97,32 @@ int	ft_get_prev_dir(char ***env, char *old, char *pwd)
 
 	chdir_ret = 0;
 	old = ft_get_var("OLDPWD", *env, NULL);
-	ft_set_var("OLDPWD", pwd, env);
 	if (old == NULL)
 		old = ft_strdup(pwd);
-	ft_set_var("PWD", old, env);
-	ft_putendl_fd(old, STDOUT_FILENO);
 	chdir_ret = chdir(old);
+	if (chdir_ret == 0)
+	{
+		ft_set_var("OLDPWD", pwd, env);
+		ft_set_var("PWD", old, env);
+		ft_putendl_fd(old, STDOUT_FILENO);
+	}
 	ft_free(old);
 	return (chdir_ret);
+}
+
+static void	ft_chdir_err(char *path)
+{
+	t_stat	sb;
+	int		stat_ret;
+
+	memset(&sb, 0, sizeof(t_stat));
+	stat_ret = stat(path, &sb);
+	if (stat_ret == 0 && (sb.st_mode & __S_IFMT) != __S_IFDIR)
+		ft_fprintf(STDOUT_FILENO, "bash: cd: %s: Not a directory\n",
+			path);
+	if (stat_ret == -1)
+		ft_fprintf(STDERR_FILENO, "bash: cd: %s: No such file or directory\n",
+			path);
 }
 
 /** @} */
