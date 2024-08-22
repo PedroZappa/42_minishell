@@ -94,10 +94,10 @@ OBJS	= $(SRC:$(SRC_PATH)/%.c=$(BUILD_PATH)/%.o)
 LIBFT_PATH	= $(LIBS_PATH)/libft
 LIBFT_ARC	= $(LIBFT_PATH)/libft.a
 
-TESTER_PATH	= $(LIBS_PATH)/minishell_tester
+TESTER_PATH		= $(LIBS_PATH)/minishell_tester
 GOOGLETEST_PATH	= tests/googletest
-BOOST_PATH	= boost/
-BOOST	= boost_1_86_0
+BOOST_PATH		= tests/boost/
+BOOST			= boost_1_86_0
 
 #==============================================================================#
 #                              COMPILER & FLAGS                                #
@@ -234,23 +234,24 @@ cmake: $(BUILD) get_googletest		## Test w/ cmake
 	@cd tests/ && mkdir -p build/ && cd build/ && cmake .. && make
 
 get_googletest: $(BUILD_PATH) $(BUILD)
-	@echo "* $(CYA)Getting googletest$(D)]"
+	@echo "* $(CYA)Getting googletest$(D): $(_INFO)"
 	@if test ! -d "$(GOOGLETEST_PATH)"; then \
 		git clone git@github.com:google/googletest.git $(GOOGLETEST_PATH); \
-		echo "* $(GRN)googletest download$(D): $(_SUCCESS)"; \
+		echo "* $(YEL)googletest download$(D): $(_SUCCESS)"; \
 	else \
-		echo "* $(GRN)googletest already exists 🖔"; \
+		echo "* $(YEL)googletest already exists 🖔"; \
 	echo " $(RED)$(D) [$(GRN)Nothing to be done!$(D)]"; \
 	fi
 
 get_boost: $(BUILD_PATH) $(BUILD)
-	@echo "* $(CYA)Getting Boost Library$(D)]"
+	@echo "* $(CYA)Getting Boost Library$(D): $(_INFO)"
 	@if test ! -d "$(BOOST_PATH)"; then \
 		cd tests && \
 		curl https://archives.boost.io/release/1.86.0/source/$(BOOST).tar.bz2 -o $(BOOST).tar.bz2; \
+		echo "* $(GRN)Unpacking Boost Library$(D): $(_INFO)"; \
 		tar --bzip2 -xf $(BOOST).tar.bz2; \
-		mv $(BOOST)/ $(BOOST_PATH); \
-		$(RM) $(BOOST).tar.bz2; \
+		cd .. && mv tests/$(BOOST) $(BOOST_PATH); \
+		$(RM) tests/$(BOOST).tar.bz2; \
 		echo "* $(GRN)Boost Library download$(D): $(_SUCCESS)"; \
 	else \
 		echo "* $(GRN)Boost Library already exists 🖔"; \
@@ -265,7 +266,7 @@ gdb: all $(NAME) $(TEMP_PATH)			## Debug w/ gdb
 	make get_log
 
 
-ugdb: all $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck) & gdb
+vgdb: all $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck) & gdb
 	tmux split-window -h "valgrind $(VGDB_ARGS) --log-file=gdb.txt ./$(NAME) $(ARG)"
 	make vgdb_cmd
 	tmux split-window -v "gdb --tui -x $(TEMP_PATH)/gdb_commands.txt $(NAME)"
@@ -331,6 +332,7 @@ fclean: clean			## Remove executable and .gdbinit
 libclean: fclean	## Remove libs
 	$(RM) $(LIBS_PATH)
 	$(RM) $(GOOGLETEST_PATH)
+	$(RM) $(BOOST_PATH)
 	@echo "* $(YEL)Removing lib folder & files!$(D) : $(_SUCCESS)"
 
 re: fclean all	## Purge & Recompile
