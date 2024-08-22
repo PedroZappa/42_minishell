@@ -1,6 +1,11 @@
 #include <gtest/gtest.h>
 #include "tester.hpp"
 
+int main(int argc, char** argv) {
+	::testing::InitGoogleTest(&argc, argv);
+	return RUN_ALL_TESTS();
+}
+
 std::string Tester::exec(const char* cmd) {
 	std::array<char, 128> buffer;
 	std::string result;
