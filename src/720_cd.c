@@ -69,7 +69,7 @@ static int	ft_chdir(char ***env, char *path)
 		ft_get_prev_dir(env, old, pwd);
 	else
 	{
-		old = ft_resolve_path(pwd, path);
+		old = ft_path_resolve(pwd, path);
 		chdir_ret = chdir(old);
 		ft_set_var("OLDPWD", pwd, env);
 		if (chdir_ret == 0)
@@ -79,7 +79,7 @@ static int	ft_chdir(char ***env, char *path)
 	{
 		ft_fprintf(STDERR_FILENO,
 			"bash: %s: No such file or directory\n", path);
-		return (ft_free(old), FAILURE);
+		return (ft_free(pwd), ft_free(old), FAILURE);
 	}
 	return (ft_free(pwd), ft_free(old), chdir_ret);
 }

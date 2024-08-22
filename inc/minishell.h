@@ -410,7 +410,11 @@ int			ft_unset(t_shell *sh, int n);
 
 /// @file	780_path.c 
 int			ft_path(t_shell *sh, int n);
-char		*ft_resolve_path(char *pwd, char *path);
+char		*ft_path_resolve(char *pwd, char *path);
+
+/// @file 782_path_utils.c
+char		*ft_path_combine(char const *s1, char const *s2);
+size_t		ft_path_reduced_len(char **elems);
 
 //=============================================================================/
 //	800		Errors & Info													   /
