@@ -18,17 +18,17 @@
 /// @param pipe2	Pointer to a pipe2
 /// @return			Pointer to an array of pipes
 /// @note			Used all over the code base
-int	**ft_pipe_init(char **path, int *pipe1, int *pipe2)
+int	**ft_pipe_init(char **path, int *pipe0, int *pipe1)
 {
 	int	**pipes;
 
 	pipes = malloc(sizeof(int *) * 2);
 	if (!pipes)
 		return (ft_err(MALLOC_ERR, errno), NULL);
-	if (pipe(pipe2) == PIPE_FAIL)
+	if (pipe(pipe1) == PIPE_FAIL)
 		return (ft_pipe_err(path), NULL);
-	pipes[0] = pipe1;
-	pipes[1] = pipe2;
+	pipes[0] = pipe0;
+	pipes[1] = pipe1;
 	return (pipes);
 }
 
