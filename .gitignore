@@ -63,3 +63,5 @@ docs/
 .vscode/
 googletest/
 build/
+tests/boost
+tests/googletest	

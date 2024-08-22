@@ -256,8 +256,9 @@ define parse_cmds
 	display *tks
 	display *cmds
 	display *cmds->argv
-	display *cmds->argv@cmds->argc
 	display cmds[i].argv[j]
+	display i
+	display j
 end
 
 define expand_check_dollar
@@ -266,44 +267,26 @@ define expand_check_dollar
 	display *i
 end
 
-### 300_parser.c
-define parser
-	display *sh
-	display line_buf
-	display *sh->cmds
-end
-
-define count_args
-	display *sh
-	display *tks
-	display *prev
-	display i
-end
-
-define parse_cmds
-	display *tks
-	display *cmds
-	display *cmds->argv
-	display cmds[i].argv[j]
-	display i
-	display j
-end
-
 ### 310_readline.c
-define get_prompt
-	display prompt
-	display pwd
-	display trim
-	display ret
-	display sh->home
-	display sh->user
+define readline
+	display **line_buf
+	display *prompt
 end
 
-define trim_cwd
-	display ****sh
-	display cwd
-	display tmp
-	display ret
+define build_cwd
+	display *cwd
+	display *ret
+	display i
+	display cwd_len
+	display home_len
+end
+
+define build_prompt
+	display sh->envp
+	display *ret
+	display *temp
+	display *cwd
+	display *pwd
 end
 
 define add_user_host
@@ -508,6 +491,29 @@ define sort_env
 	display env[n + 1]
 	display env[i]
 	display env[j]
+end
+
+### 781_path_resolver.c
+define path_resolve
+	display pwd
+	display path
+	display ret
+	display temp
+end
+
+define path_elems_final_size
+	display **elems
+	display i
+	display j
+	display elems[i]
+end
+
+define path_resolve_inner
+	display path
+	display ret
+	display *elems
+	display *final_elems
+	display final_size
 end
 
 ### 900_free.c

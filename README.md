@@ -83,6 +83,7 @@ cd ""
 
 # TODO:
 cd /		# see ft_readline (space for ft_calloc)
+cd ~ && cd ..
 ```
 
 # Notes

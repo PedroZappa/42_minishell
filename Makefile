@@ -95,7 +95,8 @@ LIBFT_PATH	= $(LIBS_PATH)/libft
 LIBFT_ARC	= $(LIBFT_PATH)/libft.a
 
 TESTER_PATH	= $(LIBS_PATH)/minishell_tester
-GOOGLETEST_PATH	= googletest
+GOOGLETEST_PATH	= tests/googletest
+BOOST_PATH	= boost.zip
 
 #==============================================================================#
 #                              COMPILER & FLAGS                                #
@@ -228,43 +229,29 @@ sync_valgrind: $(BUILD)		## Test bash & minishell w/ valgrind
 	tmux setw synchronize-panes on
 	clear && valgrind $(VAL_ARGS) $(VAL_LEAK) ./$(NAME)
 
-cmake: $(BUILD)	fclean		## Test w/ cmake
-	@if [ -f "minishell" ]; then \
-		$(RM) minishell/; \
-	fi
-	@if [ -d "build/" ]; then \
-		$(RM) build/; \
-	fi
-	@mkdir -p build/ && cd build/ && cmake .. && cmake --build .
+cmake: $(BUILD) get_googletest		## Test w/ cmake
+	@cd tests/ && mkdir -p build/ && cd build/ && cmake .. && make
 
-tester: $(BUILD) get_minishell_tester			## Test w/ tester
-	cd $(TESTER_PATH) && pip3 install -r requirements.txt 
-	python3 $(TESTER_PATH)/src/__main__.py .
-
-get_minishell_tester:
-	@echo "* $(CYA)Getting Minishell Tester$(D)]"
-	@if test ! -d "$(TESTER_PATH)"; then \
-		git clone git@github.com:PedroZappa/minishell_tester.git $(TESTER_PATH); \
-		echo "* $(GRN)Minishell Tester download$(D): $(_SUCCESS)"; \
+get_googletest: $(BUILD_PATH) $(BUILD)
+	@echo "* $(CYA)Getting googletest$(D)]"
+	@if test ! -d "$(GOOGLETEST_PATH)"; then \
+		git clone git@github.com:google/googletest.git $(GOOGLETEST_PATH); \
+		echo "* $(GRN)googletest download$(D): $(_SUCCESS)"; \
 	else \
-		echo "* $(GRN)Minishell Tester already exists 🖔"; \
+		echo "* $(GRN)googletest already exists 🖔"; \
 	echo " $(RED)$(D) [$(GRN)Nothing to be done!$(D)]"; \
 	fi
 
-googletest: $(BUILD_PATH) $(BUILD) get_googletest			## Test w/ googletest
-	@if test ! -d "build/"; then \
-		mkdir -p build/ && \
-		cd build && cmake .. && cmake --build .; \
-	fi
-	@cd tests && ctest
-
-get_googletest:
-	@echo "* $(CYA)Getting Google Test$(D)]"
-	@if test ! -d "$(GOOGLETEST_PATH)"; then \
-		git clone https://github.com/google/googletest.git $(GOOGLETEST_PATH); \
-		echo "* $(GRN)Google Test download$(D): $(_SUCCESS)"; \
+get_boost: $(BUILD_PATH) $(BUILD)
+	@echo "* $(CYA)Getting Boost Library$(D)]"
+	@if test ! -d "$(BOOST_PATH)"; then \
+		cd tests && curl https://archives.boost.io/release/1.86.0/source/boost_1_86_0.tar.gz -o boost.zip; \
+		tar -xvf $(BOOST_PATH); \
+		mv boost_1_86_0/  boost/; \
+		$(RM) $(BOOST_PATH); \
+		echo "* $(GRN)Boost Library download$(D): $(_SUCCESS)"; \
 	else \
-		echo "* $(GRN)Google Test already exists 🖔"; \
+		echo "* $(GRN)Boost Library already exists 🖔"; \
 	echo " $(RED)$(D) [$(GRN)Nothing to be done!$(D)]"; \
 	fi
 
@@ -275,7 +262,8 @@ gdb: all $(NAME) $(TEMP_PATH)			## Debug w/ gdb
 	tmux resize-pane -L 5
 	make get_log
 
-vgdb: all $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck) & gdb
+
+ugdb: all $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck) & gdb
 	tmux split-window -h "valgrind $(VGDB_ARGS) --log-file=gdb.txt ./$(NAME) $(ARG)"
 	make vgdb_cmd
 	tmux split-window -v "gdb --tui -x $(TEMP_PATH)/gdb_commands.txt $(NAME)"

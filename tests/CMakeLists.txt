@@ -1,9 +1,14 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.10)
+project(minishell_tester)
 
-set(${This} minishell_tester)
-# Find and include GoogleTest
-find_package(GTest REQUIRED)
-include_directories(${GTEST_INCLUDE_DIRS})
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_BUILD_TYPE_TMP "${CMAKE_BUILD_TYPE}")
+set(CMAKE_BUILD_TYPE "Release")
+
+add_subdirectory(googletest)
+include_directories(googletest/googletest/include)
+include_directories(googletest/googlemock/include)
+set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE_TMP})
 
 # BUILD SOURCES
 set(Sources
@@ -12,29 +17,9 @@ set(Sources
 	Tests.cpp
 )
 
-# Add the test executable
-add_executable(${This} ${Sources})
+add_executable(minishell_tester ${Sources})
 
-# Ensure minishell is built before running the tests
-# add_dependencies(minishell_builder)
-
-# Link the test executable against GTest
-target_link_libraries(
-    gtest_main  # Link GoogleTest
-)
-
-# Add a test that uses the `minishell` executable
-add_test(test_yo
-	NAME CompareWithBashTest
-	COMMAND ${This}
-)
-
-# Specify the path to the minishell binary built by your Makefile
-# set_tests_properties(CompareWithBashTest PROPERTIES 
-# 	ENVIRONMENT "MINISHELL_BINARY=${MINISHELL_BINARY}"
-# )
-
-# IMPORT EXECUTABLE
-set(Exec
-	minishell
+target_link_libraries(minishell_tester
+	gtest
+	gtest_main
 )
