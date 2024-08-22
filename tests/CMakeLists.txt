@@ -10,16 +10,17 @@ include_directories(googletest/googletest/include)
 include_directories(googletest/googlemock/include)
 set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE_TMP})
 
-# BUILD SOURCES
-set(Sources
-	Tester.cpp
-	Tester.hpp
-	Tests.cpp
+add_executable(minishell_tester 
+	main.cpp
+	tester.hpp
+	tests.cpp
 )
-
-add_executable(minishell_tester ${Sources})
 
 target_link_libraries(minishell_tester
 	gtest
 	gtest_main
 )
+
+# Enable testing
+enable_testing()
+add_test(NAME minishell_tester COMMAND minishell_tester)

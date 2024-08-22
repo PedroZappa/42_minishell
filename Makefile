@@ -230,8 +230,11 @@ sync_valgrind: $(BUILD)		## Test bash & minishell w/ valgrind
 	tmux setw synchronize-panes on
 	clear && valgrind $(VAL_ARGS) $(VAL_LEAK) ./$(NAME)
 
-cmake: $(BUILD) get_googletest		## Test w/ cmake
+cmake: $(BUILD) get_googletest get_boost
 	@cd tests/ && mkdir -p build/ && cd build/ && cmake .. && make
+
+ctest: cmake			## Test w/ ctest
+	@cd tests/build && ctest
 
 get_googletest: $(BUILD_PATH) $(BUILD)
 	@echo "* $(CYA)Getting googletest$(D): $(_INFO)"

@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "Tester.hpp"
+#include "tester.hpp"
 
 std::string Tester::exec(const char* cmd) {
 	std::array<char, 128> buffer;
