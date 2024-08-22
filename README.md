@@ -38,11 +38,11 @@
 ## General
 ```sh
 cat ""
+cd /lib/ && pwd
 
 # TODO:
 ../
 $PWD
-cd /lib/ && pwd
 ```
 ## Built-ins 
 ### [[echo]]
