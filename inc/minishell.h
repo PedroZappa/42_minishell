@@ -370,8 +370,8 @@ int			ft_pipe_setter(int *pipe, int end);
 void		ft_close_pipes(int *pipe0, int *pipe1);
 
 /// @file	680_redir.c
-void	ft_redir_in(t_shell *sh, int i);
-void	ft_redir_out(t_shell *sh, int i);
+void		ft_redir_in(t_shell *sh, int i);
+void		ft_redir_out(t_shell *sh, int i);
 
 //=============================================================================/
 //	700		Builtins														   /
@@ -410,6 +410,11 @@ int			ft_unset(t_shell *sh, int n);
 
 /// @file	780_path.c 
 int			ft_path(t_shell *sh, int n);
+char		*ft_path_resolve(char *pwd, char *path);
+
+/// @file 782_path_utils.c
+char		*ft_path_combine(char const *s1, char const *s2);
+size_t		ft_path_reduced_len(char **elems);
 
 //=============================================================================/
 //	800		Errors & Info													   /
