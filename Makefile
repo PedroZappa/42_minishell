@@ -96,7 +96,8 @@ LIBFT_ARC	= $(LIBFT_PATH)/libft.a
 
 TESTER_PATH	= $(LIBS_PATH)/minishell_tester
 GOOGLETEST_PATH	= tests/googletest
-BOOST_PATH	= boost.zip
+BOOST_PATH	= boost/
+BOOST	= boost_1_86_0
 
 #==============================================================================#
 #                              COMPILER & FLAGS                                #
@@ -245,10 +246,11 @@ get_googletest: $(BUILD_PATH) $(BUILD)
 get_boost: $(BUILD_PATH) $(BUILD)
 	@echo "* $(CYA)Getting Boost Library$(D)]"
 	@if test ! -d "$(BOOST_PATH)"; then \
-		cd tests && curl https://archives.boost.io/release/1.86.0/source/boost_1_86_0.tar.gz -o boost.zip; \
-		tar -xvf $(BOOST_PATH); \
-		mv boost_1_86_0/  boost/; \
-		$(RM) $(BOOST_PATH); \
+		cd tests && \
+		curl https://archives.boost.io/release/1.86.0/source/$(BOOST).tar.bz2 -o $(BOOST).tar.bz2; \
+		tar --bzip2 -xf $(BOOST).tar.bz2; \
+		mv $(BOOST)/ $(BOOST_PATH); \
+		$(RM) $(BOOST).tar.bz2; \
 		echo "* $(GRN)Boost Library download$(D): $(_SUCCESS)"; \
 	else \
 		echo "* $(GRN)Boost Library already exists 🖔"; \
