@@ -33,6 +33,7 @@ void	ft_free_sh(t_shell *sh)
 		free(sh->home);
 		free(sh->user);
 		free(sh);
+		rl_clear_history();
 	}
 }
 
