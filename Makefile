@@ -232,7 +232,8 @@ sync_valgrind: $(BUILD)		## Test bash & minishell w/ valgrind
 	clear && valgrind $(VAL_ARGS) $(VAL_LEAK) ./$(NAME)
 
 cmake: $(BUILD) get_googletest get_boost
-	@cd tests/ && mkdir -p build/ && cd build/ && cmake .. && make
+	@cd tests/ && mkdir -p build/ && cd build/ && cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .. && make
+	ln -s tests/build/compile_commands.json compile_commands.json
 
 ctest: cmake			## Test w/ ctest
 	@cd tests/build && ctest
@@ -340,6 +341,7 @@ libclean: fclean	## Remove libs
 	$(RM) $(LIBS_PATH)
 	$(RM) $(GOOGLETEST_PATH)
 	$(RM) $(BOOST_PATH)
+	$(RM) tests/build
 	@echo "* $(YEL)Removing lib folder & files!$(D) : $(_SUCCESS)"
 
 re: fclean all	## Purge & Recompile

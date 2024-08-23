@@ -66,3 +66,7 @@ googletest/
 build/
 tests/boost
 tests/googletest	
+.cache/
+
+#LSP
+compile_commands.json
