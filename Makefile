@@ -331,6 +331,7 @@ fclean: clean			## Remove executable and .gdbinit
 	@if [ -f "$(NAME)" ]; then \
 		if [ -f "$(NAME)" ]; then \
 			$(RM) $(NAME); \
+			$(RM) compile_commands.json; \
 			echo "* $(YEL)Removing $(CYA)$(NAME)$(D) file: $(_SUCCESS)"; \
 		fi; \
 	else \
@@ -342,6 +343,7 @@ libclean: fclean	## Remove libs
 	$(RM) $(GOOGLETEST_PATH)
 	$(RM) $(BOOST_PATH)
 	$(RM) tests/build
+	$(RM) compile_commands.json
 	@echo "* $(YEL)Removing lib folder & files!$(D) : $(_SUCCESS)"
 
 re: fclean all	## Purge & Recompile
