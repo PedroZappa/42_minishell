@@ -8,6 +8,7 @@ set(CMAKE_BUILD_TYPE "Release")
 add_subdirectory(googletest)
 include_directories(googletest/googletest/include)
 include_directories(googletest/googlemock/include)
+include_directories(boost/boost/processes)
 set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE_TMP})
 
 add_executable(minishell_tester 

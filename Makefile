@@ -233,7 +233,9 @@ sync_valgrind: $(BUILD)		## Test bash & minishell w/ valgrind
 
 cmake: $(BUILD) get_googletest get_boost
 	@cd tests/ && mkdir -p build/ && cd build/ && cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .. && make
-	ln -s tests/build/compile_commands.json compile_commands.json
+	@if test ! -f compile_commands.json; then \
+		ln -s tests/build/compile_commands.json compile_commands.json; \
+	fi
 
 ctest: cmake			## Test w/ ctest
 	@cd tests/build && ctest
