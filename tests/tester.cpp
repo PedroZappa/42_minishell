@@ -43,6 +43,7 @@ std::string Tester::get_minishell_output(const std::string& bash_output, const s
 		boost::process::std_err > boost::process::null
 	);
 
+	// Send cmd to minishell
     in_stream << cmd << std::endl;
     in_stream.pipe().close();
 
