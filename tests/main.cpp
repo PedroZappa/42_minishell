@@ -6,19 +6,15 @@ int main(int argc, char** argv)
 
 	std::cout << "Boost version: " << BOOST_LIB_VERSION << std::endl;
 
- //    Tester shell_test;
-	//
- //    std::string command = "../minishell";
-	// std::string cmd = "echo 'Hello, Whirl!'";
-	// shell_test.ProcessTest(cmd);
 	return RUN_ALL_TESTS();
 }
-// Example test case
+
+// Test test case
 TEST(TesterTests, BasicFunctionality) {
     Tester shell_test;
     std::string cmd = "echo 'Hello, Whirl!'";
 
-    shell_test.minishell_cmd_ = "../minishell";  // Adjust path if necessary
+    shell_test.minishell_cmd_ = "./minishell";  // Adjust path if necessary
 
-    // shell_test.ProcessTest(cmd);
+    shell_test.ProcessTest(cmd);
 }

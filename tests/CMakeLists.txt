@@ -18,6 +18,7 @@ set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE_TMP})
 
 add_executable(minishell_tester 
 	main.cpp
+	tester.cpp
 	tester.hpp
 	tests.cpp
 )
