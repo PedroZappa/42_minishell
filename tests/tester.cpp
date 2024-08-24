@@ -1,6 +1,7 @@
 #include "tester.hpp"
+#include <cctype>
 
-void Tester::ProcessTest(const std::string& minishell_cmd) {
+void Tester::Test(const std::string& minishell_cmd) {
     std::string bash_output = get_bash_output(minishell_cmd);
     std::string minishell_output = get_minishell_output(bash_output, minishell_cmd);
 
@@ -25,7 +26,7 @@ std::string Tester::get_bash_output(const std::string& cmd) {
 	);
 
     while (pipe_stream && std::getline(pipe_stream, line_read)) {
-        output += (line_read + "\n");
+        output += (line_read + "$\n");
     }
 
     c.wait();
@@ -35,8 +36,8 @@ std::string Tester::get_bash_output(const std::string& cmd) {
 std::string Tester::get_minishell_output(const std::string& bash_output, const std::string& cmd) {
     std::string output;
     std::string line_read;
-	boost::process::ipstream pipe_stream;
     boost::process::opstream in_stream;
+	boost::process::ipstream pipe_stream;
     boost::process::child c(minishell_path,
 		boost::process::std_in < in_stream,
 		boost::process::std_out > pipe_stream,
@@ -53,8 +54,10 @@ std::string Tester::get_minishell_output(const std::string& bash_output, const s
         if (line_n < 2) {
 			line_n++;
         } else {
-            output += (line_read + "\n"); // Append subsequent lines to output
-			break;
+			if (isspace(line_read[0]) || line_read[0] == '\n') {
+				break;
+			}
+            output += (line_read + "$\n");
         }
     }
 

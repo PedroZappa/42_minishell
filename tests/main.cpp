@@ -8,13 +8,3 @@ int main(int argc, char** argv)
 
 	return RUN_ALL_TESTS();
 }
-
-// Test test case
-TEST(TesterTests, BasicFunctionality) {
-    Tester shell_test;
-    std::string cmd = "echo 'Hello, Whirl!'";
-
-    shell_test.minishell_path = "./minishell";  // Adjust path if necessary
-
-    shell_test.ProcessTest(cmd);
-}
