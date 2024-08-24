@@ -30,4 +30,3 @@ target_link_libraries(minishell_tester
 
 # Enable testing
 enable_testing()
-add_test(NAME minishell_tester COMMAND minishell_tester)

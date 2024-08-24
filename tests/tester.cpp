@@ -3,6 +3,9 @@
 void Tester::ProcessTest(const std::string& minishell_cmd) {
     std::string bash_output = get_bash_output(minishell_cmd);
     std::string minishell_output = get_minishell_output(bash_output, minishell_cmd);
+	
+	std::cout << "Bash Output\t:" << bash_output << std::endl;
+	std::cout << "Minishell Output\t:" << minishell_output << std::endl;
 
     if (bash_output != minishell_output) {
         std::cerr << "Outputs differ!" << std::endl;
@@ -13,16 +16,16 @@ void Tester::ProcessTest(const std::string& minishell_cmd) {
 
 std::string Tester::get_bash_output(const std::string& cmd) {
     std::string output;
+    std::string line_read;
 	boost::process::ipstream pipe_stream;
     boost::process::child c(cmd,
 		boost::process::std_out > pipe_stream,
 		boost::process::std_err > boost::process::null,
 		boost::process::shell
 	);
-    std::string line;
 
-    while (pipe_stream && std::getline(pipe_stream, line)) {
-        output += (line + "\n");
+    while (pipe_stream && std::getline(pipe_stream, line_read)) {
+        output += (line_read + "\n");
     }
 
     c.wait();
@@ -31,7 +34,7 @@ std::string Tester::get_bash_output(const std::string& cmd) {
 
 std::string Tester::get_minishell_output(const std::string& bash_output, const std::string& cmd) {
     std::string output;
-    std::string line;
+    std::string line_read;
 	boost::process::ipstream pipe_stream;
     boost::process::opstream in_stream;
     boost::process::child c(minishell_cmd_,
@@ -43,8 +46,8 @@ std::string Tester::get_minishell_output(const std::string& bash_output, const s
     in_stream << cmd << std::endl;
     in_stream.pipe().close();
 
-    while (pipe_stream && std::getline(pipe_stream, line)) {
-        output += (line + "\n");
+    while (pipe_stream && std::getline(pipe_stream, line_read)) {
+        output += (line_read + "\n");
         if (output.size() >= bash_output.size()) {
             break;
         }
