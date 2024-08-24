@@ -27,8 +27,6 @@ class Tester
 		std::string get_bash_output(const std::string& cmd);
 		std::string get_minishell_output(const std::string& bash_output, const std::string& cmd);
 		std::string get_minishell_output_pty(const std::string& bash_output, const std::string& cmd);
-
-	private:
 		std::string minishell_cmd_;
 };
 
