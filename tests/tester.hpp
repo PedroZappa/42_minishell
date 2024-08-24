@@ -2,15 +2,13 @@
 # define TESTER_HPP
 
 #include <cstdio>
-#include <iostream>
-#include <memory>
-#include <stdexcept>
 #include <string>
-#include <array>
 
 #include <boost/process.hpp>
 #include <boost/version.hpp>
 #include <gtest/gtest.h>
+
+#include "../lib/libft/libft/libft.h"
 
 class Tester
 {

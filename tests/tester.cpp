@@ -4,8 +4,8 @@ void Tester::ProcessTest(const std::string& minishell_cmd) {
     std::string bash_output = get_bash_output(minishell_cmd);
     std::string minishell_output = get_minishell_output(bash_output, minishell_cmd);
 	
-	std::cout << "Bash Output\t:" << bash_output << std::endl;
-	std::cout << "Minishell Output\t:" << minishell_output << std::endl;
+	std::cout << YEL"Bash Output :\n" << NC << bash_output << std::endl;
+	std::cout << YEL"Minishell Output :\n" << NC << minishell_output << std::endl;
 
     if (bash_output != minishell_output) {
         std::cerr << "Outputs differ!" << std::endl;
