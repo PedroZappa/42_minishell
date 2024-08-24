@@ -3,7 +3,7 @@
 void Tester::ProcessTest(const std::string& minishell_cmd) {
     std::string bash_output = get_bash_output(minishell_cmd);
     std::string minishell_output = get_minishell_output(bash_output, minishell_cmd);
-	
+
 	std::cout << YEL"Bash Output :\n" << NC << bash_output << std::endl;
 	std::cout << YEL"Minishell Output :\n" << NC << minishell_output << std::endl;
 
@@ -47,8 +47,15 @@ std::string Tester::get_minishell_output(const std::string& bash_output, const s
     in_stream << cmd << std::endl;
     in_stream.pipe().close();
 
-    while (pipe_stream && std::getline(pipe_stream, line_read)) {
-        output += (line_read + "\n");
+	int line_n = 0;
+	while (pipe_stream && std::getline(pipe_stream, line_read))
+	{
+        if (line_n < 2) {
+			line_n++;
+        } else {
+            output += (line_read + "\n"); // Append subsequent lines to output
+			break;
+        }
     }
 
     c.wait();
