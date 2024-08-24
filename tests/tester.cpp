@@ -54,7 +54,7 @@ std::string Tester::get_minishell_output(const std::string& bash_output, const s
         if (line_n < 2) {
 			line_n++;
         } else {
-			if (isspace(line_read[0]) || line_read[0] == '\n') {
+			if (line_read.empty()) {
 				break;
 			}
             output += (line_read + "$\n");
