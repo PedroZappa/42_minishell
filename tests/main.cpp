@@ -4,6 +4,9 @@
 
 int main(int argc, char** argv) {
 	::testing::InitGoogleTest(&argc, argv);
+
+	std::cout << "Boost version: " << BOOST_LIB_VERSION << std::endl;
+
 	return RUN_ALL_TESTS();
 }
 
@@ -12,8 +15,6 @@ std::string Tester::exec(const char* cmd) {
 	std::string result;
 
 	
-	// std::cout << "Boost version: " << BOOST_LIB_VERSION << std::endl;
-
 	std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd, "r"), pclose);
 	if (!pipe) {
 		throw std::runtime_error("popen() failed!");
