@@ -49,9 +49,6 @@ std::string Tester::get_minishell_output(const std::string& bash_output, const s
 
     while (pipe_stream && std::getline(pipe_stream, line_read)) {
         output += (line_read + "\n");
-        if (output.size() >= bash_output.size()) {
-            break;
-        }
     }
 
     c.wait();
