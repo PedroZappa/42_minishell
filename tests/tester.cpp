@@ -26,7 +26,8 @@ std::string Tester::get_bash_output(const std::string& cmd) {
 	);
 
     while (pipe_stream && std::getline(pipe_stream, line_read)) {
-        output += (line_read + "$\n");
+        // output += (line_read + "$\n");
+        output += line_read;
     }
 
     c.wait();
@@ -57,7 +58,8 @@ std::string Tester::get_minishell_output(const std::string& bash_output, const s
 			if (line_read.empty()) {
 				break;
 			}
-            output += (line_read + "$\n");
+            // output += (line_read + "$\n");
+            output += line_read;
         }
     }
 
