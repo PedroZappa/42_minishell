@@ -8,9 +8,9 @@ void Tester::ProcessTest(const std::string& minishell_cmd) {
 	std::cout << YEL"Minishell Output :\n" << NC << minishell_output << std::endl;
 
     if (bash_output != minishell_output) {
-        std::cerr << "Outputs differ!" << std::endl;
+        std::cerr << RED"Outputs differ!" << NC << std::endl;
     } else {
-        std::cout << "Outputs match!" << std::endl;
+        std::cout << GRN"Outputs match!" << NC << std::endl;
     }
 }
 
