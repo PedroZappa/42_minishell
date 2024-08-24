@@ -37,7 +37,7 @@ std::string Tester::get_minishell_output(const std::string& bash_output, const s
     std::string line_read;
 	boost::process::ipstream pipe_stream;
     boost::process::opstream in_stream;
-    boost::process::child c(minishell_cmd_,
+    boost::process::child c(minishell_path,
 		boost::process::std_in < in_stream,
 		boost::process::std_out > pipe_stream,
 		boost::process::std_err > boost::process::null

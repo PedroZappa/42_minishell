@@ -14,7 +14,7 @@ TEST(TesterTests, BasicFunctionality) {
     Tester shell_test;
     std::string cmd = "echo 'Hello, Whirl!'";
 
-    shell_test.minishell_cmd_ = "./minishell";  // Adjust path if necessary
+    shell_test.minishell_path = "./minishell";  // Adjust path if necessary
 
     shell_test.ProcessTest(cmd);
 }
