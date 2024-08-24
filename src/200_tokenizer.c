@@ -22,7 +22,7 @@
 static void		ft_init_ops(t_tk_ops *ops);
 static int		ft_get_tkns(char *line, t_token **tks, t_tk_ops *ops);
 static t_tk_ops	ft_get_tk(char *tk, t_tk_ops **ops);
-static int		ft_has_match(char **line);
+// static int		ft_has_match(char **line);
 
 /// @brief			Tokenizer
 /// @details
@@ -116,12 +116,14 @@ static int	ft_get_tkns(char *line, t_token **tks, t_tk_ops *ops)
 		if (tk.tkn != NO_TOKEN)
 		{
 			line += tk.len;
+			// if (ft_isspace(tk.tkn[0]) || tk.tkn[0] == '\0')
+			// 	tk.type = TK_BLANK;
 			if (tk.type != TK_BLANK)
 				ft_tk_add_free(tks, ft_tk_new(tk.tkn, tk.type, tk.len), &tk);
 			tmp = line;
 		}
-		else if (((*line == '\'') || (*line == '\"')) && ft_has_match(&line))
-			return (FAILURE);
+		// else if (((*line == '\'') || (*line == '\"')) && ft_has_match(&line))
+		// 	return (FAILURE);
 		else
 			++line;
 	}
@@ -146,13 +148,17 @@ static t_tk_ops	ft_get_tk(char *tk, t_tk_ops **ops)
 	i = 0;
 	if (!ft_isspace(tk[0]))
 	{
-		if ((tk[i] == '\'') || (tk[i] == '\"'))
+		if ((tk[0] == '\'') || (tk[0] == '\"'))
 		{
 			++i;
 			while ((tk[i] && (tk[i] != '\'')) && (tk[i] != '\"'))
 				++i;
+			if (tk[i] == '\'' || tk[i] == '\"')
+				++i;
+			ret = (t_tk_ops){ft_substr(tk, 0, i), TK_CMD, i};
+			return (ret);
 		}
-		while (tk[i] && !ft_isspace(tk[i]))
+		while (tk[i] && !ft_isspace(tk[i]) && (tk[i] != '\'') && (tk[i] != '\"'))
 			++i;
 		ret = (t_tk_ops){ft_substr(tk, 0, i), TK_CMD, i};
 	}
@@ -173,18 +179,18 @@ static t_tk_ops	ft_get_tk(char *tk, t_tk_ops **ops)
 /// @return			SUCCESS(matching quote found)
 ///					FAILURE(no match)
 /// @note			Used in ft_get_tkns() when a quote is parsed
-static int	ft_has_match(char **quote)
-{
-	char	*line_0;
-
-	line_0 = (*quote);
-	(*quote) = ft_strchr(((*quote) + 1), **quote);
-	if (!(*quote))
-	{
-		(*quote) = line_0 + ft_strlen(line_0);
-		return (FAILURE);
-	}
-	return (SUCCESS);
-}
+// static int	ft_has_match(char **quote)
+// {
+// 	char	*line_0;
+//
+// 	line_0 = (*quote);
+// 	(*quote) = ft_strchr(((*quote) + 1), **quote);
+// 	if (!(*quote))
+// 	{
+// 		(*quote) = line_0 + ft_strlen(line_0);
+// 		return (FAILURE);
+// 	}
+// 	return (SUCCESS);
+// }
 
 /** @} */

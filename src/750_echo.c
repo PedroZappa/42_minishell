@@ -49,7 +49,7 @@ int	ft_echo(t_shell *sh, int n)
 	while (sh->cmds[n].argv[i])
 	{
 		ft_putstr_fd(sh->cmds[n].argv[i], STDOUT_FILENO);
-		if (sh->cmds[n].argv[i + 1])
+		if (sh->cmds[n].argv[i + 1] && !ft_isspace(sh->cmds[n].argv[i][0]))
 			write(STDOUT_FILENO, " ", 1);
 		++i;
 	}
