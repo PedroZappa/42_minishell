@@ -155,9 +155,9 @@ TEST(Builtins, cd) {
 		"cd ~",
 		"cd /",
 		"cd /home",
-		"cd /home/zedr0",
-		"cd /home/zedr0/C0D3/42",
-		"cd /home/zedr0/C0D3/42/Projects",
+		"cd -",
+		"cd ..",
+		"cd \"\""
 	};
 
 	for (const auto& cmd : commands) {
