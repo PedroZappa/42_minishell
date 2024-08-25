@@ -3,6 +3,8 @@
 
 # include <cstdio>
 # include <string>
+# include <iostream>
+# include <map>
 
 # include <boost/process.hpp>
 # include <boost/version.hpp>
