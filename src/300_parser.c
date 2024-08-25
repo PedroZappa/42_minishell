@@ -54,7 +54,7 @@ int	ft_parser(t_shell *sh, char *line_buf)
 	if (ft_check_syntax(tks))
 		return (ft_free_tks(&tks), FAILURE);
 	sh->n_cmds = ft_count_cmds(tks);
-	sh->cmds = ft_calloc(sh->n_cmds, sizeof(t_cmd));
+	sh->cmds = (t_cmd *)ft_calloc(sh->n_cmds, sizeof(t_cmd));
 	if (!sh->cmds)
 		return (ft_err(MALLOC_ERR, errno), FAILURE);
 	if (sh->n_cmds == NO_CMDS)
