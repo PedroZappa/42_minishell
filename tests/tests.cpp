@@ -13,9 +13,13 @@ void runTest(Tester& shell_test, const std::string& cmd) {
         std::string invalid_read = "Invalid read of size";
         std::string malloc_err = ": malloc (in";
 
-		if (valgrind_output.first.find(invalid_read) != std::string::npos ||
-			valgrind_output.first.find(malloc_err) != std::string::npos) {
+		if (valgrind_output.first.find(invalid_read) != std::string::npos) {
 			std::cout << valgrind_output.first << std::endl;
+			shell_test.n_invalid_reads++;
+		}
+		if (valgrind_output.first.find(malloc_err) != std::string::npos) {
+			std::cout << valgrind_output.first << std::endl;
+			shell_test.n_leaks++;
 		}
     }
 }
@@ -58,6 +62,10 @@ TEST(Parser, Basic) {
     for (const auto& cmd : commands) {
         runTest(shell_test, cmd);
     }
+
+
+	std::cout << "Invalid reads: " << shell_test.n_invalid_reads << std::endl;
+	std::cout << "Leaks: " << shell_test.n_leaks << std::endl;
 }
 
 TEST(Parser, Advanced) {
@@ -84,6 +92,9 @@ TEST(Parser, Advanced) {
     for (const auto& cmd : commands) {
         runTest(shell_test, cmd);
     }
+
+	std::cout << "Invalid reads: " << shell_test.n_invalid_reads << std::endl;
+	std::cout << "Leaks: " << shell_test.n_leaks << std::endl;
 }
 
 // Expander Tests
@@ -103,6 +114,9 @@ TEST(Expander, Basic) {
     for (const auto& cmd : commands) {
         runTest(shell_test, cmd);
     }
+
+	std::cout << "Invalid reads: " << shell_test.n_invalid_reads << std::endl;
+	std::cout << "Leaks: " << shell_test.n_leaks << std::endl;
 }
 
 // Builtin Tests
@@ -145,6 +159,9 @@ TEST(Builtins, echo) {
     for (const auto& cmd : commands) {
         runTest(shell_test, cmd);
     }
+
+	std::cout << "Invalid reads: " << shell_test.n_invalid_reads << std::endl;
+	std::cout << "Leaks: " << shell_test.n_leaks << std::endl;
 }
 
 // Tests cd
@@ -163,6 +180,9 @@ TEST(Builtins, cd) {
 	for (const auto& cmd : commands) {
 		runTest(shell_test, cmd);
 	}
+
+	std::cout << "Invalid reads: " << shell_test.n_invalid_reads << std::endl;
+	std::cout << "Leaks: " << shell_test.n_leaks << std::endl;
 }
 
 TEST(Builtins, Exit) {
@@ -177,6 +197,9 @@ TEST(Builtins, Exit) {
 	for (const auto& cmd : commands) {
 		runTest(shell_test, cmd);
 	}
+
+	std::cout << "Invalid reads: " << shell_test.n_invalid_reads << std::endl;
+	std::cout << "Leaks: " << shell_test.n_leaks << std::endl;
 }
 
 TEST(ExitCodes, Basic) {
@@ -203,4 +226,7 @@ TEST(ExitCodes, Basic) {
 	for (const auto& cmd : commands) {
 		runTest(shell_test, cmd);
 	}
+
+	std::cout << "Invalid reads: " << shell_test.n_invalid_reads << std::endl;
+	std::cout << "Leaks: " << shell_test.n_leaks << std::endl;
 }

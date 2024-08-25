@@ -21,6 +21,8 @@ class Tester
 		int bash_exit_status;
 		int minishell_exit_status;
 		int valgrind_exit_status;
+		int n_leaks = 0;
+		int n_invalid_reads = 0;
 		std::string valgrind_output;
 		std::string minishell_path = "./minishell";
 		boost::process::opstream in_stream;
@@ -31,6 +33,7 @@ class Tester
 		std::pair<std::string, int> get_bash_output(const std::string& cmd);
 		std::pair<std::string, int> get_minishell_output(const std::string& bash_output, const std::string& cmd);
 		std::pair<std::string, int> get_valgrind(const std::string& minishell_path, const std::string& cmd);
+
 };
 
 #endif /* TESTER_HPP */
