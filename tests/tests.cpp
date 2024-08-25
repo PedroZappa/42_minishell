@@ -11,8 +11,10 @@ void runTest(Tester& shell_test, const std::string& cmd) {
 
     if (!valgrind_output.first.empty()) {
         std::string invalid_read = "Invalid read of size";
+        std::string malloc_err = ": malloc (in";
 
-		if (valgrind_output.first.find(invalid_read) != std::string::npos) {
+		if (valgrind_output.first.find(invalid_read) != std::string::npos ||
+			valgrind_output.first.find(malloc_err) != std::string::npos) {
 			std::cout << valgrind_output.first << std::endl;
 		}
     }
@@ -22,8 +24,9 @@ void runTest(Tester& shell_test, const std::string& cmd) {
 TEST(TesterTest, BasicFunctionality) {
     Tester shell_test;
     // std::string cmd = "echo 'Hello, Whirl!'";
+    std::string cmd = "exit";
     // std::string cmd = "ls -al";
-    std::string cmd = "echo \"'$USER'\"";
+    // std::string cmd = "echo \"'$USER'\"";
 
     runTest(shell_test, cmd);
 	// shell_test.Test(cmd);
