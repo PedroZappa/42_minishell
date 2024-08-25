@@ -25,10 +25,8 @@ std::string Tester::get_bash_output(const std::string& cmd) {
 		boost::process::shell
 	);
 
-    while (pipe_stream && std::getline(pipe_stream, line_read)) {
-        // output += (line_read + "$\n");
+    while (pipe_stream && std::getline(pipe_stream, line_read))
         output += line_read;
-    }
 
     c.wait();
     return output;
@@ -58,11 +56,12 @@ std::string Tester::get_minishell_output(const std::string& bash_output, const s
 			if (line_read.empty() || line_read.find("@42:") != std::string::npos) {
 				break;
 			}
-            // output += (line_read + "$\n");
             output += line_read;
         }
     }
-
     c.wait();
+	 // Remove trailing null character(s), if any
+    while (!output.empty() && output.back() == '\0')
+        output.pop_back();
     return output;
 }
