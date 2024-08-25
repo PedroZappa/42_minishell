@@ -70,3 +70,6 @@ tests/googletest
 
 #LSP
 compile_commands.json
+
+# Test
+not_*

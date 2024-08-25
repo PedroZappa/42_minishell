@@ -31,9 +31,14 @@ int	ft_exit(t_shell *sh, int n)
 	if (sh->cmds[n].argc == 1)
 		ft_kill(sh, EXIT_SUCCESS);
 	else if ((sh->cmds[n].argc == 2) && (ft_isdigit(sh->cmds[n].argv[1][0])))
-		ft_kill(sh, ft_abs(ft_atoi(sh->cmds[n].argv[1])));
+	{
+		if (sh->cmds[n].argv[1][0] == '-' && ft_isdigit(sh->cmds[n].argv[1][1]))
+			ft_kill(sh, 2);
+		else
+			ft_kill(sh, ft_atoi(sh->cmds[n].argv[1]));
+	}
 	else if (sh->cmds[n].argc > 2)
-		ft_fprintf(STDERR_FILENO, "exit\nbash: %s: too many arguments\n",
+		ft_fprintf(STDERR_FILENO, "",
 			sh->cmds[n].argv[0], sh->cmds[n].argv[1]);
 	return (SUCCESS);
 }
@@ -43,10 +48,9 @@ int	ft_exit(t_shell *sh, int n)
 /// @param sig		Signal number
 static void	ft_kill(t_shell *sh, int sig)
 {
-	ft_putstr_fd("exit\n", STDOUT_FILENO);
 	errno = sig;
 	ft_free_sh(sh);
-	exit(errno);
+	exit(sig);
 }
 
 /** @} */

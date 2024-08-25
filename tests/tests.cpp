@@ -93,7 +93,7 @@ TEST(Expander, Basic) {
 }
 
 // Builtin Tests
-TEST(Builtins, Echo) {
+TEST(Builtins, echo) {
     Tester shell_test;
     std::vector<std::string> commands = {
         "echo",
@@ -132,4 +132,62 @@ TEST(Builtins, Echo) {
     for (const auto& cmd : commands) {
         runTest(shell_test, cmd);
     }
+}
+
+// Tests cd
+TEST(Builtins, cd) {
+	Tester shell_test;
+	std::vector<std::string> commands = {
+		"cd",
+		"cd ~",
+		"cd /",
+		"cd /home",
+		"cd /home/zedr0",
+		"cd /home/zedr0/C0D3/42",
+		"cd /home/zedr0/C0D3/42/Projects",
+	};
+
+	for (const auto& cmd : commands) {
+		runTest(shell_test, cmd);
+	}
+}
+
+TEST(Builtins, Exit) {
+	Tester shell_test;
+	std::vector<std::string> commands = {
+		"exit",
+		"exit 42",
+		"exit -42",
+		"exit 42 42",
+	};
+
+	for (const auto& cmd : commands) {
+		runTest(shell_test, cmd);
+	}
+}
+
+TEST(ExitCodes, Basic) {
+	Tester shell_test;
+	std::vector<std::string> commands = {
+		"exit 0",
+		"echo 42",
+		"cat 42 > not_executable_file",
+		"cat 42 > not_existing_file",
+		"./not_executable_file",
+		"not_existing_command",
+		"< not_existing_file",
+		"> not_existing_file",
+		">> not_existing_file",
+		"< not_existing_file > not_existing_file2",
+		"< not_existing_file >> not_existing_file2",
+		"| echo 1",
+		"| echo 1 | echo 2",
+		"ls not_existing_file",
+		"ls not_existing_file | echo 42 | cat",
+		"ls not_existing_file | cat > not_executable_file",
+	};
+
+	for (const auto& cmd : commands) {
+		runTest(shell_test, cmd);
+	}
 }
