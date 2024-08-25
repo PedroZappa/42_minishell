@@ -4,6 +4,7 @@
 void runTest(Tester& shell_test, const std::string& cmd) {
     std::pair<std::string, int> bash_output = shell_test.get_bash_output(cmd);
     std::pair<std::string, int> minishell_output = shell_test.get_minishell_output(bash_output.first, cmd);
+	// std::pair<std::string, int> valgrind_output = shell_test.get_valgrind(shell_test.minishell_path, cmd);
 
     std::cout << YEL << cmd << NC << std::endl;
     EXPECT_EQ(bash_output.first, minishell_output.first);
@@ -13,10 +14,12 @@ void runTest(Tester& shell_test, const std::string& cmd) {
 // Test test case
 TEST(TesterTest, BasicFunctionality) {
     Tester shell_test;
-    std::string cmd = "echo 'Hello, Whirl!'";
+    // std::string cmd = "echo 'Hello, Whirl!'";
     // std::string cmd = "ls -al";
+    std::string cmd = "echo \"'$USER'\"";
 
     runTest(shell_test, cmd);
+	// shell_test.Test(cmd);
 }
 
 // Parser Tests

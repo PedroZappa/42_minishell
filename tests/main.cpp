@@ -58,9 +58,6 @@ int main(int argc, char** argv) {
 
         std::cout << "Running selected tests...\n";
         RUN_ALL_TESTS();
-
-		// Reset the filter
-		::testing::GTEST_FLAG(filter) = "";
     }
 
     return 0;

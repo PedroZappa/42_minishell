@@ -1,12 +1,13 @@
 #include "tester.hpp"
-#include <cctype>
 
 void Tester::Test(const std::string& minishell_cmd) {
     std::pair<std::string, int> bash_output = get_bash_output(minishell_cmd);
     std::pair<std::string, int> minishell_output = get_minishell_output(bash_output.first, minishell_cmd);
+	std::pair<std::string, int> valgrind_output = get_valgrind(minishell_path, minishell_cmd);
 
 	std::cout << YEL"Bash Output :\n" << NC << bash_output.first << std::endl;
-	std::cout << YEL"Minishell Output :\n" << NC << minishell_output.second << std::endl;
+	std::cout << YEL"Minishell Output :\n" << NC << minishell_output.first << std::endl;
+	std::cout << YEL"Valgrind Exit Status :\n" << NC << valgrind_output.second << std::endl;
 
     if (bash_output != minishell_output) {
         std::cerr << RED"Outputs differ!" << NC << std::endl;
@@ -16,7 +17,7 @@ void Tester::Test(const std::string& minishell_cmd) {
 }
 
 std::pair<std::string, int> Tester::get_bash_output(const std::string& cmd) {
-	int exit_code = 0;
+	Tester test_shell;
     std::string output;
     std::string line_read;
 	boost::process::ipstream pipe_stream;
@@ -30,8 +31,8 @@ std::pair<std::string, int> Tester::get_bash_output(const std::string& cmd) {
         output += line_read;
 
     c.wait();
-	exit_code = c.exit_code();
-    return {output, exit_code};
+	test_shell.bash_exit_status = c.exit_code();
+    return {output, test_shell.bash_exit_status};
 }
 
 std::pair<std::string, int> Tester::get_minishell_output(const std::string& bash_output, const std::string& cmd) {
@@ -43,7 +44,8 @@ std::pair<std::string, int> Tester::get_minishell_output(const std::string& bash
     boost::process::child c(minishell_path,
 		boost::process::std_in < in_stream,
 		boost::process::std_out > pipe_stream,
-		boost::process::std_err > boost::process::null
+		boost::process::std_err > boost::process::null,
+        boost::process::shell
 	);
 
 	// Send cmd to minishell
@@ -68,4 +70,47 @@ std::pair<std::string, int> Tester::get_minishell_output(const std::string& bash
     while (!output.empty() && output.back() == '\0')
         output.pop_back();
     return {output, exit_code};
+}
+
+std::pair<std::string, int> Tester::get_valgrind(const std::string& minishell_path, const std::string& cmd) {
+	Tester test_shell;
+    std::string output;
+    std::string line_read;
+
+    // Run minishell under Valgrind to check for memory leaks
+    boost::process::child c("valgrind --leak-check=full " + minishell_path,
+        boost::process::std_in < in_stream,
+        boost::process::std_out > out_stream,
+        boost::process::std_err > err_stream,
+        boost::process::shell
+    );
+
+    // Send the command to minishell
+    in_stream << cmd << std::endl;
+    in_stream.pipe().close();
+
+    // Read the output from minishell
+    while (out_stream && std::getline(out_stream, line_read)) {
+        output += line_read + "\n";
+    }
+
+    // Read Valgrind's error output (if any)
+    std::string valgrind_output;
+    while (err_stream && std::getline(err_stream, line_read)) {
+        valgrind_output += line_read + "\n";
+    }
+
+    // Wait for the process to finish
+    c.wait();
+    test_shell.bash_exit_status = c.exit_code();
+
+    // Output Valgrind's findings
+    if (!valgrind_output.empty()) {
+        std::cerr << "Valgrind Output:\n" << valgrind_output << std::endl;
+    } else {
+        std::cout << "No memory leaks detected by Valgrind." << std::endl;
+    }
+
+    // Return the output and exit code
+    return {output, test_shell.valgrind_exit_status};
 }
