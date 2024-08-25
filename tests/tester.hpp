@@ -21,8 +21,6 @@ class Tester
 		int bash_exit_status;
 		int minishell_exit_status;
 		int valgrind_exit_status;
-		int n_leaks = 0;
-		int n_invalid_reads = 0;
 		std::string valgrind_output;
 		std::string minishell_path = "./minishell";
 		boost::process::opstream in_stream;
