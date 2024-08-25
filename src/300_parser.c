@@ -180,7 +180,7 @@ static int	ft_parse_cmds(t_token *tks, t_cmd *cmds, int i, int j)
 {
 	while (tks)
 	{
-		cmds[i].argv = ft_calloc((cmds[i].argc + 1), sizeof(char *));
+		cmds[i].argv = (char **)ft_calloc((cmds[i].argc + 1), sizeof(char *));
 		if (!cmds[i].argv)
 			return (ft_err(MALLOC_ERR, errno), FAILURE);
 		j = 0;
