@@ -68,8 +68,11 @@ end
 define get_tkns
 	display line
 	display **tks
+	display (*tks)->name
 	display tmp
 	display tk
+	display tk.tkn[0]
+	display tkn_str
 end
 
 define get_tk

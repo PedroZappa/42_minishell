@@ -20,7 +20,8 @@
 #include "../inc/minishell.h"
 
 static void		ft_init_ops(t_tk_ops *ops);
-static int		ft_get_tkns(char *line, t_token **tks, t_tk_ops *ops);
+static int		ft_get_tkns(t_shell *sh, char *line, \
+						t_token **tks, t_tk_ops *ops);
 static t_tk_ops	ft_get_tk(char *tk, t_tk_ops **ops);
 // static int		ft_has_match(char **line);
 
@@ -41,25 +42,14 @@ int	ft_tokenizer(t_shell *sh, char *line, t_token **tks)
 {
 	t_tk_ops	ops[17];
 	t_token		*tk;
-	char		*tkn_str;
 
 	ft_init_ops(ops);
-	if (ft_get_tkns(line, tks, ops) != SUCCESS)
+	if (ft_get_tkns(sh, line, tks, ops) != SUCCESS)
 		return (ft_err(TKNZR_ERR, errno));
 	tk = *tks;
 	while (tk)
 	{
-		tkn_str = tk->name;
-		if (((tkn_str[0] == '~' && tkn_str[1] == '/')
-				|| (tkn_str[0] == '~')) && sh->home)
-		{
-			ft_free(tk->name);
-			tk->name = ft_strdup(sh->home);
-		}
-		else
-			tk->name = ft_expander(sh, tkn_str);
-		if (tk->name == NULL)
-			ft_free(tkn_str);
+		tk->name = ft_expander(sh, tk->name);
 		tk = tk->next;
 	}
 	return (SUCCESS);
@@ -104,8 +94,9 @@ static void	ft_init_ops(t_tk_ops *ops)
 /// @return			SUCCESS(0) on success,
 ///					FAILURE(1) on failure
 ///	@note			Used in ft_tokenizer()
-static int	ft_get_tkns(char *line, t_token **tks, t_tk_ops *ops)
+static int	ft_get_tkns(t_shell *sh, char *line, t_token **tks, t_tk_ops *ops)
 {
+	char		*tkn_str;
 	char		*tmp;
 	t_tk_ops	tk;
 
@@ -116,14 +107,20 @@ static int	ft_get_tkns(char *line, t_token **tks, t_tk_ops *ops)
 		if (tk.tkn != NO_TOKEN)
 		{
 			line += tk.len;
-			// if (ft_isspace(tk.tkn[0]) || tk.tkn[0] == '\0')
-			// 	tk.type = TK_BLANK;
-			if (tk.type != TK_BLANK)
-				ft_tk_add_free(tks, ft_tk_new(tk.tkn, tk.type, tk.len), &tk);
+			tkn_str = ft_strdup(tk.tkn);
+			if ((tkn_str[0] == '~') && sh->home)
+			{
+				ft_free(tk.tkn);
+				if (tkn_str[1] == '/')
+					tk.tkn = ft_strjoin(sh->home, "/");
+				else
+					tk.tkn = ft_strdup(sh->home);
+			}
+			ft_free(tkn_str);
+			if ((tk.type != TK_BLANK) && (tk.tkn[0] != '~'))
+				ft_tk_add_free(tks, ft_tk_new(tk.tkn, tk.type, ft_strlen(tk.tkn)), &tk);
 			tmp = line;
 		}
-		// else if (((*line == '\'') || (*line == '\"')) && ft_has_match(&line))
-		// 	return (FAILURE);
 		else
 			++line;
 	}
