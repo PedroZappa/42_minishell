@@ -2,11 +2,11 @@
 #include <cctype>
 
 void Tester::Test(const std::string& minishell_cmd) {
-    std::string bash_output = get_bash_output(minishell_cmd);
-    std::string minishell_output = get_minishell_output(bash_output, minishell_cmd);
+    std::pair<std::string, int> bash_output = get_bash_output(minishell_cmd);
+    std::pair<std::string, int> minishell_output = get_minishell_output(bash_output.first, minishell_cmd);
 
-	std::cout << YEL"Bash Output :\n" << NC << bash_output << std::endl;
-	std::cout << YEL"Minishell Output :\n" << NC << minishell_output << std::endl;
+	std::cout << YEL"Bash Output :\n" << NC << bash_output.first << std::endl;
+	std::cout << YEL"Minishell Output :\n" << NC << minishell_output.second << std::endl;
 
     if (bash_output != minishell_output) {
         std::cerr << RED"Outputs differ!" << NC << std::endl;
@@ -15,7 +15,8 @@ void Tester::Test(const std::string& minishell_cmd) {
     }
 }
 
-std::string Tester::get_bash_output(const std::string& cmd) {
+std::pair<std::string, int> Tester::get_bash_output(const std::string& cmd) {
+	int exit_code = 0;
     std::string output;
     std::string line_read;
 	boost::process::ipstream pipe_stream;
@@ -29,10 +30,12 @@ std::string Tester::get_bash_output(const std::string& cmd) {
         output += line_read;
 
     c.wait();
-    return output;
+	exit_code = c.exit_code();
+    return {output, exit_code};
 }
 
-std::string Tester::get_minishell_output(const std::string& bash_output, const std::string& cmd) {
+std::pair<std::string, int> Tester::get_minishell_output(const std::string& bash_output, const std::string& cmd) {
+	int exit_code = 0;
     std::string output;
     std::string line_read;
     boost::process::opstream in_stream;
@@ -60,8 +63,9 @@ std::string Tester::get_minishell_output(const std::string& bash_output, const s
         }
     }
     c.wait();
+	exit_code = c.exit_code();
 	 // Remove trailing null character(s), if any
     while (!output.empty() && output.back() == '\0')
         output.pop_back();
-    return output;
+    return {output, exit_code};
 }

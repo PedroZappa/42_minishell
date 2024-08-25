@@ -1,12 +1,22 @@
 #include "tester.hpp"
 
+// Define a reusable runTest function
+void runTest(Tester& shell_test, const std::string& cmd) {
+    std::pair<std::string, int> bash_output = shell_test.get_bash_output(cmd);
+    std::pair<std::string, int> minishell_output = shell_test.get_minishell_output(bash_output.first, cmd);
+
+    std::cout << YEL << cmd << NC << std::endl;
+    EXPECT_EQ(bash_output.first, minishell_output.first);
+    EXPECT_EQ(bash_output.second, minishell_output.second);
+}
+
 // Test test case
 TEST(TesterTest, BasicFunctionality) {
     Tester shell_test;
     std::string cmd = "echo 'Hello, Whirl!'";
     // std::string cmd = "ls -al";
 
-    shell_test.Test(cmd);
+    runTest(shell_test, cmd);
 }
 
 // Parser Tests
@@ -29,16 +39,8 @@ TEST(Parser, Basic) {
         "echo $USER"
     };
 
-    auto runTest = [&shell_test](const std::string& cmd) {
-        std::string bash_output = shell_test.get_bash_output(cmd);
-        std::string minishell_output = shell_test.get_minishell_output(bash_output, cmd);
-
-		std::cout << YEL << cmd << NC << std::endl;
-        EXPECT_EQ(bash_output, minishell_output);
-    };
-
     for (const auto& cmd : commands) {
-        runTest(cmd);
+        runTest(shell_test, cmd);
     }
 }
 
@@ -60,99 +62,73 @@ TEST(Parser, Advanced) {
         "echo '$USER \"$HOME\"'",
         "echo \"$USER 42\" '\"$USER\"'",
         "echo ''\"\"'\"'\"'\"",
-		"echo \"new line.\\ntab.\\t backslash: \\\\\"",
-    };
-
-    auto runTest = [&shell_test](const std::string& cmd) {
-        std::string bash_output = shell_test.get_bash_output(cmd);
-        std::string minishell_output = shell_test.get_minishell_output(bash_output, cmd);
-
-		std::cout << YEL << cmd << NC << std::endl;
-        EXPECT_EQ(bash_output, minishell_output);
+        "echo \"new line.\\ntab.\\t backslash: \\\\\"",
     };
 
     for (const auto& cmd : commands) {
-        runTest(cmd);
+        runTest(shell_test, cmd);
     }
 }
 
 // Expander Tests
 TEST(Expander, Basic) {
-	Tester shell_test;
-	std::vector<std::string> commands = {
-		"echo ~",
-		"echo ~/",
+    Tester shell_test;
+    std::vector<std::string> commands = {
+        "echo ~",
+        "echo ~/",
         "echo $",
-		"echo $USER",
+        "echo $USER",
         "echo $USER \"$HOME\"",
-		"echo $USER$USER",
-		"echo $USER'$USER'",
-		"echo '$USER'",
-		"echo '$USER$USER'",
-		"echo '$USER'$USER"
-	};
+        "echo $USER$USER",
+        "echo $USER'$USER'",
+        "echo '$USER'",
+        "echo '$USER$USER'",
+        "echo '$USER'$USER"
+    };
 
-	auto runTest = [&shell_test](const std::string& cmd) {
-		std::string bash_output = shell_test.get_bash_output(cmd);
-		std::string minishell_output = shell_test.get_minishell_output(bash_output, cmd);
-
-		std::cout << YEL << cmd << NC << std::endl;
-		EXPECT_EQ(bash_output, minishell_output);
-	};
-
-	for (const auto& cmd : commands) {
-		runTest(cmd);
-	}
+    for (const auto& cmd : commands) {
+        runTest(shell_test, cmd);
+    }
 }
 
 // Builtin Tests
 TEST(Builtins, Echo) {
     Tester shell_test;
-	std::vector<std::string> commands = {
-		"echo",
-		"echo \'", 
-		"echo -n2 -n hey",
-		"echo -n yo",
-		"echo -n -n -n -n",
-		"echo --n yo",
-		"echo -nn yo",
-		"echo '-n' yo",
-		"echo '-n ' yo",
-		"echo '-n  ' yo",
+    std::vector<std::string> commands = {
+        "echo",
+        "echo \'", 
+        "echo -n2 -n hey",
+        "echo -n yo",
+        "echo -n -n -n -n",
+        "echo --n yo",
+        "echo -nn yo",
+        "echo '-n' yo",
+        "echo '-n ' yo",
+        "echo '-n  ' yo",
         "echo 42' '42",
-		"echo you are $USER",
-		"echo $USER$USER",
+        "echo you are $USER",
+        "echo $USER$USER",
         "echo $USER'$USER'",
-		"echo \'yo $USER\'",
-		"echo \'yo $USER  \'",
-		"echo \'$USER\'$USER",
-		"echo \'$USER\'\"$USER\"$USER\"$USER\"$USER\"$USER\"$USER\"$USER\"$USER\"$USER",
-		"echo \"yo\"",
-		"echo \"$USER\"",
-		"echo \"yo $USER\"",
-		"echo \"yo $USER  \"",
-		"echo \"-n\" yo",
-		"echo \"-n \" yo",
-		"echo \"-n  \" yo",
-		"echo \" -n  \" yo ",
-		"echo \"yo $USER\"",
-		"echo \"yo $USER\" ",
-		"echo \"$USER\"\'$USER\'",
-		"echo \"$USER\"\'$USER\'$USER",
-		"echo \"$USER\"$USER\'$USER\'"
-	};
-
-    auto runTest = [&shell_test](const std::string& cmd) {
-        // shell_test.Test(cmd);
-		std::string bash_output = shell_test.get_bash_output(cmd);
-		std::string minishell_output = shell_test.get_minishell_output(bash_output, cmd);
-
-		std::cout << YEL << cmd << NC << std::endl;
-		EXPECT_EQ(bash_output, minishell_output);
+        "echo \'yo $USER\'",
+        "echo \'yo $USER  \'",
+        "echo \'$USER\'$USER",
+        "echo \'$USER\'\"$USER\"$USER\"$USER\"$USER\"$USER\"$USER\"$USER\"$USER\"$USER",
+        "echo \"yo\"",
+        "echo \"$USER\"",
+        "echo \"yo $USER\"",
+        "echo \"yo $USER  \"",
+        "echo \"-n\" yo",
+        "echo \"-n \" yo",
+        "echo \"-n  \" yo",
+        "echo \" -n  \" yo ",
+        "echo \"yo $USER\"",
+        "echo \"yo $USER\" ",
+        "echo \"$USER\"\'$USER\'",
+        "echo \"$USER\"\'$USER\'$USER",
+        "echo \"$USER\"$USER\'$USER\'"
     };
 
     for (const auto& cmd : commands) {
-        runTest(cmd);
+        runTest(shell_test, cmd);
     }
 }
-
