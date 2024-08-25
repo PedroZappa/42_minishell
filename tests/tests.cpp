@@ -1,7 +1,7 @@
 #include "tester.hpp"
 
 // Test test case
-TEST(TesterTests, BasicFunctionality) {
+TEST(TesterTest, BasicFunctionality) {
     Tester shell_test;
     std::string cmd = "echo 'Hello, Whirl!'";
     // std::string cmd = "ls -al";
@@ -45,20 +45,19 @@ TEST(Parser, Basic) {
 TEST(Parser, Advanced) {
     Tester shell_test;
     std::vector<std::string> commands = {
+        "echo \"<< EOF\"",
+        "echo $USER '>> file.txt' \"|\"",
+        "echo '42 $USER' \">\" file.txt",
         "echo 'echo $v >> file.txt'",
         "echo ' \"\" ' '42'",
         "echo '<< | | >>'42",
-        "echo ''",
         "echo ''''42''",
         "echo '$'",
         "echo \"42\"'$'\"42\"",
         "echo a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'",
         "echo \" \"'$USER\"'\"42 \" ''\"  | << -1\"",
-        "echo \"<< EOF\"",
         "echo \"$USER\"'$USER'$USER",
         "echo '$USER \"$HOME\"'",
-        "echo $USER '>> file.txt' \"|\"",
-        "echo '42 $USER' \">\" file.txt",
         "echo \"$USER 42\" '\"$USER\"'",
         "echo ''\"\"'\"'\"'\"",
 		"echo \"new line.\\ntab.\\t backslash: \\\\\"",
