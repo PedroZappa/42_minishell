@@ -29,7 +29,7 @@ void runTest(Tester& shell_test, const std::string& cmd) {
 
 void leakReport() {
 	std::cout << "Invalid reads: " << g_invalid_reads << std::endl;
-	std::cout << "Leaks: " << g_leaks << std::endl;
+	std::cout << "Leaks: " << (g_leaks - g_invalid_reads) << std::endl;
 	g_invalid_reads = 0;
 	g_leaks = 0;
 }
