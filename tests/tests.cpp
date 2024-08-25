@@ -1,14 +1,102 @@
 #include "tester.hpp"
 
 // Define a reusable runTest function
+// void runTest(Tester& shell_test, const std::string& cmd) {
+//     std::pair<std::string, int> bash_output = shell_test.get_bash_output(cmd);
+//     std::pair<std::string, int> minishell_output = shell_test.get_minishell_output(bash_output.first, cmd);
+// 	std::pair<std::string, int> valgrind_output = shell_test.get_valgrind(shell_test.minishell_path, cmd);
+//
+//     std::cout << YEL << cmd << NC << std::endl;
+//     EXPECT_EQ(bash_output.first, minishell_output.first);
+//     EXPECT_EQ(bash_output.second, minishell_output.second);
+// 	if (!valgrind_output.first.empty()) {
+// 		std::cout << YEL << valgrind_output.first << NC << std::endl;
+// 	}
+// }
+//
+
+#include <sstream>
+#include <vector>
+
+// void runTest(Tester& shell_test, const std::string& cmd) {
+//     std::pair<std::string, int> bash_output = shell_test.get_bash_output(cmd);
+//     std::pair<std::string, int> minishell_output = shell_test.get_minishell_output(bash_output.first, cmd);
+//     std::pair<std::string, int> valgrind_output = shell_test.get_valgrind(shell_test.minishell_path, cmd);
+// 	int line_target = 14;
+//
+//     std::cout << YEL << cmd << NC << std::endl;
+//     EXPECT_EQ(bash_output.first, minishell_output.first);
+//     EXPECT_EQ(bash_output.second, minishell_output.second);
+//
+//     if (!valgrind_output.first.empty()) {
+//         std::istringstream stream(valgrind_output.first);
+//         std::string line;
+//         std::vector<std::string> lines;
+//
+//         // Read all lines into a vector
+//         while (std::getline(stream, line)) {
+//             lines.push_back(line);
+//         }
+//
+//         // Check if the 13th line exists and matches the desired pattern
+//         if (lines.size() >= line_target) {
+//             std::string pattern = "still reachable: 0 bytes in 0 blocks";
+//             if (lines[line_target - 1].find(pattern) != std::string::npos) { // 12 because index is 0-based
+//                 std::cout << valgrind_output.first << std::endl;
+//             }
+//         }
+//     }
+// }
+
+// void runTest(Tester& shell_test, const std::string& cmd) {
+//     std::pair<std::string, int> bash_output = shell_test.get_bash_output(cmd);
+//     std::pair<std::string, int> minishell_output = shell_test.get_minishell_output(bash_output.first, cmd);
+//     std::pair<std::string, int> valgrind_output = shell_test.get_valgrind(shell_test.minishell_path, cmd);
+//
+//     std::cout << YEL << cmd << NC << std::endl;
+//     EXPECT_EQ(bash_output.first, minishell_output.first);
+//     EXPECT_EQ(bash_output.second, minishell_output.second);
+//
+//     if (!valgrind_output.first.empty()) {
+//         // Look for a Valgrind "no leaks" summary
+//         std::string leak_summary = "LEAK SUMMARY:";
+//         std::string definitely_lost = "definitely lost: 0 bytes in 0 blocks";
+//         std::string indirectly_lost = "indirectly lost: 0 bytes in 0 blocks";
+//         std::string possibly_lost = "possibly lost: 0 bytes in 0 blocks";
+//         std::string still_reachable = "still reachable: 0 bytes in 0 blocks";
+//
+//         size_t invalid_read_found = valgrind_output.first.find(leak_summary);
+//         size_t pos_definitely = valgrind_output.first.find(definitely_lost, invalid_read_found);
+//         size_t pos_indirectly = valgrind_output.first.find(indirectly_lost, invalid_read_found);
+//         size_t pos_possibly = valgrind_output.first.find(possibly_lost, invalid_read_found);
+//         size_t pos_still = valgrind_output.first.find(still_reachable, invalid_read_found);
+//
+//         if (invalid_read_found != std::string::npos &&
+//             pos_definitely != std::string::npos &&
+//             pos_indirectly != std::string::npos &&
+//             pos_possibly != std::string::npos &&
+//             pos_still != std::string::npos) {
+//             std::cout << valgrind_output.first << std::endl;
+//         }
+//     }
+// }
+
 void runTest(Tester& shell_test, const std::string& cmd) {
     std::pair<std::string, int> bash_output = shell_test.get_bash_output(cmd);
     std::pair<std::string, int> minishell_output = shell_test.get_minishell_output(bash_output.first, cmd);
-	// std::pair<std::string, int> valgrind_output = shell_test.get_valgrind(shell_test.minishell_path, cmd);
+    std::pair<std::string, int> valgrind_output = shell_test.get_valgrind(shell_test.minishell_path, cmd);
 
     std::cout << YEL << cmd << NC << std::endl;
     EXPECT_EQ(bash_output.first, minishell_output.first);
     EXPECT_EQ(bash_output.second, minishell_output.second);
+
+    if (!valgrind_output.first.empty()) {
+        std::string invalid_read = "Invalid read of size";
+
+		if (valgrind_output.first.find(invalid_read) != std::string::npos) {
+			std::cout << valgrind_output.first << std::endl;
+		}
+    }
 }
 
 // Test test case

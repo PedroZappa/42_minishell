@@ -70,7 +70,7 @@ std::map<int, std::string> ListTestSuites() {
     
 	std::cout << std::endl;
     for (int i = 0; i < unit_test.total_test_suite_count(); ++i) {
-        const ::testing::TestSuite* test_suite = unit_test.GetTestSuite(i);
+        const ::testing::TestSuite *test_suite = unit_test.GetTestSuite(i);
         test_suites[count] = test_suite->name();
         std::cout << YEL << count << ". " << test_suite->name() << NC << std::endl;
 		std::cout << "    " << test_suite->total_test_count() << " tests" << std::endl;

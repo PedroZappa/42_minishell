@@ -17,16 +17,15 @@
 class Tester
 {
 	public: 
-		boost::process::opstream in_stream;
-		boost::process::ipstream out_stream;
-		boost::process::ipstream err_stream;
-		std::pair<std::string, int> valgrind_output;
-		std::string minishell_path = "./minishell";
-		std::string output = "";
-		std::string line_read = "";
+		// Variables
 		int bash_exit_status;
 		int minishell_exit_status;
 		int valgrind_exit_status;
+		std::string valgrind_output;
+		std::string minishell_path = "./minishell";
+		boost::process::opstream in_stream;
+		boost::process::ipstream out_stream;
+		boost::process::ipstream err_stream;
 		// Functions
 		void Test(const std::string& minishell_cmd);
 		std::pair<std::string, int> get_bash_output(const std::string& cmd);

@@ -74,11 +74,12 @@ std::pair<std::string, int> Tester::get_minishell_output(const std::string& bash
 
 std::pair<std::string, int> Tester::get_valgrind(const std::string& minishell_path, const std::string& cmd) {
 	Tester test_shell;
+	boost::process::opstream in_stream;
+	boost::process::ipstream out_stream;
+	boost::process::ipstream err_stream;
     std::string output;
     std::string line_read;
-
-    // Run minishell under Valgrind to check for memory leaks
-    boost::process::child c("valgrind --leak-check=full " + minishell_path,
+    boost::process::child c("valgrind --leak-check=full --show-leak-kinds=all --suppressions=readline.supp " + minishell_path,
         boost::process::std_in < in_stream,
         boost::process::std_out > out_stream,
         boost::process::std_err > err_stream,
@@ -102,15 +103,9 @@ std::pair<std::string, int> Tester::get_valgrind(const std::string& minishell_pa
 
     // Wait for the process to finish
     c.wait();
-    test_shell.bash_exit_status = c.exit_code();
+    test_shell.valgrind_exit_status = c.exit_code();
 
-    // Output Valgrind's findings
-    if (!valgrind_output.empty()) {
-        std::cerr << "Valgrind Output:\n" << valgrind_output << std::endl;
-    } else {
-        std::cout << "No memory leaks detected by Valgrind." << std::endl;
-    }
 
     // Return the output and exit code
-    return {output, test_shell.valgrind_exit_status};
+    return {valgrind_output, test_shell.valgrind_exit_status};
 }
