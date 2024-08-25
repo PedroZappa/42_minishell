@@ -31,6 +31,13 @@ int main(int argc, char** argv) {
             break;
         }
 
+		if (input == "x") {
+            ::testing::GTEST_FLAG(filter) = "*";
+            std::cout << "Running all tests...\n";
+            RUN_ALL_TESTS();
+            continue;
+        }
+
         std::set<std::string> selected_suites;
         std::stringstream ss(input);
         int choice;
