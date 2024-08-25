@@ -33,10 +33,13 @@ TEST(Parser, Basic) {
         "echo ''",
         "echo $",
         "echo '$'",
-        "echo $HOME",
+        "echo $USER",
+        "echo '$USER'",
+        "echo '$USER$USER'",
         "echo $HOME$HOME",
-        "echo $USER42",
-        "echo $USER"
+		"echo \"yo\"",
+		"echo \"yo \"",
+		"echo \"yo $USER\"",
     };
 
     for (const auto& cmd : commands) {
@@ -81,8 +84,6 @@ TEST(Expander, Basic) {
         "echo $USER \"$HOME\"",
         "echo $USER$USER",
         "echo $USER'$USER'",
-        "echo '$USER'",
-        "echo '$USER$USER'",
         "echo '$USER'$USER"
     };
 
