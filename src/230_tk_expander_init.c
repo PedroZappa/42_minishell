@@ -71,7 +71,7 @@ static void	ft_expand_check_dollar(char *tkn, int *i)
 	if (tkn[*i] && (ft_check_alpha(tkn[*i]) == SUCCESS))
 		while (tkn[*i] && (ft_check_alnum(tkn[*i]) == SUCCESS))
 			++(*i);
-	else if ((tkn[*i] != '\'') && (tkn[*i] != '\"'))
+	else if ((tkn[*i] != '\'') && (tkn[*i] != '\"') && (tkn[*i] != '\0'))
 		++(*i);
 }
 

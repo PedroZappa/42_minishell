@@ -71,7 +71,7 @@ char	*ft_expand_dollar(char *tkn, int *i)
 	if (tkn[*i] && (ft_check_alpha(tkn[*i]) == SUCCESS))
 		while (tkn[*i] && (ft_check_alnum(tkn[*i]) == SUCCESS))
 			++(*i);
-	else if ((tkn[*i] != '\'') && (tkn[*i] != '\"'))
+	else if ((tkn[*i] != '\'') && (tkn[*i] != '\"') && (tkn[*i] != '\0'))
 		++(*i);
 	tkn_len = (*i - tkn_start);
 	ret = ft_substr(tkn, tkn_start, tkn_len);

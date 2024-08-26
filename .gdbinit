@@ -62,7 +62,6 @@ define tokenizer
 	display *line
 	display **tks
 	display *tk
-	display tkn_str
 end
 
 define get_tkns
@@ -133,13 +132,13 @@ end
 define expander
 	display sh
 	display tk_str
-	display tk_str[i]
 	display **sub_tkns
 	display sub_tkns[curr_tk]
 	display *sub_tkns@5
 	display *ret
 	display curr_tk
 	display *curr_tk
+	display tk_str[i]
 	display i
 end
 
