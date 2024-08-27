@@ -77,6 +77,9 @@ TEST(Parser, Advanced) {
     Tester shell_test;
     std::vector<std::string> commands = {
         "echo '$'",
+		"echo ''",
+		"echo '''",
+		"echo ''''",
 		"echo \"'$USER'\"",
 		"echo '\"$USER\"'",
         "echo \"<< EOF\"",
