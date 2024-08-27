@@ -231,7 +231,7 @@ sync_valgrind: $(BUILD)		## Test bash & minishell w/ valgrind
 	tmux setw synchronize-panes on
 	clear && valgrind $(VAL_ARGS) $(VAL_LEAK) ./$(NAME)
 
-cmake: $(BUILD) get_googletest get_boost
+cmake: $(BUILD) get_googletest
 	@cd tests/ && mkdir -p build/ && cd build/ && cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .. && make
 	@if test ! -f compile_commands.json; then \
 		ln -s tests/build/compile_commands.json compile_commands.json; \
@@ -250,21 +250,6 @@ get_googletest: $(BUILD_PATH) $(BUILD)
 		echo "* $(YEL)googletest download$(D): $(_SUCCESS)"; \
 	else \
 		echo "* $(YEL)googletest already exists 🖔"; \
-	echo " $(RED)$(D) [$(GRN)Nothing to be done!$(D)]"; \
-	fi
-
-get_boost: $(BUILD_PATH) $(BUILD)
-	@echo "* $(CYA)Getting Boost Library$(D): $(_INFO)"
-	@if test ! -d "$(BOOST_PATH)"; then \
-		cd tests && \
-		curl https://archives.boost.io/release/1.86.0/source/$(BOOST).tar.bz2 -o $(BOOST).tar.bz2; \
-		echo "* $(GRN)Unpacking Boost Library$(D): $(_INFO)"; \
-		tar --bzip2 -xf $(BOOST).tar.bz2; \
-		cd .. && mv tests/$(BOOST) $(BOOST_PATH); \
-		$(RM) tests/$(BOOST).tar.bz2; \
-		echo "* $(GRN)Boost Library download$(D): $(_SUCCESS)"; \
-	else \
-		echo "* $(GRN)Boost Library already exists 🖔"; \
 	echo " $(RED)$(D) [$(GRN)Nothing to be done!$(D)]"; \
 	fi
 
