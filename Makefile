@@ -125,7 +125,7 @@ MKDIR_P	= mkdir -p
 
 ### Valgrind
 VAL_ARGS 	= --suppressions=readline.supp
-VAL_LEAK	= --leak-check=full --show-leak-kinds=all
+VAL_LEAK	= --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes
 VGDB_ARGS	= --vgdb-error=0 $(VAL_LEAK) $(VAL_ARGS)
 
 #==============================================================================#

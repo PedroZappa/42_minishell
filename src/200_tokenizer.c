@@ -118,7 +118,7 @@ static int	ft_get_tkns(t_shell *sh, char *line, t_token **tks, t_tk_ops *ops)
 			}
 			ft_free(tkn_str);
 			if ((tk.type != TK_BLANK) && (tk.tkn[0] != '~'))
-				ft_tk_add_free(tks, ft_tk_new(tk.tkn, tk.type, ft_strlen(tk.tkn)), &tk);
+				ft_tk_add_free(tks, ft_tk_new(tk.tkn, tk.type, (int)ft_strlen(tk.tkn)), &tk);
 			tmp = line;
 		}
 		else
@@ -152,7 +152,7 @@ static t_tk_ops	ft_get_tk(char *tk, t_tk_ops **ops)
 				++i;
 			if (tk[i] == '\"')
 				++i;
-			ret = (t_tk_ops){ft_substr(tk, 0, i), TK_CMD, i};
+			ret = (t_tk_ops){ft_substr(tk, 0, (size_t)i), TK_CMD, i};
 			return (ret);
 		}
 		if (tk[0] == '\'')
@@ -162,18 +162,18 @@ static t_tk_ops	ft_get_tk(char *tk, t_tk_ops **ops)
 				++i;
 			if (tk[i] == '\'')
 				++i;
-			ret = (t_tk_ops){ft_substr(tk, 0, i), TK_CMD, i};
+			ret = (t_tk_ops){ft_substr(tk, 0, (size_t)i), TK_CMD, i};
 			return (ret);
 		}
 		while (tk[i] && !ft_isspace(tk[i]) && (tk[i] != '\'') && (tk[i] != '\"'))
 			++i;
-		ret = (t_tk_ops){ft_substr(tk, 0, i), TK_CMD, i};
+		ret = (t_tk_ops){ft_substr(tk, 0, (size_t)i), TK_CMD, i};
 	}
 	else
 		ret = (t_tk_ops){"", TK_BLANK, 1};
 	i = -1;
 	while ((ops[++i] != NULL) && !ret.tkn)
-		if (ops[i]->tkn && !ft_strncmp(tk, ops[i]->tkn, ops[i]->len))
+		if (ops[i]->tkn && !ft_strncmp(tk, ops[i]->tkn, (size_t)ops[i]->len))
 			return (ret);
 	return (ret);
 }
@@ -191,7 +191,7 @@ static t_tk_ops	ft_get_tk(char *tk, t_tk_ops **ops)
 // 	char	*line_0;
 //
 // 	line_0 = (*quote);
-// 	(*quote) = ft_strchr(((*quote) + 1), **quote);
+// 	(*quote) = ft_strrchr(((*quote) + 1), **quote);
 // 	if (!(*quote))
 // 	{
 // 		(*quote) = line_0 + ft_strlen(line_0);
