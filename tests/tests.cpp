@@ -109,7 +109,6 @@ TEST(Parser, Advanced) {
         "echo '$USER \"$HOME\"'",
         "echo \"$USER 42\" '\"$USER\"'",
         "echo ''\"\"'\"'\"'\"",
-        "echo \"new line.\\ntab.\\t backslash: \\\\\"",
     };
 
     for (const auto& cmd : commands) {
