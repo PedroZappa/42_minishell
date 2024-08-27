@@ -79,7 +79,7 @@ std::pair<std::string, int> Tester::get_valgrind(const std::string& minishell_pa
 	boost::process::ipstream err_stream;
     std::string output;
     std::string line_read;
-    boost::process::child c("valgrind --leak-check=full --show-leak-kinds=all --suppressions=readline.supp " + minishell_path,
+    boost::process::child c("valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --suppressions=readline.supp " + minishell_path,
         boost::process::std_in < in_stream,
         boost::process::std_out > out_stream,
         boost::process::std_err > err_stream,

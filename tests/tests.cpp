@@ -2,6 +2,7 @@
 
 int g_invalid_reads = 0;
 int g_leaks = 0;
+int g_fd = 0;
 
 void runTest(Tester& shell_test, const std::string& cmd) {
     std::pair<std::string, int> bash_output = shell_test.get_bash_output(cmd);
@@ -15,6 +16,7 @@ void runTest(Tester& shell_test, const std::string& cmd) {
     if (!valgrind_output.first.empty()) {
         std::string invalid_read = "Invalid read of size";
         std::string malloc_err = ": malloc (in";
+        // std::string fd_err = "Open file descriptor";
 
 		if (valgrind_output.first.find(invalid_read) != std::string::npos) {
 			std::cout << valgrind_output.first << std::endl;
@@ -24,14 +26,25 @@ void runTest(Tester& shell_test, const std::string& cmd) {
 			std::cout << valgrind_output.first << std::endl;
 			g_leaks++;
 		}
+        // size_t pos = 0;
+        // while ((pos = valgrind_output.first.find(fd_err, pos)) != std::string::npos) {
+        //     g_fd++;
+        //     pos += fd_err.length(); // Move past the current match
+        // }
+        //
+        // if (g_fd > 0) {
+        //     std::cout << valgrind_output.first << std::endl;
+        // }
     }
 }
 
 void leakReport() {
 	std::cout << "Invalid reads: " << g_invalid_reads << std::endl;
 	std::cout << "Leaks: " << (g_leaks - g_invalid_reads) << std::endl;
+	std::cout << "Total fd: " << g_leaks << std::endl;
 	g_invalid_reads = 0;
 	g_leaks = 0;
+	g_fd = 0;
 }
 
 // Test test case
