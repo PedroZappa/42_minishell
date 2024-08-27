@@ -1,4 +1,4 @@
-break ft_exec_pipeline
+break ft_exec_child_first
 fs cmd
 info thread
 info break

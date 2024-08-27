@@ -22,7 +22,7 @@ int	**ft_pipe_init(char **path, int *pipe0, int *pipe1)
 {
 	int	**pipes;
 
-	pipes = malloc(sizeof(int *) * 2);
+	pipes = (int **)malloc(sizeof(int *) * 2);
 	if (!pipes)
 		return (ft_err(MALLOC_ERR, errno), NULL);
 	if (pipe(pipe1) == PIPE_FAIL)
