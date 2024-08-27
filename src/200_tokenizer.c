@@ -22,7 +22,7 @@
 static void		ft_init_ops(t_tk_ops *ops);
 static int		ft_get_tkns(t_shell *sh, char *line, \
 						t_token **tks, t_tk_ops *ops);
-static t_tk_ops	ft_get_tk(char *tk, t_tk_ops **ops);
+static t_tk_ops	ft_get_tk(char *tk, t_tk_ops *ops);
 // static int		ft_has_match(char **line);
 
 /// @brief			Tokenizer
@@ -103,7 +103,7 @@ static int	ft_get_tkns(t_shell *sh, char *line, t_token **tks, t_tk_ops *ops)
 	tmp = line;
 	while (line && *line)
 	{
-		tk = ft_get_tk(line, &ops);
+		tk = ft_get_tk(line, ops);
 		if (tk.tkn != NO_TOKEN)
 		{
 			line += tk.len;
@@ -136,7 +136,7 @@ static int	ft_get_tkns(t_shell *sh, char *line, t_token **tks, t_tk_ops *ops)
 /// @return			SUCCESS(t_tk_ops struct with op data)
 ///					FAILURE(empty t_tk_ops struct)
 /// @note			Used in ft_get_tkns()
-static t_tk_ops	ft_get_tk(char *tk, t_tk_ops **ops)
+static t_tk_ops	ft_get_tk(char *tk, t_tk_ops *ops)
 {
 	t_tk_ops	ret;
 	int			i;
@@ -171,10 +171,16 @@ static t_tk_ops	ft_get_tk(char *tk, t_tk_ops **ops)
 	}
 	else
 		ret = (t_tk_ops){"", TK_BLANK, 1};
-	i = -1;
-	while ((ops[++i] != NULL) && !ret.tkn)
-		if (ops[i]->tkn && !ft_strncmp(tk, ops[i]->tkn, (size_t)ops[i]->len))
+	i = 0;
+	while ((&ops[i] != NULL) && (ops[i].tkn != NULL))
+	{
+		if (!ft_strncmp(tk, ops[i].tkn, (size_t)ops[i].len))
+		{
+			ret.type = ops[i].type;
 			return (ret);
+		}
+		++i;
+	}
 	return (ret);
 }
 

@@ -77,7 +77,8 @@ end
 define get_tk
 	display tk
 	display tk[i]
-	display ops[i]
+	display *ops[i]
+	display ops[i]->tkn
 	display ret
 	display i
 end
@@ -252,6 +253,11 @@ define count_args
 	display *tks
 	display *prev
 	display i
+end
+
+define count_cmds
+	display *tks
+	display count
 end
 
 define parse_cmds
