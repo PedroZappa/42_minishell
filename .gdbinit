@@ -387,6 +387,44 @@ define update_last_cmd
 	display i
 end
 
+### 630_pipeline.c
+define exec_pipeline
+	display *sh
+	display pipe0
+	display pipe1
+	display cmd_idx
+end
+
+define exec_first
+	display *sh
+	display pid
+	display *outpipe
+end
+
+define exec_loop
+	display *sh
+	display **pipe
+	display *pipe0
+	display *pipe1
+	display cmd_i
+	display i
+end
+
+define exec_cmd_i
+	display *sh
+	display **pipe
+	display pipe[0]
+	display pipe[1]
+	display i
+end
+
+define exec_last
+	display *sh
+	display pid
+	display *inpipe
+	display i
+end
+
 # 700_exit.c
 define exit
 	display *sh
