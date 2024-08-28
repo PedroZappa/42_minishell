@@ -32,6 +32,7 @@ void	ft_exec_child_first(t_shell *sh, int *outpipe)
 			ft_close_pipes(NULL, outpipe);
 			ft_fork_exit(sh, PIPE_ERR, FAILURE);
 		}
+		ft_close_pipes(NULL, outpipe);
 	}
 	if (sh->cmds[0].argv[0])
 		ft_exec_cmd(sh, ft_exec_check(sh->cmds[0].argv[0]), NO_PIPE);

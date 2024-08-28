@@ -40,9 +40,9 @@ int	ft_exec_pipeline(t_shell *sh)
 	cmd_idx = ft_exec_loop(sh, pipe0, pipe1);
 	if (cmd_idx == CMD_FAIL)
 		return (FAILURE);
-	if ((cmd_idx % 2 == 0) && (ft_exec_last(sh, pipe0) == FAILURE))
+	if ((cmd_idx % 2 == 0) && (ft_exec_last(sh, pipe1) == FAILURE))
 		return (FAILURE);
-	if ((cmd_idx % 2 == 1) && (ft_exec_last(sh, pipe1) == FAILURE))
+	if ((cmd_idx % 2 == 1) && (ft_exec_last(sh, pipe0) == FAILURE))
 		return (FAILURE);
 	if (ft_exec_last(sh, pipe1) == FAILURE)
 		return (FAILURE);

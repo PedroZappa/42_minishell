@@ -11,8 +11,8 @@ set tui active-border-mode bold-standout
 set tui border-mode reverse
 set trace-commands on
 set logging enabled on
-# set follow-fork-mode child
-set detach-on-fork off
+set follow-fork-mode child
+# set detach-on-fork off
 
 show follow-fork-mode
 
@@ -427,6 +427,32 @@ define exec_last
 	display i
 end
 
+# 640_exec_child.c
+define exec_child_first
+	display sh->cmds[0].argv[0]
+	display sh->cmds[0].in.name
+	display sh->cmds[0].out.name
+	display *outpipe
+end
+
+# 670_pipes.c
+define pipe_init
+	display **path
+	display *pipe0
+	display *pipe1
+end
+
+define pipe_setter
+	display *pipe
+	display end
+	display pipe[end]
+end
+
+define close_pipes
+	display *pipe0
+	display *pipe1
+end
+
 # 700_exit.c
 define exit
 	display *sh
@@ -619,6 +645,13 @@ end
 # extract_var
 # fs cmd
 # rfr
+
+
+# ft_exec_pipeline
+break ft_exec_pipeline
+run
+fs cmd
+rfr
 
 ### Info Stats
 info break
