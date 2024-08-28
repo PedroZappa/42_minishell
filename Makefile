@@ -125,7 +125,7 @@ MKDIR_P	= mkdir -p
 
 ### Valgrind
 VAL_ARGS 	= --suppressions=readline.supp
-VAL_LEAK	= --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes
+VAL_LEAK	= --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --trace-children=yes
 VGDB_ARGS	= --vgdb-error=0 $(VAL_LEAK) $(VAL_ARGS)
 
 #==============================================================================#
@@ -258,6 +258,7 @@ get_googletest: $(BUILD_PATH) $(BUILD)
 gdb: all $(NAME) $(TEMP_PATH)			## Debug w/ gdb
 	tmux split-window -h "gdb --tui --args ./$(NAME)"
 	tmux resize-pane -L 5
+	tmux split-window -v "btop"
 	make get_log
 
 
@@ -267,7 +268,6 @@ vgdb: all $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck) & gdb
 	tmux split-window -v "gdb --tui -x $(TEMP_PATH)/gdb_commands.txt $(NAME)"
 	tmux resize-pane -U 18
 	tmux split-window -v "btop"
-	tmux resize-pane -D 5
 	make get_log
 
 valgrind: all $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck)
