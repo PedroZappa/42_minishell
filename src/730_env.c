@@ -27,11 +27,7 @@
 int	ft_env(t_shell *sh, int n)
 {
 	int		i;
-	int		fd;
 
-	fd = STDOUT_FILENO;
-	if (sh->pipe[0] > 0)
-		fd = sh->pipe[0];
 	ft_set_var("_", sh->cmds[n].argv[0], &sh->envp);
 	i = 0;
 	while (sh->cmds[n].argv[++i])
@@ -40,7 +36,7 @@ int	ft_env(t_shell *sh, int n)
 	i = -1;
 	while (sh->envp[++i])
 		if (ft_strchr(sh->envp[i], '='))
-			ft_fprintf(fd, "%s\n", sh->envp[i]);
+			ft_fprintf(STDOUT_FILENO, "%s\n", sh->envp[i]);
 	return (i);
 }
 
