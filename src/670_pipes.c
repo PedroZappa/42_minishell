@@ -26,17 +26,20 @@ void	ft_pipe_init(t_shell *sh)
 
 /// @brief			Set pipes
 /// @param pipe		Pointer to a pipe
-/// @param end		End of pipe (stdin or stdout)
+/// @param in		Flag whether stdin or stdout
 /// @return			SUCCESS(0)
-int	ft_pipe_setter(t_shell *sh, int end)
+int	ft_pipe_setter(t_shell *sh, int pipe, int in)
 {
-	if (sh->pipe[end] != end)
+	if (dup2(sh->pipe[in], in) == PIPE_FAIL)
 	{
-		if (dup2(sh->pipe[end], end) == PIPE_FAIL)
-		{
-			ft_close_pipes(sh);
-			ft_fork_exit(sh, PIPE_ERR, FAILURE);
-		}
+		ft_close_pipes(sh);
+		ft_fork_exit(sh, PIPE_ERR, FAILURE);
+	}
+	close(sh->pipe[1 - in]);
+	if (dup2(pipe, 1 - in) == PIPE_FAIL)
+	{
+		ft_close_pipes(sh);
+		ft_fork_exit(sh, PIPE_ERR, FAILURE);
 	}
 	return (SUCCESS);
 }

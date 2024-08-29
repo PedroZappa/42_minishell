@@ -22,7 +22,7 @@ void	ft_redir_in(t_shell *sh, int i)
 				S_IRWXU | S_IRGRP | S_IROTH);
 		if (fd < 0)
 			ft_fork_exit(sh, sh->cmds[i].in.name, FAILURE);
-		if (ft_pipe_setter(&fd, STDIN_FILENO) == PIPE_FAIL)
+		if (ft_pipe_setter(sh, fd, STDIN_FILENO) == PIPE_FAIL)
 		{
 			close(fd);
 			ft_fork_exit(sh, PIPE_ERR, FAILURE);
@@ -41,10 +41,9 @@ void	ft_redir_out(t_shell *sh, int i)
 			S_IRWXU | S_IRGRP | S_IROTH);
 	if (fd < 0)
 		ft_fork_exit(sh, sh->cmds[i].out.name, FAILURE);
-	if ((fd != 1) && (ft_pipe_setter(&fd, STDOUT_FILENO) == PIPE_FAIL))
+	if ((fd != 1) && (ft_pipe_setter(sh, fd, STDOUT_FILENO) == PIPE_FAIL))
 	{
 		close(fd);
 		ft_fork_exit(sh, PIPE_ERR, FAILURE);
 	}
-	close(fd);
 }
