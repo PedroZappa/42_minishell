@@ -41,7 +41,7 @@ void	ft_exec_cmd(t_shell *sh, int id, int i)
 		}
 		ft_execve(sh->path, sh->cmds[i].argv, sh->envp);
 		ft_free_sh(sh);
-		exit(CMD_NOT_FOUND);
+		exit(SUCCESS);
 	}
 	else
 		ft_exec(sh, id, i);

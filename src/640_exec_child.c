@@ -38,7 +38,6 @@ void	ft_exec_child_i(t_shell *sh, int i)
 {
 	ft_pipe_setter(sh, i - 1, STDIN_FILENO);
 	ft_pipe_setter(sh, i, STDOUT_FILENO);
-	printf("id i %d\n", i);
 	if (sh->cmds[i].in.name)
 		ft_redir_in(sh, i);
 	if (sh->cmds[i].out.name)
