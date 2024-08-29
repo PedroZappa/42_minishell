@@ -400,7 +400,6 @@ end
 define exec_first
 	display *sh
 	display pid
-	display *outpipe
 end
 
 define exec_loop
@@ -432,14 +431,12 @@ define exec_child_first
 	display sh->cmds[0].argv[0]
 	display sh->cmds[0].in.name
 	display sh->cmds[0].out.name
-	display *outpipe
+	display sh->pipe
 end
 
 # 670_pipes.c
 define pipe_init
 	display **path
-	display *pipe0
-	display *pipe1
 end
 
 define pipe_setter
