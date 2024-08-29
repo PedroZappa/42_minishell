@@ -368,11 +368,11 @@ void		ft_execve(char **path, char **argv, char **envp);
 /// @file	670_pipes.c
 void		ft_pipe_init(t_shell *sh);
 int			ft_pipe_setter(t_shell *sh, int fd, int end);
-void		ft_close_pipes(t_shell *sh);
+void		ft_close_pipes(t_shell *sh, int fd);
 
 /// @file	680_redir.c
-void		ft_redir_in(t_shell *sh, int i);
-void		ft_redir_out(t_shell *sh, int i);
+void		ft_redir_in(t_shell *sh, int i, int *fd);
+void		ft_redir_out(t_shell *sh, int i, int *fd);
 
 //=============================================================================/
 //	700		Builtins														   /

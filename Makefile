@@ -142,6 +142,9 @@ $(NAME): $(BUILD_PATH) $(LIBFT_ARC) $(OBJS)			## Compile
 	@echo "[$(_SUCCESS) compiling $(MAG)$(NAME)$(D) $(YEL)🖔$(D)]"
 	make norm
 
+shell: all
+	@./minishell
+
 asan: CFLAGS += $(ASAN_FLAGS)
 asan: $(BUILD_PATH) $(LIBFT_ARC) $(OBJS)   ## Compile with Address Sanitizer
 	@echo "$(YEL)Compiling $(MAG)$(NAME)$(YEL) with Address Sanitizer$(D)"

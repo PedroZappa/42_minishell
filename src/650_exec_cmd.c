@@ -39,6 +39,7 @@ void	ft_exec_cmd(t_shell *sh, int id, int i)
 		// if (!stat_ret)
 		if (stat(sh->cmds[i].argv[0], &sb) == -1)	
 		{
+			printf("%s\n%s\n", sh->cmds[i].argv[0], strerror(errno));
 			ft_free_sh(sh);
 			exit(CMD_NOT_FOUND);
 		}
