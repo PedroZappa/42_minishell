@@ -22,15 +22,17 @@
 void	ft_exec_child_first(t_shell *sh)
 {
 	int	fd;
+	int		in[2];
+	int		out[2];
 
 	fd = -1;
 	if (sh->cmds[0].in.name)
-		ft_redir_in(sh, 0, &fd);
+		ft_redir_in(sh, 0);
 	if (sh->cmds[0].out.name)
-		ft_redir_out(sh, 0, &fd);
+		ft_redir_out(sh, 0);
 	if (sh->cmds[0].argv[0])
 		ft_exec_cmd(sh, ft_exec_check(sh->cmds[0].argv[0]), NO_PIPE);
-	ft_close_pipes(sh, fd);
+	ft_close_pipes(sh);
 	ft_free_sh(sh);
 	exit(SUCCESS);
 }
@@ -38,15 +40,17 @@ void	ft_exec_child_first(t_shell *sh)
 void	ft_exec_child_i(t_shell *sh, int i)
 {
 	int fd;
+	int	in[2];
+	int	out[2];
 
 	fd = -1;
 	if (sh->cmds[i].in.name)
-		ft_redir_in(sh, i, &fd);
+		ft_redir_in(sh, i);
 	if (sh->cmds[i].out.name)
-		ft_redir_out(sh, i, &fd);
+		ft_redir_out(sh, i);
 	if (sh->cmds[i].argv[0])
 		ft_exec_cmd(sh, ft_exec_check(sh->cmds[i].argv[0]), i);
-	ft_close_pipes(sh, fd);
+	ft_close_pipes(sh);
 	ft_free_sh(sh);
 	exit(SUCCESS);
 }
@@ -57,12 +61,12 @@ void	ft_exec_child_last(t_shell *sh, int i)
 
 	fd = -1;
 	if (sh->cmds[i].in.name)
-		ft_redir_in(sh, i, &fd);
+		ft_redir_in(sh, i);
 	if (sh->cmds[i].out.name)
-		ft_redir_out(sh, i, &fd);
+		ft_redir_out(sh, i);
 	if (sh->cmds[i].argv[0])
 		ft_exec_cmd(sh, ft_exec_check(sh->cmds[i].argv[0]), i);
-	ft_close_pipes(sh, fd);
+	ft_close_pipes(sh);
 	ft_free_sh(sh);
 	exit(SUCCESS);
 }
