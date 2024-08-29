@@ -98,7 +98,6 @@ LIBFT_ARC	= $(LIBFT_PATH)/libft.a
 TESTER_PATH		= $(LIBS_PATH)/minishell_tester
 GOOGLETEST_PATH	= tests/googletest
 BOOST_PATH		= tests/boost/
-BOOST			= boost_1_86_0
 
 #==============================================================================#
 #                              COMPILER & FLAGS                                #
@@ -217,6 +216,12 @@ check_ext_func: all		## Check for external functions
 	@echo "$(CYA)Reading binary$(D): $(MAG)$(NAME)$(D)"
 	nm ./$(NAME) | grep "U" | grep -v "__" | tee $(TEMP_PATH)/ext_func.txt
 	@echo "$(YEL)$(_SEP)$(D)"
+
+OBJS_TEST = test.o
+test: $(BUILD_PATH) $(LIBFT_ARC) $(OBJS_TEST)
+	@echo "$(YEL)Compiling $(MAG)$(NAME)$(YEL) test version$(D)"
+	$(CC) $(CFLAGS) $(DFLAGS) $(OBJS_TEST) $(INC) $(LIBFT_ARC) $(RFLAGS) -o $(NAME)
+	@echo "[$(_SUCCESS) compiling $(MAG)$(NAME)$(D) $(YEL)🖔$(D)]"
 
 ##@ Test Rules 🧪
 

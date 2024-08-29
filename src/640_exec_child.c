@@ -21,11 +21,7 @@
 
 void	ft_exec_child_first(t_shell *sh)
 {
-	int	fd;
-	int		in[2];
-	int		out[2];
-
-	fd = -1;
+	ft_pipe_setter(sh, STDIN_FILENO);
 	if (sh->cmds[0].in.name)
 		ft_redir_in(sh, 0);
 	if (sh->cmds[0].out.name)
@@ -39,11 +35,6 @@ void	ft_exec_child_first(t_shell *sh)
 
 void	ft_exec_child_i(t_shell *sh, int i)
 {
-	int fd;
-	int	in[2];
-	int	out[2];
-
-	fd = -1;
 	if (sh->cmds[i].in.name)
 		ft_redir_in(sh, i);
 	if (sh->cmds[i].out.name)
@@ -57,9 +48,7 @@ void	ft_exec_child_i(t_shell *sh, int i)
 
 void	ft_exec_child_last(t_shell *sh, int i)
 {
-	int fd;
-
-	fd = -1;
+	ft_pipe_setter(sh, STDOUT_FILENO);
 	if (sh->cmds[i].in.name)
 		ft_redir_in(sh, i);
 	if (sh->cmds[i].out.name)

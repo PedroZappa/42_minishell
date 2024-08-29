@@ -172,7 +172,7 @@ static t_tk_ops	ft_get_tk(char *tk, t_tk_ops *ops)
 	else
 		ret = (t_tk_ops){"", TK_BLANK, 1};
 	i = 0;
-	while ((&ops[i] != NULL) && (ops[i].tkn != NULL))
+	while ((ops != NULL) && (ops[i].tkn != NULL))
 	{
 		if (!ft_strncmp(tk, ops[i].tkn, (size_t)ops[i].len))
 		{
