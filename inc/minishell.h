@@ -224,7 +224,8 @@ typedef struct s_shell
 	char	*user;
 	char	*heredoc;
 	int		exit_status;
-	int		pipe[2];
+	int		**pipes;
+	int		n_pipes;
 }	t_shell;
 
 //=============================================================================/
@@ -258,8 +259,8 @@ int			ft_tokenizer(t_shell *sh, char *line, t_token **tks);
 
 /// @file	210_tk_list.c
 t_token		*ft_tk_new(char *line, t_token_type type, int len);
-void			ft_tk_add(t_token **tk_list, t_token *tks);
-void			ft_tk_add_free(t_token **tk_list, t_token *tk, t_tk_ops *tk_op);
+void		ft_tk_add(t_token **tk_list, t_token *tks);
+void		ft_tk_add_free(t_token **tk_list, t_token *tk, t_tk_ops *tk_op);
 t_token		*ft_tk_last(t_token *tk);
 
 /// @file	220_tk_expander.c
@@ -367,7 +368,7 @@ void		ft_execve(char **path, char **argv, char **envp);
 
 /// @file	670_pipes.c
 void		ft_pipe_init(t_shell *sh);
-int			ft_pipe_setter(t_shell *sh, int end);
+int			ft_pipe_setter(t_shell *sh, int i, int end);
 int			ft_pipe_setter_fd(t_shell *sh, int fd, int in);
 void		ft_close_pipes(t_shell *sh);
 
@@ -444,6 +445,8 @@ int			ft_free_arr(char **arr);
 int			ft_free_tks(t_token **tk);
 int			ft_free_cmds(t_cmd *cmds, int n_cmds);
 int			ft_free_nocmds(t_cmd *cmds, int n_cmds, t_token **tks);
+
+void		ft_free_any(void *ptr);
 
 #endif
 

@@ -12,33 +12,51 @@
 
 #include "../inc/minishell.h"
 
+/// @brief			Initialize pipes
+/// @param sh		Pointer to a t_shell struct
+/// @note			Used all over the code base
+void	ft_pipe_init(t_shell *sh)
+{
+	int	i;
+
+	i = 0;
+	sh->pipes = ft_calloc(sh->n_pipes, sizeof(int *));
+	while (i < sh->n_pipes)
+	{
+		sh->pipes[i] = ft_calloc(2, sizeof(int));
+		if (pipe(sh->pipes[i]) == PIPE_FAIL)
+			return ((void)ft_return_err("Couldn't create pipes", errno, FAILURE));
+		i++;
+	}
+}
+
 /// @brief			Set pipes
 /// @param sh		Pointer to a t_shell struct
-/// @param in		Flag whether stdin or stdout
+/// @param i		Pipe number
+/// @param out		Flag whether stdin or stdout
 /// @return			SUCCESS(0)
-int	ft_pipe_setter(t_shell *sh, int in)
+int	ft_pipe_setter(t_shell *sh, int i, int out)
 {
-	if (sh->pipe[in] == -1 || in < 0)
+	if (out < 0 || out > 1)
 		return (FAILURE);
-	if (dup2(sh->pipe[1 - in], 1 - in) == PIPE_FAIL)
+	if (dup2(sh->pipes[i][out], out) == PIPE_FAIL)
 	{
 		ft_close_pipes(sh);
 		ft_fork_exit(sh, PIPE_ERR, FAILURE);
 	}
-	close(sh->pipe[in]);
 	return (SUCCESS);
 }
 
 /// @brief			Set pipes
 /// @param sh		Pointer to a t_shell struct
 /// @param fd		Pointer to a fd
-/// @param in		Flag whether stdin or stdout
+/// @param out		Flag whether stdin or stdout
 /// @return			SUCCESS(0)
-int ft_pipe_setter_fd(t_shell *sh, int fd, int in)
+int	ft_pipe_setter_fd(t_shell *sh, int fd, int out)
 {
-	if ((in > 1 || in < 0) && fd < 0)
+	if ((out > 1 || out < 0) && fd < 0)
 		return (FAILURE);
-	if (dup2(fd, 1 - in) == PIPE_FAIL)
+	if (dup2(fd, out) == PIPE_FAIL)
 	{
 		ft_close_pipes(sh);
 		ft_fork_exit(sh, PIPE_ERR, FAILURE);
@@ -50,14 +68,18 @@ int ft_pipe_setter_fd(t_shell *sh, int fd, int in)
 /// @param sh		Pointer to a t_shell struct
 void	ft_close_pipes(t_shell *sh)
 {
-	if (sh->pipe[0] > 0)
+	int i;
+
+	if (sh->pipes == NULL)
+		return ;
+	i = -1;
+	while (++i < sh->n_pipes)
 	{
-		close(sh->pipe[0]);
-		sh->pipe[0] = -1;
+		if (sh->pipes[i] == NULL)
+			continue ;
+		close(sh->pipes[i][0]);
+		close(sh->pipes[i][1]);
+		ft_free_any(sh->pipes[i]);
 	}
-	if (sh->pipe[1] > 0)
-	{
-		close(sh->pipe[1]);
-		sh->pipe[1] = -1;
-	}
+	ft_free_any(sh->pipes);
 }

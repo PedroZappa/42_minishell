@@ -30,7 +30,9 @@ typedef struct s_pipex
 {
 	pid_t	pid1;
 	pid_t	pid2;
+	pid_t	pid3;
 	int		tube[2];
+	int		tube2[2];
 	int		infile;
 	int		outfile;
 	char	*paths;
@@ -51,13 +53,19 @@ void	msg_error(char *err)
 	exit (1);
 }
 
+void	close_pipes(t_pipex *pipex)
+{
+	close(pipex->tube[0]);
+	close(pipex->tube[1]);
+	close(pipex->tube2[0]);
+	close(pipex->tube2[1]);
+}
+
 void	parent_free(t_pipex *pipex)
 {
 	int	i;
 
 	i = 0;
-	close(pipex->infile);
-	close(pipex->outfile);
 	while (pipex->cmd_paths[i])
 	{
 		free(pipex->cmd_paths[i]);
@@ -101,9 +109,9 @@ static char	*get_cmd(char **paths, char *cmd)
 void	first_child(t_pipex pipex, char *argv[], char *envp[])
 {
 	dup2(pipex.tube[1], 1);
-	close(pipex.tube[0]);
-	//dup2(pipex.infile, 0);
-	pipex.cmd_args = ft_split(argv[2], ' ');
+	close_pipes(&pipex);
+
+	pipex.cmd_args = ft_split(argv[1], ' ');
 	pipex.cmd = get_cmd(pipex.cmd_paths, pipex.cmd_args[0]);
 	if (!pipex.cmd)
 	{
@@ -117,8 +125,25 @@ void	first_child(t_pipex pipex, char *argv[], char *envp[])
 void	second_child(t_pipex pipex, char *argv[], char *envp[])
 {
 	dup2(pipex.tube[0], 0);
-	close(pipex.tube[1]);
-	//dup2(pipex.outfile, 1);
+	dup2(pipex.tube2[1], 1);
+	close_pipes(&pipex);
+
+	pipex.cmd_args = ft_split(argv[2], ' ');
+	pipex.cmd = get_cmd(pipex.cmd_paths, pipex.cmd_args[0]);
+	if (!pipex.cmd)
+	{
+		child_free(&pipex);
+		msg(ERR_CMD);
+		exit(1);
+	}
+	execve(pipex.cmd, pipex.cmd_args, envp);
+}
+
+void	third_child(t_pipex pipex, char *argv[], char *envp[])
+{
+	dup2(pipex.tube2[0], 0);
+	close_pipes(&pipex);
+
 	pipex.cmd_args = ft_split(argv[3], ' ');
 	pipex.cmd = get_cmd(pipex.cmd_paths, pipex.cmd_args[0]);
 	if (!pipex.cmd)
@@ -137,25 +162,21 @@ char	*find_path(char **envp)
 	return (*envp + 5);
 }
 
-void	close_pipes(t_pipex *pipex)
-{
-	close(pipex->tube[0]);
-	close(pipex->tube[1]);
-}
-
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_pipex	pipex;
 
-	if (argc != 5)
+	if (argc != 4)
 		return (msg(ERR_INPUT));
-	pipex.infile = open(argv[1], O_RDONLY);
+	/*pipex.infile = open(argv[1], O_RDONLY);
 	if (pipex.infile < 0)
 		msg_error(ERR_INFILE);
 	pipex.outfile = open(argv[argc - 1], O_TRUNC | O_CREAT | O_RDWR, 0000644);
 	if (pipex.outfile < 0)
-		msg_error(ERR_OUTFILE);
+		msg_error(ERR_OUTFILE);*/
 	if (pipe(pipex.tube) < 0)
+		msg_error(ERR_PIPE);
+	if (pipe(pipex.tube2) < 0)
 		msg_error(ERR_PIPE);
 	pipex.paths = find_path(envp);
 	pipex.cmd_paths = ft_split(pipex.paths, ':');
@@ -165,9 +186,13 @@ int	main(int argc, char *argv[], char *envp[])
 	pipex.pid2 = fork();
 	if (pipex.pid2 == 0)
 		second_child(pipex, argv, envp);
+	pipex.pid3 = fork();
+	if (pipex.pid3 == 0)
+		third_child(pipex, argv, envp);
 	close_pipes(&pipex);
 	waitpid(pipex.pid1, NULL, 0);
 	waitpid(pipex.pid2, NULL, 0);
+	waitpid(pipex.pid3, NULL, 0);
 	parent_free(&pipex);
 	return (0);
 }

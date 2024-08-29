@@ -49,8 +49,7 @@ int	ft_init(t_shell *sh, char **envp)
 	// sh->heredoc = ft_strdup("");
 	ft_get_termios(STDIN_FILENO, &sh->termios);
 	rl_editing_mode = VI;
-	sh->pipe[0] = -1;
-	sh->pipe[1] = -1;
+	sh->n_pipes = 0;
 	return (SUCCESS);
 }
 

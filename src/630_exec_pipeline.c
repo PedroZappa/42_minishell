@@ -33,6 +33,7 @@ int	ft_exec_pipeline(t_shell *sh)
 	int	cmd_idx;
 
 	ft_fork_sigset();
+	ft_pipe_init(sh);
 	if (ft_exec_first(sh) == FAILURE)
 		return (FAILURE);
 	cmd_idx = ft_exec_loop(sh);
@@ -60,8 +61,6 @@ int	ft_exec_first(t_shell *sh)
 {
 	pid_t	pid;
 
-	if (pipe(sh->pipe) == PIPE_FAIL)
-		return (ft_return_err("", errno, FAILURE));
 	pid = fork();
 	if (pid == PID_FAIL)
 		return (ft_return_err("", errno, FAILURE));
