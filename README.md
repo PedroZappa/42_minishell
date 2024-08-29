@@ -33,7 +33,9 @@
 
 ## GCC cleanup __attribute__
 - [Using the __cleanup__ variable attribute in GCC](https://echorand.me/site/notes/articles/c_cleanup/cleanup_attribute_c.html)
-# Tests
+# Heredoc
+
+- [Bash Heredoc](https://linuxize.com/post/bash-heredoc/)
 
 # Tests
 ## General
