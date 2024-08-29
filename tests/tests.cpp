@@ -215,6 +215,19 @@ TEST(Builtins, Exit) {
 	leakReport();
 }
 
+
+TEST(Pipes, Basic) {
+	Tester shell_test;
+	std::vector<std::string> commands = {
+		"env | grep USER",
+	};
+
+	for (const auto& cmd : commands) {
+		runTest(shell_test, cmd);
+	}
+	leakReport();
+}
+
 TEST(ExitCodes, Basic) {
 	Tester shell_test;
 	std::vector<std::string> commands = {
