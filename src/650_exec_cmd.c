@@ -28,18 +28,14 @@
 void	ft_exec_cmd(t_shell *sh, int id, int i)
 {
 	t_stat	sb;
-	// int		stat_ret;
 
 	memset(&sb, 0, sizeof(t_stat));
 	if (id == CMD_EXEC)
 	{
 		if (!sh->cmds[i].argv[0][0])
 			return ;
-		// stat_ret = stat(sh->cmds[i].argv[0], &sb);
-		// if (!stat_ret)
-		if (stat(sh->cmds[i].argv[0], &sb) == -1)	
+		if (stat(sh->cmds[i].argv[0], &sb) == 0)	
 		{
-			printf("%s\n%s\n", sh->cmds[i].argv[0], strerror(errno));
 			ft_free_sh(sh);
 			exit(CMD_NOT_FOUND);
 		}

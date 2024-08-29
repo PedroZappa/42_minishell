@@ -111,7 +111,7 @@ int	ft_exec_cmd_i(t_shell *sh, int i)
 		return (ft_return_err("", errno, FAILURE));
 	if (pid == SUCCESS)
 		ft_exec_child_i(sh, i);
-	ft_close_pipes(sh);
+	ft_close_pipes(sh, -1);
 	return (SUCCESS);
 }
 
@@ -131,7 +131,7 @@ int	ft_exec_last(t_shell *sh)
 		return (ft_return_err("", errno, FAILURE));
 	if (pid == SUCCESS)
 		ft_exec_child_last(sh, i);
-	ft_close_pipes(sh);
+	ft_close_pipes(sh, -1);
 	return (SUCCESS);
 }
 
