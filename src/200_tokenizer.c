@@ -67,6 +67,8 @@ static void	ft_init_ops(t_tk_ops *ops)
 	ops[5] = (t_tk_ops){">", TK_OUT, 1};
 	ops[6] = (t_tk_ops){"||", TK_OR, 2};
 	ops[7] = (t_tk_ops){"&&", TK_AND, 2};
+	ops[7] = (t_tk_ops){"(", TK_PARENTESHIS, 1};
+	ops[7] = (t_tk_ops){")", TK_PARENTESHIS, 1};
 	ops[8] = (t_tk_ops){"|", TK_PIPE, 1};
 	ops[9] = (t_tk_ops){" ", TK_BLANK, 1};
 	ops[10] = (t_tk_ops){"\n", TK_BLANK, 1};
@@ -101,23 +103,20 @@ static int	ft_get_tkns(t_shell *sh, char *line, t_token **tks, t_tk_ops *ops)
 	t_tk_ops	tk;
 
 	tmp = line;
-	while (line && *line)
+	while (line && line[0])
 	{
 		tk = ft_get_tk(line, ops);
 		if (tk.tkn != NO_TOKEN)
 		{
 			line += tk.len;
 			tkn_str = ft_strdup(tk.tkn);
-			if ((tkn_str[0] == '~') && sh->home)
+			if (tk.tkn[0] == '~' && sh->home)
 			{
 				ft_free(tk.tkn);
-				if (tkn_str[1] == '/')
-					tk.tkn = ft_strjoin(sh->home, "/");
-				else
-					tk.tkn = ft_strdup(sh->home);
+				tk.tkn = ft_strjoin(sh->home, tkn_str + 1);
 			}
 			ft_free(tkn_str);
-			if ((tk.type != TK_BLANK) && (tk.tkn[0] != '~'))
+			if (tk.type != TK_BLANK)
 				ft_tk_add_free(tks, ft_tk_new(tk.tkn, tk.type, (int)ft_strlen(tk.tkn)), &tk);
 			tmp = line;
 		}

@@ -43,9 +43,7 @@ t_token	*ft_tk_new(char *line, t_token_type type, int len)
 	tk->name = ft_substr(line, 0, len);
 	tk->type = type;
 	tk->len = len;
-	tk->to_del = 0;
-	if ((tk->name[0] != '\'') || (tk->name[0] != '\"'))
-		tk->to_del = 1;
+	tk->to_del = (tk->name[0] != '\'') || (tk->name[0] != '\"');
 	tk->next = NULL;
 	return (tk);
 }
