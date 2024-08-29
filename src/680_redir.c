@@ -35,7 +35,7 @@ void	ft_redir_out(t_shell *sh, int i, int *fd)
 {
 	*fd = open(sh->cmds[i].out.name, sh->cmds[i].out.flag,
 			S_IRWXU | S_IRGRP | S_IROTH);
-	if (fd < 0)
+	if (*fd < 0)
 		ft_fork_exit(sh, sh->cmds[i].out.name, FAILURE);
 	if ((*fd != 1) && (ft_pipe_setter(sh, *fd, STDOUT_FILENO) == PIPE_FAIL))
 	{
