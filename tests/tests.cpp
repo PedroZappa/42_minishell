@@ -220,6 +220,19 @@ TEST(Pipes, Basic) {
 	Tester shell_test;
 	std::vector<std::string> commands = {
 		"env | grep USER",
+		"cat .vgdbinit | grep info"
+	};
+
+	for (const auto& cmd : commands) {
+		runTest(shell_test, cmd);
+	}
+	leakReport();
+}
+
+TEST(Redirection, Basic) {
+	Tester shell_test;
+	std::vector<std::string> commands = {
+		"echo 42 > 42",
 	};
 
 	for (const auto& cmd : commands) {
