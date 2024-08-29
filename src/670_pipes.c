@@ -18,44 +18,42 @@
 /// @param pipe2	Pointer to a pipe2
 /// @return			Pointer to an array of pipes
 /// @note			Used all over the code base
-int	**ft_pipe_init(char **path, int *pipe0, int *pipe1)
+void	ft_pipe_init(t_shell *sh)
 {
-	int	**pipes;
-
-	pipes = (int **)malloc(sizeof(int *) * 2);
-	if (!pipes)
-		return (ft_err(MALLOC_ERR, errno), NULL);
-	if (pipe(pipe1) == PIPE_FAIL)
-		return (ft_pipe_err(path), NULL);
-	pipes[0] = pipe0;
-	pipes[1] = pipe1;
-	return (pipes);
+	if (pipe(sh->pipe) == PIPE_FAIL)
+		return ;
 }
 
 /// @brief			Set pipes
 /// @param pipe		Pointer to a pipe
 /// @param end		End of pipe (stdin or stdout)
 /// @return			SUCCESS(0)
-int	ft_pipe_setter(int *pipe, int end)
+int	ft_pipe_setter(t_shell *sh, int end)
 {
-	if (pipe[end] != end)
-		return (dup2(pipe[end], end));
+	if (sh->pipe[end] != end)
+	{
+		if (dup2(sh->pipe[end], end) == PIPE_FAIL)
+		{
+			ft_close_pipes(sh);
+			ft_fork_exit(sh, PIPE_ERR, FAILURE);
+		}
+	}
 	return (SUCCESS);
 }
 
 /// @brief			Close pipes
 /// @param pipe0	Pointer to a pipe0
 /// @param pipe1	Pointer to a pipe1
-void	ft_close_pipes(int *pipe0, int *pipe1)
+void	ft_close_pipes(t_shell *sh)
 {
-	if (pipe0)
+	if (sh->pipe[0] < 0)
 	{
-		close(pipe0[0]);
-		close(pipe0[1]);
+		close(sh->pipe[0]);
+		sh->pipe[0] = -1;
 	}
-	if (pipe1)
+	if (sh->pipe[1] < 0)
 	{
-		close(pipe1[0]);
-		close(pipe1[1]);
+		close(sh->pipe[1]);
+		sh->pipe[1] = -1;
 	}
 }

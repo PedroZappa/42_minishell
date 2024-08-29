@@ -224,6 +224,7 @@ typedef struct s_shell
 	char	*user;
 	char	*heredoc;
 	int		exit_status;
+	int		pipe[2];
 }	t_shell;
 
 //=============================================================================/
@@ -353,9 +354,9 @@ int			ft_exec_pipeline(t_shell *sh);
 
 /// @file	640_exec_child.c
 void		ft_exec_child(t_shell *sh, int *outpipe);
-void		ft_exec_child_first(t_shell *sh, int *pipeout);
-void		ft_exec_child_i(t_shell *sh, int **pipes, int i);
-void		ft_exec_child_last(t_shell *sh, int *pipein, int i);
+void		ft_exec_child_first(t_shell *sh);
+void		ft_exec_child_i(t_shell *sh, int i);
+void		ft_exec_child_last(t_shell *sh, int i);
 
 /// @file	650_exec_cmd.c
 void		ft_exec_cmd(t_shell *sh, int id, int i);
@@ -365,9 +366,9 @@ int			ft_exec(t_shell *sh, int cmd, int n);
 void		ft_execve(char **path, char **argv, char **envp);
 
 /// @file	670_pipes.c
-int			**ft_pipe_init(char **path, int *pipe1, int *pipe2);
-int			ft_pipe_setter(int *pipe, int end);
-void		ft_close_pipes(int *pipe0, int *pipe1);
+void		ft_pipe_init(t_shell *sh);
+int			ft_pipe_setter(t_shell *sh, int end);
+void		ft_close_pipes(t_shell *sh);
 
 /// @file	680_redir.c
 void		ft_redir_in(t_shell *sh, int i);
