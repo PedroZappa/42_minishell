@@ -34,7 +34,7 @@ void	ft_readline(char **line_buf, t_shell *sh)
 	prompt = ft_build_prompt(sh);
 	*line_buf = readline(prompt);
 	ft_free(prompt);
-	if (!*line_buf)
+	if (*line_buf == NULL)
 		*line_buf = ft_strdup("exit");
 	if (ft_strlen(*line_buf) > 0)
 		add_history(*line_buf);

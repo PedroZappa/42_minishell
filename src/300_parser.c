@@ -61,7 +61,7 @@ int	ft_parser(t_shell *sh, char *line_buf)
 		return (ft_free_tks(&tks), FAILURE);
 	sh->n_cmds = ft_count_cmds(tks);
 	sh->cmds = (t_cmd *)ft_calloc(sh->n_cmds, sizeof(t_cmd));
-	if (!sh->cmds)
+	if (sh->cmds == NULL)
 		return (ft_err(MALLOC_ERR, errno), FAILURE);
 	if (sh->n_cmds == NO_CMDS)
 		return (ft_free_nocmds(sh->cmds, sh->n_cmds, &tks));
@@ -89,7 +89,8 @@ static int	ft_check_syntax(t_token *tk)
 		return (ft_syntax_err(tk->name, FAILURE));
 	while (tk)
 	{
-		if (!tk->next && (tk->type == TK_PIPE || tk->type == TK_OR))
+		if (tk->type == TK_PIPE || tk->type == TK_OR || tk->type == TK_AND
+			|| ft_strcmp(tk->name, ")") == 0)
 			return (ft_syntax_err(tk->name, FAILURE));
 		if (tk->next && ((tk->type == TK_PIPE) && (tk->next->type == TK_PIPE)) \
 			&& ((tk->type == TK_PIPE) || (tk->next->type == TK_OR)) \
@@ -114,7 +115,7 @@ static int	ft_count_cmds(t_token *tks)
 	count = 0;
 	while (tks)
 	{
-		if (!count)
+		if (count == 0)
 			count = 1;
 		if ((tks->type == TK_AND) || (tks->type == TK_OR)
 			|| (tks->type == TK_PIPE))
@@ -187,7 +188,7 @@ static int	ft_parse_cmds(t_token *tks, t_cmd *cmds, int i, int j)
 	while (tks)
 	{
 		cmds[i].argv = (char **)ft_calloc((cmds[i].argc + 1), sizeof(char *));
-		if (!cmds[i].argv)
+		if (cmds[i].argv == NULL)
 			return (ft_err(MALLOC_ERR, errno), FAILURE);
 		j = 0;
 		while (tks && tks->type != TK_PIPE && tks->type != TK_OR

@@ -184,26 +184,4 @@ static t_tk_ops	ft_get_tk(char *tk, t_tk_ops *ops)
 	return (ft_find_ops(tk, ops));
 }
 
-/// @brief			Check if line contains a matching closing quote
-/// @details
-/// - Checks if line contains a matching closing quote
-/// 	- If it doesn't, move pointer to end of the line
-/// @param quote	Pointer to a quote
-/// @return			SUCCESS(matching quote found)
-///					FAILURE(no match)
-/// @note			Used in ft_get_tkns() when a quote is parsed
-// static int	ft_has_match(char **quote)
-// {
-// 	char	*line_0;
-//
-// 	line_0 = (*quote);
-// 	(*quote) = ft_strrchr(((*quote) + 1), **quote);
-// 	if (!(*quote))
-// 	{
-// 		(*quote) = line_0 + ft_strlen(line_0);
-// 		return (FAILURE);
-// 	}
-// 	return (SUCCESS);
-// }
-
 /** @} */

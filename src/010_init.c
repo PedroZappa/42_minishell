@@ -41,7 +41,7 @@ int	ft_init(t_shell *sh, char **envp)
 	sh->envp = ft_init_env(envp);
 	ft_shlvl(sh);
 	sh->envt = ft_calloc(1, sizeof(char *));
-	if (!sh->envp || !sh->envt)
+	if (sh->envp == NULL || sh->envt == NULL)
 		return (ft_err(ENV_INIT_ERR, errno), FAILURE);
 	sh->home = ft_get_var("HOME", sh->envp, NULL);
 	sh->user = ft_get_var("USER", sh->envp, NULL);
@@ -67,7 +67,7 @@ static void	ft_shlvl(t_shell *sh)
 	shlvl = ft_get_var("SHLVL", sh->envp, NULL);
 	if (shlvl)
 	{
-		if (!lvl)
+		if (lvl == 0)
 		{
 			lvl = 1;
 			i = ft_atoi(shlvl);
@@ -75,7 +75,7 @@ static void	ft_shlvl(t_shell *sh)
 		else
 			i = (ft_atoi(shlvl) + 1);
 		new = ft_itoa(i);
-		if (!new)
+		if (new == NULL)
 			ft_err(MALLOC_ERR, errno);
 		ft_set_var("SHLVL", new, &sh->envp);
 		free(new);

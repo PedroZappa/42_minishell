@@ -40,7 +40,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	sh = ft_calloc(1, sizeof(t_shell));
-	if (!sh)
+	if (sh == NULL)
 		return (ft_err(MALLOC_ERR, errno), EXIT_FAILURE);
 	if (ft_init(sh, envp) != SUCCESS)
 		ft_err(INIT_ERR, errno);
@@ -70,6 +70,7 @@ static int	ft_sh_loop(t_shell *sh)
 		status = ft_parser(sh, line_buf);
 		if (status == FAILURE)
 			continue ;
+		// temporary to test simple pipes
 		sh->n_pipes = sh->n_cmds - (sh->n_cmds > 0);
 		if (sh->n_cmds > NO_CMDS)
 			if (ft_execute(sh) == FAILURE)

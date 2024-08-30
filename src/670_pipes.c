@@ -25,7 +25,8 @@ void	ft_pipe_init(t_shell *sh)
 	{
 		sh->pipes[i] = ft_calloc(2, sizeof(int));
 		if (pipe(sh->pipes[i]) == PIPE_FAIL)
-			return ((void)ft_return_err("Couldn't create pipes", errno, FAILURE));
+			return ((void)ft_return_err("Couldn't create pipes",
+					errno, FAILURE));
 		i++;
 	}
 }
@@ -33,7 +34,7 @@ void	ft_pipe_init(t_shell *sh)
 /// @brief			Set pipes
 /// @param sh		Pointer to a t_shell struct
 /// @param i		Pipe number
-/// @param out		Flag whether stdin or stdout
+/// @param out	Flag whether stdin or stdout
 /// @return			SUCCESS(0)
 int	ft_pipe_setter(t_shell *sh, int i, int out)
 {
@@ -68,7 +69,7 @@ int	ft_pipe_setter_fd(t_shell *sh, int fd, int out)
 /// @param sh		Pointer to a t_shell struct
 void	ft_close_pipes(t_shell *sh)
 {
-	int i;
+	int	i;
 
 	if (sh->pipes == NULL)
 		return ;

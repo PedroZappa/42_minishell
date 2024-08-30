@@ -30,7 +30,7 @@ t_tree_node	*ft_tn_new(char *line, t_token_type type, int len)
 	t_tree_node	*ret;
 
 	ret = ft_calloc(1, sizeof(t_tree_node));
-	if (!ret)
+	if (ret == NULL)
 		return (ft_err(MALLOC_ERR, errno), NULL);
 	ret->name = ft_substr(line, 0, len);
 	ret->type = type;

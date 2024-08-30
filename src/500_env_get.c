@@ -93,7 +93,7 @@ static char	*ft_extract_var(char *select, char **env)
 	var = NULL;
 	while (*env)
 	{
-		if (!ft_strncmp(tmp, *env, len))
+		if (ft_strncmp(tmp, *env, len) == 0)
 		{
 			var = ft_strdup(*env + len);
 			break ;
@@ -126,8 +126,8 @@ int	ft_get_var_index(char *var, char **env)
 	i = -1;
 	while (env[++i])
 	{
-		if (((ft_strncmp(var, env[i], key_len) == SUCCESS) \
-			&& (((env[i][key_len] == '=') || (env[i][key_len] == '\0')))))
+		if ((ft_strncmp(var, env[i], key_len) == SUCCESS)
+			&& ((env[i][key_len] == '=') || (env[i][key_len] == '\0')))
 			return (i);
 	}
 	return (NO_VAR);

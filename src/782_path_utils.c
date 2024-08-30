@@ -49,7 +49,7 @@ char	*ft_path_combine(char const *s1, char const *s2)
 	return (ret);
 }
 
-void ft_home_expand(t_shell *sh, t_tk_ops *tk)
+void	ft_home_expand(t_shell *sh, t_tk_ops *tk)
 {
 	char	*tkn_str;
 

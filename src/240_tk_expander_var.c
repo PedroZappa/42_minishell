@@ -46,7 +46,7 @@ char	*ft_expand_var(t_shell *sh, char ***sub_tkns)
 			&& ((*sub_tkns)[i][1] || (*sub_tkns)[i + 1]))
 		{
 			(*sub_tkns)[i] = ft_fill_var(sh, curr);
-			if (!(*sub_tkns)[i])
+			if ((*sub_tkns)[i] == NULL)
 				(*sub_tkns)[i] = ft_strdup("");
 		}
 		else

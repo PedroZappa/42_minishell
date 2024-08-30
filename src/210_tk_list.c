@@ -38,7 +38,7 @@ t_token	*ft_tk_new(char *line, t_token_type type, int len)
 	t_token	*tk;
 
 	tk = ft_calloc(1, sizeof(t_token));
-	if (!tk)
+	if (tk == NULL)
 		return (ft_err(TKNZR_ERR, errno), NULL);
 	tk->name = ft_substr(line, 0, len);
 	tk->type = type;
@@ -87,7 +87,7 @@ void	ft_tk_add_free(t_token **tk_list, t_token *tk, t_tk_ops *tk_op)
 /// @note			Used in ft_tk_add()
 t_token	*ft_tk_last(t_token *tk)
 {
-	if (!tk)
+	if (tk == NULL)
 		return (NULL);
 	while (tk->next)
 	{
