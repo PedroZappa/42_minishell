@@ -48,3 +48,16 @@ char	*ft_path_combine(char const *s1, char const *s2)
 	ret[s1_len + s2_len + 1] = '\0';
 	return (ret);
 }
+
+void ft_home_expand(t_token *tk)
+{
+	char	*tkn_str;
+
+	tkn_str = ft_strdup(tk.tkn);
+	if (tk.tkn[0] == '~' && sh->home)
+	{
+		ft_free(tk.tkn);
+		tk.tkn = ft_strjoin(sh->home, tkn_str + 1);
+	}
+	ft_free(tkn_str);
+}

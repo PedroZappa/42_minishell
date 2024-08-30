@@ -98,7 +98,6 @@ static void	ft_init_ops(t_tk_ops *ops)
 ///	@note			Used in ft_tokenizer()
 static int	ft_get_tkns(t_shell *sh, char *line, t_token **tks, t_tk_ops *ops)
 {
-	char		*tkn_str;
 	char		*tmp;
 	t_tk_ops	tk;
 
@@ -112,15 +111,10 @@ static int	ft_get_tkns(t_shell *sh, char *line, t_token **tks, t_tk_ops *ops)
 			continue ;
 		}
 		line += tk.len;
-		tkn_str = ft_strdup(tk.tkn);
-		if (tk.tkn[0] == '~' && sh->home)
-		{
-			ft_free(tk.tkn);
-			tk.tkn = ft_strjoin(sh->home, tkn_str + 1);
-		}
-		ft_free(tkn_str);
+		ft_home_expand(tk);
 		if (tk.type != TK_BLANK)
-			ft_tk_add_free(tks, ft_tk_new(tk.tkn, tk.type, (int)ft_strlen(tk.tkn)), &tk);
+			ft_tk_add_free(tks, ft_tk_new(tk.tkn, tk.type,
+					(int)ft_strlen(tk.tkn)), &tk);
 		tmp = line;
 	}
 	if (tmp != line)
