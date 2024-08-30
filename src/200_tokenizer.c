@@ -111,7 +111,7 @@ static int	ft_get_tkns(t_shell *sh, char *line, t_token **tks, t_tk_ops *ops)
 			continue ;
 		}
 		line += tk.len;
-		ft_home_expand(tk);
+		ft_home_expand(sh, &tk);
 		if (tk.type != TK_BLANK)
 			ft_tk_add_free(tks, ft_tk_new(tk.tkn, tk.type,
 					(int)ft_strlen(tk.tkn)), &tk);

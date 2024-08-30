@@ -49,15 +49,15 @@ char	*ft_path_combine(char const *s1, char const *s2)
 	return (ret);
 }
 
-void ft_home_expand(t_token *tk)
+void ft_home_expand(t_shell *sh, t_tk_ops *tk)
 {
 	char	*tkn_str;
 
-	tkn_str = ft_strdup(tk.tkn);
-	if (tk.tkn[0] == '~' && sh->home)
+	tkn_str = ft_strdup(tk->tkn);
+	if (tk->tkn[0] == '~' && sh->home)
 	{
-		ft_free(tk.tkn);
-		tk.tkn = ft_strjoin(sh->home, tkn_str + 1);
+		ft_free(tk->tkn);
+		tk->tkn = ft_strjoin(sh->home, tkn_str + 1);
 	}
 	ft_free(tkn_str);
 }
