@@ -51,6 +51,12 @@ int	ft_parser(t_shell *sh, char *line_buf)
 	if (ft_tokenizer(sh, line_buf, &tks))
 		return (ft_free_tks(&tks), FAILURE);
 	ft_free(line_buf);
+	t_token *temp = tks;
+	while (temp)
+	{
+		printf("%s, %d\n", temp->name, temp->type);
+		temp = temp->next;
+	}
 	if (ft_check_syntax(tks))
 		return (ft_free_tks(&tks), FAILURE);
 	sh->n_cmds = ft_count_cmds(tks);
@@ -184,7 +190,8 @@ static int	ft_parse_cmds(t_token *tks, t_cmd *cmds, int i, int j)
 		if (!cmds[i].argv)
 			return (ft_err(MALLOC_ERR, errno), FAILURE);
 		j = 0;
-		while (tks && (tks->type != TK_PIPE) && (tks->type != TK_OR))
+		while (tks && tks->type != TK_PIPE && tks->type != TK_OR
+			&& tks->type != TK_AND && tks->type != TK_PARENTESHIS)
 		{
 			if (tks->type == TK_CMD)
 				cmds[i].argv[j++] = ft_strdup(tks->name);

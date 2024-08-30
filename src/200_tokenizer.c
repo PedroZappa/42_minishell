@@ -40,7 +40,7 @@ static t_tk_ops	ft_get_tk(char *tk, t_tk_ops *ops);
 ///	@note			Used in ft_parser()
 int	ft_tokenizer(t_shell *sh, char *line, t_token **tks)
 {
-	t_tk_ops	ops[17];
+	t_tk_ops	ops[19];
 	t_token		*tk;
 
 	ft_init_ops(ops);
@@ -67,17 +67,17 @@ static void	ft_init_ops(t_tk_ops *ops)
 	ops[5] = (t_tk_ops){">", TK_OUT, 1};
 	ops[6] = (t_tk_ops){"||", TK_OR, 2};
 	ops[7] = (t_tk_ops){"&&", TK_AND, 2};
-	ops[7] = (t_tk_ops){"(", TK_PARENTESHIS, 1};
-	ops[7] = (t_tk_ops){")", TK_PARENTESHIS, 1};
-	ops[8] = (t_tk_ops){"|", TK_PIPE, 1};
-	ops[9] = (t_tk_ops){" ", TK_BLANK, 1};
-	ops[10] = (t_tk_ops){"\n", TK_BLANK, 1};
-	ops[11] = (t_tk_ops){"\v", TK_BLANK, 1};
-	ops[12] = (t_tk_ops){"\t", TK_BLANK, 1};
-	ops[13] = (t_tk_ops){"\r", TK_BLANK, 1};
-	ops[14] = (t_tk_ops){"\f", TK_BLANK, 1};
-	ops[15] = (t_tk_ops){"*", TK_WILD, 1};
-	ops[16] = (t_tk_ops){NULL, 0, 0};
+	ops[8] = (t_tk_ops){"(", TK_PARENTESHIS, 1};
+	ops[9] = (t_tk_ops){")", TK_PARENTESHIS, 1};
+	ops[10] = (t_tk_ops){"|", TK_PIPE, 1};
+	ops[11] = (t_tk_ops){" ", TK_BLANK, 1};
+	ops[12] = (t_tk_ops){"\n", TK_BLANK, 1};
+	ops[13] = (t_tk_ops){"\v", TK_BLANK, 1};
+	ops[14] = (t_tk_ops){"\t", TK_BLANK, 1};
+	ops[15] = (t_tk_ops){"\r", TK_BLANK, 1};
+	ops[16] = (t_tk_ops){"\f", TK_BLANK, 1};
+	ops[17] = (t_tk_ops){"*", TK_WILD, 1};
+	ops[18] = (t_tk_ops){NULL, 0, 0};
 }
 
 /// @brief			Get tokens from line
@@ -106,26 +106,54 @@ static int	ft_get_tkns(t_shell *sh, char *line, t_token **tks, t_tk_ops *ops)
 	while (line && line[0])
 	{
 		tk = ft_get_tk(line, ops);
-		if (tk.tkn != NO_TOKEN)
+		if (tk.tkn == NO_TOKEN)
 		{
-			line += tk.len;
-			tkn_str = ft_strdup(tk.tkn);
-			if (tk.tkn[0] == '~' && sh->home)
-			{
-				ft_free(tk.tkn);
-				tk.tkn = ft_strjoin(sh->home, tkn_str + 1);
-			}
-			ft_free(tkn_str);
-			if (tk.type != TK_BLANK)
-				ft_tk_add_free(tks, ft_tk_new(tk.tkn, tk.type, (int)ft_strlen(tk.tkn)), &tk);
-			tmp = line;
+			line++;
+			continue ;
 		}
-		else
-			++line;
+		line += tk.len;
+		tkn_str = ft_strdup(tk.tkn);
+		if (tk.tkn[0] == '~' && sh->home)
+		{
+			ft_free(tk.tkn);
+			tk.tkn = ft_strjoin(sh->home, tkn_str + 1);
+		}
+		ft_free(tkn_str);
+		if (tk.type != TK_BLANK)
+			ft_tk_add_free(tks, ft_tk_new(tk.tkn, tk.type, (int)ft_strlen(tk.tkn)), &tk);
+		tmp = line;
 	}
 	if (tmp != line)
 		ft_tk_add_free(tks, ft_tk_new(tmp, TK_CMD, (line - tmp)), &tk);
 	return (SUCCESS);
+}
+
+static t_tk_ops	ft_find_ops(char *tk, t_tk_ops *ops)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (tk[i] && !ft_isspace(tk[i]) && tk[i] != '\'' && tk[i] != '\"')
+	{
+		j = -1;
+		while (ops != NULL && ops[++j].tkn != NULL)
+		{
+			if (ops[j].tkn && tk[i] == ops[j].tkn[0])
+			{
+				if (i == 0)
+				{
+					if (ft_strnstr(tk, ops[j].tkn, INT_MAX) != NULL)
+						return ((t_tk_ops){ft_strdup(ops[j].tkn),
+							ops[j].type, (size_t)ops[j].len});
+					continue ;
+				}
+				return ((t_tk_ops){ft_substr(tk, 0, (size_t)i), TK_CMD, i});
+			}
+		}
+		i++;
+	}
+	return ((t_tk_ops){ft_substr(tk, 0, (size_t)i), TK_CMD, i});
 }
 
 /// @brief			Find matching token operation
@@ -139,48 +167,27 @@ static t_tk_ops	ft_get_tk(char *tk, t_tk_ops *ops)
 {
 	t_tk_ops	ret;
 	int			i;
+	char		c;
 
 	ret = (t_tk_ops){NULL, TK_CMD, 0};
 	i = 0;
-	if (!ft_isspace(tk[0]))
-	{
-		if (tk[0] == '\"')
-		{
-			++i;
-			while (tk[i] && (tk[i] != '\"'))
-				++i;
-			if (tk[i] == '\"')
-				++i;
-			ret = (t_tk_ops){ft_substr(tk, 0, (size_t)i), TK_CMD, i};
-			return (ret);
-		}
-		if (tk[0] == '\'')
-		{
-			++i;
-			while (tk[i] && (tk[i] != '\''))
-				++i;
-			if (tk[i] == '\'')
-				++i;
-			ret = (t_tk_ops){ft_substr(tk, 0, (size_t)i), TK_CMD, i};
-			return (ret);
-		}
-		while (tk[i] && !ft_isspace(tk[i]) && (tk[i] != '\'') && (tk[i] != '\"'))
-			++i;
-		ret = (t_tk_ops){ft_substr(tk, 0, (size_t)i), TK_CMD, i};
-	}
-	else
-		ret = (t_tk_ops){"", TK_BLANK, 1};
+	while (ft_isspace(tk[i]))
+		i++;
+	if (i > 0)
+		return ((t_tk_ops){"", TK_BLANK, i});
 	i = 0;
-	while ((ops != NULL) && (ops[i].tkn != NULL))
+	if (tk[0] == '\"' || tk[0] == '\'')
 	{
-		if (!ft_strncmp(tk, ops[i].tkn, (size_t)ops[i].len))
-		{
-			ret.type = ops[i].type;
-			return (ret);
-		}
-		++i;
+		c = tk[0];
+		i++;
+		while (tk[i] && (tk[i] != c))
+			i++;
+		if (tk[i] == c)
+			i++;
+		ret = (t_tk_ops){ft_substr(tk, 0, (size_t)i), TK_CMD, i};
+		return (ret);
 	}
-	return (ret);
+	return (ft_find_ops(tk, ops));
 }
 
 /// @brief			Check if line contains a matching closing quote

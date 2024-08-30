@@ -75,7 +75,7 @@ void	ft_tk_add(t_token **tk_list, t_token *tk)
 void	ft_tk_add_free(t_token **tk_list, t_token *tk, t_tk_ops *tk_op)
 {
 	ft_tk_add(tk_list, tk);
-	if (tk_op->tkn && (tk_op->type == TK_CMD))
+	if (tk_op->tkn)
 		ft_free(tk_op->tkn);
 }
 
