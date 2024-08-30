@@ -85,12 +85,13 @@ int	ft_parser(t_shell *sh, char *line_buf)
 /// @note		Used in ft_parser()
 static int	ft_check_syntax(t_token *tk)
 {
-	if (tk && (tk->type == TK_PIPE || tk->type == TK_OR))
+	if (tk && (tk->type == TK_PIPE || tk->type == TK_OR || tk->type == TK_AND
+			|| ft_strcmp(tk->name, ")") == 0))
 		return (ft_syntax_err(tk->name, FAILURE));
 	while (tk)
 	{
-		if (tk->type == TK_PIPE || tk->type == TK_OR || tk->type == TK_AND
-			|| ft_strcmp(tk->name, ")") == 0)
+		if (tk->next == NULL && (tk->type == TK_PIPE || tk->type == TK_OR
+			|| tk->type == TK_AND || ft_strcmp(tk->name, "(") == 0))
 			return (ft_syntax_err(tk->name, FAILURE));
 		if (tk->next && ((tk->type == TK_PIPE) && (tk->next->type == TK_PIPE)) \
 			&& ((tk->type == TK_PIPE) || (tk->next->type == TK_OR)) \
@@ -98,8 +99,6 @@ static int	ft_check_syntax(t_token *tk)
 			&& ((tk->type == TK_OR) || (tk->next->type == TK_OR)))
 			return (ft_syntax_err(tk->name, FAILURE));
 		tk = tk->next;
-		// if ((ft_strcmp(tk->name, "cd") == 0) && (tk->next->name[1] == '~'))
-		// 	return (ft_syntax_err(tk->name, FAILURE));
 	}
 	return (SUCCESS);
 }
