@@ -218,10 +218,11 @@ check_ext_func: all		## Check for external functions
 	nm ./$(NAME) | grep "U" | grep -v "__" | tee $(TEMP_PATH)/ext_func.txt
 	@echo "$(YEL)$(_SEP)$(D)"
 
+TEST_NAME = test
 OBJS_TEST = test.o
 test: $(BUILD_PATH) $(LIBFT_ARC) $(OBJS_TEST)
 	@echo "$(YEL)Compiling $(MAG)$(NAME)$(YEL) test version$(D)"
-	$(CC) $(CFLAGS) $(DFLAGS) $(OBJS_TEST) $(INC) $(LIBFT_ARC) $(RFLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(DFLAGS) $(OBJS_TEST) $(INC) $(LIBFT_ARC) $(RFLAGS) -o $(TEST_NAME)
 	@echo "[$(_SUCCESS) compiling $(MAG)$(NAME)$(D) $(YEL)🖔$(D)]"
 
 ##@ Test Rules 🧪

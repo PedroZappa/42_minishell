@@ -224,7 +224,6 @@ typedef struct s_shell
 	char	*hostname;
 	char	*home;
 	char	*user;
-	char	*heredoc;
 	int		exit_status;
 	int		**pipes;
 	int		n_pipes;
