@@ -91,10 +91,14 @@ char	*ft_get_hostname(void)
 	char	*ret;
 
 	fd = open("/etc/hostname", O_RDONLY);
-	if (fd < 0)
-		return (ft_strdup("42"));
-	ret = get_next_line(fd);
-	ret[ft_strlen(ret) - 1] = '\0';
+	if (fd != -1)
+	{
+		ret = get_next_line(fd);
+		ret[ft_strlen(ret) - 1] = '\0';
+	}
+	else
+		ret = ft_strdup("42");
+	close(fd);
 	return (ret);
 }
 /** @} */
