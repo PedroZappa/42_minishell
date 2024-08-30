@@ -419,7 +419,7 @@ char		*ft_path_resolve(char *pwd, char *path);
 /// @file 782_path_utils.c
 char		*ft_path_combine(char const *s1, char const *s2);
 size_t		ft_path_reduced_len(char **elems);
-void 		ft_home_expand(t_shell *sh, t_tk_ops *tk);
+void		ft_home_expand(t_shell *sh, t_tk_ops *tk);
 
 //=============================================================================/
 //	800		Errors & Info													   /

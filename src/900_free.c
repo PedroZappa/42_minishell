@@ -29,7 +29,6 @@ void	ft_free_sh(t_shell *sh)
 		ft_free_arr(sh->envp);
 		ft_free_arr(sh->envt);
 		ft_free_arr(sh->path);
-		// free(sh->heredoc);
 		free(sh->home);
 		free(sh->user);
 		free(sh);

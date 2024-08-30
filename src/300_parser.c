@@ -91,7 +91,7 @@ static int	ft_check_syntax(t_token *tk)
 	while (tk)
 	{
 		if (tk->next == NULL && (tk->type == TK_PIPE || tk->type == TK_OR
-			|| tk->type == TK_AND || ft_strcmp(tk->name, "(") == 0))
+				|| tk->type == TK_AND || ft_strcmp(tk->name, "(") == 0))
 			return (ft_syntax_err(tk->name, FAILURE));
 		if (tk->next && ((tk->type == TK_PIPE) && (tk->next->type == TK_PIPE)) \
 			&& ((tk->type == TK_PIPE) || (tk->next->type == TK_OR)) \

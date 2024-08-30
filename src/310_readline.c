@@ -80,7 +80,9 @@ static char	*ft_build_prompt(t_shell *sh)
 	char	*cwd;
 	char	*pwd;
 
-	temp = ft_strjoin(sh->user, "@42:");
+	ret = ft_strjoin(BGRN, sh->user);
+	temp = ft_strjoin(ret, "@42"BWHT":"BBLU);
+	ft_free(ret);
 	cwd = ft_get_var("PWD", sh->envp, NULL);
 	if (cwd != NULL)
 	{
@@ -89,7 +91,7 @@ static char	*ft_build_prompt(t_shell *sh)
 			temp = ft_strjoin_free(temp, pwd);
 		ft_free(cwd);
 	}
-	ret = ft_strjoin(temp, GRN"$> "NC);
+	ret = ft_strjoin(temp, BWHT"$ "NC);
 	return (ft_free(temp), ret);
 }
 
