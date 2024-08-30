@@ -22,6 +22,7 @@
 
 static char	*ft_build_cwd(t_shell *sh, char *cwd);
 static char	*ft_build_prompt(t_shell *sh);
+static char	*ft_prompt_user(t_shell *sh);
 
 /// @brief			Readline wrapper
 /// @param line_buf	Line buffer
@@ -80,9 +81,7 @@ static char	*ft_build_prompt(t_shell *sh)
 	char	*cwd;
 	char	*pwd;
 
-	ret = ft_strjoin(BGRN, sh->user);
-	temp = ft_strjoin(ret, "@42"BWHT":"BBLU);
-	ft_free(ret);
+	temp = ft_prompt_user(sh);
 	cwd = ft_get_var("PWD", sh->envp, NULL);
 	if (cwd != NULL)
 	{
@@ -93,6 +92,20 @@ static char	*ft_build_prompt(t_shell *sh)
 	}
 	ret = ft_strjoin(temp, BWHT"$ "NC);
 	return (ft_free(temp), ret);
+}
+
+static char	*ft_prompt_user(t_shell *sh)
+{
+	char	*ret;
+	char	*temp;
+
+	temp = ft_strjoin(BGRN, sh->user);
+	ret = ft_strjoin(temp, "@");
+	ft_free(temp);
+	temp = ft_strjoin(ret, sh->hostname);
+	ft_free(ret);
+	ret = ft_strjoin(temp, BWHT":"BBLU);
+	return (ret);
 }
 
 /** @} */

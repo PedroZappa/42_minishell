@@ -45,8 +45,8 @@ int	ft_init(t_shell *sh, char **envp)
 		return (ft_err(ENV_INIT_ERR, errno), FAILURE);
 	sh->home = ft_get_var("HOME", sh->envp, NULL);
 	sh->user = ft_get_var("USER", sh->envp, NULL);
+	sh->hostname = ft_get_hostname();
 	ft_set_var("OLDPWD", NULL, &sh->envp);
-	// sh->heredoc = ft_strdup("");
 	ft_get_termios(STDIN_FILENO, &sh->termios);
 	rl_editing_mode = VI;
 	sh->n_pipes = 0;
@@ -85,23 +85,16 @@ static void	ft_shlvl(t_shell *sh)
 		ft_set_var("SHLVL", "1", &sh->envp);
 }
 
-/** @} */
-
-/// @brief Initialize in & out redirections
-/// @param cmds Pointer to an array of t_cmd structs
-/// @param n_cmds Number of commands in the array
-/// @note		Used in ft_parser()
-void	ft_reset_redir(t_cmd *cmds, int n_cmds)
+char	*ft_get_hostname(void)
 {
-	int	i;
+	int		fd;
+	char	*ret;
 
-	i = -1;
-	while (++i < n_cmds)
-	{
-		cmds[i].in.name = NULL;
-		cmds[i].in.heredoc = NULL;
-		cmds[i].in.flag = -1;
-		cmds[i].out.name = NULL;
-		cmds[i].out.flag = -1;
-	}
+	fd = open("/etc/hostname", O_RDONLY);
+	if (fd < 0)
+		return (ft_strdup("42"));
+	ret = get_next_line(fd);
+	ret[ft_strlen(ret) - 1] = '\0';
+	return (ret);
 }
+/** @} */

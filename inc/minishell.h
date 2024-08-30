@@ -221,6 +221,7 @@ typedef struct s_shell
 	char	**envp;
 	char	**envt;
 	char	**path;
+	char	*hostname;
 	char	*home;
 	char	*user;
 	char	*heredoc;
@@ -241,7 +242,7 @@ int			main(int argc, char **argv, char **envp);
 
 /// @file	010_init.c
 int			ft_init(t_shell *sh, char **envp);
-void		ft_reset_redir(t_cmd *cmd, int n_cmds);
+char		*ft_get_hostname();
 
 //=============================================================================/
 //	100		Termios  														   /
