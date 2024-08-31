@@ -39,6 +39,9 @@ std::pair<std::string, int> Tester::get_minishell_output(const std::string& bash
 	int exit_code = 0;
     std::string output;
     std::string line_read;
+	char hostname[HOST_NAME_MAX];
+    gethostname(hostname, sizeof(hostname));
+    std::string hostname_str = "@" + std::string(hostname) + ":";
     boost::process::opstream in_stream;
 	boost::process::ipstream pipe_stream;
     boost::process::child c(minishell_path,
