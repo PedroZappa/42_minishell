@@ -35,12 +35,12 @@ int	ft_exec_pipeline(t_shell *sh)
 	ft_fork_sigset();
 	ft_pipe_init(sh);
 	if (ft_exec_first(sh) == FAILURE)
-		return (FAILURE);
+		return (ft_free_arr(sh->path), FAILURE);
 	cmd_idx = ft_exec_loop(sh);
 	if (cmd_idx == CMD_FAIL)
-		return (FAILURE);
+		return (ft_free_arr(sh->path), FAILURE);
 	if (ft_exec_last(sh) == FAILURE)
-		return (FAILURE);
+		return (ft_free_arr(sh->path), FAILURE);
 	ft_close_pipes(sh);
 	wait(&g_exit);
 	while (cmd_idx--)
@@ -50,7 +50,7 @@ int	ft_exec_pipeline(t_shell *sh)
 		g_exit = (128 + WTERMSIG(g_exit));
 	else if (WIFEXITED(g_exit))
 		g_exit = WEXITSTATUS(g_exit);
-	return (SUCCESS);
+	return (ft_free_arr(sh->path), SUCCESS);
 }
 
 /// @brief			Execute first command in pipeline
