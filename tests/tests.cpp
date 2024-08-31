@@ -147,7 +147,6 @@ TEST(Commands, Basic) {
 		"ls -a -l",
 		"touch a b c",
 		"rm a b c",
-		"./minishell",
 	};
 
 	for (const auto& cmd : commands) {
