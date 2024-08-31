@@ -153,6 +153,7 @@ typedef struct s_token
 	char			*name;
 	int				len;
 	int				to_del;
+	int				spaced;
 	struct s_token	*next;
 }	t_token;
 
@@ -259,7 +260,7 @@ void		ft_set_termios(int fd, int opts, t_term *termios);
 int			ft_tokenizer(t_shell *sh, char *line, t_token **tks);
 
 /// @file	210_tk_list.c
-t_token		*ft_tk_new(char *line, t_token_type type, int len);
+t_token		*ft_tk_new(char *line, t_token_type type, int len, int spaced);
 void		ft_tk_add(t_token **tk_list, t_token *tks);
 void		ft_tk_add_free(t_token **tk_list, t_token *tk, t_tk_ops *tk_op);
 t_token		*ft_tk_last(t_token *tk);

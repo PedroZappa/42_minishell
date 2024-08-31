@@ -33,7 +33,7 @@
 /// @return			SUCCESS(Pointer to a t_token struct)
 ///	@return			FAILURE(NULL)
 /// @note			Used in ft_get_tkns()
-t_token	*ft_tk_new(char *line, t_token_type type, int len)
+t_token	*ft_tk_new(char *line, t_token_type type, int len, int spaced)
 {
 	t_token	*tk;
 
@@ -43,6 +43,7 @@ t_token	*ft_tk_new(char *line, t_token_type type, int len)
 	tk->name = ft_substr(line, 0, len);
 	tk->type = type;
 	tk->len = len;
+	tk->spaced = spaced;
 	tk->to_del = (tk->name[0] != '\'') || (tk->name[0] != '\"');
 	tk->next = NULL;
 	return (tk);

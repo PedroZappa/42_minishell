@@ -49,6 +49,7 @@ int	ft_tokenizer(t_shell *sh, char *line, t_token **tks)
 	tk = *tks;
 	while (tk)
 	{
+		printf("%s, %d, %d\n", tk->name, tk->type, tk->spaced);
 		tk->name = ft_expander(sh, tk->name);
 		tk = tk->next;
 	}
@@ -99,9 +100,11 @@ static void	ft_init_ops(t_tk_ops *ops)
 static int	ft_get_tkns(t_shell *sh, char *line, t_token **tks, t_tk_ops *ops)
 {
 	char		*tmp;
+	int			spaced;
 	t_tk_ops	tk;
 
 	tmp = line;
+	spaced = 0;
 	while (line && line[0])
 	{
 		tk = ft_get_tk(line, ops);
@@ -114,11 +117,12 @@ static int	ft_get_tkns(t_shell *sh, char *line, t_token **tks, t_tk_ops *ops)
 		ft_home_expand(sh, &tk);
 		if (tk.type != TK_BLANK)
 			ft_tk_add_free(tks, ft_tk_new(tk.tkn, tk.type,
-					(int)ft_strlen(tk.tkn)), &tk);
+					(int)ft_strlen(tk.tkn), spaced), &tk);
 		tmp = line;
+		spaced = tk.type == TK_BLANK;
 	}
 	if (tmp != line)
-		ft_tk_add_free(tks, ft_tk_new(tmp, TK_CMD, (line - tmp)), &tk);
+		ft_tk_add_free(tks, ft_tk_new(tmp, TK_CMD, (line - tmp), 0), &tk);
 	return (SUCCESS);
 }
 
@@ -133,17 +137,14 @@ static t_tk_ops	ft_find_ops(char *tk, t_tk_ops *ops)
 		j = -1;
 		while (ops != NULL && ops[++j].tkn != NULL)
 		{
-			if (ops[j].tkn && tk[i] == ops[j].tkn[0])
-			{
-				if (i == 0)
-				{
-					if (ft_strnstr(tk, ops[j].tkn, INT_MAX) != NULL)
-						return ((t_tk_ops){ft_strdup(ops[j].tkn),
-							ops[j].type, (size_t)ops[j].len});
-					continue ;
-				}
-				return ((t_tk_ops){ft_substr(tk, 0, (size_t)i), TK_CMD, i});
-			}
+			if (ops[j].tkn == NULL || tk[i] != ops[j].tkn[0])
+				continue ;
+			if (i != 0)
+				return ((t_tk_ops){ft_substr(tk, 0, (size_t)i),
+					TK_CMD, i});
+			if (ft_strnstr(tk, ops[j].tkn, INT_MAX) != NULL)
+				return ((t_tk_ops){ft_strdup(ops[j].tkn),
+					ops[j].type, (size_t)ops[j].len});
 		}
 		i++;
 	}
