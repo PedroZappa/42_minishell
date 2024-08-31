@@ -46,7 +46,7 @@ int	ft_execute(t_shell *sh)
 	else if (ft_exec_pipeline(sh))
 		return (FAILURE);
 	ft_set_termios(STDIN_FILENO, TCSAFLUSH, &sh->termios);
-	return (SUCCESS);
+	return (ft_free_arr(sh->path), SUCCESS);
 }
 
 /// @brief			Extract PATH from envp array
