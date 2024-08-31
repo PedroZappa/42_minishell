@@ -30,7 +30,7 @@ void	ft_execve(char **path, char **argv, char **envp)
 {
 	int	execve_err;
 
-	if ((*argv[0] == '.' && *argv[1] == '/') || (*argv[0] == '/'))
+	if ((argv[0][0] == '.' && argv[0][1] == '/') || (argv[0][0] == '/'))
 	{
 		execve_err = execve(*argv, argv, envp);
 		if (execve_err != EXECVE_ERR)
