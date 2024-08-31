@@ -89,12 +89,18 @@ char	*ft_get_hostname(void)
 {
 	int		fd;
 	char	*ret;
+	char	*temp;
 
 	fd = open("/etc/hostname", O_RDONLY);
 	if (fd != -1)
 	{
 		ret = get_next_line(fd);
-		(void)get_next_line(fd);
+		temp = get_next_line(fd);
+		while (temp)
+		{
+			ft_free(temp);
+			temp = get_next_line(fd);
+		}
 		ret[ft_strlen(ret) - 1] = '\0';
 	}
 	else

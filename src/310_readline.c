@@ -99,7 +99,7 @@ static char	*ft_prompt_user(t_shell *sh)
 	char	*ret;
 	char	*temp;
 
-	temp = ft_strjoin(BGRN, sh->user);
+	temp = ft_strjoin(RED, sh->user);
 	ret = ft_strjoin(temp, "@");
 	ft_free(temp);
 	temp = ft_strjoin(ret, sh->hostname);
