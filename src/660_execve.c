@@ -19,7 +19,7 @@
 
 #include "../inc/minishell.h"
 
-int		ft_execve_path(char **path, char **argv, char **envp);
+void	ft_execve_path(char **path, char **argv, char **envp);
 void	ft_stat_path(char *cmd);
 
 /// @brief			Execute command with execve w/ absolute or relative path
@@ -38,13 +38,9 @@ void	ft_execve(char **path, char **argv, char **envp)
 		ft_stat_path(argv[0]);
 		return ;
 	}
-	if (path)
-		execve_err = ft_execve_path(path, argv, envp);
-	if (execve_err == EXECVE_ERR)
-	{
-		ft_cmd_err(argv[0], 1);
-		g_exit = errno;
-	}
+	if (path == NULL)
+		return ;
+	ft_execve_path(path, argv, envp);
 }
 
 void	ft_stat_path(char *cmd)
@@ -66,14 +62,13 @@ void	ft_stat_path(char *cmd)
 		g_exit = 126;
 		return ;
 	}
-
 }
 
 /// @brief			Execute command with relative path
 /// @param path		Pointer to PATH array
 /// @param argv		Pointer to command arguments array
 /// @param envp		Pointer to environment variables array
-int	ft_execve_path(char **path, char **argv, char **envp)
+void	ft_execve_path(char **path, char **argv, char **envp)
 {
 	char	*exec_path;
 	int		execve_err;
@@ -81,7 +76,7 @@ int	ft_execve_path(char **path, char **argv, char **envp)
 
 	i = 0;
 	execve_err = EXECVE_ERR;
-	while (path && execve_err == EXECVE_ERR && path[i])
+	while ((execve_err == EXECVE_ERR) && path[i])
 	{
 		exec_path = ft_strjoin(path[i], *argv);
 		if (!exec_path)
@@ -91,7 +86,11 @@ int	ft_execve_path(char **path, char **argv, char **envp)
 		++i;
 		free(exec_path);
 	}
-	return (execve_err);
+	if (execve_err == EXECVE_ERR)
+	{
+		ft_cmd_err(argv[0], 1);
+		g_exit = errno;
+	}
 }
 
 /** @} */
