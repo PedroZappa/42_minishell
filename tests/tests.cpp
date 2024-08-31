@@ -138,6 +138,115 @@ TEST(Expander, Basic) {
 	leakReport();
 }
 
+// Test Executing Commands
+TEST(Commands, Basic) {
+	Tester shell_test;
+	std::vector<std::string> commands = {
+		"/bin/ls -l",
+		"ls -al",
+		"ls -a -l",
+		"touch a b c",
+		"rm a b c",
+		"./minishell",
+	};
+
+	for (const auto& cmd : commands) {
+		runTest(shell_test, cmd);
+	}
+	leakReport();
+}
+
+TEST(Commands, InDoubleQuotes_Basic) {
+	Tester shell_test;
+	std::vector<std::string> commands = {
+		"\"ls\"",
+		"\"\"ls\"\"",
+		"\"\"\"ls\"\"\"",
+		"\"\"\"\"ls\"\"\"\"",
+		"\"ls -l\"",
+		"\"\"ls -l\"\"",
+		"\"\"\"ls -l\"\"\"",
+		"\"\"\"\"ls -l\"\"\"\"",
+		"ls\" -l\"",
+	};
+
+	for (const auto& cmd : commands) {
+		runTest(shell_test, cmd);
+	}
+	leakReport();
+}
+
+TEST(Commands, InDoubleQuotes_Advanced) {
+	Tester shell_test;
+	std::vector<std::string> commands = {
+		"ls > \"a\"z",
+		"ls | \"a\"z",
+		"ls > \"$USER\"",
+		"ls | \"$USER\"",
+		"ls > \'$USER\'",
+		"ls | \'$USER\'",
+		"echo ls\"\'$USER\'\"",
+		"echo ls\"\"\'$USER\'\"\"z",
+		"echo ls\'\'\"$USER\"\'\'",
+	};
+
+	for (const auto& cmd : commands) {
+		runTest(shell_test, cmd);
+	}
+	leakReport();
+}
+
+TEST(Commands, InSingleQuotes) {
+	Tester shell_test;
+	std::vector<std::string> commands = {
+		"\'ls\'",
+		"\'\'ls\'\'",
+		"\'\'\'ls\'\'\'",
+		"\'\'\'\'ls\'\'\'\'",
+		"\'ls -l\'",
+		"\'\'ls -l\'\'",
+		"\'\'\'ls -l\'\'\'",
+		"\'\'\'\'ls -l\'\'\'\'",
+		"l\'s\'",
+		"c$VAR Makefile (export VAR=at)"
+	};
+
+	for (const auto& cmd : commands) {
+		runTest(shell_test, cmd);
+	}
+	leakReport();
+}
+
+TEST(Commands, WithPipes) {
+	Tester shell_test;
+	std::vector<std::string> commands = {
+		"ls | wc |",
+	};
+
+	for (const auto& cmd : commands) {
+		runTest(shell_test, cmd);
+	}
+	leakReport();
+}
+
+TEST(Commands, WithRedirection) {
+	Tester shell_test;
+	std::vector<std::string> commands = {
+		"ls <",
+		"ls >",
+		"ls < > a",
+		"| ls",
+		"echo $VOID_VAR",
+		"echo $",
+		"cat Makefile | grep vgdb",
+	};
+
+	for (const auto& cmd : commands) {
+		runTest(shell_test, cmd);
+	}
+	leakReport();
+}
+
 // Builtin Tests
 TEST(Builtins, echo) {
     Tester shell_test;
@@ -172,7 +281,12 @@ TEST(Builtins, echo) {
         "echo \"yo $USER\" ",
         "echo \"$USER\"\'$USER\'",
         "echo \"$USER\"\'$USER\'$USER",
-        "echo \"$USER\"$USER\'$USER\'"
+        "echo \"$USER\"$USER\'$USER\'",
+		"echo $\'USER\'",
+		"echo $666HOME",
+		"z.txt",
+		"~~minishell",
+		"l  s",
     };
 
     for (const auto& cmd : commands) {
@@ -216,19 +330,6 @@ TEST(Builtins, Exit) {
 }
 
 
-TEST(Pipes, Basic) {
-	Tester shell_test;
-	std::vector<std::string> commands = {
-		"env | grep USER",
-		"cat .vgdbinit | grep info"
-	};
-
-	for (const auto& cmd : commands) {
-		runTest(shell_test, cmd);
-	}
-	leakReport();
-}
-
 TEST(Redirection, Basic) {
 	Tester shell_test;
 	std::vector<std::string> commands = {
@@ -241,25 +342,16 @@ TEST(Redirection, Basic) {
 	leakReport();
 }
 
-TEST(ExitCodes, Basic) {
+TEST(Pipes, Basic) {
 	Tester shell_test;
 	std::vector<std::string> commands = {
-		"exit 0",
-		"echo 42",
-		"cat 42 > not_executable_file",
-		"cat 42 > not_existing_file",
-		"./not_executable_file",
-		"not_existing_command",
-		"< not_existing_file",
-		"> not_existing_file",
-		">> not_existing_file",
-		"< not_existing_file > not_existing_file2",
-		"< not_existing_file >> not_existing_file2",
-		"| echo 1",
-		"| echo 1 | echo 2",
-		"ls not_existing_file",
-		"ls not_existing_file | echo 42 | cat",
-		"ls not_existing_file | cat > not_executable_file",
+		"env | grep USER",
+		"cat .vgdbinit | grep info",
+		"nocmd | ls",
+		"ls | nocmd",
+		"nonocmd | nocmd",
+		"cat | cat | ls",
+		"ls | grep a | grep k | grep e",
 	};
 
 	for (const auto& cmd : commands) {
