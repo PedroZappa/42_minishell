@@ -105,6 +105,7 @@ static char	*ft_prompt_user(t_shell *sh)
 	temp = ft_strjoin(ret, sh->hostname);
 	ft_free(ret);
 	ret = ft_strjoin(temp, BWHT":"BBLU);
+	ft_free(temp);
 	return (ret);
 }
 

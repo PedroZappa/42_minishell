@@ -241,7 +241,7 @@ int			main(int argc, char **argv, char **envp);
 
 /// @file	010_init.c
 int			ft_init(t_shell *sh, char **envp);
-char		*ft_get_hostname();
+char		*ft_get_hostname(void);
 
 //=============================================================================/
 //	100		Termios  														   /

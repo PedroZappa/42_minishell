@@ -20,8 +20,6 @@
 
 #include "../inc/minishell.h"
 
-static int	ft_exec_check_path(int type, char *cmd);
-
 /// @brief			Check command type
 /// @param cmd		Command name
 /// @return			SUCCESS(cmd type)
@@ -47,26 +45,6 @@ int	ft_exec_check(char *cmd)
 		type = CMD_EXPORT;
 	if (ft_strncmp(cmd, "unset", 6) == SUCCESS)
 		type = CMD_UNSET;
-	type = ft_exec_check_path(type, cmd);
-	return (type);
-}
-
-/// @brief			Check command path
-/// @param type		Command type
-/// @param cmd		Command name
-static int	ft_exec_check_path(int type, char *cmd)
-{
-	int	i;
-
-	i = 0;
-	while (cmd[i])
-	{
-		if (cmd[i] == '/')
-			return (CMD_PATH);
-		if (cmd[i] == ' ')
-			return (type);
-		i++;
-	}
 	return (type);
 }
 

@@ -27,24 +27,16 @@
 /// @note			Used in ft_exec_child()
 void	ft_exec_cmd(t_shell *sh, int id, int i)
 {
-	t_stat	sb;
-
-	memset(&sb, 0, sizeof(t_stat));
-	if (id == CMD_EXEC)
+	if (id != CMD_EXEC)
 	{
-		if (!sh->cmds[i].argv[0][0])
-			return ;
-		if (stat(sh->cmds[i].argv[0], &sb) == 0)
-		{
-			ft_free_sh(sh);
-			exit(CMD_NOT_FOUND);
-		}
-		ft_execve(sh->path, sh->cmds[i].argv, sh->envp);
-		ft_free_sh(sh);
-		exit(SUCCESS);
-	}
-	else
 		ft_exec(sh, id, i);
+		return ;
+	}
+	if (!sh->cmds[i].argv[0][0])
+		return ;
+	ft_execve(sh->path, sh->cmds[i].argv, sh->envp);
+	ft_free_sh(sh);
+	exit(SUCCESS);
 }
 
 /// @brief			Execute one builtin command
@@ -72,8 +64,6 @@ int	ft_exec(t_shell *sh, int cmd, int n)
 		g_exit = ft_export(sh, n);
 	if (cmd == CMD_UNSET)
 		g_exit = ft_unset(sh, n);
-	if (cmd == CMD_PATH)
-		g_exit = ft_path(sh, n);
 	return (SUCCESS);
 }
 

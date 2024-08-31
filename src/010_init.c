@@ -94,6 +94,7 @@ char	*ft_get_hostname(void)
 	if (fd != -1)
 	{
 		ret = get_next_line(fd);
+		(void)get_next_line(fd);
 		ret[ft_strlen(ret) - 1] = '\0';
 	}
 	else

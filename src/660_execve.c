@@ -19,8 +19,8 @@
 
 #include "../inc/minishell.h"
 
-void	ft_execve_abs(char **cmd, char **envp);
-void	ft_execve_path(char **path, char **argv, char **envp);
+int		ft_execve_path(char **path, char **argv, char **envp);
+void	ft_stat_path(char *cmd);
 
 /// @brief			Execute command with execve w/ absolute or relative path
 /// @param path		Pointer to PATH array
@@ -28,28 +28,52 @@ void	ft_execve_path(char **path, char **argv, char **envp);
 /// @param envp		Pointer to environment variables array
 void	ft_execve(char **path, char **argv, char **envp)
 {
-	if ((*argv[0] == '.') || (*argv[0] == '/'))
-		ft_execve_abs(argv, envp);
-	else if (path)
-		ft_execve_path(path, argv, envp);
-	else
+	int	execve_err;
+
+	if ((*argv[0] == '.' && *argv[1] == '/') || (*argv[0] == '/'))
+	{
+		execve_err = execve(*argv, argv, envp);
+		if (execve_err != EXECVE_ERR)
+			return ;
+		ft_stat_path(argv[0]);
+		return ;
+	}
+	if (path)
+		execve_err = ft_execve_path(path, argv, envp);
+	if (execve_err == EXECVE_ERR)
+	{
+		ft_cmd_err(argv[0], 1);
 		g_exit = errno;
+	}
 }
 
-/// @brief			Execute command with absolute path
-/// @param cmd		Pointer to command
-/// @param envp		Pointer to environment variables array
-void	ft_execve_abs(char **argv, char **envp)
+void	ft_stat_path(char *cmd)
 {
-	if (execve(*argv, argv, envp) == EXECVE_ERR)
-		g_exit = errno;
+	t_stat	sb;
+	int		stat_ret;
+
+	memset(&sb, 0, sizeof(t_stat));
+	stat_ret = stat(cmd, &sb);
+	if (stat_ret == -1)
+	{
+		ft_fprintf(STDERR_FILENO, "bash: %s: No such file or directory\n", cmd);
+		g_exit = 127;
+		return ;
+	}
+	if ((sb.st_mode & __S_IFMT) == __S_IFDIR)
+	{
+		ft_fprintf(STDOUT_FILENO, "bash: %s: Is a directory\n", cmd);
+		g_exit = 126;
+		return ;
+	}
+
 }
 
 /// @brief			Execute command with relative path
 /// @param path		Pointer to PATH array
 /// @param argv		Pointer to command arguments array
 /// @param envp		Pointer to environment variables array
-void	ft_execve_path(char **path, char **argv, char **envp)
+int	ft_execve_path(char **path, char **argv, char **envp)
 {
 	char	*exec_path;
 	int		execve_err;
@@ -57,7 +81,7 @@ void	ft_execve_path(char **path, char **argv, char **envp)
 
 	i = 0;
 	execve_err = EXECVE_ERR;
-	while ((execve_err == EXECVE_ERR) && path[i])
+	while (path && execve_err == EXECVE_ERR && path[i])
 	{
 		exec_path = ft_strjoin(path[i], *argv);
 		if (!exec_path)
@@ -67,11 +91,7 @@ void	ft_execve_path(char **path, char **argv, char **envp)
 		++i;
 		free(exec_path);
 	}
-	if (execve_err == EXECVE_ERR)
-	{
-		ft_cmd_err(argv[0], 1);
-		g_exit = errno;
-	}
+	return (execve_err);
 }
 
 /** @} */
