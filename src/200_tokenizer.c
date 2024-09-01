@@ -26,12 +26,6 @@ static t_tk_ops	ft_get_tk(char *tk, t_tk_ops *ops);
 // static int		ft_has_match(char **line);
 
 /// @brief			Tokenizer
-/// @details
-/// - Initializes t_tk_ops array with all supported tokens
-/// - Get tokens from line
-/// - Handle Token Expansion
-/// 	- Expand ~ (HOME)
-/// 	- Expand all other tokens
 /// @param sh		Pointer to a t_shell struct
 /// @param line		Line buffer
 /// @param tks		Pointer to a t_token struct
@@ -84,16 +78,6 @@ static void	ft_init_ops(t_tk_ops *ops)
 }
 
 /// @brief			Get tokens from line
-/// @details
-/// - Stash line in tmp
-/// - Loop through line
-/// 	- Get token data
-/// 	- If the token is part of a command, add it to tokens list
-///		- If a operation token is parsed:
-/// 		- Move pointer to next token
-/// 		- If the token is not a blank, add it to the li	st
-///		- Check if line contains a matching closing quote
-/// - Get last remaining remaining token
 /// @param tks		Pointer to a t_token struct
 /// @param line		Line buffer
 /// @return			SUCCESS(0) on success,
