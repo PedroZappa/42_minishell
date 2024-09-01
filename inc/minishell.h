@@ -378,7 +378,6 @@ int			ft_pwd(t_shell *sh, int n);
 
 /// @file	720_cd.c
 int			ft_cd(t_shell *sh, int cmd_n);
-// static int	ft_chdir(char ***env, char *path);
 
 /// @file	730_env.c
 int			ft_env(t_shell *sh, int n);
@@ -391,8 +390,6 @@ int			ft_echo(t_shell *sh, int n);
 
 /// @file	760_export.c
 int			ft_export(t_shell *sh, int n);
-// static int	ft_export_status(t_shell *sh, int n);
-// static char	**ft_sort_env(char **env, int n);
 
 /// @file	761_export_status.c
 int			ft_export_status(t_shell *sh, int n);
@@ -401,10 +398,9 @@ int			ft_export_status(t_shell *sh, int n);
 int			ft_unset(t_shell *sh, int n);
 
 /// @file	780_path.c 
-int			ft_path(t_shell *sh, int n);
 char		*ft_path_resolve(char *pwd, char *path);
 
-/// @file 782_path_utils.c
+/// @file	781_path_utils.c
 char		*ft_path_combine(char const *s1, char const *s2);
 size_t		ft_path_reduced_len(char **elems);
 void		ft_home_expand(t_shell *sh, t_tk_ops *tk);
@@ -435,8 +431,6 @@ int			ft_free_arr(char **arr);
 int			ft_free_tks(t_token **tk);
 int			ft_free_cmds(t_cmd *cmds, int n_cmds);
 int			ft_free_nocmds(t_cmd *cmds, int n_cmds, t_token **tks);
-
-void		ft_free_any(void *ptr);
 
 #endif
 

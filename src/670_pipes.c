@@ -80,7 +80,9 @@ void	ft_close_pipes(t_shell *sh)
 			continue ;
 		close(sh->pipes[i][0]);
 		close(sh->pipes[i][1]);
-		ft_free_any(sh->pipes[i]);
+		free(sh->pipes[i]);
+		sh->pipes[i] = NULL;
 	}
-	ft_free_any(sh->pipes);
+	free(sh->pipes);
+	sh->pipes = NULL;
 }
