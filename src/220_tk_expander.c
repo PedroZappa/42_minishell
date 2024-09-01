@@ -28,110 +28,127 @@
 /// @return			Expanded token string
 char	*ft_expander(t_shell *sh, char *tk_str)
 {
-	char	**sub_tkns;
-	char	*ret;
-	int		curr_tk;
 	int		i;
+	int		j;
+	char	*ret;
+	char	*temp;
 
-	sub_tkns = NULL;
-	sub_tkns = ft_expander_init(tk_str);
 	i = 0;
-	curr_tk = 0;
+	j = 0;
+	ret = ft_strdup("");
 	while (tk_str[i])
 	{
+		if (tk_str[i] == '\'')
+		{
+			ret = ft_strjoin_free(ret, ft_substr(tk_str, j, i - j));
+			temp = ft_expand_squote(tk_str + i);
+			i++;
+			while (tk_str[i] && tk_str[i] != '\'')
+				i++;
+			ret = ft_strjoin_free(ret, temp);
+			j = i;
+			continue ;
+		}
+		if (tk_str[i] == '\"')
+		{
+			ret = ft_strjoin_free(ret, ft_substr(tk_str, j, i - j));
+			temp = ft_expand_dquote(sh, tk_str + i);
+			i++;
+			while (tk_str[i] && tk_str[i] != '\"')
+				i++;
+			ret = ft_strjoin_free(ret, temp);
+			j = i;
+			continue ;
+		}
 		if (tk_str[i] == '$')
 		{
-			sub_tkns[curr_tk] = ft_expand_dollar(tk_str, &i);
-			++curr_tk;
+			ret = ft_strjoin_free(ret, ft_substr(tk_str, j, i - j));
+			temp = ft_expand_dollar(sh, tk_str + i);
+			i++;
+			while (tk_str[i] && ft_check_alnum(tk_str[i]))
+				i++;
+			ret = ft_strjoin_free(ret, temp);
+			j = i;
+			continue ;
 		}
-		else if (tk_str[i] == '\'')
-			ft_expand_squote(&sub_tkns, tk_str, &i, &curr_tk);
-		else if (tk_str[i] == '\"')
-			ft_expand_dquote(&sub_tkns, tk_str, &i, &curr_tk);
-		else
-			ft_expand_other(&sub_tkns, tk_str, &i, &curr_tk);
+		i++;
 	}
-	sub_tkns[curr_tk] = NULL;
-	ret = ft_expand_var(sh, &sub_tkns);
-	return (free(sub_tkns), free(tk_str), ret);
+	ret = ft_strjoin_free(ret, ft_substr(tk_str, j, i - j));
+	return (ft_free(tk_str), ret);
 }
 
 /// @brief		Dollar sign expansion
 /// @param tkn	Token string
 /// @param i	Reference to index
 /// @return		Expanded token
-char	*ft_expand_dollar(char *tkn, int *i)
+char	*ft_expand_dollar(t_shell *sh, char *tkn)
 {
-	int		tkn_start;
-	int		tkn_len;
+	int		i;
 	char	*ret;
 
-	tkn_start = *i;
-	++(*i);
-	if (tkn[*i] && (ft_check_alpha(tkn[*i]) == SUCCESS))
-		while (tkn[*i] && (ft_check_alnum(tkn[*i]) == SUCCESS))
-			++(*i);
-	else if ((tkn[*i] != '\'') && (tkn[*i] != '\"') && (tkn[*i] != '\0'))
-		++(*i);
-	tkn_len = (*i - tkn_start);
-	ret = ft_substr(tkn, tkn_start, tkn_len);
+	i = 1;
+	if (tkn[i] && (ft_check_alpha(tkn[i]) == SUCCESS))
+	{
+		while (tkn[i] && (ft_check_alnum(tkn[i]) == SUCCESS))
+			i++;
+	}
+	else
+		return (ft_strdup("$"));
+	if (tkn[i] != '\0')
+		return (NULL);
+	ret = ft_fill_var(sh, tkn);
+	if (ret == NULL)
+		ret = ft_strdup("");
 	return (ret);
 }
 
-void	ft_expand_squote(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
+char	*ft_expand_squote(char *tkn)
 {
-	int	tkn_start;
-	int	tkn_len;
+	int		i;
+	char	*ret;
 
-	tkn_start = *i;
-	++(*i);
-	while (tkn[*i] && (tkn[*i] != '\'') && (tkn[*i] != '\"'))
-		++(*i);
-	++(*i);
-	tkn_len = (*i - tkn_start);
-	(*sub_tkns)[(*curr_tk)++] = ft_substr(tkn, tkn_start, tkn_len);
+	i = 1;
+	while (tkn[i] && tkn[i] != '\'')
+		i++;
+	if (tkn[i] != '\'')
+		return (NULL);
+	ret = ft_substr(tkn, 1, i - 1);
+	return (ret);
 }
 
-void	ft_expand_dquote(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
+char	*ft_expand_dquote(t_shell *sh, char *tkn)
 {
-	int	start;
+	int		i;
+	int		j;
+	char	*ret;
+	char	*temp;
 
-	++(*i);
-	start = *i;
-	while (tkn[*i] && (tkn[*i] != '\"'))
+	i = 1;
+	j = 1;
+	ret = ft_strdup("");
+	while (tkn[i] && (tkn[i] != '\"'))
 	{
-		if (tkn[*i] == '$')
+		if (tkn[i] == '$')
 		{
-			if (*i > start)
-				(*sub_tkns)[(*curr_tk)++] = ft_substr(tkn, start, (*i - start));
-			(*sub_tkns)[(*curr_tk)++] = ft_expand_dollar(tkn, i);
-			start = *i;
+			ret = ft_strjoin_free(ret, ft_substr(tkn, j, i - j));
+			j = i + 1;
+			if (tkn[j] && (ft_check_alpha(tkn[j]) == SUCCESS))
+				while (tkn[j] && (ft_check_alnum(tkn[j]) == SUCCESS))
+					j++;
+			temp = ft_expand_dollar(sh, ft_substr(tkn, i, j - i));
+			ret = ft_strjoin_free(ret, temp);
+			i = j;
+			continue ;
 		}
-		else
-			++(*i);
+		i++;
 	}
-	if (*i > start)
-		(*sub_tkns)[(*curr_tk)++] = ft_substr(tkn, start, (*i - start));
-	++(*i);
-}
-
-/// @brief			Save unexpanded token
-/// @param sub_tkns	Pointer to array of sub-tokens
-/// @param tkn		Token string
-/// @param i		Reference to index
-/// @param curr_tk	Current token
-void	ft_expand_other(char ***sub_tkns, char *tkn, int *i, int *curr_tk)
-{
-	int	tkn_start;
-	int	tkn_len;
-
-	tkn_start = *i;
-	(*i)++;
-	while (tkn[*i] && (tkn[*i] != '$')
-		&& (tkn[*i] != '\'') && (tkn[*i] != '\"'))
-		++(*i);
-	tkn_len = (*i - tkn_start);
-	(*sub_tkns)[(*curr_tk)++] = ft_substr(tkn, tkn_start, tkn_len);
+	ret = ft_strjoin_free(ret, ft_substr(tkn, j, i - j));
+	if (tkn[i] != '\"')
+	{
+		ft_free(ret);
+		return (NULL);
+	}
+	return (ret);
 }
 
 /** @} */

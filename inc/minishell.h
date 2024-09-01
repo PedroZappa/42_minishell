@@ -117,7 +117,8 @@ typedef enum e_token_type
 	TK_OR,
 	TK_AND,
 	TK_WILD,
-	TK_PARENTESHIS
+	TK_PARENTESHIS,
+	TK_DOLLAR
 }	t_token_type;
 
 typedef enum e_cmd_type
@@ -266,24 +267,14 @@ t_token		*ft_tk_last(t_token *tk);
 
 /// @file	220_tk_expander.c
 char		*ft_expander(t_shell *sh, char *str);
-char		*ft_expand_dollar(char *tkn, int *i);
-void		ft_expand_squote(char ***sub_tkns, char *tkn, int *i, int *curr_tk);
-void		ft_expand_dquote(char ***sub_tkns, char *tkn, int *i, int *curr_tk);
-void		ft_expand_other(char ***sub_tkns, char *tkn, int *i, int *curr_tk);
-
-/// @file	230_tk_expander_check.c
-char		**ft_expander_init(char *tkns);
-// static void	ft_expand_check_dollar(char *tkn, int *i);
-// static void	ft_expand_check_squote(char *tkn, int *i);
-// static void	ft_expand_check_dquote(char *tkn, int *n_tkns, int *i);
-// static void	ft_expand_check_other(char *tkn, int *i);
-
-/// @file	240_tk_expander_var.c
-char		*ft_expand_var(t_shell *sh, char ***sub_tkns);
+char		*ft_expand_dollar(t_shell *sh, char *tkn);
+char		*ft_expand_squote(char *tkn);
+char		*ft_expand_dquote(t_shell *sh, char *tkn);
 
 /// @file	250_tk_expander_utils.c
 int			ft_check_alpha(char c);
 int			ft_check_alnum(char c);
+char		*ft_fill_var(t_shell *sh, char *tkn);
 
 /// @file	260_tk_rm_blanks.c
 void		ft_rm_blank_tks(t_token **tk_list);

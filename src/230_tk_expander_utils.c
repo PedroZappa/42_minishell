@@ -41,4 +41,28 @@ int	ft_check_alnum(char c)
 	return (FAILURE);
 }
 
+/// @brief			Fill expanded variable
+/// @details
+/// Conditionally extract variable
+/// - If first character is a letter or _ get var from env
+/// - If it is ?, get exit code
+/// - Else, return the string
+/// @param sh		Pointer to a t_shell struct
+/// @param tkn		Token string
+char	*ft_fill_var(t_shell *sh, char *tkn)
+{
+	char	*var;
+	int		i;
+
+	i = 1;
+	var = NULL;
+	if (ft_check_alpha(tkn[i]) == SUCCESS)
+		var = ft_get_var((tkn + 1), sh->envp, sh->envt);
+	else if (tkn[i] == '?')
+		var = ft_itoa(WEXITSTATUS(g_exit));
+	else
+		var = ft_strdup(tkn);
+	return (var);
+}
+
 /** @} */

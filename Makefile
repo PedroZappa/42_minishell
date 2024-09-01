@@ -53,10 +53,7 @@ FILES			+= 100_termios.c
 FILES			+= 200_tokenizer.c
 FILES			+= 210_tk_list.c
 FILES			+= 220_tk_expander.c
-FILES			+= 230_tk_expander_init.c
-FILES			+= 240_tk_expander_var.c
-FILES			+= 250_tk_expander_utils.c
-FILES			+= 260_tk_rm_blank.c
+FILES			+= 230_tk_expander_utils.c
 FILES			+= 300_parser.c
 FILES			+= 310_readline.c
 FILES			+= 400_signal.c
@@ -223,6 +220,10 @@ test: $(BUILD_PATH) $(LIBFT_ARC) $(OBJS_TEST)
 	@echo "$(YEL)Compiling $(MAG)$(NAME)$(YEL) test version$(D)"
 	$(CC) $(CFLAGS) $(DFLAGS) $(OBJS_TEST) $(INC) $(LIBFT_ARC) $(RFLAGS) -o $(TEST_NAME)
 	@echo "[$(_SUCCESS) compiling $(MAG)$(NAME)$(D) $(YEL)🖔$(D)]"
+
+%.o: %.c
+	@echo -n "$(MAG)█$(D)"
+	$(CC) $(CFLAGS) $(DFLAGS) -MMD -MP -c $< -o $@
 
 ##@ Test Rules 🧪
 

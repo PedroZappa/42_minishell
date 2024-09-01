@@ -51,12 +51,6 @@ int	ft_parser(t_shell *sh, char *line_buf)
 	if (ft_tokenizer(sh, line_buf, &tks))
 		return (ft_free_tks(&tks), FAILURE);
 	ft_free(line_buf);
-	/*t_token *temp = tks;
-	while (temp)
-	{
-		printf("%s, %d\n", temp->name, temp->type);
-		temp = temp->next;
-	}*/
 	if (ft_check_syntax(tks))
 		return (ft_free_tks(&tks), FAILURE);
 	sh->n_cmds = ft_count_cmds(tks);

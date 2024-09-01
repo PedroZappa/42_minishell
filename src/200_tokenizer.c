@@ -49,7 +49,10 @@ int	ft_tokenizer(t_shell *sh, char *line, t_token **tks)
 	tk = *tks;
 	while (tk)
 	{
-		tk->name = ft_expander(sh, tk->name);
+		printf("%s -> ", tk->name);
+		//if (tk->type != TK_BLANK)
+		//	tk->name = ft_expander(sh, tk->name);
+		printf("%s | %d\n", tk->name, tk->type);
 		tk = tk->next;
 	}
 	return (SUCCESS);
@@ -77,7 +80,7 @@ static void	ft_init_ops(t_tk_ops *ops)
 	ops[15] = (t_tk_ops){"\r", TK_BLANK, 1};
 	ops[16] = (t_tk_ops){"\f", TK_BLANK, 1};
 	ops[17] = (t_tk_ops){"*", TK_WILD, 1};
-	ops[18] = (t_tk_ops){NULL, 0, 0};
+	ops[17] = (t_tk_ops){NULL, 0, 0};
 }
 
 /// @brief			Get tokens from line
@@ -114,7 +117,7 @@ static int	ft_get_tkns(t_shell *sh, char *line, t_token **tks, t_tk_ops *ops)
 		ft_home_expand(sh, &tk);
 		if (tk.type != TK_BLANK)
 			ft_tk_add_free(tks, ft_tk_new(tk.tkn, tk.type,
-					(int)ft_strlen(tk.tkn)), &tk);
+				(int)ft_strlen(tk.tkn)), &tk);
 		tmp = line;
 	}
 	if (tmp != line)
@@ -128,7 +131,7 @@ static t_tk_ops	ft_find_ops(char *tk, t_tk_ops *ops)
 	int	j;
 
 	i = 0;
-	while (tk[i] && !ft_isspace(tk[i]) && tk[i] != '\'' && tk[i] != '\"')
+	while (tk[i] && !ft_isspace(tk[i]))
 	{
 		j = -1;
 		while (ops != NULL && ops[++j].tkn != NULL)
@@ -159,28 +162,13 @@ static t_tk_ops	ft_find_ops(char *tk, t_tk_ops *ops)
 /// @note			Used in ft_get_tkns()
 static t_tk_ops	ft_get_tk(char *tk, t_tk_ops *ops)
 {
-	t_tk_ops	ret;
 	int			i;
-	char		c;
 
-	ret = (t_tk_ops){NULL, TK_CMD, 0};
 	i = 0;
 	while (ft_isspace(tk[i]))
 		i++;
 	if (i > 0)
 		return ((t_tk_ops){"", TK_BLANK, i});
-	i = 0;
-	if (tk[0] == '\"' || tk[0] == '\'')
-	{
-		c = tk[0];
-		i++;
-		while (tk[i] && (tk[i] != c))
-			i++;
-		if (tk[i] == c)
-			i++;
-		ret = (t_tk_ops){ft_substr(tk, 0, (size_t)i), TK_CMD, i};
-		return (ret);
-	}
 	return (ft_find_ops(tk, ops));
 }
 
