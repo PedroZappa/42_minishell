@@ -88,6 +88,8 @@ char	*ft_expand_dollar(t_shell *sh, char *tkn, int *i)
 		while (tkn[*i] && (ft_check_alnum(tkn[*i]) == 0))
 			*i += 1;
 	}
+	else if (tkn[*i] == '?')
+		*i += 1;
 	else
 		return (ft_strdup("$"));
 	temp = ft_substr(tkn, j, *i - j);
