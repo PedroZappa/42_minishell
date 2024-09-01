@@ -89,7 +89,7 @@ static int	ft_check_syntax(t_token *tk)
 			return (ft_syntax_err(tk->name, FAILURE));
 		if (tk->next && ((tk->type == TK_PIPE) && (tk->next->type == TK_PIPE)) \
 			&& ((tk->type == TK_PIPE) || (tk->next->type == TK_OR)) \
-			&& ((tk->type == TK_OR) || (tk->next->type == TK_PIPE)) \
+			&& ((tk->type == TK_OR)) \
 			&& ((tk->type == TK_OR) || (tk->next->type == TK_OR)))
 			return (ft_syntax_err(tk->name, FAILURE));
 		tk = tk->next;
