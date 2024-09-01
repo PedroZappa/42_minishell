@@ -24,10 +24,6 @@ static int	ft_sh_loop(t_shell *sh);
 int	g_exit;
 
 /// @brief		Minishell main function.
-/// @details
-/// - Init Env Variables
-/// - Init Termios Interface
-/// - Enter Minishell loop;
 /// @param argc	Number of arguments.
 /// @param argv	Array of arguments.
 /// @param envp	Array of environment variables.
@@ -50,10 +46,6 @@ int	main(int argc, char **argv, char **envp)
 }
 
 /// @brief			Minishell loop
-/// @details
-/// - Setup signal handler
-/// - Call parser
-/// - Execute commands
 /// @param sh		Pointer to a t_shell struct
 /// @return			SUCCESS(status)
 /// @note			Used in main()

@@ -23,14 +23,6 @@
 static void	ft_shlvl(t_shell *sh);
 
 /// @brief		Initialize minishell
-/// @details
-///	- Allocate memory for minishell
-///	- Initialize envp (primary env)
-///	- Alloc envt (temporary env)
-///	- Get HOME var
-///	- Initialize heredoc
-///	- Get snapshot of termios interface state
-///	- Set readline() editing mode to VI
 /// @param sh	Pointer to a t_shell struct
 /// @param envp	Pointer to environment variables
 /// @return		SUCCESS(0)
@@ -85,6 +77,9 @@ static void	ft_shlvl(t_shell *sh)
 		ft_set_var("SHLVL", "1", &sh->envp);
 }
 
+/// @brief		Get hostname
+/// @return		SUCCESS(hostname)
+/// @note		Used in ft_init()
 char	*ft_get_hostname(void)
 {
 	int		fd;

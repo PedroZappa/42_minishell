@@ -20,9 +20,6 @@
 #include "../inc/minishell.h"
 
 /// @brief			Get Termios Interface State of a given fd
-/// @details
-/// - Get Termios Attribute
-///	- Handle Failure
 /// @param fd
 /// @param termios	Pointer to Termios Interface structure
 /// @note			Used in ft_init()
@@ -36,10 +33,8 @@ void	ft_get_termios(int fd, t_term *termios)
 }
 
 /// @brief			Set Termios Interface
-/// @details
-/// - Get Termios Attribute
-///	- Handle Failure
-/// @param fd
+/// @param fd		File descriptor
+/// @param opts		Termios Interface options
 /// @param termios	Pointer to Termios Interface structure
 /// @note			Used in ft_execute()
 void	ft_set_termios(int fd, int opts, t_term *termios)

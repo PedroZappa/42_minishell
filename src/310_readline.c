@@ -94,6 +94,10 @@ static char	*ft_build_prompt(t_shell *sh)
 	return (ft_free(temp), ret);
 }
 
+/// @brief			Build bash prompt
+/// @param sh		Pointer to a t_shell struct
+/// @return			SUCCESS(Bash prompt)
+/// @note			Used in ft_readline()
 static char	*ft_prompt_user(t_shell *sh)
 {
 	char	*ret;

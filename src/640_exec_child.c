@@ -19,6 +19,8 @@
 
 #include "../inc/minishell.h"
 
+/// @brief			Execute first command in pipeline
+/// @param sh		Pointer to a t_shell struct
 void	ft_exec_child_first(t_shell *sh)
 {
 	if (sh->n_pipes != 0)
@@ -34,6 +36,9 @@ void	ft_exec_child_first(t_shell *sh)
 	exit(SUCCESS);
 }
 
+/// @brief			Execute command in pipeline
+/// @param sh		Pointer to a t_shell struct
+/// @param i		Command index
 void	ft_exec_child_i(t_shell *sh, int i)
 {
 	ft_pipe_setter(sh, i - 1, STDIN_FILENO);
@@ -49,6 +54,9 @@ void	ft_exec_child_i(t_shell *sh, int i)
 	exit(SUCCESS);
 }
 
+/// @brief			Execute last command in pipeline
+/// @param sh		Pointer to a t_shell struct
+/// @param i		Command index
 void	ft_exec_child_last(t_shell *sh, int i)
 {
 	ft_pipe_setter(sh, i - 1, STDIN_FILENO);

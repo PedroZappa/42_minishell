@@ -20,9 +20,6 @@
 #include "../inc/minishell.h"
 
 /// @brief			Execute one command
-/// @details
-/// - Check command type
-/// - Execute command
 /// @param sh		Pointer to a t_shell struct
 /// @return			SUCCESS(0)
 ///	@return			FAILURE(1)
@@ -49,15 +46,6 @@ int	ft_exec_one(t_shell *sh)
 }
 
 /// @brief			Execute one command as a child process
-/// @details
-/// - Set signal handlers in parent process
-/// - Fork a child process:
-///		- Set signal handlers
-///		- Execute command
-///	- Wait for child process
-///	- Handle exit status
-///		- If program was terminated by signal: Return the signal number
-///		- Else check if program exited: Return exit status
 /// @param sh		Pointer to a t_shell struct
 /// @return			SUCCESS(0)
 /// @return			FAILURE(1)

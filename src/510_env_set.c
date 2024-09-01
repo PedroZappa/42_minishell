@@ -23,12 +23,6 @@
 static char	**ft_env_add_var(char **env, char *new_var);
 
 /// @brief			Set environment variable
-/// @details		Build new variable string
-///					- If val exists	concatenate "=" and val to var;
-///					- else just copy var;
-///					- Get var's index in env
-///					- If var is not found in env, add it
-///					- Else, if it exists and has a new value, update it
 /// @param var		Pointer to variable to be set
 /// @param val		Pointer to value to be set
 /// @param env		Pointer to array of environment variables
@@ -58,11 +52,6 @@ int	ft_set_var(char *var, char *val, char ***env)
 }
 
 /// @brief			Extract variable index from env
-/// @details		- Check if env is NULL
-/// 				- Get variable to search for length
-///					- Loop through environment variables
-///						- If variable is found and it ends with = or \0,
-///						return its index,
 /// @param var		Pointer to variable string
 /// @param env		Pointer to array of environment variables
 /// @return			SUCCESS(var index in env)
@@ -87,14 +76,6 @@ int	ft_var_from_env(char *var, char **env)
 }
 
 /// @brief			Add new variable to env
-/// @details		- Loop through old environment variables
-///					- Count variables in old env
-///					- Increment var count by 2 to account for new var & NULL
-///					- Allocate new array
-///					- Copy old env to new array
-///					- Add new var
-///					- NULL terminal new array
-///					- Free old env
 /// @param env		Pointer to array of environment variables
 /// @param new_var	Pointer to new variable to add to env
 /// @return			SUCCESS(Pointer to new env array)
@@ -124,10 +105,6 @@ static char	**ft_env_add_var(char **env, char *new_var)
 }
 
 /// @brief			Delete variable from env and return new env
-/// @details		
-/// - Loop through old environment variables and count them
-/// - Allocate space
-/// - Copy old env to new array
 /// @param env		Pointer to array of environment variables
 /// @param to_del	Pointer to variable to delete
 ///	@return			SUCCESS(Pointer to new env array)

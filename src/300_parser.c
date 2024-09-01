@@ -25,21 +25,9 @@ static void	ft_count_args(t_shell *sh, t_token *tks);
 static int	ft_parse_cmds(t_token *tks, t_cmd *cmds, int i, int j);
 
 /// @brief			Parser
-/// @details
-/// - Call readline to display prompt
-///	- Add line to history
-///	- Call tokenizer
-///	- Handle case where tk expands to a blank
-///	- Validate syntax
-///	- Count commands
-///	- Alloc cmds array
-///	- Count cmd's arguments
-///	- Initialize cmd's list
-///	- Parse cmds
-///	- Free tks
 /// @param sh		Pointer to a t_shell struct
 /// @param line_buf	Line buffer
-/// @return			SUCCESS(0
+/// @return			SUCCESS(0)
 /// @return			FAILURE(1)
 ///	@note			Used in ft_sh_loop()
 int	ft_parser(t_shell *sh, char *line_buf)
@@ -119,17 +107,6 @@ static int	ft_count_cmds(t_token *tks)
 }
 
 /// @brief			Count a given command's arguments
-/// @details
-/// - For each parsed command:
-///		- Initialize argument counter
-///		- Save current token in prev
-///		- Loop through token list to get the current command arguments
-///			- If token is not an input or output redirection
-///				- Increment argument counter
-///			- Save current token in prev
-///			- Move to next token
-///		- Move to next token
-///		- Increment command counter
 /// @param sh		Pointer to a t_shell struct
 /// @param tks		Pointer to a t_token struct
 /// @note			Used in ft_parser()
@@ -158,18 +135,6 @@ static void	ft_count_args(t_shell *sh, t_token *tks)
 }
 
 /// @brief			Parse commands from token list
-/// @details
-/// - For each token in the list
-///		- Allocate memory for argv
-///		- While current token is not TK_PIPE or TK_OR (Gets one command)
-///			- If current token is a command
-///				- Save command in argv
-///			- If current token is not Null
-///				- Move to next token
-///		- If current token exists
-///			- Move to next token
-///		- Set last argument in argv to NULL
-///		- Move to next command
 /// @param tks		Pointer to a t_token struct list
 /// @param cmds		Pointer to an array of t_cmd structs
 /// @param i		Count of commands (Norminette made me do this)

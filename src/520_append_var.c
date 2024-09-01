@@ -41,13 +41,6 @@ int	ft_append(t_shell *sh, int n, int i)
 }
 
 /// @brief			Append value to variable key
-/// @details
-/// - Get position of '+' in variable
-/// - Get length of variable key
-/// - Get substring with variable key
-///	- Get pointer to value after '=' 
-///	- Get pointer to old value
-///	- Build new variable string
 /// @param sh		Pointer to a t_shell struct
 /// @param n		Command index
 /// @param i		Argument index to start from

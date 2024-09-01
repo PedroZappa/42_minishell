@@ -25,9 +25,6 @@ static char	*ft_extract_var(char *select, char **env);
 /// @param env		Pointer to environment variables array
 /// @return			SUCCESS(Pointer to new env array)
 ///					FAILURE(NULL)
-/// @details		- Count variables
-///					- Allocate memory
-///					- Copy variables
 /// @note			Used in ft_init()
 char	**ft_init_env(char **env)
 {
@@ -75,10 +72,6 @@ char	*ft_get_var(char *var, char **envp, char**envt)
 /// @param env		Pointer to array of environment variables
 /// @return			SUCCESS(requested var)
 ///					FAILURE(NULL)
-/// @detail			- Check input for NULL
-///					- Format select string
-///					- Take its length
-///					- If selectec var is found set it to var and break
 /// @note			Used in ft_get_var()
 static char	*ft_extract_var(char *select, char **env)
 {
@@ -105,11 +98,6 @@ static char	*ft_extract_var(char *select, char **env)
 }
 
 /// @brief			Find variable index in env
-/// @details		- Check if env is NULL
-/// 				- Get length of variable to search for
-///					- Loop through environment variables
-///						- If variable is found and it ends with = or \0,
-///						return its index,
 /// @param var		Pointer to variable string
 /// @param env		Pointer to array of environment variables
 /// @return			SUCCESS(var index in env)

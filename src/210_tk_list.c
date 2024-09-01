@@ -20,13 +20,6 @@
 #include "../inc/minishell.h"
 
 /// @brief			Create new token
-/// @details
-/// - Allocates memory for a t_token struct
-/// - Stores line in name
-/// - Stores type in type
-/// - Stores len in len
-/// - If first character is not a quote, set to_del to 1
-/// - Set next to NULL (Sentinel value)
 /// @param line		Line buffer
 /// @param type		Token type
 /// @param len		Length of token
@@ -49,8 +42,6 @@ t_token	*ft_tk_new(char *line, t_token_type type, int len)
 }
 
 /// @brief			Add token to list
-/// @details		- Get last token in list
-///					-
 /// @param tk_list	Pointer to a list of t_token structs
 /// @param tk		Pointer to a t_token struct
 /// @note			Used in ft_get_tkns()

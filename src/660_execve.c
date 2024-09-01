@@ -43,6 +43,8 @@ void	ft_execve(char **path, char **argv, char **envp)
 	ft_execve_path(path, argv, envp);
 }
 
+/// @brief			Get stat of a path
+/// @param cmd		Pointer to command
 void	ft_stat_path(char *cmd)
 {
 	t_stat	sb;
