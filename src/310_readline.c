@@ -37,6 +37,7 @@ void	ft_readline(char **line_buf, t_shell *sh)
 	ft_free(prompt);
 	if (*line_buf == NULL)
 		*line_buf = ft_strdup("exit");
+	ft_verify_quotes(line_buf);
 	if (ft_strlen(*line_buf) > 0)
 		add_history(*line_buf);
 }

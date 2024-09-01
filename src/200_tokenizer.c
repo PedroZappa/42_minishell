@@ -19,11 +19,9 @@
 
 #include "../inc/minishell.h"
 
-static void		ft_init_ops(t_tk_ops *ops);
 static int		ft_get_tkns(t_shell *sh, char *line, \
 						t_token **tks, t_tk_ops *ops);
 static t_tk_ops	ft_get_tk(char *tk, t_tk_ops *ops);
-// static int		ft_has_match(char **line);
 
 /// @brief			Tokenizer
 /// @param sh		Pointer to a t_shell struct
@@ -43,38 +41,13 @@ int	ft_tokenizer(t_shell *sh, char *line, t_token **tks)
 	tk = *tks;
 	while (tk)
 	{
-		// printf("%s -> ", tk->name);
+		printf("%s -> ", tk->name);
 		if (tk->type != TK_BLANK)
 			tk->name = ft_expander(sh, tk->name);
-		// printf("%s | %d\n", tk->name, tk->type);
+		printf("%s | %d\n", tk->name, tk->type);
 		tk = tk->next;
 	}
 	return (SUCCESS);
-}
-
-/// @brief			Initialize t_tk_ops array with all supported tokens
-/// @param ops		Pointer to an array of t_tk_ops structs
-static void	ft_init_ops(t_tk_ops *ops)
-{
-	ops[0] = (t_tk_ops){"<<", TK_IN, 2};
-	ops[1] = (t_tk_ops){"<", TK_IN, 1};
-	ops[2] = (t_tk_ops){">>", TK_OUT, 2};
-	ops[3] = (t_tk_ops){">|", TK_OUT, 2};
-	ops[4] = (t_tk_ops){"<>", TK_OUT, 2};
-	ops[5] = (t_tk_ops){">", TK_OUT, 1};
-	ops[6] = (t_tk_ops){"||", TK_OR, 2};
-	ops[7] = (t_tk_ops){"&&", TK_AND, 2};
-	ops[8] = (t_tk_ops){"(", TK_PARENTESHIS, 1};
-	ops[9] = (t_tk_ops){")", TK_PARENTESHIS, 1};
-	ops[10] = (t_tk_ops){"|", TK_PIPE, 1};
-	ops[11] = (t_tk_ops){" ", TK_BLANK, 1};
-	ops[12] = (t_tk_ops){"\n", TK_BLANK, 1};
-	ops[13] = (t_tk_ops){"\v", TK_BLANK, 1};
-	ops[14] = (t_tk_ops){"\t", TK_BLANK, 1};
-	ops[15] = (t_tk_ops){"\r", TK_BLANK, 1};
-	ops[16] = (t_tk_ops){"\f", TK_BLANK, 1};
-	ops[17] = (t_tk_ops){"*", TK_WILD, 1};
-	ops[18] = (t_tk_ops){NULL, 0, 0};
 }
 
 /// @brief			Get tokens from line
@@ -117,7 +90,7 @@ static t_tk_ops	ft_find_ops(char *tk, t_tk_ops *ops)
 
 	i = 0;
 	dq = (tk[i] == '\"') * '\"' + (tk[i] == '\'') * '\'';
-	while (tk[i] && (!ft_isspace(tk[i]) || dq))
+	while (tk[i])
 	{
 		j = -1;
 		while ((ops != NULL) && (ops[++j].tkn != NULL) && (dq == 0))
@@ -132,8 +105,7 @@ static t_tk_ops	ft_find_ops(char *tk, t_tk_ops *ops)
 					ops[j].type, (size_t)ops[j].len});
 		}
 		i++;
-		if ((dq == '\'' && tk[i] == '\'') || (dq == '"' && tk[i] == '"'))
-			dq = (tk[i] == '\"') * '\"' + (tk[i] == '\'') * '\'';
+		dq = ft_get_dq(dq, tk[i]);
 	}
 	return ((t_tk_ops){ft_substr(tk, 0, (size_t)i), TK_CMD, i});
 }

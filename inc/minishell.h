@@ -259,6 +259,10 @@ void		ft_set_termios(int fd, int opts, t_term *termios);
 /// @file	200_tokenizer.c
 int			ft_tokenizer(t_shell *sh, char *line, t_token **tks);
 
+/// @file	201_tokenizer.c
+void		ft_init_ops(t_tk_ops *ops);
+char		ft_get_dq(char dq, char tk);
+
 /// @file	210_tk_list.c
 t_token		*ft_tk_new(char *line, t_token_type type, int len);
 void		ft_tk_add(t_token **tk_list, t_token *tks);
@@ -271,7 +275,7 @@ char		*ft_expand_dollar(t_shell *sh, char *tkn, int *i);
 char		*ft_expand_squote(char *tkn, int *i);
 char		*ft_expand_dquote(t_shell *sh, char *tkn, int *i);
 
-/// @file	230_tk_expander_utils.c
+/// @file	221_tk_expander_utils.c
 int			ft_check_alpha(char c);
 int			ft_check_alnum(char c);
 char		*ft_fill_var(t_shell *sh, char *tkn);
@@ -282,13 +286,13 @@ char		*ft_fill_var(t_shell *sh, char *tkn);
 
 /// @file	300_parser.c
 int			ft_parser(t_shell *sh, char *line_buf);
-/// static int	ft_check_syntax(t_token *tks);
-/// static int	ft_count_cmds(t_token *tks);
-/// static void	ft_count_args(t_shell *sh, t_token *tks);
-/// static int	ft_parse_cmds(t_token *tks, t_cmd *cmds, int i, int j);
 
 /// @file	310_readline.c
 void		ft_readline(char **line_buf, t_shell *sh);
+
+/// @file	311_readline_utils.c
+void		ft_verify_quotes(char **buf);
+char		*ft_compress_list(t_list *list, char delim);
 
 //=============================================================================/
 //	400		Signal  														   /
