@@ -91,8 +91,8 @@ TEST(Parser, Advanced) {
     std::vector<std::string> commands = {
         "echo '$'",
 		"echo ''",
-		"echo '''",
 		"echo ''''",
+		"echo \"\"\"\"",
 		"echo \"'$USER'\"",
 		"echo '\"$USER\"'",
         "echo \"<< EOF\"",
@@ -109,6 +109,19 @@ TEST(Parser, Advanced) {
         "echo '$USER \"$HOME\"'",
         "echo \"$USER 42\" '\"$USER\"'",
         "echo ''\"\"'\"'\"'\"",
+    };
+
+    for (const auto& cmd : commands) {
+        runTest(shell_test, cmd);
+    }
+	leakReport();
+}
+
+TEST(Parser, UnclosedQuotes) {
+    Tester shell_test;
+    std::vector<std::string> commands = {
+		"echo '''",
+		"echo \"\"\"",
     };
 
     for (const auto& cmd : commands) {
