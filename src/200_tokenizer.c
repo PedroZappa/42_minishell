@@ -101,7 +101,7 @@ static int	ft_get_tkns(t_shell *sh, char *line, t_token **tks, t_tk_ops *ops)
 		ft_home_expand(sh, &tk);
 		if (tk.type != TK_BLANK)
 			ft_tk_add_free(tks, ft_tk_new(tk.tkn, tk.type,
-				(int)ft_strlen(tk.tkn)), &tk);
+					(int)ft_strlen(tk.tkn)), &tk);
 		tmp = line;
 	}
 	if (tmp != line)
@@ -111,9 +111,9 @@ static int	ft_get_tkns(t_shell *sh, char *line, t_token **tks, t_tk_ops *ops)
 
 static t_tk_ops	ft_find_ops(char *tk, t_tk_ops *ops)
 {
-	int	i;
-	int	j;
-	char dq;
+	int		i;
+	int		j;
+	char	dq;
 
 	i = 0;
 	dq = (tk[i] == '\"') * '\"' + (tk[i] == '\'') * '\'';
