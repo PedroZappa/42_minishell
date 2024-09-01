@@ -122,7 +122,7 @@ static t_tk_ops	ft_find_ops(char *tk, t_tk_ops *ops)
 		j = -1;
 		while ((ops != NULL) && (ops[++j].tkn != NULL) && (dq == 0))
 		{
-			if (ops[j].tkn && tk[i] == ops[j].tkn[0])
+			if (ops[j].tkn && (tk[i] == ops[j].tkn[0]))
 			{
 				if (i == 0)
 				{
