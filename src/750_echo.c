@@ -36,11 +36,6 @@ int	ft_echo(t_shell *sh, int n)
 	int	i;
 
 	ft_set_var("_", sh->cmds[n].argv[0], &sh->envp);
-	sentinel = '\n';
-	i = -1;
-	while (sh->cmds[n].argv[++i])
-		if (sh->cmds[n].argv[i][0] == '\"')
-			sh->cmds[n].argv[i] = ft_rm_squotes(sh->cmds[n].argv[i]);
 	i = 0;
 	while (sh->cmds[n].argv[++i] && ft_is_nflag(sh->cmds[n].argv[i]))
 		sentinel = '\0';
@@ -49,7 +44,7 @@ int	ft_echo(t_shell *sh, int n)
 	while (sh->cmds[n].argv[i])
 	{
 		ft_putstr_fd(sh->cmds[n].argv[i], STDOUT_FILENO);
-		if (sh->cmds[n].argv[i + 1] && !ft_isspace(sh->cmds[n].argv[i][0]))
+		if (sh->cmds[n].argv[i + 1])
 			write(STDOUT_FILENO, " ", 1);
 		++i;
 	}
