@@ -70,7 +70,9 @@ TEST(Parser, Basic) {
         "echo '${$?}'",
         "echo '$USER'",
         "echo ''",
+		"echo \"\"",
         "echo '$'",
+        "echo \"$\"",
         "echo $USER",
         "echo '$USER'",
         "echo '$USER$USER'",
@@ -89,14 +91,11 @@ TEST(Parser, Basic) {
 TEST(Parser, Advanced) {
     Tester shell_test;
     std::vector<std::string> commands = {
-        "echo '$'",
-		"echo ''",
 		"echo ''''",
 		"echo \"\"\"\"",
 		"echo \"'$USER'\"",
 		"echo '\"$USER\"'",
         "echo \"<< EOF\"",
-        "echo ''''42''",
         "echo $USER '>> file.txt' \"|\"",
         "echo '42 $USER' \">\" file.txt",
         "echo 'echo $v >> file.txt'",
@@ -122,6 +121,8 @@ TEST(Parser, UnclosedQuotes) {
     std::vector<std::string> commands = {
 		"echo '''",
 		"echo \"\"\"",
+        "echo ''''42''",
+        "echo \"\"\"\"42\"\"",
     };
 
     for (const auto& cmd : commands) {
@@ -134,15 +135,59 @@ TEST(Parser, UnclosedQuotes) {
 TEST(Expander, Basic) {
     Tester shell_test;
     std::vector<std::string> commands = {
+		"$ZEDRO_VAR",
+		"ZEDRO_VAR",
         "echo ~",
         "echo ~/",
         "echo $",
         "echo \"$\"",
         "echo $USER",
-        "echo $USER \"$HOME\"",
+    };
+
+    for (const auto& cmd : commands) {
+        runTest(shell_test, cmd);
+    }
+	leakReport();
+}
+
+TEST(Expander, Advanced) {
+	Tester shell_test;
+	std::vector<std::string> commands = {
         "echo $USER$USER",
         "echo $USER'$USER'",
-        "echo '$USER'$USER"
+        "echo '$USER'$USER",
+        "echo $USER \"$HOME\"",
+        "echo \'$USER\'$USER",
+        "echo \'$USER\'\"$USER\"$USER\"$USER\"$USER\"$USER\"$USER\"$USER\"$USER\"$USER",
+	};
+
+	for (const auto& cmd : commands) {
+		runTest(shell_test, cmd);
+	}
+	leakReport();
+}
+
+TEST(Expander, WithPipesRedirects) {
+    Tester shell_test;
+    std::vector<std::string> commands = {
+		"cat < Makefile | grep NAME | grep $",
+		"cat < Makefile | grep $novar NAME",
+		"cat < a.txt | grep $USER",
+    };
+
+    for (const auto& cmd : commands) {
+        runTest(shell_test, cmd);
+    }
+	leakReport();
+}
+TEST(Expander, WithHereDoc) {
+    Tester shell_test;
+    std::vector<std::string> commands = {
+		"cat << $USER",
+		"cat << a $USER",
+		"cat << a '$USER'",
+		"cat << a \"$USER\"",
+		"cat << a $VOID_VAR",
     };
 
     for (const auto& cmd : commands) {
@@ -232,6 +277,7 @@ TEST(Commands, InSingleQuotes) {
 TEST(Commands, WithPipes) {
 	Tester shell_test;
 	std::vector<std::string> commands = {
+		"ls | wc -l",
 		"ls | wc |",
 	};
 
@@ -259,36 +305,58 @@ TEST(Commands, WithRedirection) {
 	leakReport();
 }
 
-// Builtin Tests
-TEST(Builtins, echo) {
+// //
+// BUILTINS
+// //
+TEST(Builtins, echo_basic) {
     Tester shell_test;
     std::vector<std::string> commands = {
         "echo",
-        "echo \'", 
-        "echo -n2 -n hey",
+        "echo ''",
+        "echo \"\"",
+        "echo \'",
+        "echo \"",
+        "echo \"yo\"",
+        "echo 'yo'",
+        "echo 42' '42",
+        "echo 42\" \"42",
+		"echo ~",
+		"echo ~/",
+		"echo ~/696969",
+		"echo ~696969",
         "echo -n yo",
         "echo -n -n -n -n",
         "echo --n yo",
+        "echo -n2 -n yo",
+        "echo --nnnnnnnnnnnnnn",
         "echo -nn yo",
         "echo '-n' yo",
         "echo '-n ' yo",
         "echo '-n  ' yo",
-        "echo 42' '42",
+        "echo \"n\" yo",
+        "echo \"n \" yo",
+        "echo \"n  \" yo",
+    };
+
+    for (const auto& cmd : commands) {
+        runTest(shell_test, cmd);
+    }
+	leakReport();
+}
+
+TEST(Builtins, echo_advanced) {
+    Tester shell_test;
+    std::vector<std::string> commands = {
         "echo you are $USER",
         "echo $USER$USER",
         "echo $USER'$USER'",
+        "echo \"Yo Whirl\"",
+        "echo \"Yo\" dudes & dudettes!",
         "echo \'yo $USER\'",
         "echo \'yo $USER  \'",
-        "echo \'$USER\'$USER",
-        "echo \'$USER\'\"$USER\"$USER\"$USER\"$USER\"$USER\"$USER\"$USER\"$USER\"$USER",
-        "echo \"yo\"",
         "echo \"$USER\"",
         "echo \"yo $USER\"",
         "echo \"yo $USER  \"",
-        "echo \"-n\" yo",
-        "echo \"-n \" yo",
-        "echo \"-n  \" yo",
-        "echo \" -n  \" yo ",
         "echo \"yo $USER\"",
         "echo \"yo $USER\" ",
         "echo \"$USER\"\'$USER\'",
@@ -296,6 +364,18 @@ TEST(Builtins, echo) {
         "echo \"$USER\"$USER\'$USER\'",
 		"echo $\'USER\'",
 		"echo $666HOME",
+		"echo \"ls > a.txt d 'a'\"",
+		"echo \"ls > a.txt d \"a\"\"",
+		"echo \"ls > '$USER' \"a\"\"",
+		"echo '$HOME > ho | me.txt'",
+		"echo | ls",
+		"ls | echo",
+		"nocmd | echo",
+		"echo | nocmd",
+		"echo > a.txt",
+		"echo whatever > a.txt",
+		"echo < void_file",
+		"echo << void_file",
 		"z.txt",
 		"~~minishell",
 		"l  s",
@@ -305,10 +385,11 @@ TEST(Builtins, echo) {
         runTest(shell_test, cmd);
     }
 	leakReport();
+
 }
 
 // Tests cd
-TEST(Builtins, cd) {
+TEST(Builtins, cd_basic) {
 	Tester shell_test;
 	std::vector<std::string> commands = {
 		"cd",
@@ -317,7 +398,10 @@ TEST(Builtins, cd) {
 		"cd /home",
 		"cd -",
 		"cd ..",
-		"cd \"\""
+		"cd \"\"",
+		"cd src",
+		"cd void",
+		"cd a b",
 	};
 
 	for (const auto& cmd : commands) {
@@ -326,13 +410,246 @@ TEST(Builtins, cd) {
 	leakReport();
 }
 
-TEST(Builtins, Exit) {
+TEST(Builtins, cd_advanced) {
+	Tester shell_test;
+	std::vector<std::string> commands = {
+		"cd --",
+		"cd ~*",
+		"cd -*",
+		"cd && cd",
+		"cd ../../../../../..",
+		"cd | ls",
+		"ls | cd",
+		"cd | nocmd",
+		"nocmd | cd",
+		"cd -n | ls",		// invalid option -n
+		"ls | cd -n",		// invalid option -n
+		"cd a b | ls",		// invalid option and ls is executed
+		"ls | cd a b",		// too many arguments
+		"cd > a.txt",		// a.txt is created and cd is executed
+		"cd < a.txt",		// cd is executed
+		"cd < void_file",	// void_file does not exist
+		"cd << a",			// Heredoc opens, written into then cd is executed
+	};
+
+	for (const auto& cmd : commands) {
+		runTest(shell_test, cmd);
+	}
+	leakReport();
+}
+
+// ENV
+TEST(Builtins, env_basic) {
+	Tester shell_test;
+	std::vector<std::string> commands = {
+		"env",
+		"env -z",
+		"env z",
+	};
+
+	for (const auto& cmd : commands) {
+		runTest(shell_test, cmd);
+	}
+	leakReport();
+}
+
+TEST(Builtins, env_withPipes) {
+	Tester shell_test;
+	std::vector<std::string> commands = {
+		"env | wc -l",
+		"env | grep PATH",
+		"env | grep VOID_VAR",
+		"ls | env",
+		"env | ls",
+		"nocmd | env",
+		"env | nocmd",
+		"env -z | ls",
+		"ls | env -z",
+		"env z | ls",
+		"ls | env z",
+	};
+
+	for (const auto& cmd : commands) {
+		runTest(shell_test, cmd);
+	}
+	leakReport();
+}
+
+TEST(Builtins, env_withRedirection) {
+	Tester shell_test;
+	std::vector<std::string> commands = {
+		"env > a.txt",
+		"env < a.txt",
+		"env < void_file",
+		"env << a",
+	};
+
+	for (const auto& cmd : commands) {
+		runTest(shell_test, cmd);
+	}
+	leakReport();
+}
+
+// PWD
+TEST(Builtins, pwd) {
+	Tester shell_test;
+	std::vector<std::string> commands = {
+		"pwd",
+		"pwd -n",
+		"pwd z",
+	};
+
+	for (const auto& cmd : commands) {
+		runTest(shell_test, cmd);
+	}
+	leakReport();
+}
+
+TEST(Builtins, pwd_advanced) {
+	Tester shell_test;
+	std::vector<std::string> commands = {
+		"ls | pwd",
+		"pwd | ls",
+		"pwd > a.txt",
+		"pwd < a.txt",
+		"pwd < void_file",
+		"pwd << a",
+	};
+
+	for (const auto& cmd : commands) {
+		runTest(shell_test, cmd);
+	}
+	leakReport();
+}
+
+// EXPORT
+TEST(Builtins, export) {
+	Tester shell_test;
+	std::vector<std::string> commands = {
+		"export",			// list formated list of environment variables
+		"export -z",			// invalid option
+		"export | grep XDG",
+		"export | wc -l",
+		"ls | export",
+		"export | ls",
+		"export -z | ls",
+		"ls | export -z",
+		"export > a.txt",
+		"export < a.txt",
+		"export < void_file",
+		"export << a",
+		"export ZEDRO=69 | ls",
+		"ls | export ZEDRO=69",
+		"export ZEDRO=69",
+		"export ZEDRO=69 && export ZEDRO=\"42 for 420\"",
+		"export ZEDRO=\"Here is | a value < no input\"",
+		"export ZEDRO=\"This is | a < value < no input\"",
+		"export ZEDRO=",
+		"export ZEDRO=$USER",
+		"export -x ZEDRO=z",
+		"export a.42 | ls",
+		"ls | export a.42",
+		"export V/A/R=zedro",
+		"export =zedro",
+		"export ZEDRO && echo $ZEDRO",
+		"export ZEDRO=zedro && echo $ZEDRO",
+		"export ZED1 ZED2=zedro",
+		"export =",
+		"export 1ZEDRO=test",
+		"export Z2EDRO=test",
+		"export TEST=ZEDRO",
+		"export $ZZZ=void",
+		"export a_test b_test",
+		"export z=42 z=69",
+		"export a=42 z=69",
+		"export \"VAR= 42\"",
+		"export \"VAR =42\"",
+		"export \"\"",
+		"export TEST1=u\"withdouble\" TEST2 TEST3=wihoutquotes TEST4=\"with spaces and expand $USER\" TEST5=\"ok, but it has more\" TEST6= TEST7='with single $PATH' = TEST8 9TEST9 TEST10=\"\" TEST11=too=many=equals TEST.12=\" \" TEST13='withsingle' TEST14",
+	};
+
+	for (const auto& cmd : commands) {
+		runTest(shell_test, cmd);
+	}
+	leakReport();
+}
+
+TEST(Builtins, unset) {
+	Tester shell_test;
+	std::vector<std::string> commands = {
+		"unset",
+		"unset ''",
+		"unset \"\"",
+		"unset $USER",
+		"unset PATH",
+		"unset a f z",
+		"unset -z",
+	};
+
+	for (const auto& cmd : commands) {
+		runTest(shell_test, cmd);
+	}
+	leakReport();
+}
+
+TEST(Builtins, unsetWithPipesRedirection) {
+	Tester shell_test;
+	std::vector<std::string> commands = {
+		"unset | ls",
+		"ls | unset",
+		"unset -z | ls",
+		"ls | unset -z",
+		"unset > a.txt",
+		"unset < a.txt",
+		"unset < void_file",
+		"unset << a",
+	};
+
+	for (const auto& cmd : commands) {
+		runTest(shell_test, cmd);
+	}
+	leakReport();
+}
+
+TEST(Builtins, unsetWithAND) {
+	Tester shell_test;
+	std::vector<std::string> commands = {
+		"export ZEDRO=42 && unset ZEDRO | ls",
+		"export ZEDRO=42 && ls | unset ZEDRO",
+		"export ZEDRO=42 && unset ZEDRO=69",
+		"export ZEDRO=42 && unset ZEDRO=",
+		"export ZEDRO=42 && unset 42",
+		"export ZEDRO=42 && unset ZE/DRO",
+		"export ZEDRO=42 && unset =",
+		"export ZEDRO=42 && unset ZEDRO",
+		"unset HOME && echo $HOME && cd $HOME",
+	};
+
+	for (const auto& cmd : commands) {
+		runTest(shell_test, cmd);
+	}
+	leakReport();
+}
+
+// EXIT
+TEST(Builtins, exit) {
 	Tester shell_test;
 	std::vector<std::string> commands = {
 		"exit",
 		"exit 42",
 		"exit -42",
 		"exit 42 42",
+		"exit 0 | exit 1",
+		"sleep 2 | exit",
+		"exit z",
+		"exit -z",
+		"exit z 42",
+		"exit 42 z",
+		"exit /",
+		"exit > a.txt",
+		"exit < a.txt",
+		"exit < void_file",
+		"exit << a",
 	};
 
 	for (const auto& cmd : commands) {
@@ -346,6 +663,46 @@ TEST(Redirection, Basic) {
 	Tester shell_test;
 	std::vector<std::string> commands = {
 		"echo 42 > 42",
+		"cat < a.txt > b.txt",
+		"cat < a.txt < c.txt > b.txt >> d.txt",
+		"cat < a.txt < c.txt",
+		"cat >> b.txt",
+		"cat << a",
+		"echo yo > > file",
+		"echo yo >>> file",
+		"echo yo > a.txt >> b.txt",
+		"echo yo >> a.txt > b.txt",
+		"echo yo > $ZEDRO_VAR",
+		"ls > a.txt -al",
+		"> a.txt",
+		"<< a > a.txt",
+		"< void_file $NOVAR",
+		"$VOID_VAR > b.txt",
+		"$VOID_VAR ls",
+		"ls > src",
+	};
+
+	for (const auto& cmd : commands) {
+		runTest(shell_test, cmd);
+	}
+	leakReport();
+}
+
+TEST(Redirection, WithPipes) {
+	Tester shell_test;
+	std::vector<std::string> commands = {
+		"cat < a.txt | sort < c.txt",
+		"cat << a | sort",
+		"cat << a | sort < a.txt",
+		"cat << a | sort > a.txt",
+		"cat << a | sort << b",
+		"< a.txt cat | < b.txt cat",
+		"ls | $ZEDRO_VAR",
+		"ls | grep a | grep M > a.txt",
+		"ls > a.txt | grep a | grep M",
+		"ls | grep a > a.txt | grep M",
+		"ls | grep a > a.txt | grep M > b.txt",
+		"cat < Makefile | cat < README.md",
 	};
 
 	for (const auto& cmd : commands) {
@@ -364,6 +721,23 @@ TEST(Pipes, Basic) {
 		"nonocmd | nocmd",
 		"cat | cat | ls",
 		"ls | grep a | grep k | grep e",
+	};
+
+	for (const auto& cmd : commands) {
+		runTest(shell_test, cmd);
+	}
+	leakReport();
+}
+
+TEST(ExitCodes, Basic) {
+	Tester shell_test;
+	std::vector<std::string> commands = {
+		"yo",
+		"nocmd | nocmd",
+		"$VOID_VAR",
+		"cat < void_file",
+		"nocmd < void_file",
+		"expr $? + $?",
 	};
 
 	for (const auto& cmd : commands) {
