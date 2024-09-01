@@ -122,21 +122,18 @@ static t_tk_ops	ft_find_ops(char *tk, t_tk_ops *ops)
 		j = -1;
 		while ((ops != NULL) && (ops[++j].tkn != NULL) && (dq == 0))
 		{
-			if (ops[j].tkn && (tk[i] == ops[j].tkn[0]))
-			{
-				if (i == 0)
-				{
-					if (ft_strnstr(tk, ops[j].tkn, INT_MAX) != NULL)
-						return ((t_tk_ops){ft_strdup(ops[j].tkn),
-							ops[j].type, (size_t)ops[j].len});
-					continue ;
-				}
-				return ((t_tk_ops){ft_substr(tk, 0, (size_t)i), TK_CMD, i});
-			}
+			if (ops[j].tkn == NULL || (tk[i] != ops[j].tkn[0]))
+				continue ;
+			if (i != 0)
+				return ((t_tk_ops){ft_substr(tk, 0, (size_t)i),
+					TK_CMD, i});
+			if (ft_strnstr(tk, ops[j].tkn, INT_MAX) != NULL)
+				return ((t_tk_ops){ft_strdup(ops[j].tkn),
+					ops[j].type, (size_t)ops[j].len});
 		}
 		i++;
-		if (((dq == '"') && (tk[i] == '"')) || ((dq == '"') && (tk[i] == '"')))
-			dq = 0;
+		if ((tk[i] == '"') || (tk[i] == '"'))
+			dq = !dq;
 	}
 	return ((t_tk_ops){ft_substr(tk, 0, (size_t)i), TK_CMD, i});
 }

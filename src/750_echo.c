@@ -20,7 +20,6 @@
 #include "../inc/minishell.h"
 
 static int	ft_is_nflag(char *arg);
-static char	*ft_rm_squotes(char *arg);
 
 /// @brief			Echo built-in
 /// @details
@@ -67,23 +66,6 @@ static int	ft_is_nflag(char *arg)
 		if (arg[i] != 'n')
 			return (!FAILURE);
 	return (!SUCCESS);
-}
-
-/// @brief		Remove single quotes
-/// @param arg	Argument to remove single quotes
-/// @return		SUCCESS(unquoted string)
-/// @return		FAILURE(NULL)
-static char	*ft_rm_squotes(char *arg)
-{
-	char	*unquoted;
-	int		len;
-
-	len = ft_strlen(arg);
-	unquoted = ft_substr(arg, 1, (len - 2));
-	if (!unquoted)
-		return (NULL);
-	free(arg);
-	return (unquoted);
 }
 
 /** @} */

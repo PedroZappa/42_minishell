@@ -271,13 +271,10 @@ char		*ft_expand_dollar(t_shell *sh, char *tkn, int *i);
 char		*ft_expand_squote(char *tkn, int *i);
 char		*ft_expand_dquote(t_shell *sh, char *tkn, int *i);
 
-/// @file	250_tk_expander_utils.c
+/// @file	230_tk_expander_utils.c
 int			ft_check_alpha(char c);
 int			ft_check_alnum(char c);
 char		*ft_fill_var(t_shell *sh, char *tkn);
-
-/// @file	260_tk_rm_blanks.c
-void		ft_rm_blank_tks(t_token **tk_list);
 
 //=============================================================================/
 //	300		Parser  														   /
