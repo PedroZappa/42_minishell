@@ -74,7 +74,7 @@ static void	ft_init_ops(t_tk_ops *ops)
 	ops[15] = (t_tk_ops){"\r", TK_BLANK, 1};
 	ops[16] = (t_tk_ops){"\f", TK_BLANK, 1};
 	ops[17] = (t_tk_ops){"*", TK_WILD, 1};
-	ops[17] = (t_tk_ops){NULL, 0, 0};
+	ops[18] = (t_tk_ops){NULL, 0, 0};
 }
 
 /// @brief			Get tokens from line
