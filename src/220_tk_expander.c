@@ -26,128 +26,100 @@
 /// @param sh		Pointer to a t_shell struct
 /// @param tkn_str	Pointer to token string
 /// @return			Expanded token string
-char	*ft_expander(t_shell *sh, char *tk_str)
+char	*ft_expander(t_shell *sh, char *tkn)
 {
 	int		i;
 	int		j;
 	char	*ret;
-	char	*temp;
 
+	ret = ft_strdup("");
 	i = 0;
 	j = 0;
-	ret = ft_strdup("");
-	while (tk_str[i])
+	while (tkn[i])
 	{
-		if (tk_str[i] == '\'')
+		if (tkn[i] != '$' && tkn[i] != '\'' && tkn[i] != '\"')
 		{
-			ret = ft_strjoin_free(ret, ft_substr(tk_str, j, i - j));
-			temp = ft_expand_squote(tk_str + i);
 			i++;
-			while (tk_str[i] && tk_str[i] != '\'')
-				i++;
-			ret = ft_strjoin_free(ret, temp);
-			j = i;
 			continue ;
 		}
-		if (tk_str[i] == '\"')
-		{
-			ret = ft_strjoin_free(ret, ft_substr(tk_str, j, i - j));
-			temp = ft_expand_dquote(sh, tk_str + i);
-			i++;
-			while (tk_str[i] && tk_str[i] != '\"')
-				i++;
-			ret = ft_strjoin_free(ret, temp);
-			j = i;
-			continue ;
-		}
-		if (tk_str[i] == '$')
-		{
-			ret = ft_strjoin_free(ret, ft_substr(tk_str, j, i - j));
-			temp = ft_expand_dollar(sh, tk_str + i);
-			i++;
-			while (tk_str[i] && ft_check_alnum(tk_str[i]))
-				i++;
-			ret = ft_strjoin_free(ret, temp);
-			j = i;
-			continue ;
-		}
-		i++;
+		ret = ft_strjoin_free(ret, ft_substr(tkn, j, i - j));
+		if (tkn[i] == '$')
+			ret = ft_strjoin_free(ret, ft_expand_dollar(sh, tkn, &i));
+		else if (tkn[i] == '\'')
+			ret = ft_strjoin_free(ret, ft_expand_squote(tkn, &i));
+		else
+			ret = ft_strjoin_free(ret, ft_expand_dquote(sh, tkn, &i));
+		j = i;
 	}
-	ret = ft_strjoin_free(ret, ft_substr(tk_str, j, i - j));
-	return (ft_free(tk_str), ret);
+	ret = ft_strjoin_free(ret, ft_substr(tkn, j, i - j));
+	return (ft_free(tkn), ret);
+}
+
+char	*ft_expand_squote(char *tkn, int *i)
+{
+	char	*ret;
+	int		j;
+
+	*i += 1;
+	j = *i;
+	while (tkn[*i] && tkn[*i] != '\'')
+		*i += 1;
+	if (tkn[*i] != '\'')
+		return (NULL);
+	ret = ft_substr(tkn, j, *i - j);
+	*i += 1;
+	return (ret);
 }
 
 /// @brief		Dollar sign expansion
 /// @param tkn	Token string
 /// @param i	Reference to index
 /// @return		Expanded token
-char	*ft_expand_dollar(t_shell *sh, char *tkn)
+char	*ft_expand_dollar(t_shell *sh, char *tkn, int *i)
 {
-	int		i;
 	char	*ret;
+	char	*temp;
+	int		j;
 
-	i = 1;
-	if (tkn[i] && (ft_check_alpha(tkn[i]) == SUCCESS))
+	j = *i;
+	*i += 1;
+	if (tkn[*i] && (ft_check_alpha(tkn[*i]) == 0))
 	{
-		while (tkn[i] && (ft_check_alnum(tkn[i]) == SUCCESS))
-			i++;
+		while (tkn[*i] && (ft_check_alnum(tkn[*i]) == 0))
+			*i += 1;
 	}
 	else
 		return (ft_strdup("$"));
-	if (tkn[i] != '\0')
-		return (NULL);
-	ret = ft_fill_var(sh, tkn);
+	temp = ft_substr(tkn, j, *i - j);
+	ret = ft_fill_var(sh, temp);
 	if (ret == NULL)
 		ret = ft_strdup("");
-	return (ret);
+	return (ft_free(temp), ret);
 }
 
-char	*ft_expand_squote(char *tkn)
+char	*ft_expand_dquote(t_shell *sh, char *tkn, int *i)
 {
-	int		i;
-	char	*ret;
-
-	i = 1;
-	while (tkn[i] && tkn[i] != '\'')
-		i++;
-	if (tkn[i] != '\'')
-		return (NULL);
-	ret = ft_substr(tkn, 1, i - 1);
-	return (ret);
-}
-
-char	*ft_expand_dquote(t_shell *sh, char *tkn)
-{
-	int		i;
 	int		j;
 	char	*ret;
-	char	*temp;
 
-	i = 1;
-	j = 1;
 	ret = ft_strdup("");
-	while (tkn[i] && (tkn[i] != '\"'))
+	*i += 1;
+	j = *i;
+	while (tkn[*i] && tkn[*i] != '\"')
 	{
-		if (tkn[i] == '$')
+		if (tkn[*i] != '$')
 		{
-			ret = ft_strjoin_free(ret, ft_substr(tkn, j, i - j));
-			j = i + 1;
-			if (tkn[j] && (ft_check_alpha(tkn[j]) == SUCCESS))
-				while (tkn[j] && (ft_check_alnum(tkn[j]) == SUCCESS))
-					j++;
-			temp = ft_expand_dollar(sh, ft_substr(tkn, i, j - i));
-			ret = ft_strjoin_free(ret, temp);
-			i = j;
+			*i += 1;
 			continue ;
 		}
-		i++;
+		ret = ft_strjoin_free(ret, ft_substr(tkn, j, *i - j));
+		ret = ft_strjoin_free(ret, ft_expand_dollar(sh, tkn, i));
+		j = *i;
 	}
-	ret = ft_strjoin_free(ret, ft_substr(tkn, j, i - j));
-	if (tkn[i] != '\"')
-	{
-		ft_free(ret);
-		return (NULL);
-	}
+	if (tkn[*i] != '\"')
+		return (ft_free(ret), NULL);
+	ret = ft_strjoin_free(ret, ft_substr(tkn, j, *i - j));
+	*i += 1;
 	return (ret);
 }
 

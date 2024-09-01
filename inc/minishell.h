@@ -266,10 +266,10 @@ void		ft_tk_add_free(t_token **tk_list, t_token *tk, t_tk_ops *tk_op);
 t_token		*ft_tk_last(t_token *tk);
 
 /// @file	220_tk_expander.c
-char		*ft_expander(t_shell *sh, char *str);
-char		*ft_expand_dollar(t_shell *sh, char *tkn);
-char		*ft_expand_squote(char *tkn);
-char		*ft_expand_dquote(t_shell *sh, char *tkn);
+char		*ft_expander(t_shell *sh, char *tkn);
+char		*ft_expand_dollar(t_shell *sh, char *tkn, int *i);
+char		*ft_expand_squote(char *tkn, int *i);
+char		*ft_expand_dquote(t_shell *sh, char *tkn, int *i);
 
 /// @file	250_tk_expander_utils.c
 int			ft_check_alpha(char c);
