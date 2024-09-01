@@ -132,8 +132,8 @@ static t_tk_ops	ft_find_ops(char *tk, t_tk_ops *ops)
 					ops[j].type, (size_t)ops[j].len});
 		}
 		i++;
-		if ((tk[i] == '"') || (tk[i] == '"'))
-			dq = !dq;
+		if ((dq == '\'' && tk[i] == '\'') || (dq == '"' && tk[i] == '"'))
+			dq = (tk[i] == '\"') * '\"' + (tk[i] == '\'') * '\'';
 	}
 	return ((t_tk_ops){ft_substr(tk, 0, (size_t)i), TK_CMD, i});
 }
