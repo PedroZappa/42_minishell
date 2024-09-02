@@ -41,10 +41,10 @@ int	ft_tokenizer(t_shell *sh, char *line, t_token **tks)
 	tk = *tks;
 	while (tk)
 	{
-		printf("%s -> ", tk->name);
+		// printf("%s -> ", tk->name);
 		if (tk->type != TK_BLANK)
 			tk->name = ft_expander(sh, tk->name);
-		printf("%s | %d\n", tk->name, tk->type);
+		// printf("%s | %d\n", tk->name, tk->type);
 		tk = tk->next;
 	}
 	return (SUCCESS);

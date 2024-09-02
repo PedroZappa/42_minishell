@@ -291,7 +291,7 @@ int			ft_parser(t_shell *sh, char *line_buf);
 void		ft_readline(char **line_buf, t_shell *sh);
 
 /// @file	311_readline_utils.c
-void		ft_verify_quotes(char **buf);
+void		ft_vq_loop(t_list *list, char *temp, char **buf);
 char		*ft_compress_list(t_list *list, char delim);
 
 //=============================================================================/

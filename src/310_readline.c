@@ -21,6 +21,7 @@
 #include "../inc/minishell.h"
 
 static char	*ft_build_cwd(t_shell *sh, char *cwd);
+static void	ft_verify_quotes(char **line_buf);
 static char	*ft_build_prompt(t_shell *sh);
 static char	*ft_prompt_user(t_shell *sh);
 
@@ -40,6 +41,47 @@ void	ft_readline(char **line_buf, t_shell *sh)
 	ft_verify_quotes(line_buf);
 	if (ft_strlen(*line_buf) > 0)
 		add_history(*line_buf);
+}
+
+/// @brief				Verify quotes
+/// @param line_buf		Line buffer
+static void	ft_verify_quotes(char **line_buf)
+{
+	char	*temp;
+	t_list	*list;
+
+	list = ft_lstnew(*line_buf);
+	if (list == NULL)
+		return ;
+	temp = *line_buf;
+	ft_vq_loop(list, temp, line_buf);
+	temp = ft_compress_list(list, '\n');
+	ft_lstclear(&list, free);
+	*line_buf = temp;
+}
+
+/// @brief			Build bash prompt
+/// @param sh		Pointer to a t_shell struct
+/// @return			Bash prompt
+/// @note			Used in ft_readline()
+static char	*ft_build_prompt(t_shell *sh)
+{
+	char	*ret;
+	char	*temp;
+	char	*cwd;
+	char	*pwd;
+
+	temp = ft_prompt_user(sh);
+	cwd = ft_get_var("PWD", sh->envp, NULL);
+	if (cwd != NULL)
+	{
+		pwd = ft_build_cwd(sh, cwd);
+		if (pwd)
+			temp = ft_strjoin_free(temp, pwd);
+		ft_free(cwd);
+	}
+	ret = ft_strjoin(temp, BWHT"$ "NC);
+	return (ft_free(temp), ret);
 }
 
 /// @brief			Formats the Current Working Directory (cwd) 
@@ -69,30 +111,6 @@ static char	*ft_build_cwd(t_shell *sh, char *cwd)
 	}
 	ret[i + (home_len > 0)] = '\0';
 	return (ret);
-}
-
-/// @brief			Build bash prompt
-/// @param sh		Pointer to a t_shell struct
-/// @return			Bash prompt
-/// @note			Used in ft_readline()
-static char	*ft_build_prompt(t_shell *sh)
-{
-	char	*ret;
-	char	*temp;
-	char	*cwd;
-	char	*pwd;
-
-	temp = ft_prompt_user(sh);
-	cwd = ft_get_var("PWD", sh->envp, NULL);
-	if (cwd != NULL)
-	{
-		pwd = ft_build_cwd(sh, cwd);
-		if (pwd)
-			temp = ft_strjoin_free(temp, pwd);
-		ft_free(cwd);
-	}
-	ret = ft_strjoin(temp, BWHT"$ "NC);
-	return (ft_free(temp), ret);
 }
 
 /// @brief			Build bash prompt
