@@ -19,7 +19,7 @@ int	ft_get_line(t_list *list, char **temp, int *i, char **line_buf);
 /// @param list			Pointer to a t_list struct containing lines read
 /// @param temp			Reference to the line read
 /// @param line_buf		
-void	ft_vq_loop(t_list *list, char *temp, char **line_buf)
+int	ft_vq_loop(t_list *list, char *temp, char **line_buf)
 {
 	int		i;
 	char	q_type;
@@ -38,8 +38,9 @@ void	ft_vq_loop(t_list *list, char *temp, char **line_buf)
 		i++;
 		if (temp[i] == '\0' && q_type != 0)
 			if (ft_get_line(list, &temp, &i, line_buf) == FAILURE)
-				return ;
+				return (FAILURE);
 	}
+	return (SUCCESS);
 }
 
 ///

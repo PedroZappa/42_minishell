@@ -21,7 +21,7 @@
 #include "../inc/minishell.h"
 
 static char	*ft_build_cwd(t_shell *sh, char *cwd);
-static void	ft_verify_quotes(char **line_buf);
+static void ft_verify_quotes(char **line_buf);
 static char	*ft_build_prompt(t_shell *sh);
 static char	*ft_prompt_user(t_shell *sh);
 
@@ -54,7 +54,8 @@ static void	ft_verify_quotes(char **line_buf)
 	if (list == NULL)
 		return ;
 	temp = *line_buf;
-	ft_vq_loop(list, temp, line_buf);
+	if (ft_vq_loop(list, temp, line_buf))
+		return ;
 	temp = ft_compress_list(list, '\n');
 	ft_lstclear(&list, free);
 	*line_buf = temp;
