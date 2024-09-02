@@ -118,7 +118,7 @@ typedef enum e_token_type
 	TK_AND,
 	TK_WILD,
 	TK_PARENTESHIS,
-	TK_DOLLAR
+	TK_HEREDOC
 }	t_token_type;
 
 typedef enum e_cmd_type
@@ -275,10 +275,14 @@ char		*ft_expand_dollar(t_shell *sh, char *tkn, int *i);
 char		*ft_expand_squote(char *tkn, int *i);
 char		*ft_expand_dquote(t_shell *sh, char *tkn, int *i);
 
-/// @file	221_tk_expander_utils.c
+/// @file	221_tk_expander.c
+char		*ft_heredoc_expander(t_shell *sh, char *tkn);
+
+/// @file	222_tk_expander_utils.c
 int			ft_check_alpha(char c);
 int			ft_check_alnum(char c);
 char		*ft_fill_var(t_shell *sh, char *tkn);
+void		ft_lstadd_back_ptr(t_list **lst, void *ptr);
 
 //=============================================================================/
 //	300		Parser  														   /
@@ -292,7 +296,7 @@ void		ft_readline(char **line_buf, t_shell *sh);
 
 /// @file	311_readline_utils.c
 int			ft_vq_loop(t_list *list, char *temp, char **buf);
-char		*ft_compress_list(t_list *list, char delim);
+char		*ft_compress_free_list(t_list **list, char delim);
 
 //=============================================================================/
 //	400		Signal  														   /

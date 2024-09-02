@@ -6,7 +6,7 @@
 /*   By: gfragoso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 23:45:42 by gfragoso          #+#    #+#             */
-/*   Updated: 2024/09/02 00:03:44 by gfragoso         ###   ########.fr       */
+/*   Updated: 2024/09/02 22:16:33 by gfragoso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /// @param ops		Pointer to an array of t_tk_ops structs
 void	ft_init_ops(t_tk_ops *ops)
 {
-	ops[0] = (t_tk_ops){"<<", TK_IN, 2};
+	ops[0] = (t_tk_ops){"<<", TK_HEREDOC, 2};
 	ops[1] = (t_tk_ops){"<", TK_IN, 1};
 	ops[2] = (t_tk_ops){">>", TK_OUT, 2};
 	ops[3] = (t_tk_ops){">|", TK_OUT, 2};

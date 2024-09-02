@@ -27,9 +27,9 @@ char	*ft_expander(t_shell *sh, char *tkn)
 {
 	int		i;
 	int		tkn_start;
-	char	*ret;
+	t_list	*list;
 
-	ret = ft_strdup("");
+	list = ft_lstnew(ft_strdup(""));
 	i = 0;
 	tkn_start = 0;
 	while (tkn[i])
@@ -39,17 +39,17 @@ char	*ft_expander(t_shell *sh, char *tkn)
 			i++;
 			continue ;
 		}
-		ret = ft_strjoin_free(ret, ft_substr(tkn, tkn_start, i - tkn_start));
+		ft_lstadd_back_ptr(&list, ft_substr(tkn, tkn_start, i - tkn_start));
 		if (tkn[i] == '$')
-			ret = ft_strjoin_free(ret, ft_expand_dollar(sh, tkn, &i));
+			ft_lstadd_back_ptr(&list, ft_expand_dollar(sh, tkn, &i));
 		else if (tkn[i] == '\'')
-			ret = ft_strjoin_free(ret, ft_expand_squote(tkn, &i));
+			ft_lstadd_back_ptr(&list, ft_expand_squote(tkn, &i));
 		else
-			ret = ft_strjoin_free(ret, ft_expand_dquote(sh, tkn, &i));
+			ft_lstadd_back_ptr(&list, ft_expand_dquote(sh, tkn, &i));
 		tkn_start = i;
 	}
-	ret = ft_strjoin_free(ret, ft_substr(tkn, tkn_start, i - tkn_start));
-	return (ft_free(tkn), ret);
+	ft_lstadd_back_ptr(&list, ft_substr(tkn, tkn_start, i - tkn_start));
+	return (ft_free(tkn), ft_compress_free_list(&list, '\0'));
 }
 
 /// @brief		Single quote expansion

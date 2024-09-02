@@ -41,10 +41,19 @@ int	ft_tokenizer(t_shell *sh, char *line, t_token **tks)
 	tk = *tks;
 	while (tk)
 	{
-		// printf("%s -> ", tk->name);
+		if (tk->type == TK_HEREDOC && tk->next != NULL
+			&& tk->next->type == TK_CMD)
+		{
+			//printf("%s + %s -> ", tk->name, tk->next->name);
+			tk->next->name = ft_heredoc_expander(sh, tk->next->name);
+			//printf("%s + %s | %d\n", tk->name, tk->next->name, tk->next->type);
+			tk = tk->next->next;
+			continue ;
+		}
+		//printf("%s -> ", tk->name);
 		if (tk->type != TK_BLANK)
 			tk->name = ft_expander(sh, tk->name);
-		// printf("%s | %d\n", tk->name, tk->type);
+		//printf("%s | %d\n", tk->name, tk->type);
 		tk = tk->next;
 	}
 	return (SUCCESS);

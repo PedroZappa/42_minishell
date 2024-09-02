@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   221_tk_expander_utils.c                            :+:      :+:    :+:   */
+/*   222_tk_expander_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfragoso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -58,6 +58,14 @@ char	*ft_fill_var(t_shell *sh, char *tkn)
 	else
 		var = ft_strdup(tkn);
 	return (var);
+}
+
+void	ft_lstadd_back_ptr(t_list **lst, void *ptr)
+{
+	t_list	*new;
+
+	new = ft_lstnew(ptr);
+	ft_lstadd_back(lst, new);
 }
 
 /** @} */
