@@ -87,7 +87,7 @@ char	*ft_compress_list(t_list *list, char delim)
 		i += ft_strlen(curr_node->content);
 		curr_node = curr_node->next;
 	}
-	ret = ft_calloc(i + ft_lstsize(list), sizeof(char));
+	ret = ft_calloc(i + ft_lstsize(list) * (delim != '\0'), sizeof(char));
 	curr_node = list;
 	i = 0;
 	while (curr_node)
@@ -95,7 +95,7 @@ char	*ft_compress_list(t_list *list, char delim)
 		ft_strcpy(ret + i, curr_node->content);
 		i += ft_strlen(curr_node->content);
 		curr_node = curr_node->next;
-		if (curr_node)
+		if (curr_node && delim != '\0')
 			ret[i++] = delim;
 	}
 	return (ret);
