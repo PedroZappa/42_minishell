@@ -91,7 +91,7 @@ void	ft_execve_path(char **path, char **argv, char **envp)
 	if (execve_err == EXECVE_ERR)
 	{
 		ft_cmd_err(argv[0], 1);
-		g_exit = errno;
+		g_exit = 127;
 	}
 }
 

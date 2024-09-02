@@ -33,7 +33,7 @@ void	ft_exec_child_first(t_shell *sh)
 	if (sh->cmds[0].argv[0])
 		ft_exec_cmd(sh, ft_exec_check(sh->cmds[0].argv[0]), NO_PIPE);
 	ft_free_sh(sh);
-	exit(SUCCESS);
+	exit(g_exit);
 }
 
 /// @brief			Execute command in pipeline
@@ -51,7 +51,7 @@ void	ft_exec_child_i(t_shell *sh, int i)
 	if (sh->cmds[i].argv[0])
 		ft_exec_cmd(sh, ft_exec_check(sh->cmds[i].argv[0]), i);
 	ft_free_sh(sh);
-	exit(SUCCESS);
+	exit(g_exit);
 }
 
 /// @brief			Execute last command in pipeline
@@ -68,7 +68,7 @@ void	ft_exec_child_last(t_shell *sh, int i)
 	if (sh->cmds[i].argv[0])
 		ft_exec_cmd(sh, ft_exec_check(sh->cmds[i].argv[0]), i);
 	ft_free_sh(sh);
-	exit(SUCCESS);
+	exit(g_exit);
 }
 
 /** @} */

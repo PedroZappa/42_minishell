@@ -36,7 +36,7 @@ void	ft_exec_cmd(t_shell *sh, int id, int i)
 		return ;
 	ft_execve(sh->path, sh->cmds[i].argv, sh->envp);
 	ft_free_sh(sh);
-	exit(SUCCESS);
+	exit(g_exit);
 }
 
 /// @brief			Execute one builtin command

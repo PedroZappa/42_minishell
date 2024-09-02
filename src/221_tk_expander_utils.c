@@ -54,7 +54,7 @@ char	*ft_fill_var(t_shell *sh, char *tkn)
 	if (ft_check_alpha(tkn[i]) == SUCCESS)
 		var = ft_get_var((tkn + 1), sh->envp, sh->envt);
 	else if (tkn[i] == '?')
-		var = ft_itoa(WEXITSTATUS(g_exit));
+		var = ft_itoa(g_exit);
 	else
 		var = ft_strdup(tkn);
 	return (var);
