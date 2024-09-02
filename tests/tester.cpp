@@ -61,7 +61,7 @@ std::pair<std::string, int> Tester::get_minishell_output(const std::string& bash
         if (line_n < 2) {
 			line_n++;
         } else {
-			if (line_read.empty() || line_read.find("@42:") != std::string::npos) {
+			if (line_read.empty() || line_read.find(hostname_str) != std::string::npos) {
 				break;
 			}
             output += line_read;

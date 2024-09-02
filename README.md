@@ -44,6 +44,10 @@ cat ""
 cd /lib/ && pwd
 
 # TODO:
+ls > $a
+echo $?
+
+
 ../
 $PWD
 ```

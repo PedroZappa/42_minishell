@@ -392,8 +392,6 @@ end
 ### 630_pipeline.c
 define exec_pipeline
 	display *sh
-	display pipe0
-	display pipe1
 	display cmd_idx
 end
 

@@ -30,6 +30,7 @@ int	ft_env(t_shell *sh, int n)
 
 	ft_set_var("_", sh->cmds[n].argv[0], &sh->envp);
 	i = 0;
+	// Handle unset PATH
 	while (sh->cmds[n].argv[++i])
 		if (sh->cmds[n].argv[i][0] == '-')
 			return (ft_flag_err(sh->cmds[n].argv[0], sh->cmds[n].argv[1], 1));
