@@ -12,6 +12,32 @@
 
 #include "../inc/minishell.h"
 
+int		ft_get_line_heredoc(t_list **list, char *delim);
+char	*ft_expand_dollars(t_shell *sh, char *tkn);
+
+char	*ft_heredoc_expander(t_shell *sh, char *tkn)
+{
+	char	*delim;
+	char	*ret;
+	int		expand;
+	t_list	*list;
+	int		exit;
+
+	list = NULL;
+	ret = ft_strdup(tkn);
+	delim = ft_expander(sh, ret);
+	expand = ft_strcmp(tkn, delim) == 0;
+	exit = 0;
+	while (exit == 0)
+		exit = ft_get_line_heredoc(&list, delim);
+	if (exit == -1)
+		return (ft_lstclear(&list, free), ft_free(tkn), NULL);
+	ret = ft_compress_free_list(&list, '\n');
+	if (expand)
+		ret = ft_expand_dollars(sh, ret);
+	return (ret);
+}
+
 int	ft_get_line_heredoc(t_list **list, char *delim)
 {
 	char	*ret;
@@ -51,27 +77,4 @@ char	*ft_expand_dollars(t_shell *sh, char *tkn)
 	ft_lstadd_back_ptr(&list, ft_substr(tkn, tkn_start, i - tkn_start));
 	i += 1;
 	return (ft_free(tkn), ft_compress_free_list(&list, '\0'));
-}
-
-char	*ft_heredoc_expander(t_shell *sh, char *tkn)
-{
-	char	*delim;
-	char	*ret;
-	int		expand;
-	t_list	*list;
-	int		exit;
-
-	list = NULL;
-	ret = ft_strdup(tkn);
-	delim = ft_expander(sh, ret);
-	expand = ft_strcmp(tkn, delim) == 0;
-	exit = 0;
-	while (exit == 0)
-		exit = ft_get_line_heredoc(&list, delim);
-	if (exit == -1)
-		return (ft_lstclear(&list, free), ft_free(tkn), NULL);
-	ret = ft_compress_free_list(&list, '\n');
-	if (expand)
-		ret = ft_expand_dollars(sh, ret);
-	return (ret);
 }
