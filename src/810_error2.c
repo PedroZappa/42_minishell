@@ -20,18 +20,6 @@
 
 #include "../inc/minishell.h"
 
-/// @brief			Print invalid command error with argument
-/// @param cmd		Command name
-/// @param arg		Invalid Argument
-/// @param err		Error number
-/// @return			SUCCESS(err)
-int	ft_bash_err(char *cmd, char *arg, int err)
-{
-	ft_fprintf(STDERR_FILENO,
-		"bash: %s: %s: No such file or directory\n", cmd, arg);
-	return (err);
-}
-
 /// @brief			Print pipe error
 /// @param path		Path to be freed
 /// @return			FAILURE(1)

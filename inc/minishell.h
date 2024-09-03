@@ -424,7 +424,6 @@ int			ft_flag_err(char *cmd, char *cmd_flag, int err);
 int			ft_cmd_err(char *cmd, int err);
 
 /// @file	810_error2.c
-int			ft_bash_err(char *cmd, char *arg, int err);
 int			ft_pipe_err(char **path);
 int			ft_return_err(char *msg, int err_code, int exit_status);	
 void		ft_fork_exit(t_shell *sh, char *msg, int err_code);
