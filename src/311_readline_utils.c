@@ -61,6 +61,7 @@ static int	ft_get_line(t_list *list, char **temp, int *i, char **line_buf)
 	{
 		ft_lstclear(&list, free);
 		*line_buf = NULL;
+		g_exit = 2;
 		return (FAILURE);
 	}
 	ft_lstadd_back(&list, ft_lstnew(ret));
