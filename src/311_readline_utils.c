@@ -39,7 +39,7 @@ int	ft_vq_loop(t_list *list, char *temp, char **line_buf)
 		i++;
 		if (temp[i] == '\0' && q_type != 0)
 			if (ft_get_line(list, &temp, &i, line_buf) == FAILURE)
-				return (FAILURE);
+				return (ft_syntax_err(&q_type, -1), FAILURE);
 	}
 	return (SUCCESS);
 }
@@ -60,7 +60,7 @@ static int	ft_get_line(t_list *list, char **temp, int *i, char **line_buf)
 	if (ret == NULL)
 	{
 		ft_lstclear(&list, free);
-		*line_buf = ft_strdup("exit");
+		*line_buf = NULL;
 		return (FAILURE);
 	}
 	ft_lstadd_back(&list, ft_lstnew(ret));
