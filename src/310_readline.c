@@ -72,6 +72,8 @@ static char	*ft_build_prompt(t_shell *sh)
 
 	temp = ft_prompt_user(sh);
 	cwd = ft_get_var("PWD", sh->envp, NULL);
+	if (cwd == NULL)
+		cwd = getcwd(NULL, 0);
 	if (cwd != NULL)
 	{
 		pwd = ft_build_cwd(sh, cwd);

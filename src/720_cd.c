@@ -20,7 +20,7 @@
 
 #include "../inc/minishell.h"
 
-static int	ft_chdir(char ***env, char *path);
+static int	ft_chdir(t_shell *sh, char *path);
 static int	ft_get_prev_dir(char ***env, char *old, char *pwd);
 static void	ft_chdir_err(char *path);
 
@@ -46,43 +46,43 @@ int	ft_cd(t_shell *sh, t_cmd *cmd)
 		home = ft_get_var("HOME", sh->envp, NULL);
 		if (home == NULL)
 			return (ft_err(ENV_VAR_ERR, FAILURE));
-		chdir = ft_chdir(&sh->envp, home);
+		chdir = ft_chdir(sh, home);
 		ft_free(home);
 		return (chdir);
 	}
 	if (cmd->argc > 2)
 		return (ft_err(ARG_ERR, FAILURE));
 	if (cmd->argv[1][0] == '\0')
-		return (ft_chdir(&sh->envp, cmd->argv[1]));
-	return (ft_chdir(&sh->envp, cmd->argv[1]));
+		return (ft_chdir(sh, cmd->argv[1]));
+	return (ft_chdir(sh, cmd->argv[1]));
 }
 
-static int	ft_chdir(char ***env, char *path)
+static int	ft_chdir(t_shell *sh, char *path)
 {
 	char	*pwd;
 	char	*old;
 	int		chdir_ret;
 
 	old = NULL;
-	pwd = ft_get_var("PWD", *env, NULL);
+	pwd = ft_get_var("PWD", sh->envp, NULL);
+	if (pwd == NULL)
+		pwd = getcwd(NULL, 0);
 	chdir_ret = 0;
 	if (path[0] == '-')
-		ft_get_prev_dir(env, old, pwd);
+		ft_get_prev_dir(&sh->envp, old, pwd);
 	else
 	{
 		old = ft_path_resolve(pwd, path);
 		chdir_ret = chdir(old);
 		if (chdir_ret == 0)
 		{
-			ft_set_var("OLDPWD", pwd, env);
-			ft_set_var("PWD", old, env);
+			ft_set_var("OLDPWD", pwd, &sh->envp);
+			ft_set_var("PWD", old, &sh->envp);
 		}
 	}
 	if (chdir_ret == -1 && path[0] != '\0')
-	{
-		ft_chdir_err(path);
-		return (ft_free(pwd), ft_free(old), FAILURE);
-	}
+		return (ft_chdir_err(path), ft_free(pwd),
+			ft_free(old), FAILURE);
 	return (ft_free(pwd), ft_free(old), chdir_ret);
 }
 
