@@ -30,8 +30,6 @@ char	*ft_heredoc_expander(t_shell *sh, char *tkn)
 	exit = 0;
 	while (exit == 0)
 		exit = ft_get_line_heredoc(&list, delim);
-	if (exit == -1)
-		return (ft_lstclear(&list, free), ft_free(tkn), NULL);
 	ret = ft_compress_free_list(&list, '\n');
 	if (expand)
 		ret = ft_expand_dollars(sh, ret);
@@ -44,16 +42,19 @@ int	ft_get_line_heredoc(t_list **list, char *delim)
 
 	ret = readline(BWHT"> "NC);
 	if (ret == NULL)
+	{
 		ft_printf("bash: warning: here-document at line "
 			"%d delimited by end-of-file; (wanted '%s')\n",
 			ft_lstsize(*list), delim);
+		return (ft_free(delim), 1);
+	}
 	if (ft_strcmp(ret, delim) == 0)
 		return (ft_free(ret), ft_free(delim), 1);
 	if (*list == NULL)
 		*list = ft_lstnew(ret);
 	else
 		ft_lstadd_back(list, ft_lstnew(ret));
-	return (ft_free(delim), 0);
+	return (0);
 }
 
 char	*ft_expand_dollars(t_shell *sh, char *tkn)
