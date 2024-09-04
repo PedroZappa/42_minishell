@@ -47,9 +47,18 @@ cd /lib/ && pwd
 ls > $a
 echo $?
 
+#invalid command, followed by empty variable, should clear the exit code
+doesntexist
+$EMPTY
+echo $?
 
-../
-$PWD
+export $LS="ls -la"
+echo $LS
+
+
+export $LS=" -la"
+echo ls$LS
+
 ```
 ## Built-ins 
 ### [[echo]]
