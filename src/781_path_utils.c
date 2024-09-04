@@ -12,6 +12,9 @@
 
 #include "../inc/minishell.h"
 
+/// @brief Get the length of the reduced path
+/// @param elems Path elements
+/// @return The length of the reduced path
 size_t	ft_path_reduced_len(char **elems)
 {
 	size_t	i;
@@ -27,28 +30,35 @@ size_t	ft_path_reduced_len(char **elems)
 	return (i + j + 2);
 }
 
-char	*ft_path_combine(char const *s1, char const *s2)
+/// @brief Combines the pwd and the path
+/// @param pwd The current working directory
+/// @param path The path to combine
+/// @return The combined path
+char	*ft_path_combine(char const *pwd, char const *path)
 {
 	char	*ret;
-	size_t	s1_len;
-	size_t	s2_len;
+	size_t	pwd_len;
+	size_t	path_len;
 
-	if (s1 == NULL || s2 == NULL)
+	if (pwd == NULL || path == NULL)
 		return (NULL);
-	s1_len = ft_strlen(s1);
-	s1_len -= s1[s1_len - 1] == '/';
-	s2_len = ft_strlen(s2);
-	s2_len -= s2[s2_len - 1] == '/';
-	ret = malloc(sizeof(char) * (s1_len + s2_len + 2));
+	pwd_len = ft_strlen(pwd);
+	pwd_len -= pwd[pwd_len - 1] == '/';
+	path_len = ft_strlen(path);
+	path_len -= path[path_len - 1] == '/';
+	ret = malloc(sizeof(char) * (pwd_len + path_len + 2));
 	if (ret == NULL)
 		return (NULL);
-	ft_memcpy(ret, s1, s1_len);
-	ft_memcpy((ret + s1_len + 1), s2, s2_len);
-	ret[s1_len] = '/';
-	ret[s1_len + s2_len + 1] = '\0';
+	ft_memcpy(ret, pwd, pwd_len);
+	ft_memcpy((ret + pwd_len + 1), path, path_len);
+	ret[pwd_len] = '/';
+	ret[pwd_len + path_len + 1] = '\0';
 	return (ret);
 }
 
+/// @brief Home expansion
+/// @param sh Pointer to a t_shell struct
+/// @param tk Pointer to a t_tk_ops struct
 void	ft_home_expand(t_shell *sh, t_tk_ops *tk)
 {
 	char	*tkn_str;
