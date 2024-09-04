@@ -41,7 +41,7 @@ int	ft_unset(t_shell *sh, t_cmd *cmd)
 	while (cmd->argv[++i])
 	{
 		var = cmd->argv[i];
-		if (!ft_strchr(var, '='))
+		if (ft_strchr(var, '=') == NULL)
 		{
 			if (ft_get_var_index(var, sh->envp) >= 0)
 				sh->envp = ft_env_del_var(sh->envp, var);

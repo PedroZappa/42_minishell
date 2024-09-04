@@ -86,14 +86,14 @@ static char	**ft_env_add_var(char **env, char *new_var)
 	char	**new_env;
 	int		i;
 
-	if (!env)
+	if (env == NULL)
 		return (ft_err(ENV_NULL_ERR, errno), NULL);
 	i = 0;
 	while (env[i])
 		++i;
 	i += 2;
 	new_env = ft_calloc(i, sizeof(char *));
-	if (!new_env)
+	if (new_env == NULL)
 		return (ft_err(MALLOC_ERR, errno), NULL);
 	i = -1;
 	while (env[++i])
@@ -120,15 +120,15 @@ char	**ft_env_del_var(char **env, char *to_del)
 	while (env[i])
 		++i;
 	new_env = ft_calloc(i, sizeof(char *));
-	if (!new_env)
+	if (new_env == NULL)
 		return (ft_err(MALLOC_ERR, errno), NULL);
 	j = 0;
 	i = -1;
 	while (env[++i])
 	{
 		var = ft_substr(env[i], 0,
-				(ft_strlen(env[i] - ft_strlen(ft_strchr(env[i], '=')))));
-		if (ft_strncmp(var, to_del, ft_max(ft_strlen(var), ft_strlen(to_del))))
+				(ft_strlen(env[i]) - ft_strlen(ft_strchr(env[i], '='))));
+		if (ft_strncmp(var, to_del, INT_MAX) != 0)
 			new_env[j++] = ft_strdup(env[i]);
 		free(var);
 	}
