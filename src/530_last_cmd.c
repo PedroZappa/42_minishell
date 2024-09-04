@@ -20,25 +20,25 @@
 #include "../inc/minishell.h"
 
 /// @brief			Build last command
-void	ft_build_last_cmd(t_shell *sh, int n)
+void	ft_build_last_cmd(t_shell *sh, t_cmd *cmd)
 {
 	char	*exec_path;
 	int		i;
 
-	if (sh->cmds[n].argv[0])
+	if (cmd->argv[0])
 	{
 		i = -1;
 		while (sh->path[++i])
 		{
 			exec_path = ft_strjoin(sh->path[i],
-					sh->cmds[n].argv[sh->cmds[n].argc]);
+					cmd->argv[cmd->argc]);
 			if (exec_path)
 			{
 				if (access(exec_path, X_OK) == 0)
 				{
 					ft_set_var("_", exec_path, &sh->envp);
-					ft_free(sh->cmds[n].argv[0]);
-					sh->cmds[n].argv[0] = exec_path;
+					ft_free(cmd->argv[0]);
+					cmd->argv[0] = exec_path;
 					break ;
 				}
 				ft_free(exec_path);
@@ -46,7 +46,7 @@ void	ft_build_last_cmd(t_shell *sh, int n)
 		}
 	}
 	else
-		ft_set_var("_", sh->cmds[n].argv[sh->cmds[n].argc], &sh->envp);
+		ft_set_var("_", cmd->argv[cmd->argc], &sh->envp);
 }
 
 /// @brief			Update '_' variable (last argument)

@@ -19,22 +19,22 @@
 
 #include "../inc/minishell.h"
 
-static void	ft_append_var(t_shell *sh, int n, int i);
+static void	ft_append_var(t_shell *sh, t_cmd *cmd, int i);
 
 /// @brief			Build array of environment variables
 /// @param sh		Pointer to a t_shell struct
-/// @param n		Command index
-int	ft_append(t_shell *sh, int n, int i)
+/// @param cmd		Pointer to t_cmd struct
+int	ft_append(t_shell *sh, t_cmd *cmd, int i)
 {
-	if (!sh->envp || !sh->cmds[n].argv[0])
+	if (!sh->envp || !cmd->argv[0])
 		return (ft_err(ENV_INIT_ERR, FAILURE));
-	while (sh->cmds[n].argv[i])
+	while (cmd->argv[i])
 	{
-		if ((ft_strchr(sh->cmds[n].argv[i], '+')
-				&& ft_strchr(sh->cmds[n].argv[i], '='))
-			&& (ft_strchr(sh->cmds[n].argv[i], '=')
-				- ft_strchr(sh->cmds[n].argv[i], '+') == 1))
-			ft_append_var(sh, n, i);
+		if ((ft_strchr(cmd->argv[i], '+')
+				&& ft_strchr(cmd->argv[i], '='))
+			&& (ft_strchr(cmd->argv[i], '=')
+				- ft_strchr(cmd->argv[i], '+') == 1))
+			ft_append_var(sh, cmd, i);
 		++i;
 	}
 	return (SUCCESS);
@@ -42,9 +42,9 @@ int	ft_append(t_shell *sh, int n, int i)
 
 /// @brief			Append value to variable key
 /// @param sh		Pointer to a t_shell struct
-/// @param n		Command index
+/// @param cmd		Pointer to t_cmd struct
 /// @param i		Argument index to start from
-static void	ft_append_var(t_shell *sh, int n, int i)
+static void	ft_append_var(t_shell *sh, t_cmd *cmd, int i)
 {
 	char	*key;
 	char	*new_val;
@@ -52,15 +52,15 @@ static void	ft_append_var(t_shell *sh, int n, int i)
 	char	*plus_pos;
 	int		key_len;
 
-	plus_pos = ft_strchr(sh->cmds[n].argv[i], '+');
-	key_len = (ft_strlen(sh->cmds[n].argv[i]) - ft_strlen(plus_pos));
-	key = ft_substr(sh->cmds[n].argv[i], 0, key_len);
-	new_val = ft_strdup(ft_strchr(sh->cmds[n].argv[i], '=') + 1);
+	plus_pos = ft_strchr(cmd->argv[i], '+');
+	key_len = (ft_strlen(cmd->argv[i]) - ft_strlen(plus_pos));
+	key = ft_substr(cmd->argv[i], 0, key_len);
+	new_val = ft_strdup(ft_strchr(cmd->argv[i], '=') + 1);
 	old_val = ft_get_var(key, sh->envp, sh->envt);
 	if (!old_val)
 		old_val = ft_strdup("");
-	ft_free(sh->cmds[n].argv[i]);
-	sh->cmds[n].argv[i] = ft_strjoin_free(
+	ft_free(cmd->argv[i]);
+	cmd->argv[i] = ft_strjoin_free(
 			ft_strjoin_free(key, ft_strdup("=")),
 			ft_strjoin_free(old_val, new_val));
 }

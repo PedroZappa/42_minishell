@@ -26,25 +26,25 @@ static int	ft_is_nflag(char *arg);
 /// - Skip dash
 /// - Check for 'n's (however many)
 /// @param sh		Pointer to a t_shell struct
-/// @param n		Command index
+/// @param cmd		Pointer to t_cmd struct
 /// @return			SUCCESS(0)
 /// @return			FAILURE(1)
-int	ft_echo(t_shell *sh, int n)
+int	ft_echo(t_shell *sh, t_cmd *cmd)
 {
 	int	sentinel;
 	int	i;
 
-	ft_set_var("_", sh->cmds[n].argv[0], &sh->envp);
+	ft_set_var("_", cmd->argv[0], &sh->envp);
 	sentinel = '\n';
 	i = 0;
-	while (sh->cmds[n].argv[++i] && ft_is_nflag(sh->cmds[n].argv[i]))
+	while (cmd->argv[++i] && ft_is_nflag(cmd->argv[i]))
 		sentinel = '\0';
 	if (sentinel == '\0')
 		i = 2;
-	while (sh->cmds[n].argv[i])
+	while (cmd->argv[i])
 	{
-		ft_putstr_fd(sh->cmds[n].argv[i], STDOUT_FILENO);
-		if (sh->cmds[n].argv[i + 1])
+		ft_putstr_fd(cmd->argv[i], STDOUT_FILENO);
+		if (cmd->argv[i + 1])
 			write(STDOUT_FILENO, " ", 1);
 		++i;
 	}

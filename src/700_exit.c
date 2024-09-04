@@ -19,38 +19,13 @@
 
 #include "../inc/minishell.h"
 
-static void	ft_kill(t_shell *sh, int sig);
-
-// TODO: Fix break if exit is not exactly exit
-
 /// @brief			exit built-in
 /// @param sh		Pointer to a t_shell struct
-/// ...
-int	ft_exit(t_shell *sh, int n)
+int	ft_exit(t_shell *sh)
 {
-	if (sh->cmds[n].argc == 1)
-		ft_kill(sh, EXIT_SUCCESS);
-	else if ((sh->cmds[n].argc == 2) && (ft_isdigit(sh->cmds[n].argv[1][0])))
-	{
-		if (sh->cmds[n].argv[1][0] == '-' && ft_isdigit(sh->cmds[n].argv[1][1]))
-			ft_kill(sh, 2);
-		else
-			ft_kill(sh, ft_atoi(sh->cmds[n].argv[1]));
-	}
-	else if (sh->cmds[n].argc > 2)
-		ft_fprintf(STDERR_FILENO, "",
-			sh->cmds[n].argv[0], sh->cmds[n].argv[1]);
-	return (SUCCESS);
-}
-
-/// @brief			exit built-in
-/// @param sh		Pointer to a t_shell struct
-/// @param sig		Signal number
-static void	ft_kill(t_shell *sh, int sig)
-{
-	errno = sig;
+	errno = EXIT_SUCCESS;
 	ft_free_sh(sh);
-	exit(sig);
+	exit(EXIT_SUCCESS);
 }
 
 /** @} */

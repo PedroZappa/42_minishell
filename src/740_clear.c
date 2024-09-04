@@ -24,11 +24,9 @@
 /// Clear screen ANSI sequence: "\033[H\033[J"
 ///		- `\033[H` : moves the cursor to the home position
 ///		- `\033[J` : clears the screen from the cursor to the end of the screen
-/// @param n		Command index
 /// @return			SUCCESS(0)
-int	ft_clear(int n)
+int	ft_clear(void)
 {
-	(void)n;
 	ft_printf("\033[H\033[J");
 	return (SUCCESS);
 }

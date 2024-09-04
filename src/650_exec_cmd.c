@@ -49,21 +49,21 @@ void	ft_exec_cmd(t_shell *sh, int id, int i)
 int	ft_exec(t_shell *sh, int cmd, int n)
 {
 	if (cmd == CMD_EXIT)
-		return (ft_exit(sh, n));
+		return (ft_exit(sh));
 	if (cmd == CMD_PWD)
-		g_exit = ft_pwd(sh, n);
+		g_exit = ft_pwd(sh, sh->cmds + n);
 	if (cmd == CMD_CD)
-		g_exit = ft_cd(sh, n);
+		g_exit = ft_cd(sh, sh->cmds + n);
 	if (cmd == CMD_ENV)
-		g_exit = ft_env(sh, n);
+		g_exit = ft_env(sh, sh->cmds + n);
 	if (cmd == CMD_CLEAR)
-		g_exit = ft_clear(n);
+		g_exit = ft_clear();
 	if (cmd == CMD_ECHO)
-		g_exit = ft_echo(sh, n);
+		g_exit = ft_echo(sh, sh->cmds + n);
 	if (cmd == CMD_EXPORT)
-		g_exit = ft_export(sh, n);
+		g_exit = ft_export(sh, sh->cmds + n);
 	if (cmd == CMD_UNSET)
-		g_exit = ft_unset(sh, n);
+		g_exit = ft_unset(sh, sh->cmds + n);
 	return (SUCCESS);
 }
 

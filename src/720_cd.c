@@ -32,29 +32,29 @@ static void	ft_chdir_err(char *path);
 ///	- If argument is empty: Go to home
 ///	- Change to requested directory
 /// @param sh		Pointer to a t_shell struct
-/// @param cmd_n	Command index
+/// @param cmd		Pointer to t_cmd struct
 /// @return			SUCCESS(0)
 /// @return			FAILURE(1)
-int	ft_cd(t_shell *sh, int cmd_n)
+int	ft_cd(t_shell *sh, t_cmd *cmd)
 {
 	char	*home;
 	int		chdir;
 
-	ft_set_var("_", sh->cmds[cmd_n].argv[0], &sh->envp);
-	if (!sh->cmds->argv[1])
+	ft_set_var("_", cmd->argv[0], &sh->envp);
+	if (cmd->argv[1] == NULL)
 	{
 		home = ft_get_var("HOME", sh->envp, NULL);
-		if (!home)
+		if (home == NULL)
 			return (ft_err(ENV_VAR_ERR, FAILURE));
 		chdir = ft_chdir(&sh->envp, home);
 		ft_free(home);
 		return (chdir);
 	}
-	if (sh->cmds[cmd_n].argc > 2)
+	if (cmd->argc > 2)
 		return (ft_err(ARG_ERR, FAILURE));
-	if (sh->cmds[cmd_n].argv[1][0] == '\0')
-		return (ft_chdir(&sh->envp, sh->cmds[cmd_n].argv[1]));
-	return (ft_chdir(&sh->envp, sh->cmds->argv[1]));
+	if (cmd->argv[1][0] == '\0')
+		return (ft_chdir(&sh->envp, cmd->argv[1]));
+	return (ft_chdir(&sh->envp, cmd->argv[1]));
 }
 
 static int	ft_chdir(char ***env, char *path)
@@ -78,7 +78,7 @@ static int	ft_chdir(char ***env, char *path)
 			ft_set_var("PWD", old, env);
 		}
 	}
-	if (chdir_ret == -1 && path[0])
+	if (chdir_ret == -1 && path[0] != '\0')
 	{
 		ft_chdir_err(path);
 		return (ft_free(pwd), ft_free(old), FAILURE);

@@ -21,19 +21,19 @@
 
 /// @brief			Env built-in
 /// @param sh		Pointer to a t_shell struct
-/// @param n		Command index
+/// @param cmd		Pointer to t_cmd struct
 /// @return			SUCCESS(i)
 /// @return			FAILURE(1)
-int	ft_env(t_shell *sh, int n)
+int	ft_env(t_shell *sh, t_cmd *cmd)
 {
 	int		i;
 
-	ft_set_var("_", sh->cmds[n].argv[0], &sh->envp);
+	ft_set_var("_", cmd->argv[0], &sh->envp);
 	i = 0;
 	// Handle unset PATH
-	while (sh->cmds[n].argv[++i])
-		if (sh->cmds[n].argv[i][0] == '-')
-			return (ft_flag_err(sh->cmds[n].argv[0], sh->cmds[n].argv[1], 1));
+	while (cmd->argv[++i])
+		if (cmd->argv[i][0] == '-')
+			return (ft_flag_err(cmd->argv[0], cmd->argv[1], 1));
 	i = -1;
 	while (sh->envp[++i])
 		if (ft_strchr(sh->envp[i], '='))

@@ -324,11 +324,11 @@ char		**ft_env_del_var(char **env, char *to_del);
 // static char	**ft_env_add_var(char **env, char *new_var);
 
 /// @file	520_build_var.c
-int			ft_append(t_shell *sh, int n, int i);
+int			ft_append(t_shell *sh, t_cmd *cmd, int i);
 // static void	ft_append_var(t_shell *sh, int n, int i);
 
 /// @file	530_last_cmd.c
-void		ft_build_last_cmd(t_shell *sh, int n);
+void		ft_build_last_cmd(t_shell *sh, t_cmd *cmd);
 int			ft_update_last_cmd(t_shell *sh);
 
 //=============================================================================/
@@ -378,32 +378,31 @@ void		ft_redir_out(t_shell *sh, int i);
 //=============================================================================/
 
 /// @file	700_exit.c
-int			ft_exit(t_shell *sh, int n);
-/// static void	ft_kill(t_shell *sh, int sig);
+int			ft_exit(t_shell *sh);
 
 /// @file	710_pwd.c
-int			ft_pwd(t_shell *sh, int n);
+int			ft_pwd(t_shell *sh, t_cmd *cmd);
 
 /// @file	720_cd.c
-int			ft_cd(t_shell *sh, int cmd_n);
+int			ft_cd(t_shell *sh, t_cmd *cmd);
 
 /// @file	730_env.c
-int			ft_env(t_shell *sh, int n);
+int			ft_env(t_shell *sh, t_cmd *cmd);
 
 /// @file	740_clear.c
-int			ft_clear(int n);
+int			ft_clear(void);
 
 /// @file	750_echo.c
-int			ft_echo(t_shell *sh, int n);
+int			ft_echo(t_shell *sh, t_cmd *cmd);
 
 /// @file	760_export.c
-int			ft_export(t_shell *sh, int n);
+int			ft_export(t_shell *sh, t_cmd *cmd);
 
 /// @file	761_export_status.c
-int			ft_export_status(t_shell *sh, int n);
+int			ft_export_status(t_shell *sh, t_cmd *cmd);
 
 /// @file	770_unset.c
-int			ft_unset(t_shell *sh, int n);
+int			ft_unset(t_shell *sh, t_cmd *cmd);
 
 /// @file	780_path.c 
 char		*ft_path_resolve(char *pwd, char *path);

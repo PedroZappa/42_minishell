@@ -30,14 +30,14 @@ static void	ft_print_export(char *var);
 ///		- Print sorted envp vars if key has value
 ///	- Else print syntax error
 /// @param sh		Pointer to a t_shell struct
-/// @param n		Command index
-int	ft_export_status(t_shell *sh, int n)
+/// @param cmd		Pointer to t_cmd struct
+int	ft_export_status(t_shell *sh, t_cmd *cmd)
 {
 	char	**sorted;
 	int		i;
 
 	i = 0;
-	if (!sh->cmds[n].argv[1])
+	if (!cmd->argv[1])
 	{
 		if (!sh->envp)
 			return (ft_err(ENV_INIT_ERR, FAILURE));
@@ -48,7 +48,7 @@ int	ft_export_status(t_shell *sh, int n)
 			ft_print_export(sorted[i]);
 		ft_free_arr(sorted);
 	}
-	else if (sh->cmds[n].argv[1][0] == '\0')
+	else if (cmd->argv[1][0] == '\0')
 		return (ft_err(SYNTAX_ERR, FAILURE));
 	return (SUCCESS);
 }
