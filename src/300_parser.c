@@ -122,8 +122,8 @@ static void	ft_count_args(t_shell *sh, t_token *tks)
 		prev = tks;
 		while (tks && (tks->type != TK_PIPE))
 		{
-			if ((tks->type == TK_CMD) \
-				&& (prev->type != TK_IN) && (prev->type != TK_OUT))
+			if ((tks->type == TK_CMD) && (prev->type != TK_IN)
+				&& (prev->type != TK_OUT) && (prev->type != TK_HEREDOC))
 				++sh->cmds[i].argc;
 			prev = tks;
 			tks = tks->next;
