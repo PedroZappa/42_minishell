@@ -47,7 +47,7 @@ int	ft_free_arr(char **arr)
 {
 	int	i;
 
-	if (!arr)
+	if (arr == NULL)
 		return (FAILURE);
 	i = 0;
 	while (arr[i])
@@ -65,7 +65,7 @@ int	ft_free_tks(t_token **tk)
 {
 	t_token	*tmp;
 
-	if (!tk || !*tk)
+	if (tk == NULL || *tk == NULL)
 		return (FAILURE);
 	while (*tk)
 	{
@@ -97,7 +97,7 @@ int	ft_free_cmds(t_cmd *cmds, int n_cmds)
 	int	i;
 	int	j;
 
-	if (!cmds)
+	if (cmds == NULL)
 		return (FAILURE);
 	i = -1;
 	while (++i < n_cmds)
@@ -107,15 +107,12 @@ int	ft_free_cmds(t_cmd *cmds, int n_cmds)
 			if (cmds[i].argv[j])
 				ft_free(cmds[i].argv[j]);
 		free(cmds[i].argv);
-		if (cmds[i].in.name)
-			ft_free(cmds[i].in.name);
-		if (cmds[i].out.name)
-			ft_free(cmds[i].out.name);
-		if (cmds[i].in.heredoc)
-			ft_lstclear(&cmds[i].in.heredoc, free);
+		if (cmds[i].in)
+			ft_vfree(cmds[i].in);
+		if (cmds[i].out)
+			ft_vfree(cmds[i].out);
 	}
-	if (cmds)
-		free(cmds);
+	ft_vfree(cmds);
 	return (SUCCESS);
 }
 

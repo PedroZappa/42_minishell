@@ -53,10 +53,7 @@ int	ft_exec_fork(t_shell *sh)
 {
 	pid_t	pid;
 
-	if (sh->cmds[0].in.flag == IGNORE_SIGQUIT)
-		signal(SIGQUIT, SIG_IGN);
-	else
-		signal(SIGQUIT, ft_fork_sighandler);
+	signal(SIGQUIT, ft_fork_sighandler);
 	signal(SIGINT, ft_fork_sighandler);
 	pid = fork();
 	if (pid == PID_FAIL)

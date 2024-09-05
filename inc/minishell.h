@@ -136,6 +136,14 @@ typedef enum e_cmd_type
 	CMD_PATH,
 }	t_cmd_type;
 
+typedef enum e_redir_type
+{
+	IN,
+	IN_HEREDOC,
+	OUT,
+	OUT_APPEND
+}	t_redir_type;
+
 //=============================================================================/
 //                               Structures                                    /
 //=============================================================================/
@@ -173,16 +181,11 @@ typedef struct s_tk_ops
 /// @struct			Redirection
 /// @brief	   		Structure to save redirection data
 /// @param name  	Redirection name (to be used with open())
-/// @param flag
-/// Redirection status flag (to use with open() & signal handling):
-/// - -1: Ignores SIGQUIT
-/// -  i: Command index for redirection
-/// @param heredoc	Pointer to Heredoc redirection node (see t_list)
+/// @param type		Redirection type
 typedef struct s_redir
 {
-	char	*name;
-	int		flag;
-	t_list	*heredoc;
+	char			*name;
+	t_redir_type	type;
 }	t_redir;
 
 /// @struct			Command
@@ -190,15 +193,21 @@ typedef struct s_redir
 /// @param cmd   	Command string
 /// @param argc  	Argument count
 /// @param argv  	Argument vector
-/// @param in	   	Input redirection data (see t_redir)
-/// @param out   	Output redirection data (see t_redir)
+/// @param in	   	Input redirection array (see t_redir)
+/// @param n_in		Number of input redirections
+/// @param out   	Output redirection array (see t_redir)
+/// @param n_out	Number of output redirections
 typedef struct s_cmd
 {
 	char	*cmd;
 	int		argc;
 	char	**argv;
-	t_redir	in;
-	t_redir	out;
+
+	t_redir	*in;
+	int		n_in;
+
+	t_redir	*out;
+	int		n_out;
 }	t_cmd;
 
 /// @struct				Shell
@@ -209,22 +218,26 @@ typedef struct s_cmd
 /// @param envp			Pointer to Environment Variables
 /// @param envt			Pointer to Temporary Environment Variables
 /// @param path			Pointer to PATH array
+/// @param hostname		Pointer to Hostname string
 /// @param home			Pointer to HOME address
 /// @param user			Pointer to USER name
-/// @param heredoc		Pointer to HEREDOC
 /// @param exit_status	Exit status
 /// ...
 typedef struct s_shell
 {
 	t_term	termios;
+
 	t_cmd	*cmds;
 	int		n_cmds;
+
 	char	**envp;
 	char	**envt;
 	char	**path;
+
 	char	*hostname;
 	char	*home;
 	char	*user;
+
 	int		exit_status;
 	int		**pipes;
 	int		n_pipes;
@@ -437,6 +450,10 @@ int			ft_free_arr(char **arr);
 int			ft_free_tks(t_token **tk);
 int			ft_free_cmds(t_cmd *cmds, int n_cmds);
 int			ft_free_nocmds(t_cmd *cmds, int n_cmds, t_token **tks);
+
+/// @file	910_free2.c
+
+void		ft_vfree(void *ptr);
 
 #endif
 
