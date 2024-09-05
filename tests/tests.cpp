@@ -308,7 +308,7 @@ TEST(Commands, WithRedirection) {
 // //
 // BUILTINS
 // //
-TEST(Builtins, echo_basic) {
+TEST(Builtins_echo, basic) {
     Tester shell_test;
     std::vector<std::string> commands = {
         "echo",
@@ -344,14 +344,14 @@ TEST(Builtins, echo_basic) {
 	leakReport();
 }
 
-TEST(Builtins, echo_advanced) {
+TEST(Builtins_echo, advanced) {
     Tester shell_test;
     std::vector<std::string> commands = {
         "echo you are $USER",
         "echo $USER$USER",
         "echo $USER'$USER'",
         "echo \"Yo Whirl\"",
-        "echo \"Yo\" dudes & dudettes!",
+        "echo \"Yo\" dudes and dudettes!",
         "echo \'yo $USER\'",
         "echo \'yo $USER  \'",
         "echo \"$USER\"",
@@ -364,6 +364,18 @@ TEST(Builtins, echo_advanced) {
         "echo \"$USER\"$USER\'$USER\'",
 		"echo $\'USER\'",
 		"echo $666HOME",
+    };
+
+    for (const auto& cmd : commands) {
+        runTest(shell_test, cmd);
+    }
+	leakReport();
+
+}
+
+TEST(Builtins_echo, withPipesRedirs) {
+    Tester shell_test;
+    std::vector<std::string> commands = {
 		"echo \"ls > a.txt d 'a'\"",
 		"echo \"ls > a.txt d \"a\"\"",
 		"echo \"ls > '$USER' \"a\"\"",
@@ -389,7 +401,7 @@ TEST(Builtins, echo_advanced) {
 }
 
 // Tests cd
-TEST(Builtins, cd_basic) {
+TEST(Builtins_cd, basic) {
 	Tester shell_test;
 	std::vector<std::string> commands = {
 		"cd",
@@ -410,7 +422,7 @@ TEST(Builtins, cd_basic) {
 	leakReport();
 }
 
-TEST(Builtins, cd_advanced) {
+TEST(Builtins_cd, advanced) {
 	Tester shell_test;
 	std::vector<std::string> commands = {
 		"cd --",
@@ -439,7 +451,7 @@ TEST(Builtins, cd_advanced) {
 }
 
 // ENV
-TEST(Builtins, env_basic) {
+TEST(Builtins_env, basic) {
 	Tester shell_test;
 	std::vector<std::string> commands = {
 		"env",
@@ -453,7 +465,7 @@ TEST(Builtins, env_basic) {
 	leakReport();
 }
 
-TEST(Builtins, env_withPipes) {
+TEST(Builtins_env, withPipes) {
 	Tester shell_test;
 	std::vector<std::string> commands = {
 		"env | wc -l",
@@ -491,7 +503,7 @@ TEST(Builtins, env_withRedirection) {
 }
 
 // PWD
-TEST(Builtins, pwd) {
+TEST(Builtins_pwd, basic) {
 	Tester shell_test;
 	std::vector<std::string> commands = {
 		"pwd",
@@ -505,7 +517,7 @@ TEST(Builtins, pwd) {
 	leakReport();
 }
 
-TEST(Builtins, pwd_advanced) {
+TEST(Builtins_pwd, advanced) {
 	Tester shell_test;
 	std::vector<std::string> commands = {
 		"ls | pwd",
@@ -523,7 +535,7 @@ TEST(Builtins, pwd_advanced) {
 }
 
 // EXPORT
-TEST(Builtins, export) {
+TEST(Builtins_export, export) {
 	Tester shell_test;
 	std::vector<std::string> commands = {
 		"export",			// list formated list of environment variables
@@ -574,7 +586,7 @@ TEST(Builtins, export) {
 	leakReport();
 }
 
-TEST(Builtins, unset) {
+TEST(Builtins_unset, unset) {
 	Tester shell_test;
 	std::vector<std::string> commands = {
 		"unset",
