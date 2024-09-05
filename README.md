@@ -43,21 +43,21 @@
 cat ""
 cd /lib/ && pwd
 
-# TODO:
-ls > $a
-echo $?
-
 #invalid command, followed by empty variable, should clear the exit code
 doesntexist
 $EMPTY
 echo $?
 
-export $LS="ls -la"
+export LS="ls -la"
 echo $LS
 
-
-export $LS=" -la"
+export LS=" -la"
 echo ls$LS
+
+
+# TODO:
+ls > $a
+echo $?
 
 ```
 ## Built-ins 

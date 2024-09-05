@@ -270,7 +270,7 @@ get_googletest: $(BUILD_PATH) $(BUILD)
 gdb: all $(NAME) $(TEMP_PATH)			## Debug w/ gdb
 	tmux split-window -h "gdb --tui --args ./$(NAME)"
 	tmux resize-pane -L 5
-	tmux split-window -v "btop"
+	# tmux split-window -v "btop"
 	make get_log
 
 
@@ -279,7 +279,7 @@ vgdb: all $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck) & gdb
 	make vgdb_cmd
 	tmux split-window -v "gdb --tui -x $(TEMP_PATH)/gdb_commands.txt $(NAME)"
 	tmux resize-pane -U 18
-	tmux split-window -v "btop"
+	# tmux split-window -v "btop"
 	make get_log
 
 valgrind: all $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck)
