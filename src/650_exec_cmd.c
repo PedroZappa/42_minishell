@@ -49,7 +49,7 @@ void	ft_exec_cmd(t_shell *sh, int id, int i)
 int	ft_exec(t_shell *sh, int cmd, int n)
 {
 	if (cmd == CMD_EXIT)
-		return (ft_exit(sh));
+		return (ft_exit(sh, n));
 	if (cmd == CMD_PWD)
 		g_exit = ft_pwd(sh, sh->cmds + n);
 	if (cmd == CMD_CD)
