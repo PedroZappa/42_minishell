@@ -326,6 +326,42 @@ define extract_var
 	display len
 end
 
+### 510_env_set.c
+define set_var
+	display *var
+	display *val
+	display ***env
+	display *new
+	display i
+	display (*env)[i]
+end
+
+define var_from_env
+	display *var
+	display **env
+	display len
+	display i
+end
+
+define env_add_var
+	display **env
+	display *new_var
+	display **new_var
+	display i
+	display env[i]
+	display new_var[i]
+end
+
+define env_del_var
+	display **env
+	display *to_del
+	display **new_env
+	display i
+	display j
+	display env[i]
+	display new_env[i]
+end
+
 ### 520_build_var.c
 define build_var
 	display *sh
