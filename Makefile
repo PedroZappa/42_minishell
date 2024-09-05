@@ -150,6 +150,12 @@ asan: $(BUILD_PATH) $(LIBFT_ARC) $(OBJS)   ## Compile with Address Sanitizer
 	$(CC) $(CFLAGS) $(OBJS) $(INC) $(LIBFT_ARC) $(RFLAGS) -o $(NAME)
 	@echo "[$(_SUCCESS) compiling $(MAG)$(NAME)$(D) with Address Sanitizer $(YEL)🖔$(D)]"
 
+tdebug: DFLAGS += -DTOKENIZER_DEBUG
+tdebug: $(BUILD_PATH) $(LIBFT_ARC) $(OBJS)   ## Compile with Tokenizer Debug
+	@echo "$(YEL)Compiling $(MAG)$(NAME)$(YEL) with Address Sanitizer$(D)"
+	$(CC) $(CFLAGS) $(OBJS) $(INC) $(LIBFT_ARC) $(RFLAGS) -o $(NAME)
+	@echo "[$(_SUCCESS) compiling $(MAG)$(NAME)$(D) with Tokenizer Debug $(YEL)🖔$(D)]"
+
 deps:		## Download/Update deps
 	@if test ! -d "$(LIBFT_PATH)"; then make get_libft; \
 		else echo "$(YEL)[libft]$(D) folder found 🖔"; fi
