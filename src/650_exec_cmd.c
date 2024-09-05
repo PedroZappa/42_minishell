@@ -46,24 +46,27 @@ void	ft_exec_cmd(t_shell *sh, int id, int i)
 /// @return			SUCCESS(0)
 ///	@return			FAILURE(1)
 ///	@note			Used in ft_execute()
-int	ft_exec(t_shell *sh, int cmd, int n)
+int	ft_exec(t_shell *sh, int type, int n)
 {
-	if (cmd == CMD_EXIT)
-		return (ft_exit(sh, n));
-	if (cmd == CMD_PWD)
-		g_exit = ft_pwd(sh, sh->cmds + n);
-	if (cmd == CMD_CD)
-		g_exit = ft_cd(sh, sh->cmds + n);
-	if (cmd == CMD_ENV)
-		g_exit = ft_env(sh, sh->cmds + n);
-	if (cmd == CMD_CLEAR)
+	t_cmd	*cmd;
+
+	cmd = sh->cmds + n;
+	if (type == CMD_EXIT)
+		return (ft_exit(sh, cmd));
+	if (type == CMD_PWD)
+		g_exit = ft_pwd(sh, cmd);
+	if (type == CMD_CD)
+		g_exit = ft_cd(sh, cmd);
+	if (type == CMD_ENV)
+		g_exit = ft_env(sh, cmd);
+	if (type == CMD_CLEAR)
 		g_exit = ft_clear();
-	if (cmd == CMD_ECHO)
-		g_exit = ft_echo(sh, sh->cmds + n);
-	if (cmd == CMD_EXPORT)
-		g_exit = ft_export(sh, sh->cmds + n);
-	if (cmd == CMD_UNSET)
-		g_exit = ft_unset(sh, sh->cmds + n);
+	if (type == CMD_ECHO)
+		g_exit = ft_echo(sh, cmd);
+	if (type == CMD_EXPORT)
+		g_exit = ft_export(sh, cmd);
+	if (type == CMD_UNSET)
+		g_exit = ft_unset(sh, cmd);
 	return (SUCCESS);
 }
 

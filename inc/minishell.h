@@ -378,7 +378,7 @@ void		ft_redir_out(t_shell *sh, int i);
 //=============================================================================/
 
 /// @file	700_exit.c
-int			ft_exit(t_shell *sh, int n);
+int			ft_exit(t_shell *sh, t_cmd *cmd);
 
 /// @file	710_pwd.c
 int			ft_pwd(t_shell *sh, t_cmd *cmd);
