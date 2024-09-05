@@ -59,6 +59,10 @@ echo ls$LS
 ls > $a
 echo $?
 
+# And Mind the exit codes
+exit 1 2
+exit 1 z
+exit z 1
 ```
 ## Built-ins 
 ### [[echo]]
