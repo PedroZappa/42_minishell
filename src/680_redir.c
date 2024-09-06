@@ -12,39 +12,36 @@
 
 #include "../inc/minishell.h"
 
-void	ft_redir_in(t_shell *sh, int i)
+void	ft_redir_in(t_shell *sh, t_cmd *cmd)
 {
-	(void)sh;
-	(void)i;
-	/*int	fd;
+	int	fd;
+	int	i;
 
-	if (sh->cmds[i].in.flag >= 0)
-	{
-		fd = open(sh->cmds[i].in.name, sh->cmds[i].in.flag,
-				S_IRWXU | S_IRGRP | S_IROTH);
-		if (fd < 0)
-			ft_fork_exit(sh, sh->cmds[i].in.name, FAILURE);
-		if (ft_pipe_setter_fd(sh, fd, STDIN_FILENO) == PIPE_FAIL)
-		{
-			close(fd);
-			ft_fork_exit(sh, PIPE_ERR, FAILURE);
-		}
-	}*/
-}
-
-void	ft_redir_out(t_shell *sh, int i)
-{
-	(void)sh;
-	(void)i;
-	/*int	fd;
-
-	fd = open(sh->cmds[i].out[0].name, sh->cmds[i].out.flag,
+	i = 0;
+	fd = open(cmd->in[i].name, O_CREAT | O_RDONLY,
 			S_IRWXU | S_IRGRP | S_IROTH);
 	if (fd < 0)
-		ft_fork_exit(sh, sh->cmds[i].out.name, FAILURE);
+		ft_fork_exit(sh, cmd->in[i].name, FAILURE);
+	if (ft_pipe_setter_fd(sh, fd, STDIN_FILENO) == PIPE_FAIL)
+	{
+		close(fd);
+		ft_fork_exit(sh, PIPE_ERR, FAILURE);
+	}
+}
+
+void	ft_redir_out(t_shell *sh, t_cmd *cmd)
+{
+	int	fd;
+	int	i;
+
+	i = 0;
+	fd = open(cmd->out[0].name, O_CREAT | O_WRONLY,
+			S_IRWXU | S_IRGRP | S_IROTH);
+	if (fd < 0)
+		ft_fork_exit(sh, cmd->out[i].name, FAILURE);
 	if ((fd != 1) && (ft_pipe_setter_fd(sh, fd, STDOUT_FILENO) == PIPE_FAIL))
 	{
 		close(fd);
 		ft_fork_exit(sh, PIPE_ERR, FAILURE);
-	}*/
+	}
 }

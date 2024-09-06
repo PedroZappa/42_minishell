@@ -203,9 +203,11 @@ typedef struct s_cmd
 	char	**argv;
 
 	t_redir	*in;
+	int		in_pipe[2];
 	int		n_in;
 
 	t_redir	*out;
+	int		out_pipe[2];
 	int		n_out;
 }	t_cmd;
 
@@ -341,18 +343,15 @@ void		ft_fork_sighandler(int sig);
 /// @file	500_env_get.c
 char		**ft_init_env(char **env);
 char		*ft_get_var(char *var, char **envp, char**envt);
-// static char	*ft_extract_var(char *select, char **env);
 int			ft_get_var_index(char *var, char **env);
 
 /// @file	510_env_set.c
 int			ft_set_var(char *var, char *val, char ***env);
 int			ft_var_from_env(char *var, char **env);
 char		**ft_env_del_var(char **env, char *to_del);
-// static char	**ft_env_add_var(char **env, char *new_var);
 
 /// @file	520_build_var.c
 int			ft_append(t_shell *sh, t_cmd *cmd, int i);
-// static void	ft_append_var(t_shell *sh, int n, int i);
 
 /// @file	530_last_cmd.c
 void		ft_build_last_cmd(t_shell *sh, t_cmd *cmd);
@@ -364,8 +363,6 @@ int			ft_update_last_cmd(t_shell *sh);
 
 /// @file	600_execute.c
 int			ft_execute(t_shell *sh);
-// static char	**ft_split_path(char **envp);
-// static int	ft_path_from_env(char **envp);
 
 /// @file	610_exec_check.c
 int			ft_exec_check(char *cmd);
@@ -378,7 +375,6 @@ int			ft_exec_fork(t_shell *sh);
 int			ft_exec_pipeline(t_shell *sh);
 
 /// @file	640_exec_child.c
-void		ft_exec_child(t_shell *sh, int *outpipe);
 void		ft_exec_child_first(t_shell *sh);
 void		ft_exec_child_i(t_shell *sh, int i);
 void		ft_exec_child_last(t_shell *sh, int i);
@@ -397,8 +393,8 @@ int			ft_pipe_setter_fd(t_shell *sh, int fd, int in);
 void		ft_close_pipes(t_shell *sh);
 
 /// @file	680_redir.c
-void		ft_redir_in(t_shell *sh, int i);
-void		ft_redir_out(t_shell *sh, int i);
+void		ft_redir_in(t_shell *sh, t_cmd *cmd);
+void		ft_redir_out(t_shell *sh, t_cmd *cmd);
 
 //=============================================================================/
 //	700		Builtins														   /

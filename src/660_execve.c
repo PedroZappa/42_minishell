@@ -20,7 +20,7 @@
 #include "../inc/minishell.h"
 
 void	ft_execve_path(char **path, char **argv, char **envp);
-void	ft_stat_path(char *cmd);
+int		ft_stat_path(char *cmd);
 
 /// @brief			Execute command with execve w/ absolute or relative path
 /// @param path		Pointer to PATH array
@@ -45,7 +45,7 @@ void	ft_execve(char **path, char **argv, char **envp)
 
 /// @brief			Get stat of a path
 /// @param cmd		Pointer to command
-void	ft_stat_path(char *cmd)
+int	ft_stat_path(char *cmd)
 {
 	t_stat	sb;
 	int		stat_ret;
@@ -56,14 +56,15 @@ void	ft_stat_path(char *cmd)
 	{
 		ft_fprintf(STDERR_FILENO, "bash: %s: No such file or directory\n", cmd);
 		g_exit = 127;
-		return ;
+		return (1);
 	}
 	if ((sb.st_mode & __S_IFMT) == __S_IFDIR)
 	{
-		ft_fprintf(STDOUT_FILENO, "bash: %s: Is a directory\n", cmd);
+		ft_fprintf(STDERR_FILENO, "bash: %s: Is a directory\n", cmd);
 		g_exit = 126;
-		return ;
+		return (1);
 	}
+	return (0);
 }
 
 /// @brief			Execute command with relative path
