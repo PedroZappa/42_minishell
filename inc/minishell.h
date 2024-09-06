@@ -137,10 +137,10 @@ typedef enum e_cmd_type
 
 typedef enum e_redir_type
 {
-	IN,
-	IN_HEREDOC,
-	OUT,
-	OUT_APPEND
+	RD_IN,
+	RD_IN_HD,
+	RD_OUT,
+	RD_OUT_APP
 }	t_redir_type;
 
 //=============================================================================/
@@ -242,6 +242,14 @@ typedef struct s_shell
 	int		n_pipes;
 }	t_shell;
 
+typedef struct s_ctrs
+{
+	int		i;
+	int		j;
+	int		k;
+	int		l;
+}	t_ctrs;
+
 //=============================================================================/
 //							Function Prototypes                                /
 //=============================================================================/
@@ -309,6 +317,13 @@ void		ft_readline(char **line_buf, t_shell *sh);
 /// @file	311_readline_utils.c
 int			ft_vq_loop(t_list *list, char *temp, char **buf);
 char		*ft_compress_free_list(t_list **list, char delim);
+
+/// @file	320_cmd_parser.c
+int			ft_parse_cmds(t_token *tks, t_cmd *cmds);
+
+/// @file	321_cmd_parser_utils.c
+void		ft_count_args(t_shell *sh, t_token *tks);
+int			ft_cmd_allocate(t_cmd *cmd);
 
 //=============================================================================/
 //	400		Signal  														   /
