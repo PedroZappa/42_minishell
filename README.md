@@ -63,6 +63,8 @@ echo $?
 exit 1 2
 exit 1 z
 exit z 1
+
+export=
 ```
 ## Built-ins 
 ### [[echo]]

@@ -42,7 +42,7 @@ int	ft_err(char *msg, int status)
 int	ft_syntax_err(char *tkn, int err)
 {
 	ft_fprintf(STDERR_FILENO,
-		"bash : syntax error near unexpected token '%s'\n", tkn);
+		"bash : syntax error near unexpected token `%s'\n", tkn);
 	return (err);
 }
 
