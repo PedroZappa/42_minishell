@@ -39,8 +39,6 @@ int	ft_echo(t_shell *sh, t_cmd *cmd)
 	i = 0;
 	while (cmd->argv[++i] && ft_is_nflag(cmd->argv[i]))
 		sentinel = '\0';
-	if (sentinel == '\0')
-		i = 2;
 	while (cmd->argv[i])
 	{
 		ft_putstr_fd(cmd->argv[i], STDOUT_FILENO);

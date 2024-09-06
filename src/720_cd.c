@@ -65,7 +65,7 @@ static int	ft_chdir(t_shell *sh, char *path)
 
 	old = NULL;
 	pwd = ft_get_var("PWD", sh->envp, NULL);
-	if (pwd == NULL)
+	if (pwd == NULL || ft_pwd_invalid(pwd))
 		pwd = getcwd(NULL, 0);
 	chdir_ret = 0;
 	if (path[0] == '-')
@@ -83,7 +83,7 @@ static int	ft_chdir(t_shell *sh, char *path)
 	if (chdir_ret == -1 && path[0] != '\0')
 		return (ft_chdir_err(path), ft_free(pwd),
 			ft_free(old), FAILURE);
-	return (ft_free(pwd), ft_free(old), chdir_ret);
+	return (ft_free(pwd), ft_free(old), 0);
 }
 
 /// @brief			Get previous directory

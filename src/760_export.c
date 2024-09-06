@@ -37,7 +37,7 @@ int	ft_export(t_shell *sh, t_cmd *cmd)
 	while (cmd->argv[++i])
 	{
 		if (cmd->argv[i][0] == '-')
-			return (ft_flag_err(cmd->argv[0], cmd->argv[i], 1));
+			return (ft_flag_err(cmd->argv[0], cmd->argv[i]));
 		if (ft_isvalid_var(cmd->argv[i]) == FAILURE)
 			ft_fprintf(STDERR_FILENO,
 				"bash: %s: '%s': not a valid identifier\n",

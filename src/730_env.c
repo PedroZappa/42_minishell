@@ -33,12 +33,12 @@ int	ft_env(t_shell *sh, t_cmd *cmd)
 	// Handle unset PATH
 	while (cmd->argv[++i])
 		if (cmd->argv[i][0] == '-')
-			return (ft_flag_err(cmd->argv[0], cmd->argv[1], 1));
+			return (ft_flag_err(cmd->argv[0], cmd->argv[1]));
 	i = -1;
 	while (sh->envp[++i])
 		if (ft_strchr(sh->envp[i], '='))
 			ft_fprintf(STDOUT_FILENO, "%s\n", sh->envp[i]);
-	return (i);
+	return (0);
 }
 
 /** @} */

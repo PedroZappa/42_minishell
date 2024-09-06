@@ -36,7 +36,7 @@ char	*ft_path_resolve(char *pwd, char *path)
 	else
 		temp = ft_path_combine(pwd, path);
 	if (temp == NULL)
-		return (pwd);
+		return (ft_strdup(pwd));
 	ret = ft_path_resolve_inner(temp);
 	return (ft_free(temp), ret);
 }

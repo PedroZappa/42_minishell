@@ -37,13 +37,12 @@ int	ft_err(char *msg, int status)
 /// @details
 /// - Print error message
 /// @param tkn		Message to be printed
-/// @param err		Error number
 /// @return			SUCCESS(0)
-int	ft_syntax_err(char *tkn, int err)
+int	ft_syntax_err(char *tkn)
 {
 	ft_fprintf(STDERR_FILENO,
 		"bash : syntax error near unexpected token `%s'\n", tkn);
-	return (err);
+	return (2);
 }
 
 /// @brief			Print invalid flag error
@@ -51,13 +50,12 @@ int	ft_syntax_err(char *tkn, int err)
 /// - Print error message
 /// @param cmd		Command name
 /// @param cmd_flag	Flag name
-/// @param err		Error number
 /// @return			SUCCESS(ret)
-int	ft_flag_err(char *cmd, char *cmd_flag, int err)
+int	ft_flag_err(char *cmd, char *cmd_flag)
 {
 	ft_fprintf(STDERR_FILENO, "%s: ’%s’: options & flags not supported\n",
 		cmd, cmd_flag);
-	return (err);
+	return (2);
 }
 
 /// @brief			Print invalid command error

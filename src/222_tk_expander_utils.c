@@ -51,7 +51,7 @@ char	*ft_fill_var(t_shell *sh, char *tkn)
 
 	i = 1;
 	var = NULL;
-	if (ft_check_alpha(tkn[i]) == SUCCESS)
+	if (ft_check_alnum(tkn[i]) == SUCCESS)
 		var = ft_get_var((tkn + 1), sh->envp, sh->envt);
 	else if (tkn[i] == '?')
 		var = ft_itoa(g_exit);

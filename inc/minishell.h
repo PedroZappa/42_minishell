@@ -424,6 +424,7 @@ char		*ft_path_resolve(char *pwd, char *path);
 char		*ft_path_combine(char const *s1, char const *s2);
 size_t		ft_path_reduced_len(char **elems);
 void		ft_home_expand(t_shell *sh, t_tk_ops *tk);
+int			ft_pwd_invalid(char *pwd);
 
 //=============================================================================/
 //	800		Errors & Info													   /
@@ -431,8 +432,8 @@ void		ft_home_expand(t_shell *sh, t_tk_ops *tk);
 
 /// @file	800_error.c
 int			ft_err(char *msg, int status);
-int			ft_syntax_err(char *tkn, int err);
-int			ft_flag_err(char *cmd, char *cmd_flag, int err);
+int			ft_syntax_err(char *tkn);
+int			ft_flag_err(char *cmd, char *cmd_flag);
 int			ft_cmd_err(char *cmd, int err);
 
 /// @file	810_error2.c

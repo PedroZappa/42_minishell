@@ -36,7 +36,7 @@ int	ft_unset(t_shell *sh, t_cmd *cmd)
 		return (FAILURE);
 	while (cmd->argv[++i])
 		if (cmd->argv[i][0] == '-')
-			return (ft_flag_err(cmd->argv[0], cmd->argv[i], 1));
+			return (ft_flag_err(cmd->argv[0], cmd->argv[i]));
 	i = 0;
 	while (cmd->argv[++i])
 	{

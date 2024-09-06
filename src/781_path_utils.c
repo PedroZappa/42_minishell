@@ -40,11 +40,11 @@ char	*ft_path_combine(char const *pwd, char const *path)
 	size_t	pwd_len;
 	size_t	path_len;
 
-	if (pwd == NULL || path == NULL)
-		return (NULL);
 	pwd_len = ft_strlen(pwd);
-	pwd_len -= pwd[pwd_len - 1] == '/';
 	path_len = ft_strlen(path);
+	if (pwd_len == 0 || path_len == 0)
+		return (NULL);
+	pwd_len -= pwd[pwd_len - 1] == '/';
 	path_len -= path[path_len - 1] == '/';
 	ret = malloc(sizeof(char) * (pwd_len + path_len + 2));
 	if (ret == NULL)
@@ -64,10 +64,25 @@ void	ft_home_expand(t_shell *sh, t_tk_ops *tk)
 	char	*tkn_str;
 
 	tkn_str = ft_strdup(tk->tkn);
-	if (tk->tkn[0] == '~' && sh->home)
+	if (tk->tkn[0] == '~' && sh->home
+		&& (tk->tkn[1] == '\0' || tk->tkn[1] == '/'))
 	{
 		ft_free(tk->tkn);
 		tk->tkn = ft_strjoin(sh->home, tkn_str + 1);
 	}
 	ft_free(tkn_str);
+}
+
+int	ft_pwd_invalid(char *pwd)
+{
+	int		stat_ret;
+	t_stat	stat_buf;
+
+	if (pwd == NULL)
+		return (-1);
+	ft_bzero(&stat_buf, sizeof(t_stat));
+	stat_ret = stat(pwd, &stat_buf);
+	if (stat_ret == -1)
+		ft_free(pwd);
+	return (stat_ret);
 }
