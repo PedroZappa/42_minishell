@@ -116,7 +116,6 @@ typedef enum e_token_type
 	TK_PIPE,
 	TK_OR,
 	TK_AND,
-	TK_WILD,
 	TK_PARENTESHIS,
 	TK_HEREDOC
 }	t_token_type;

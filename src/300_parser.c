@@ -69,17 +69,17 @@ static int	ft_check_syntax(t_token *tk)
 {
 	if (tk && (tk->type == TK_PIPE || tk->type == TK_OR || tk->type == TK_AND
 			|| ft_strcmp(tk->name, ")") == 0))
-		return (ft_syntax_err(tk->name, FAILURE));
+		return (ft_syntax_err(tk->name));
 	while (tk)
 	{
 		if (tk->next == NULL && (tk->type == TK_PIPE || tk->type == TK_OR
 				|| tk->type == TK_AND || ft_strcmp(tk->name, "(") == 0))
-			return (ft_syntax_err(tk->name, FAILURE));
+			return (ft_syntax_err(tk->name));
 		if (tk->next && ((tk->type == TK_PIPE) && (tk->next->type == TK_PIPE)) \
 			&& ((tk->type == TK_PIPE) || (tk->next->type == TK_OR)) \
 			&& ((tk->type == TK_OR)) \
 			&& ((tk->type == TK_OR) || (tk->next->type == TK_OR)))
-			return (ft_syntax_err(tk->name, FAILURE));
+			return (ft_syntax_err(tk->name));
 		tk = tk->next;
 	}
 	return (SUCCESS);
@@ -125,6 +125,10 @@ static void	ft_count_args(t_shell *sh, t_token *tks)
 			if ((tks->type == TK_CMD) && (prev->type != TK_IN)
 				&& (prev->type != TK_OUT) && (prev->type != TK_HEREDOC))
 				++sh->cmds[i].argc;
+			if ((prev->type == TK_IN) || (prev->type == TK_HEREDOC))
+				++sh->cmds[i].n_in;
+			if (prev->type == TK_OUT)
+				++sh->cmds[i].n_out;
 			prev = tks;
 			tks = tks->next;
 		}

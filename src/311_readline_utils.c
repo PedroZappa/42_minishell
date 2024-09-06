@@ -39,7 +39,7 @@ int	ft_vq_loop(t_list *list, char *temp, char **line_buf)
 		i++;
 		while (temp[i] == '\0' && q_type != 0)
 			if (ft_get_line(list, &temp, &i, line_buf) == FAILURE)
-				return (ft_syntax_err(&q_type, -1), FAILURE);
+				return (ft_syntax_err(&q_type), FAILURE);
 	}
 	return (SUCCESS);
 }
