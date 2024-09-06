@@ -22,6 +22,7 @@
 static int	ft_isvalid_var(char *var);
 static void	ft_update_var(t_shell *sh, t_cmd *cmd, int i);
 static void	ft_export_var(t_shell *sh, t_cmd *cmd, int i);
+static void	ft_export_prc(t_shell *sh, t_cmd *cmd, int i, int *exit);
 
 /// @brief		Export environment variables built-in
 /// @param sh		Pointer to a t_shell struct
@@ -29,28 +30,36 @@ static void	ft_export_var(t_shell *sh, t_cmd *cmd, int i);
 int	ft_export(t_shell *sh, t_cmd *cmd)
 {
 	int	i;
+	int	exit;
 
 	if (!sh->envp || !cmd->argv[1] || !cmd->argv[1][0])
 		return (ft_export_status(sh, cmd));
 	ft_append(sh, cmd, 1);
+	exit = 0;
 	i = 0;
 	while (cmd->argv[++i])
 	{
 		if (cmd->argv[i][0] == '-')
 			return (ft_flag_err(cmd->argv[0], cmd->argv[i]));
-		if (ft_isvalid_var(cmd->argv[i]) == FAILURE)
-			ft_fprintf(STDERR_FILENO,
-				"bash: %s: '%s': not a valid identifier\n",
-				cmd->argv[0], cmd->argv[i]);
-		else
-		{
-			if (ft_strchr(cmd->argv[i], '='))
-				ft_update_var(sh, cmd, i);
-			else
-				ft_export_var(sh, cmd, i);
-		}
+		ft_export_prc(sh, cmd, i, &exit);
 	}
-	return (SUCCESS);
+	return (exit);
+}
+
+static void	ft_export_prc(t_shell *sh, t_cmd *cmd, int i, int *exit)
+{
+	if (ft_isvalid_var(cmd->argv[i]) == FAILURE)
+	{
+		*exit = 1;
+		ft_fprintf(STDERR_FILENO,
+			"bash: %s: '%s': not a valid identifier\n",
+			cmd->argv[0], cmd->argv[i]);
+		return ;
+	}
+	if (ft_strchr(cmd->argv[i], '='))
+		ft_update_var(sh, cmd, i);
+	else
+		ft_export_var(sh, cmd, i);
 }
 
 /// @brief		Check if variable is valid
