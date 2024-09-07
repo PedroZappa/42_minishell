@@ -20,8 +20,6 @@ static t_token	*ft_parse_cmds_inner(t_token *tks, t_cmd *cmd,
 /// @brief			Parse commands from token list
 /// @param tks		Pointer to a t_token struct list
 /// @param cmds		Pointer to an array of t_cmd structs
-/// @param i		Count of commands (Norminette made me do this)
-/// @param j		Count of arguments (Norminette made me do this)
 /// @return			SUCCESS(0)
 /// @return			FAILURE(1)
 int	ft_parse_cmds(t_token *tks, t_cmd *cmds)
@@ -45,27 +43,6 @@ int	ft_parse_cmds(t_token *tks, t_cmd *cmds)
 	return (SUCCESS);
 }
 
-t_token	*ft_parse_cmds_in(t_token *tks, t_cmd *cmd, t_ctrs *c)
-{
-	if (tks->type == TK_IN)
-	{
-		if (tks->next == NULL)
-			return (tks);
-		cmd->in[c->l++] = (t_redir)
-		{ft_strdup(tks->next->name), RD_IN};
-		tks = tks->next;
-	}
-	if (tks->type == TK_HEREDOC)
-	{
-		if (tks->next == NULL)
-			return (tks);
-		cmd->in[c->l++] = (t_redir)
-		{ft_strdup(tks->next->name), RD_IN_HD};
-		tks = tks->next;
-	}
-	return (tks);
-}
-
 t_token	*ft_parse_cmds_inner(t_token *tks, t_cmd *cmd, t_ctrs *c)
 {
 	if (tks->type == TK_CMD)
@@ -87,5 +64,26 @@ t_token	*ft_parse_cmds_inner(t_token *tks, t_cmd *cmd, t_ctrs *c)
 	tks = ft_parse_cmds_in(tks, cmd, c);
 	if (tks)
 		tks = tks->next;
+	return (tks);
+}
+
+t_token	*ft_parse_cmds_in(t_token *tks, t_cmd *cmd, t_ctrs *c)
+{
+	if (tks->type == TK_IN)
+	{
+		if (tks->next == NULL)
+			return (tks);
+		cmd->in[c->l++] = (t_redir)
+		{ft_strdup(tks->next->name), RD_IN};
+		tks = tks->next;
+	}
+	if (tks->type == TK_HEREDOC)
+	{
+		if (tks->next == NULL)
+			return (tks);
+		cmd->in[c->l++] = (t_redir)
+		{ft_strdup(tks->next->name), RD_IN_HD};
+		tks = tks->next;
+	}
 	return (tks);
 }

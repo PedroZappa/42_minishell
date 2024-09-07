@@ -36,6 +36,9 @@ void	ft_init_ops(t_tk_ops *ops)
 	ops[17] = (t_tk_ops){NULL, 0, 0};
 }
 
+/// @brief			Checks if the given character is a double quote
+/// @param dq		Quote to check
+/// @param tk		token to check
 char	ft_get_dq(char dq, char tk)
 {
 	if (dq == '\'' && tk == '\'')
