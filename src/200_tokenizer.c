@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:44:44 by passunca          #+#    #+#             */
-/*   Updated: 2024/07/08 20:08:38 by passunca         ###   ########.fr       */
+/*   Updated: 2024/09/09 09:16:42 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /**
@@ -44,24 +44,12 @@ int	ft_tokenizer(t_shell *sh, char *line, t_token **tks)
 		if (tk->type == TK_HEREDOC && tk->next != NULL
 			&& tk->next->type == TK_CMD)
 		{
-#if TOKENIZER_DEBUG
-			printf("%s + %s -> ", tk->name, tk->next->name);
-#endif
 			tk->next->name = ft_heredoc_expander(sh, tk->next->name);
-#if TOKENIZER_DEBUG
-			printf("%s + %s | %d\n", tk->name, tk->next->name, tk->next->type);
-#endif
 			tk = tk->next->next;
 			continue ;
 		}
-#if TOKENIZER_DEBUG
-		printf("%s -> ", tk->name);
-#endif
 		if (tk->type != TK_BLANK)
 			tk->name = ft_expander(sh, tk->name);
-#if TOKENIZER_DEBUG
-		printf("%s | %d\n", tk->name, tk->type);
-#endif
 		tk = tk->next;
 	}
 	return (SUCCESS);
@@ -141,6 +129,8 @@ static t_tk_ops	ft_get_tk(char *tk, t_tk_ops *ops)
 	i = 0;
 	while (ft_isspace(tk[i]))
 		i++;
+	if (ft_strchr(tk, '='))
+		return ((t_tk_ops){ft_strdup(tk), TK_ASSIGN, (int)ft_strlen(tk)});
 	if (i > 0)
 		return ((t_tk_ops){"", TK_BLANK, i});
 	return (ft_find_ops(tk, ops));

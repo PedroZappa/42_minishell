@@ -6,7 +6,7 @@
 /*   By: gfragoso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:13:26 by passunca          #+#    #+#             */
-/*   Updated: 2024/08/09 11:44:02 by gfragoso         ###   ########.fr       */
+/*   Updated: 2024/09/09 09:13:37 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int	ft_exec(t_shell *sh, int type, int n)
 		g_exit = ft_export(sh, cmd);
 	if (type == CMD_UNSET)
 		g_exit = ft_unset(sh, cmd);
+	if (type == CMD_ENVT)
+		g_exit = ft_envt(sh, cmd);
 	return (SUCCESS);
 }
 

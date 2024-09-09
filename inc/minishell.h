@@ -6,7 +6,7 @@
 /*   By: gfragoso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/08/17 12:11:49 by passunca         ###   ########.fr       */
+/*   Updated: 2024/09/09 09:13:31 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,8 @@ typedef enum e_token_type
 	TK_OR,
 	TK_AND,
 	TK_PARENTESHIS,
-	TK_HEREDOC
+	TK_HEREDOC,
+	TK_ASSIGN,
 }	t_token_type;
 
 typedef enum e_cmd_type
@@ -133,6 +134,7 @@ typedef enum e_cmd_type
 	CMD_EXIT,
 	CMD_HELP,
 	CMD_PATH,
+	CMD_ENVT,
 }	t_cmd_type;
 
 typedef enum e_redir_type
@@ -356,6 +358,9 @@ int			ft_append(t_shell *sh, t_cmd *cmd, int i);
 /// @file	530_last_cmd.c
 void		ft_build_last_cmd(t_shell *sh, t_cmd *cmd);
 int			ft_update_last_cmd(t_shell *sh);
+
+/// @file	540_envt.c
+int			ft_envt(t_shell *sh, t_cmd *cmd);
 
 //=============================================================================/
 //	600		Executer														   /
