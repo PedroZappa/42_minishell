@@ -115,3 +115,12 @@ TO Verify
 Token Priority
 
 Redirect -> Pipe -> Command
+
+# TODO
+
+- Fix signals (ctrl + d com texto nao sair)
+- Indireitar os pipes
+  -- Resolver 2 forks escreverem ao mesmo tempo
+- Redirects
+- ENVT (EXTRA BONUS 2.0)
+- Misc fixes
