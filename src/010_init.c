@@ -77,6 +77,24 @@ static void	ft_shlvl(t_shell *sh)
 		ft_set_var("SHLVL", "1", &sh->envp);
 }
 
+/// @brief		Normalize hostname string
+///				Removes \n and everything after a '.'
+/// @return		SUCCESS(hostname)
+/// @note		Used in ft_init()
+char	*ft_hostname_norm(char *hostname)
+{
+	size_t	len;
+	char	*dot;
+
+	len = ft_strlen(hostname);
+	if (hostname[len - 1] == '\n')
+		hostname[len - 1] = '\0';
+	dot = ft_strchr(hostname, '.');
+	if (dot != NULL)
+		*dot = '\0';
+	return (hostname);
+}
+
 /// @brief		Get hostname
 /// @return		SUCCESS(hostname)
 /// @note		Used in ft_init()
@@ -96,7 +114,9 @@ char	*ft_get_hostname(void)
 			ft_free(temp);
 			temp = get_next_line(fd);
 		}
-		ret[ft_strlen(ret) - 1] = '\0';
+		if (ret == NULL || ret[0] == '\0')
+			return (close(fd), ft_strdup("42"));
+		ret = ft_hostname_norm(ret);
 	}
 	else
 		ret = ft_strdup("42");
