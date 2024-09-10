@@ -105,7 +105,6 @@ static void	ft_update_var(t_shell *sh, t_cmd *cmd, int i)
 static void	ft_export_var(t_shell *sh, t_cmd *cmd, int i)
 {
 	char	*key;
-	char	*value;
 	int		j;
 
 	key = cmd->argv[i];

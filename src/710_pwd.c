@@ -38,7 +38,7 @@ int	ft_pwd(t_shell *sh, t_cmd *cmd)
 	while (cmd->argv[++i])
 		if (cmd->argv[i][0] == '-')
 			return (ft_flag_err(cmd->argv[0], cmd->argv[i]));
-	pwd = ft_get_var("PWD", sh->envp, NULL);
+	pwd = ft_get_var("PWD", sh->envp);
 	if (pwd == NULL || ft_pwd_invalid(pwd))
 		pwd = getcwd(NULL, 0);
 	ft_putendl_fd(pwd, STDOUT_FILENO);

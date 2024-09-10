@@ -43,7 +43,7 @@ int	ft_cd(t_shell *sh, t_cmd *cmd)
 	ft_set_var("_", cmd->argv[0], &sh->envp);
 	if (cmd->argv[1] == NULL)
 	{
-		home = ft_get_var("HOME", sh->envp, NULL);
+		home = ft_get_var("HOME", sh->envp);
 		if (home == NULL)
 			return (ft_err(ENV_VAR_ERR, FAILURE));
 		chdir = ft_chdir(sh, home);
@@ -64,7 +64,7 @@ static int	ft_chdir(t_shell *sh, char *path)
 	int		chdir_ret;
 
 	old = NULL;
-	pwd = ft_get_var("PWD", sh->envp, NULL);
+	pwd = ft_get_var("PWD", sh->envp);
 	if (pwd == NULL || ft_pwd_invalid(pwd))
 		pwd = getcwd(NULL, 0);
 	chdir_ret = 0;
@@ -96,7 +96,7 @@ int	ft_get_prev_dir(char ***env, char *old, char *pwd)
 	int		chdir_ret;
 
 	chdir_ret = 0;
-	old = ft_get_var("OLDPWD", *env, NULL);
+	old = ft_get_var("OLDPWD", *env);
 	if (old == NULL)
 		old = ft_strdup(pwd);
 	chdir_ret = chdir(old);

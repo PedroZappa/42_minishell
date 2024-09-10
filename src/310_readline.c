@@ -90,7 +90,7 @@ static char	*ft_build_prompt(t_shell *sh)
 	char	*pwd;
 
 	temp = ft_prompt_user(sh);
-	cwd = ft_get_var("PWD", sh->envp, NULL);
+	cwd = ft_get_var("PWD", sh->envp);
 	if (cwd == NULL)
 		cwd = getcwd(NULL, 0);
 	if (cwd != NULL)
