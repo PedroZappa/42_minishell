@@ -56,9 +56,9 @@ char	*ft_path_resolve_inner(char *path)
 	final_size = ft_path_elems_final_size(elems);
 	final_elems = ft_path_arr_reduce(elems, final_size);
 	if (final_size == 0)
-		return ((void)ft_free_arr(elems), strdup("/"));
+		return (ft_free_arr(elems), strdup("/"));
 	ret = ft_path_arr_to_str(final_elems);
-	return (free(final_elems), (void)ft_free_arr(elems), ret);
+	return (free(final_elems), ft_free_arr(elems), ret);
 }
 
 /// @brief Get the length of the reduced path
