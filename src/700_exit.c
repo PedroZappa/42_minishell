@@ -48,7 +48,7 @@ int	ft_exit(t_shell *sh, t_cmd *cmd)
 			ft_kill(sh, ft_atoi(cmd->argv[1]));
 		else
 			ft_fprintf(STDERR_FILENO,
-			  "bash: exit: %s: numeric argument required\n", cmd->argv[1]);
+				"bash: exit: %s: numeric argument required\n", cmd->argv[1]);
 	}
 	return (SUCCESS);
 }
