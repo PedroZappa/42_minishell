@@ -114,13 +114,8 @@ Token Priority
 Redirect -> Pipe -> Command
 
 # TODO:
-```sh
-cd /		# see ft_readline (space for ft_calloc)
-cd ~ && cd ..
-```
-```
 
-- Fix signals (ctrl + d com texto nao sair)
+- ✅ Fix signals (ctrl + d com texto nao sair) 
 - Indireitar os pipes
   -- Resolver 2 forks escreverem ao mesmo tempo
 - Redirects
