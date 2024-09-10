@@ -371,6 +371,12 @@ define build_var
 	display sh->cmds[n].argv[i]
 end
 
+define ft_append
+	display *cmd
+	display cmd->argv[i]
+	display i
+end
+
 define append_var
 	display *sh
 	display *sh->cmds[n].argv@sh->cmds[n].argc
@@ -414,7 +420,7 @@ define exec_fork
 end
 
 define exec
-	display *shset editing on
+	display *sh
 	display *cmd
 	display n
 end
@@ -544,9 +550,9 @@ end
 ### 760_export.c
 define export
 	display *sh
-	display n
-	display *sh->cmds[n].argv@sh->cmds[n].argc
-	display sh->cmds[n].argv[i]
+	display i
+	display cmd[i].argv@3
+	display cmd[i].argv[i]
 end
 
 define isvalid_var
@@ -557,11 +563,10 @@ end
 
 define update_var
 	display *sh
-	display n
+	display *key
+	display *value
 	display i
-	display key_len
-	display key
-	display value
+	display cmd
 end
 
 define export_var
