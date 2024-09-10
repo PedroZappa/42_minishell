@@ -30,8 +30,7 @@ char	*ft_path_resolve(char *pwd, char *path)
 	ret = NULL;
 	if (path == NULL || pwd == NULL)
 		return (pwd);
-	if (path[0] == '/'
-		|| (path[0] == '~' && (path[1] == '\0' || path[1] == '/')))
+	if (path[0] == '/')
 		temp = ft_strdup(path);
 	else
 		temp = ft_path_combine(pwd, path);
@@ -56,7 +55,8 @@ char	*ft_path_resolve_inner(char *path)
 	final_size = ft_path_elems_final_size(elems);
 	final_elems = ft_path_arr_reduce(elems, final_size);
 	if (final_size == 0)
-		return (ft_free_arr(elems), strdup("/"));
+		return (free(final_elems), ft_free_arr(elems),
+			ft_strdup("/"));
 	ret = ft_path_arr_to_str(final_elems);
 	return (free(final_elems), ft_free_arr(elems), ret);
 }
