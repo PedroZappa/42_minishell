@@ -117,8 +117,7 @@ typedef enum e_token_type
 	TK_OR,
 	TK_AND,
 	TK_PARENTESHIS,
-	TK_HEREDOC,
-	TK_ASSIGN,
+	TK_HEREDOC
 }	t_token_type;
 
 typedef enum e_cmd_type
@@ -316,10 +315,9 @@ void		ft_lstadd_back_ptr(t_list **lst, void *ptr);
 int			ft_parser(t_shell *sh, char *line_buf);
 
 /// @file	310_readline.c
-void		ft_readline(char **line_buf, t_shell *sh);
+int			ft_readline(char **line_buf, t_shell *sh);
 
 /// @file	311_readline_utils.c
-int			ft_vq_loop(t_list *list, char *temp, char **buf);
 char		*ft_compress_free_list(t_list **list, char delim);
 
 /// @file	320_cmd_parser.c
@@ -448,6 +446,7 @@ int			ft_pwd_invalid(char *pwd);
 /// @file	800_error.c
 int			ft_err(char *msg, int status);
 int			ft_syntax_err(char *tkn);
+int			ft_syntax_char_err(char tkn);
 int			ft_flag_err(char *cmd, char *cmd_flag);
 int			ft_cmd_err(char *cmd, int err);
 

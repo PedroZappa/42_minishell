@@ -129,8 +129,6 @@ static t_tk_ops	ft_get_tk(char *tk, t_tk_ops *ops)
 	i = 0;
 	while (ft_isspace(tk[i]))
 		i++;
-	if (ft_strchr(tk, '='))
-		return ((t_tk_ops){ft_strdup(tk), TK_ASSIGN, (int)ft_strlen(tk)});
 	if (i > 0)
 		return ((t_tk_ops){"", TK_BLANK, i});
 	return (ft_find_ops(tk, ops));

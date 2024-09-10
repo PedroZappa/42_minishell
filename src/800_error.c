@@ -38,6 +38,18 @@ int	ft_err(char *msg, int status)
 /// - Print error message
 /// @param tkn		Message to be printed
 /// @return			SUCCESS(0)
+int	ft_syntax_char_err(char tkn)
+{
+	ft_fprintf(STDERR_FILENO,
+		"bash : syntax error near unexpected token `%c'\n", tkn);
+	return (2);
+}
+
+/// @brief Create error message
+/// @details
+/// - Print error message
+/// @param tkn		Message to be printed
+/// @return			SUCCESS(0)
 int	ft_syntax_err(char *tkn)
 {
 	ft_fprintf(STDERR_FILENO,

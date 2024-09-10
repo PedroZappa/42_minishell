@@ -21,7 +21,7 @@
 #include "../inc/minishell.h"
 
 static char	*ft_build_cwd(t_shell *sh, char *cwd);
-static void	ft_verify_quotes(char **line_buf);
+static int	ft_verify_quotes(char **line_buf);
 static char	*ft_build_prompt(t_shell *sh);
 static char	*ft_prompt_user(t_shell *sh);
 
@@ -29,34 +29,53 @@ static char	*ft_prompt_user(t_shell *sh);
 /// @param line_buf	Line buffer
 /// @param home		Home directory
 /// @note			Used in ft_parser()
-void	ft_readline(char **line_buf, t_shell *sh)
+/// @return			SUCCESS(0)
+///					FAILURE(!=0)	
+int	ft_readline(char **line_buf, t_shell *sh)
 {
 	char	*prompt;
+	int		exit;
 
 	prompt = ft_build_prompt(sh);
 	*line_buf = readline(prompt);
 	ft_free(prompt);
 	if (*line_buf == NULL)
 		*line_buf = ft_strdup("exit");
-	ft_verify_quotes(line_buf);
+	exit = ft_verify_quotes(line_buf);
+	if (exit)
+		return (exit);
 	if (ft_strlen(*line_buf) > 0)
 		add_history(*line_buf);
+	return (SUCCESS);
 }
 
 /// @brief				Verify quotes
 /// @param line_buf		Line buffer
-static void	ft_verify_quotes(char **line_buf)
+/// @return				SUCCESS(0)
+///						FAILURE(!=0)
+static int	ft_verify_quotes(char **line_buf)
 {
+	int		i;
+	char	q_type;
 	char	*temp;
-	t_list	*list;
 
-	list = ft_lstnew(*line_buf);
-	if (list == NULL)
-		return ;
+	i = 0;
+	q_type = 0;
 	temp = *line_buf;
-	if (ft_vq_loop(list, temp, line_buf))
-		return ;
-	*line_buf = ft_compress_free_list(&list, '\n');
+	while (temp[i])
+	{
+		if ((temp[i] == '\'') || (temp[i] == '\"'))
+		{
+			if (q_type == temp[i])
+				q_type = 0;
+			else if (q_type == 0)
+				q_type = temp[i];
+		}
+		i++;
+	}
+	if (q_type != 0)
+		return (ft_syntax_char_err(q_type));
+	return (SUCCESS);
 }
 
 /// @brief			Build bash prompt

@@ -47,7 +47,7 @@ LIBS_PATH		= lib
 BUILD_PATH		= .build
 TEMP_PATH		= .temp
 
-FILES			= 000_main.c
+FILES			=  000_main.c
 FILES			+= 010_init.c
 FILES			+= 100_termios.c
 FILES			+= 200_tokenizer.c

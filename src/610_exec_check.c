@@ -29,6 +29,8 @@ int	ft_exec_check(char *cmd)
 	int	type;
 
 	type = CMD_EXEC;
+	if (ft_strchr(cmd, '=') && ft_strlen(cmd) > 0)
+		type = CMD_ENVT;
 	if (ft_strncmp(cmd, "exit", 5) == SUCCESS)
 		type = CMD_EXIT;
 	if (ft_strncmp(cmd, "pwd", 4) == SUCCESS)
