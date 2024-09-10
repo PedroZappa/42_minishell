@@ -39,7 +39,6 @@ int	ft_init(t_shell *sh, char **envp)
 	sh->hostname = ft_get_hostname();
 	ft_set_var("OLDPWD", NULL, &sh->envp);
 	ft_get_termios(STDIN_FILENO, &sh->termios);
-	rl_editing_mode = VI;
 	sh->n_pipes = 0;
 	return (SUCCESS);
 }
