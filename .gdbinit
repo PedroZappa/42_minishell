@@ -313,7 +313,6 @@ end
 define get_var
 	display var
 	display *envp
-	display *envt
 	display var2get
 end
 

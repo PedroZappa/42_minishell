@@ -132,8 +132,7 @@ typedef enum e_cmd_type
 	CMD_CLEAR,
 	CMD_EXIT,
 	CMD_HELP,
-	CMD_PATH,
-	CMD_ENVT,
+	CMD_PATH
 }	t_cmd_type;
 
 typedef enum e_redir_type
@@ -218,7 +217,6 @@ typedef struct s_cmd
 /// @param cmds  		Pointer to commands array (see t_cmd)
 /// @param n_cmds		Number of commands
 /// @param envp			Pointer to Environment Variables
-/// @param envt			Pointer to Temporary Environment Variables
 /// @param path			Pointer to PATH array
 /// @param hostname		Pointer to Hostname string
 /// @param home			Pointer to HOME address
@@ -233,7 +231,6 @@ typedef struct s_shell
 	int		n_cmds;
 
 	char	**envp;
-	char	**envt;
 	char	**path;
 
 	char	*hostname;
@@ -342,7 +339,7 @@ void		ft_fork_sighandler(int sig);
 
 /// @file	500_env_get.c
 char		**ft_init_env(char **env);
-char		*ft_get_var(char *var, char **envp, char**envt);
+char		*ft_get_var(char *var, char **envp);
 int			ft_get_var_index(char *var, char **env);
 
 /// @file	510_env_set.c
@@ -356,9 +353,6 @@ int			ft_append(t_shell *sh, t_cmd *cmd, int i);
 /// @file	530_last_cmd.c
 void		ft_build_last_cmd(t_shell *sh, t_cmd *cmd);
 int			ft_update_last_cmd(t_shell *sh);
-
-/// @file	540_envt.c
-int			ft_envt(t_shell *sh, t_cmd *cmd);
 
 //=============================================================================/
 //	600		Executer														   /

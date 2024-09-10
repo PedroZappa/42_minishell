@@ -56,7 +56,7 @@ static void	ft_append_var(t_shell *sh, t_cmd *cmd, int i)
 	key_len = (ft_strlen(cmd->argv[i]) - ft_strlen(plus_pos));
 	key = ft_substr(cmd->argv[i], 0, key_len);
 	new_val = ft_strdup(ft_strchr(cmd->argv[i], '=') + 1);
-	old_val = ft_get_var(key, sh->envp, sh->envt);
+	old_val = ft_get_var(key, sh->envp);
 	if (!old_val)
 		old_val = ft_strdup("");
 	ft_free(cmd->argv[i]);

@@ -51,19 +51,16 @@ char	**ft_init_env(char **env)
 /// @brief			Get a var from ENV
 /// @param var		Var to get
 /// @param envp		Pointer to array of pointers, primary env
-/// @param envt		Pointer to array of pointers, temporary env
 /// @return			SUCCESS(var2get)
 ///					FAILURE(NULL)
 /// @details		- Extract from envp
 ///					- If NULL extract from temporary env;
 /// @note			Used in ft_init()
-char	*ft_get_var(char *var, char **envp, char**envt)
+char	*ft_get_var(char *var, char **envp)
 {
 	char	*var2get;
 
 	var2get = ft_extract_var(var, envp);
-	if (var2get == NULL)
-		var2get = ft_extract_var(var, envt);
 	return (var2get);
 }
 

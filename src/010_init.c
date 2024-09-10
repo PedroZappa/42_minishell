@@ -32,11 +32,10 @@ int	ft_init(t_shell *sh, char **envp)
 {
 	sh->envp = ft_init_env(envp);
 	ft_shlvl(sh);
-	sh->envt = ft_calloc(1, sizeof(char *));
-	if (sh->envp == NULL || sh->envt == NULL)
+	if (sh->envp == NULL)
 		return (ft_err(ENV_INIT_ERR, errno), FAILURE);
-	sh->home = ft_get_var("HOME", sh->envp, NULL);
-	sh->user = ft_get_var("USER", sh->envp, NULL);
+	sh->home = ft_get_var("HOME", sh->envp);
+	sh->user = ft_get_var("USER", sh->envp);
 	sh->hostname = ft_get_hostname();
 	ft_set_var("OLDPWD", NULL, &sh->envp);
 	ft_get_termios(STDIN_FILENO, &sh->termios);
@@ -56,7 +55,7 @@ static void	ft_shlvl(t_shell *sh)
 	int			i;
 
 	lvl = 0;
-	shlvl = ft_get_var("SHLVL", sh->envp, NULL);
+	shlvl = ft_get_var("SHLVL", sh->envp);
 	if (shlvl)
 	{
 		if (lvl == 0)

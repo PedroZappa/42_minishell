@@ -125,5 +125,4 @@ export yo # Invalid write and conditional jump
 - Indireitar os pipes
   -- Resolver 2 forks escreverem ao mesmo tempo
 - Redirects
-- ENVT (EXTRA BONUS 2.0)
 - Misc fixes

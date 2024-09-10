@@ -67,8 +67,6 @@ int	ft_exec(t_shell *sh, int type, int n)
 		g_exit = ft_export(sh, cmd);
 	if (type == CMD_UNSET)
 		g_exit = ft_unset(sh, cmd);
-	if (type == CMD_ENVT)
-		g_exit = ft_envt(sh, cmd);
 	return (SUCCESS);
 }
 

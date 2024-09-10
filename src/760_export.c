@@ -94,8 +94,6 @@ static void	ft_update_var(t_shell *sh, t_cmd *cmd, int i)
 	key = ft_substr(cmd->argv[i], 0, key_len);
 	value = ft_strdup(ft_strchr(cmd->argv[i], '=') + 1);
 	ft_set_var(key, value, &sh->envp);
-	if (ft_get_var_index(key, sh->envt) >= 0)
-		sh->envt = ft_env_del_var(sh->envt, key);
 	ft_free(key);
 	ft_free(value);
 }
@@ -114,16 +112,7 @@ static void	ft_export_var(t_shell *sh, t_cmd *cmd, int i)
 	j = ft_get_var_index(key, sh->envp);
 	if (j >= 0)
 		return ;
-	j = ft_get_var_index(key, sh->envt);
-	if (!j)
-		ft_set_var(key, NULL, &sh->envp);
-	else
-	{
-		value = ft_get_var(key, NULL, sh->envt);
-		ft_set_var(key, value, &sh->envp);
-		sh->envt = ft_env_del_var(sh->envt, key);
-		ft_free(value);
-	}
+	ft_set_var(key, NULL, &sh->envp);
 }
 
 /** @} */
