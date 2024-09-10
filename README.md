@@ -119,7 +119,6 @@ cd /		# see ft_readline (space for ft_calloc)
 cd ~ && cd ..
 ```
 ```
-export yo # Invalid write and conditional jump
 
 - Fix signals (ctrl + d com texto nao sair)
 - Indireitar os pipes
