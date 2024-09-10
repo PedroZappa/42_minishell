@@ -36,6 +36,7 @@ char	*ft_path_resolve(char *pwd, char *path)
 		temp = ft_path_combine(pwd, path);
 	if (temp == NULL)
 		return (ft_strdup(pwd));
+	printf("temp -> %s", temp);
 	ret = ft_path_resolve_inner(temp);
 	return (ft_free(temp), ret);
 }
@@ -128,7 +129,7 @@ char	**ft_path_arr_reduce(char **elems, size_t final_size)
 	while (elems[i])
 	{
 		if (ft_strcmp(elems[i], "..") == 0)
-			j -= j > 0;
+			j -= (j > 0);
 		else if (ft_strcmp(elems[i], "."))
 		{
 			ret[j] = elems[i];
