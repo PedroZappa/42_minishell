@@ -87,11 +87,14 @@ void	ft_execve_path(char **path, char **argv, char **envp)
 		++i;
 		free(exec_path);
 	}
-	if (execve_err == EXECVE_ERR)
-	{
-		g_exit = 127;
+	if (path == NULL)
+		ft_fprintf(STDERR_FILENO, "bash: %s: No such file or directory\n",
+			*argv);
+	else if (execve_err == EXECVE_ERR)
 		ft_cmd_err(argv[0], g_exit);
-	}
+	else
+		return ;
+	g_exit = 127;
 }
 
 /** @} */
