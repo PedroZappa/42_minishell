@@ -20,7 +20,7 @@
 
 #include "../inc/minishell.h"
 
-static char	*ft_build_cwd(t_shell *sh, char *cwd);
+static char	*ft_build_cwd(char *cwd, char *home);
 static int	ft_verify_quotes(char **line_buf);
 static char	*ft_build_prompt(t_shell *sh);
 static char	*ft_prompt_user(t_shell *sh);
@@ -88,6 +88,7 @@ static char	*ft_build_prompt(t_shell *sh)
 	char	*temp;
 	char	*cwd;
 	char	*pwd;
+	char	*home;
 
 	temp = ft_prompt_user(sh);
 	cwd = ft_get_var("PWD", sh->envp);
@@ -95,10 +96,14 @@ static char	*ft_build_prompt(t_shell *sh)
 		cwd = getcwd(NULL, 0);
 	if (cwd != NULL)
 	{
-		pwd = ft_build_cwd(sh, cwd);
+		home = ft_get_var("HOME", sh->envp);
+		if (home == NULL)
+			home = ft_strdup(sh->home);
+		pwd = ft_build_cwd(cwd, home);
 		if (pwd)
 			temp = ft_strjoin_free(temp, pwd);
 		ft_free(cwd);
+		ft_free(home);
 	}
 	ret = ft_strjoin(temp, BWHT"$ "NC);
 	return (ft_free(temp), ret);
@@ -106,11 +111,11 @@ static char	*ft_build_prompt(t_shell *sh)
 
 /// @brief			Formats the Current Working Directory (cwd) 
 /// 						to omit the home path and replace it by '~'
-/// @param sh		Pointer to a t_shell struct
-/// @param cwd	String containing the path to the cwd
+/// @param cwd		String containing the path to the cwd
+///	@param home		Home path
 /// @return			Formatted cwd
 /// @note			Used in ft_build_prompt()
-static char	*ft_build_cwd(t_shell *sh, char *cwd)
+static char	*ft_build_cwd(char *cwd, char *home)
 {
 	char	*ret;
 	int		i;
@@ -118,8 +123,8 @@ static char	*ft_build_cwd(t_shell *sh, char *cwd)
 	int		home_len;
 
 	cwd_len = ft_strlen(cwd);
-	home_len = ft_strlen(sh->home);
-	if (ft_strncmp(cwd, sh->home, home_len) != 0)
+	home_len = ft_strlen(home);
+	if (ft_strncmp(cwd, home, home_len) != 0)
 		home_len = 0;
 	ret = ft_calloc((cwd_len - home_len + (home_len > 0) + 1), sizeof(char));
 	i = 0;

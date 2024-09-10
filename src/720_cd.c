@@ -45,7 +45,7 @@ int	ft_cd(t_shell *sh, t_cmd *cmd)
 	{
 		home = ft_get_var("HOME", sh->envp);
 		if (home == NULL)
-			return (ft_err(ENV_VAR_ERR, FAILURE));
+			home = ft_strdup(sh->home);
 		chdir = ft_chdir(sh, home);
 		ft_free(home);
 		return (chdir);
