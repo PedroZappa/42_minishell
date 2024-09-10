@@ -42,6 +42,7 @@ int	ft_syntax_char_err(char tkn)
 {
 	ft_fprintf(STDERR_FILENO,
 		"bash : syntax error near unexpected token `%c'\n", tkn);
+	g_exit = 2;
 	return (2);
 }
 
@@ -54,6 +55,7 @@ int	ft_syntax_err(char *tkn)
 {
 	ft_fprintf(STDERR_FILENO,
 		"bash : syntax error near unexpected token `%s'\n", tkn);
+	g_exit = 2;
 	return (2);
 }
 
