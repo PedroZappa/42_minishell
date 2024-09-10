@@ -18,6 +18,7 @@
 ***/
 
 #include "../inc/minishell.h"
+#include <unistd.h>
 
 void	ft_kill(t_shell *sh, int exit_code);
 int		ft_isnum(char *str);
@@ -28,20 +29,32 @@ int		ft_isnum(char *str);
 int	ft_exit(t_shell *sh, t_cmd *cmd)
 {
 	if (cmd->argc > 2)
-		ft_err("bash: exit: too many arguments\n", FAILURE);
+	{
+		ft_fprintf(STDOUT_FILENO, "exit\n");
+		if (!ft_isnum(cmd->argv[1]))
+		{
+			ft_fprintf(STDERR_FILENO,
+				"bash: exit: %s: numeric argument required\n", cmd->argv[1]);
+			ft_kill(sh, 2);
+		}
+		else
+			ft_err("bash: exit: too many arguments\n", FAILURE);
+	}
 	if (cmd->argc == 1)
 		ft_kill(sh, 0);
 	if (cmd->argc == 2)
 	{
 		if (ft_isnum(cmd->argv[1]))
 			ft_kill(sh, ft_atoi(cmd->argv[1]));
+		else
+			ft_fprintf(STDERR_FILENO,
+			  "bash: exit: %s: numeric argument required\n", cmd->argv[1]);
 	}
 	return (SUCCESS);
 }
 
 void	ft_kill(t_shell *sh, int exit_code)
 {
-	ft_fprintf(STDOUT_FILENO, "exit\n");
 	errno = exit_code;
 	ft_free_sh(sh);
 	exit(exit_code);

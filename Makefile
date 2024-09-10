@@ -239,7 +239,7 @@ test: $(BUILD_PATH) $(LIBFT_ARC) $(OBJS_TEST)
 ##@ Test Rules 🧪
 
 sync_shell: $(BUILD)		## Test w/ syncshell
-	tmux set-option remain-on-exit off
+	tmux set-option remain-on-exit on
 	@echo "[$(YEL)Testing with syncshell$(D)]"
 	tmux split-window -h "bash"
 	tmux setw synchronize-panes on
