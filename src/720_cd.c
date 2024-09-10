@@ -65,7 +65,7 @@ static int	ft_chdir(t_shell *sh, char *path)
 
 	old = NULL;
 	pwd = ft_get_var("PWD", sh->envp);
-	if (pwd == NULL || ft_pwd_invalid(pwd))
+	if (path == NULL || pwd == NULL || ft_pwd_invalid(pwd))
 		pwd = getcwd(NULL, 0);
 	chdir_ret = 0;
 	if (path[0] == '-')
