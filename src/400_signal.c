@@ -28,6 +28,7 @@ void	ft_sigset(void)
 {
 	signal(SIGINT, ft_signal_handler);
 	signal(SIGQUIT, SIG_IGN);
+	signal(SIGTERM, SIG_IGN);
 }
 
 /// @brief			Signal handler

@@ -38,8 +38,6 @@ void	ft_execve(char **path, char **argv, char **envp)
 		ft_stat_path(argv[0]);
 		return ;
 	}
-	if (path == NULL)
-		return ;
 	ft_execve_path(path, argv, envp);
 }
 
@@ -79,7 +77,7 @@ void	ft_execve_path(char **path, char **argv, char **envp)
 
 	i = 0;
 	execve_err = EXECVE_ERR;
-	while ((execve_err == EXECVE_ERR) && path[i])
+	while ((execve_err == EXECVE_ERR) && path && path[i])
 	{
 		exec_path = ft_strjoin(path[i], *argv);
 		if (!exec_path)
