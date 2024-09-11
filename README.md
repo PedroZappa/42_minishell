@@ -129,8 +129,6 @@ a
 
 exit /	# Does not exit as it should
 
-cd ../../../../../.. # Invalid Read
-
 ls <	# Error Message Output differ
 ls >	# Error Message Output differ
 

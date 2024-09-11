@@ -126,9 +126,9 @@ char	*ft_path_arr_to_str(char **elems)
 /// @return SUCCESS(The reduced path array)
 char	**ft_path_arr_reduce(char **elems, size_t final_size)
 {
-	char	**ret;
-	int		i;
-	int		j;
+	char		**ret;
+	size_t		i;
+	size_t		j;
 
 	ret = ft_calloc(final_size + 1, sizeof(char *));
 	i = 0;
@@ -139,7 +139,8 @@ char	**ft_path_arr_reduce(char **elems, size_t final_size)
 			j -= (j > 0);
 		else if (ft_strcmp(elems[i], "."))
 		{
-			ret[j] = elems[i];
+			if (j < final_size)
+				ret[j] = elems[i];
 			j++;
 		}
 		i++;

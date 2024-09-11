@@ -64,7 +64,6 @@ int	ft_pwd_invalid(char *pwd)
 	return (stat_ret);
 }
 
-
 /// @brief			Print invalid flag error
 /// @param cmd		Command name
 /// @param cmd_flag	Flag name
