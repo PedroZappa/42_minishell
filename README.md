@@ -116,6 +116,8 @@ Redirect -> Pipe -> Command
 ```sh
 ls << EOF # Send Ctrl+C inside heredoc then exit provokes a leak
 cd << EOF # Close heredoc then exit leaks
+exit < a	# Leaks
+exit << a	# Leaks
 
 cd ../../../../../.. # Invalid Read
 
@@ -126,6 +128,7 @@ env z | ls	# Error Message Output differ
 ls | env z	# Error Message Output differ
 
 echo > a.txt	# Leaks
+
 
 ```
 
