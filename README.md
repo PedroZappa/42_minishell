@@ -115,9 +115,17 @@ Redirect -> Pipe -> Command
 # TODO:
 ```sh
 ls << EOF # Send Ctrl+C inside heredoc then exit provokes a leak
+EOF
+Ctrl+C
+
 cd << EOF # Close heredoc then exit leaks
+EOF
+exit
+
 exit < a	# Leaks
+a
 exit << a	# Leaks
+a
 
 cd ../../../../../.. # Invalid Read
 
@@ -128,8 +136,6 @@ env z | ls	# Error Message Output differ
 ls | env z	# Error Message Output differ
 
 echo > a.txt	# Leaks
-
-
 ```
 
 - ✅ Fix signals (ctrl + d com texto nao sair) 
