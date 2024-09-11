@@ -127,6 +127,8 @@ a
 exit << a	# Leaks
 a
 
+exit /	# Does not exit as it should
+
 cd ../../../../../.. # Invalid Read
 
 ls <	# Error Message Output differ
