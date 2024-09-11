@@ -44,7 +44,6 @@ char	*ft_path_resolve(char *pwd, char *path)
 		temp = ft_path_combine(pwd, path);
 	if (temp == NULL)
 		return (ft_strdup(pwd));
-	printf("temp -> %s", temp);
 	ret = ft_path_resolve_inner(temp);
 	return (ft_free(temp), ret);
 }
