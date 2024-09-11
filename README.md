@@ -102,7 +102,6 @@ echo "$USER"$USER'$USER'
 cd ~
 cd -
 cd ""
-
 ```
 
 # Notes
@@ -114,9 +113,11 @@ Token Priority
 Redirect -> Pipe -> Command
 
 # TODO:
-
 ```sh
 ls << EOF # Send Ctrl+C inside heredoc then exit provokes a leak
+
+cd ../../../../../.. # Invalid Read
+```
 
 - ✅ Fix signals (ctrl + d com texto nao sair) 
 - Indireitar os pipes

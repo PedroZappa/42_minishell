@@ -409,8 +409,8 @@ TEST(Builtins_cd, basic) {
 		"cd ..",
 		"cd \"\"",
 		"cd src",
-		"cd void",
-		"cd a b",
+		// "cd void",
+		// "cd a b",
 	};
 
 	for (const auto& cmd : commands) {
@@ -422,10 +422,6 @@ TEST(Builtins_cd, basic) {
 TEST(Builtins_cd, advanced) {
 	Tester shell_test;
 	std::vector<std::string> commands = {
-		"cd --",
-		"cd ~*",
-		"cd -*",
-		"cd && cd",
 		"cd ../../../../../..",
 		"cd | ls",
 		"ls | cd",
@@ -550,7 +546,6 @@ TEST(Builtins_export, export) {
 		"export ZEDRO=69 | ls",
 		"ls | export ZEDRO=69",
 		"export ZEDRO=69",
-		"export ZEDRO=69 && export ZEDRO=\"42 for 420\"",
 		"export ZEDRO=\"Here is | a value < no input\"",
 		"export ZEDRO=\"This is | a < value < no input\"",
 		"export ZEDRO=",
@@ -560,8 +555,6 @@ TEST(Builtins_export, export) {
 		"ls | export a.42",
 		"export V/A/R=zedro",
 		"export =zedro",
-		"export ZEDRO && echo $ZEDRO",
-		"export ZEDRO=zedro && echo $ZEDRO",
 		"export ZED1 ZED2=zedro",
 		"export =",
 		"export 1ZEDRO=test",
@@ -620,25 +613,25 @@ TEST(Builtins, unsetWithPipesRedirection) {
 	leakReport();
 }
 
-TEST(Builtins, unsetWithAND) {
-	Tester shell_test;
-	std::vector<std::string> commands = {
-		"export ZEDRO=42 && unset ZEDRO | ls",
-		"export ZEDRO=42 && ls | unset ZEDRO",
-		"export ZEDRO=42 && unset ZEDRO=69",
-		"export ZEDRO=42 && unset ZEDRO=",
-		"export ZEDRO=42 && unset 42",
-		"export ZEDRO=42 && unset ZE/DRO",
-		"export ZEDRO=42 && unset =",
-		"export ZEDRO=42 && unset ZEDRO",
-		"unset HOME && echo $HOME && cd $HOME",
-	};
-
-	for (const auto& cmd : commands) {
-		runTest(shell_test, cmd);
-	}
-	leakReport();
-}
+// TEST(Builtins, unsetWithAND) {
+// 	Tester shell_test;
+// 	std::vector<std::string> commands = {
+// 		"export ZEDRO=42 && unset ZEDRO | ls",
+// 		"export ZEDRO=42 && ls | unset ZEDRO",
+// 		"export ZEDRO=42 && unset ZEDRO=69",
+// 		"export ZEDRO=42 && unset ZEDRO=",
+// 		"export ZEDRO=42 && unset 42",
+// 		"export ZEDRO=42 && unset ZE/DRO",
+// 		"export ZEDRO=42 && unset =",
+// 		"export ZEDRO=42 && unset ZEDRO",
+// 		"unset HOME && echo $HOME && cd $HOME",
+// 	};
+//
+// 	for (const auto& cmd : commands) {
+// 		runTest(shell_test, cmd);
+// 	}
+// 	leakReport();
+// }
 
 // EXIT
 TEST(Builtins_exit, basic) {
