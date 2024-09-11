@@ -10,6 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+* @defgroup 	path_utils Path utilities
+* @{
+*
+* @brief		Path utilities
+* @version		1.0
+***/
+
 #include "../inc/minishell.h"
 
 /// @brief Get the length of the reduced path
@@ -73,6 +81,8 @@ void	ft_home_expand(t_shell *sh, t_tk_ops *tk)
 	ft_free(tkn_str);
 }
 
+/// @brief Check if pwd is invalid
+/// @param pwd The current working directory
 int	ft_pwd_invalid(char *pwd)
 {
 	int		stat_ret;
@@ -86,3 +96,5 @@ int	ft_pwd_invalid(char *pwd)
 		ft_free(pwd);
 	return (stat_ret);
 }
+
+/** @} */

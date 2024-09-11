@@ -10,6 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+* @defgroup 	tokenizer_utils Tokenizer utils
+* @{
+*
+* @brief		Tokenizer utils
+* @version		1.0
+***/
+
 #include "../inc/minishell.h"
 
 /// @brief			Initialize t_tk_ops array with all supported tokens
@@ -51,3 +59,5 @@ char	ft_get_dq(char dq, char tk)
 		return ('\'');
 	return (dq);
 }
+
+/** @} */

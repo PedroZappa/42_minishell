@@ -20,8 +20,6 @@
 #include "../inc/minishell.h"
 
 /// @brief			Error printing
-/// @details		Prints message to stderr
-///					- Saves exit code to g_exit
 /// @param msg		Message to be printed
 /// @param status	Error number
 /// @return			SUCCESS(1)
@@ -34,8 +32,6 @@ int	ft_err(char *msg, int status)
 }
 
 /// @brief Create error message
-/// @details
-/// - Print error message
 /// @param tkn		Message to be printed
 /// @return			SUCCESS(0)
 int	ft_syntax_char_err(char tkn)
@@ -47,8 +43,6 @@ int	ft_syntax_char_err(char tkn)
 }
 
 /// @brief Create error message
-/// @details
-/// - Print error message
 /// @param tkn		Message to be printed
 /// @return			SUCCESS(0)
 int	ft_syntax_err(char *tkn)
@@ -60,8 +54,6 @@ int	ft_syntax_err(char *tkn)
 }
 
 /// @brief			Print invalid flag error
-/// @details
-/// - Print error message
 /// @param cmd		Command name
 /// @param cmd_flag	Flag name
 /// @return			SUCCESS(ret)
@@ -73,8 +65,6 @@ int	ft_flag_err(char *cmd, char *cmd_flag)
 }
 
 /// @brief			Print invalid command error
-/// @details
-/// - Print error message
 /// @param cmd		Command name
 /// @param err		Error number
 /// @return			SUCCESS(err)

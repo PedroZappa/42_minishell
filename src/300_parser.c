@@ -54,14 +54,6 @@ int	ft_parser(t_shell *sh, char *line_buf)
 }
 
 /// @brief Check if a given token's list is a valid command syntactically
-/// @details
-/// - If first token is a pipe, return failure
-/// - Loop through token list and throw an error:
-///		- If there is no next token, and the current tkn is a PIPE or OR;
-///		- If there is a next token, the current tkn a PIPE and the next also;
-///		- If there is a next token, the current tkn a PIPE and the next OR
-///		- If there is a next token, the current tkn a OR and the next a PIPE;
-///		- If there is a next token, the current tkn a OR and the next also;
 /// @param tk	Pointer to a t_token struct
 /// @return		SUCCESS(0)
 /// @note		Used in ft_parser()
@@ -88,6 +80,8 @@ static int	ft_check_syntax(t_token *tk)
 	return (SUCCESS);
 }
 
+/// @brief Check if a given token's list is a valid command syntactically 2
+/// @param tk	Pointer to a t_token struct
 static int	ft_check_syntax2(t_token *tk)
 {
 	if (tk->next && ((tk->type == TK_PIPE) && (tk->next->type == TK_PIPE))

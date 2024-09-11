@@ -10,10 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+* @defgroup 	readline Readline
+* @{
+*
+* @brief		Readline functionality
+* @version		1.0
+***/
+
 #include "../inc/minishell.h"
 
 static char	*ft_compress_list(t_list *list, char delim);
 
+/// @brief			Compress list
+/// @param list		Pointer to a t_list struct
+/// @param delim	Delimiter
+/// @return			SUCCESS(Compressed list)
+/// @return			FAILURE(NULL)
 char	*ft_compress_free_list(t_list **list, char delim)
 {
 	char	*ret;
@@ -57,3 +70,5 @@ static char	*ft_compress_list(t_list *list, char delim)
 	}
 	return (ret);
 }
+
+/** @} */

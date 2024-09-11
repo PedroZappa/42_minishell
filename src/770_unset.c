@@ -10,15 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+* @defgroup env_set Set environment variable
+* @{
+*
+* @brief		Set environment variable
+* @version		1.0
+***/
+
 #include "../inc/minishell.h"
 
 /// @brief			Unset built-in
-/// @details
-/// - If flags are parsed return error
-/// - Loop through envp looking for var
-///		- If there is no "=" in var:
-///			- Check if var is in envp
-///				- If yes, delete it
 /// @param sh		Pointer to a t_shell struct
 /// @param cmd		Pointer to t_cmd struct
 /// @return			SUCCESS(0)
@@ -40,10 +42,10 @@ int	ft_unset(t_shell *sh, t_cmd *cmd)
 	{
 		var = cmd->argv[i];
 		if (ft_strchr(var, '=') == NULL)
-		{
 			if (ft_get_var_index(var, sh->envp) >= 0)
 				sh->envp = ft_env_del_var(sh->envp, var);
-		}
 	}
 	return (SUCCESS);
 }
+
+/** @} */

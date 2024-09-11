@@ -20,6 +20,8 @@
 #include "../inc/minishell.h"
 
 /// @brief			Build last command
+/// @param sh		Pointer to a t_shell struct
+/// @param cmd		Pointer to t_cmd struct
 void	ft_build_last_cmd(t_shell *sh, t_cmd *cmd)
 {
 	char	*exec_path;
@@ -50,9 +52,6 @@ void	ft_build_last_cmd(t_shell *sh, t_cmd *cmd)
 }
 
 /// @brief			Update '_' variable (last argument)
-/// @details
-/// - Check for non-empty argument
-/// - Set '_' variable
 /// @param sh		Pointer to a t_shell struct
 /// @param n		Command index
 /// @return			SUCCESS(0)

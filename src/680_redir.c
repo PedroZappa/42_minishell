@@ -10,8 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+* @defgroup redirects Redirects
+* @{
+*
+* @brief		Redirects
+* @version		1.0
+***/
+
 #include "../inc/minishell.h"
 
+/// @brief			Redirect input
+/// @param sh		Pointer to a t_shell struct
+/// @param cmd		Pointer to a t_cmd struct
 void	ft_redir_in(t_shell *sh, t_cmd *cmd)
 {
 	int	fd;
@@ -29,6 +40,9 @@ void	ft_redir_in(t_shell *sh, t_cmd *cmd)
 	}
 }
 
+/// @brief			Redirect output
+/// @param sh		Pointer to a t_shell struct
+/// @param cmd		Pointer to a t_cmd struct
 void	ft_redir_out(t_shell *sh, t_cmd *cmd)
 {
 	int	fd;
@@ -45,3 +59,5 @@ void	ft_redir_out(t_shell *sh, t_cmd *cmd)
 		ft_fork_exit(sh, PIPE_ERR, FAILURE);
 	}
 }
+
+/** @} */

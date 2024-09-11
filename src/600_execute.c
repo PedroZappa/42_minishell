@@ -27,7 +27,6 @@ static int	ft_path_from_env(char **envp);
 * @param sh	Pointer to a t_shell struct
 * @return	SUCCESS(0)
 * @return	FAILURE(1)
-* @endcode
 */
 int	ft_execute(t_shell *sh)
 {

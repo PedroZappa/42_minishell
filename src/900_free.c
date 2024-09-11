@@ -39,7 +39,6 @@ void	ft_free_sh(t_shell *sh)
 /// @brief			Free array
 /// @param arr		Array to be freed
 /// @param status	Exit status
-/// @var i			To iterate array members
 /// @return			SUCCESS(0)
 ///					FAILURE(1)
 int	ft_free_arr(char **arr)
@@ -79,17 +78,8 @@ int	ft_free_tks(t_token **tk)
 /// @brief			Free commands
 /// @param cmds		Pointer to an array of t_cmd structs
 /// @param n_cmds	Number of commands in the array
-/// @var i			To iterate through the array of commands
-/// @var j			To iterate through the command's arguments
 /// @return			SUCCESS(0)
 ///	@return			FAILURE(1)
-/// @details
-/// - Free command's arguments
-/// - Free command argv
-/// - Free command's input redirection
-/// - Free command's output redirection
-/// - Free command heredoc list
-/// - Free command struct
 /// @note			Used in ft_sh_loop() ...
 int	ft_free_cmds(t_cmd *cmds, int n_cmds)
 {

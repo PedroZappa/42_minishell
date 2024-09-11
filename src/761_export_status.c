@@ -23,12 +23,6 @@ static char	**ft_sort_env(char **env, int n);
 static void	ft_print_export(char *var);
 
 /// @brief		Export environment variables
-/// @details
-/// - Check if command has argument
-///		- Initialize a copy of envp
-///		- Sort envp
-///		- Print sorted envp vars if key has value
-///	- Else print syntax error
 /// @param sh		Pointer to a t_shell struct
 /// @param cmd		Pointer to t_cmd struct
 int	ft_export_status(t_shell *sh, t_cmd *cmd)

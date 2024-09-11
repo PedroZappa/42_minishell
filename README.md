@@ -115,6 +115,9 @@ Redirect -> Pipe -> Command
 
 # TODO:
 
+```sh
+ls << EOF # Send Ctrl+C inside heredoc then exit provokes a leak
+
 - ✅ Fix signals (ctrl + d com texto nao sair) 
 - Indireitar os pipes
   -- Resolver 2 forks escreverem ao mesmo tempo

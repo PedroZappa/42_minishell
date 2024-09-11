@@ -10,6 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+* @defgroup parser Parser
+* @{
+*
+* @brief		Parser
+* @version		1.0
+***/
+
 #include "../inc/minishell.h"
 
 static t_token	*ft_parse_cmds_in(t_token *tks, t_cmd *cmd,
@@ -43,6 +51,10 @@ int	ft_parse_cmds(t_token *tks, t_cmd *cmds)
 	return (SUCCESS);
 }
 
+/// @brief			Parse commands from token list
+/// @param tks		Pointer to a t_token struct list
+/// @param cmd		Pointer to a t_cmd struct
+/// @param c		Pointer to a t_ctrs struct
 t_token	*ft_parse_cmds_inner(t_token *tks, t_cmd *cmd, t_ctrs *c)
 {
 	if (tks->type == TK_CMD)
@@ -67,6 +79,10 @@ t_token	*ft_parse_cmds_inner(t_token *tks, t_cmd *cmd, t_ctrs *c)
 	return (tks);
 }
 
+/// @brief			Parse commands from token list
+/// @param tks		Pointer to a t_token struct list
+/// @param cmd		Pointer to a t_cmd struct
+/// @param c		Pointer to a t_ctrs struct (counters)
 t_token	*ft_parse_cmds_in(t_token *tks, t_cmd *cmd, t_ctrs *c)
 {
 	if (tks->type == TK_IN)
@@ -87,3 +103,5 @@ t_token	*ft_parse_cmds_in(t_token *tks, t_cmd *cmd, t_ctrs *c)
 	}
 	return (tks);
 }
+
+/** @} */

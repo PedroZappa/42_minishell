@@ -10,6 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+* @defgroup		path_resolver Path resolver
+* @{
+*
+* @brief		Resolves a path
+* @version		1.0
+***/
+
 #include "../inc/minishell.h"
 
 char	*ft_path_resolve_inner(char *path);

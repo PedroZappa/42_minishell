@@ -10,6 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+* @defgroup cmd_parser_utils Command parser utils
+* @{
+*
+* @brief		Command parser utils
+* @version		1.0
+***/
+
 #include "../inc/minishell.h"
 
 /// @brief			Count a given command's arguments
@@ -44,6 +52,8 @@ void	ft_count_args(t_shell *sh, t_token *tks)
 	}
 }
 
+/// @brief			Allocate memory for t_cmd struct
+/// @param cmd		Pointer to a t_cmd struct
 int	ft_cmd_allocate(t_cmd *cmd)
 {
 	cmd->argv = (char **)ft_calloc((cmd->argc + 1), sizeof(char *));
@@ -58,3 +68,5 @@ int	ft_cmd_allocate(t_cmd *cmd)
 			ft_err(MALLOC_ERR, errno), FAILURE);
 	return (0);
 }
+
+/** @} */

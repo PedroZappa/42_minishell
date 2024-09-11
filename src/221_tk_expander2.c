@@ -10,11 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+* @defgroup heredoc_expander Heredoc expander
+* @{
+*
+* @brief		Heredoc expander
+* @version		1.0
+***/
+
 #include "../inc/minishell.h"
 
 int		ft_get_line_heredoc(t_list **list, char *delim);
 char	*ft_expand_dollars(t_shell *sh, char *tkn);
 
+/// @brief		Heredoc expander
+/// @param sh	Pointer to a t_shell struct
+/// @param tkn	Pointer to token string
 char	*ft_heredoc_expander(t_shell *sh, char *tkn)
 {
 	char	*delim;
@@ -36,6 +47,9 @@ char	*ft_heredoc_expander(t_shell *sh, char *tkn)
 	return (ft_free(tkn), ret);
 }
 
+/// @brief			Get heredoc line
+/// @param list		Pointer to an array of t_list structs
+/// @param delim	HereDoc Delimiter
 int	ft_get_line_heredoc(t_list **list, char *delim)
 {
 	char	*ret;
@@ -46,17 +60,20 @@ int	ft_get_line_heredoc(t_list **list, char *delim)
 		ft_printf("bash: warning: here-document at line "
 			"%d delimited by end-of-file; (wanted '%s')\n",
 			ft_lstsize(*list), delim);
-		return (ft_free(delim), 1);
+		return (ft_free(delim), FAILURE);
 	}
 	if (ft_strcmp(ret, delim) == 0)
-		return (ft_free(ret), ft_free(delim), 1);
+		return (ft_free(ret), ft_free(delim), FAILURE);
 	if (*list == NULL)
 		*list = ft_lstnew(ret);
 	else
 		ft_lstadd_back(list, ft_lstnew(ret));
-	return (0);
+	return (SUCCESS);
 }
 
+/// @brief		Dollar expansion
+/// @param sh	Pointer to a t_shell struct
+/// @param tkn	Pointer to token string
 char	*ft_expand_dollars(t_shell *sh, char *tkn)
 {
 	int		tkn_start;
@@ -81,3 +98,5 @@ char	*ft_expand_dollars(t_shell *sh, char *tkn)
 	i += 1;
 	return (ft_free(tkn), ft_compress_free_list(&list, '\0'));
 }
+
+/** @} */

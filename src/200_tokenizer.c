@@ -22,6 +22,7 @@
 static int		ft_get_tkns(t_shell *sh, char *line, \
 						t_token **tks, t_tk_ops *ops);
 static t_tk_ops	ft_get_tk(char *tk, t_tk_ops *ops);
+static t_tk_ops	ft_find_ops(char *tk, t_tk_ops *ops);
 
 /// @brief			Tokenizer
 /// @param sh		Pointer to a t_shell struct
@@ -58,8 +59,8 @@ int	ft_tokenizer(t_shell *sh, char *line, t_token **tks)
 /// @brief			Get tokens from line
 /// @param tks		Pointer to a t_token struct
 /// @param line		Line buffer
-/// @return			SUCCESS(0) on success,
-///					FAILURE(1) on failure
+/// @return			SUCCESS(0)
+///					FAILURE(1)
 ///	@note			Used in ft_tokenizer()
 static int	ft_get_tkns(t_shell *sh, char *line, t_token **tks, t_tk_ops *ops)
 {
@@ -87,6 +88,27 @@ static int	ft_get_tkns(t_shell *sh, char *line, t_token **tks, t_tk_ops *ops)
 	return (SUCCESS);
 }
 
+/// @brief			Find matching token operation
+/// @param tk		Token string
+/// @return			SUCCESS(t_tk_ops struct with op data)
+///					FAILURE(empty t_tk_ops struct)
+/// @note			Used in ft_get_tkns()
+static t_tk_ops	ft_get_tk(char *tk, t_tk_ops *ops)
+{
+	int			i;
+
+	i = 0;
+	while (ft_isspace(tk[i]))
+		i++;
+	if (i > 0)
+		return ((t_tk_ops){"", TK_BLANK, i});
+	return (ft_find_ops(tk, ops));
+}
+
+/// @brief			Returns labeled token
+/// @param tk		Token string
+/// @param ops		Pointer to an array of t_tk_ops
+/// @return			SUCCESS(t_tk_ops struct with op data)
 static t_tk_ops	ft_find_ops(char *tk, t_tk_ops *ops)
 {
 	int		i;
@@ -113,25 +135,6 @@ static t_tk_ops	ft_find_ops(char *tk, t_tk_ops *ops)
 		dq = ft_get_dq(dq, tk[i]);
 	}
 	return ((t_tk_ops){ft_substr(tk, 0, (size_t)i), TK_CMD, i});
-}
-
-/// @brief			Find matching token operation
-/// @details
-///	- Compares tk with each token in the array
-/// @param tk		Token string
-/// @return			SUCCESS(t_tk_ops struct with op data)
-///					FAILURE(empty t_tk_ops struct)
-/// @note			Used in ft_get_tkns()
-static t_tk_ops	ft_get_tk(char *tk, t_tk_ops *ops)
-{
-	int			i;
-
-	i = 0;
-	while (ft_isspace(tk[i]))
-		i++;
-	if (i > 0)
-		return ((t_tk_ops){"", TK_BLANK, i});
-	return (ft_find_ops(tk, ops));
 }
 
 /** @} */

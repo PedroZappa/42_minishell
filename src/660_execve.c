@@ -54,15 +54,15 @@ int	ft_stat_path(char *cmd)
 	{
 		ft_fprintf(STDERR_FILENO, "bash: %s: No such file or directory\n", cmd);
 		g_exit = 127;
-		return (1);
+		return (FAILURE);
 	}
 	if ((sb.st_mode & __S_IFMT) == __S_IFDIR)
 	{
 		ft_fprintf(STDERR_FILENO, "bash: %s: Is a directory\n", cmd);
 		g_exit = 126;
-		return (1);
+		return (FAILURE);
 	}
-	return (0);
+	return (SUCCESS);
 }
 
 /// @brief			Execute command with relative path

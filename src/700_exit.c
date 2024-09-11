@@ -53,6 +53,9 @@ int	ft_exit(t_shell *sh, t_cmd *cmd)
 	return (SUCCESS);
 }
 
+/// @brief			Free shell and exit
+/// @param sh		Pointer to a t_shell struct
+/// @param exit_code	Exit code
 void	ft_kill(t_shell *sh, int exit_code)
 {
 	errno = exit_code;
@@ -60,6 +63,8 @@ void	ft_kill(t_shell *sh, int exit_code)
 	exit(exit_code);
 }
 
+/// @brief			Check if string is a number
+/// @param str		String to check
 int	ft_isnum(char *str)
 {
 	int	i;

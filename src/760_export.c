@@ -46,6 +46,12 @@ int	ft_export(t_shell *sh, t_cmd *cmd)
 	return (exit);
 }
 
+/// @brief		Update / Export variable
+/// @param sh	Pointer to a t_shell struct
+/// @param cmd	Pointer to t_cmd struct
+/// @param i	Argument index to start from
+/// @param exit	Pointer to exit status
+/// @return		SUCCESS(0)
 static void	ft_export_prc(t_shell *sh, t_cmd *cmd, int i, int *exit)
 {
 	if (ft_isvalid_var(cmd->argv[i]) == FAILURE)

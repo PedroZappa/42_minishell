@@ -22,9 +22,6 @@
 static int	ft_is_nflag(char *arg);
 
 /// @brief			Echo built-in
-/// @details
-/// - Skip dash
-/// - Check for 'n's (however many)
 /// @param sh		Pointer to a t_shell struct
 /// @param cmd		Pointer to t_cmd struct
 /// @return			SUCCESS(0)

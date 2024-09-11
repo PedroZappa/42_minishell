@@ -10,6 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+* @defgroup pipes Pipes
+* @{
+*
+* @brief		Pipe logic
+* @version		1.0
+***/
+
 #include "../inc/minishell.h"
 
 /// @brief			Initialize pipes
@@ -86,3 +94,5 @@ void	ft_close_pipes(t_shell *sh)
 	ft_vfree(sh->pipes);
 	sh->pipes = NULL;
 }
+
+/** @} */

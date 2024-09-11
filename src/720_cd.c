@@ -25,12 +25,6 @@ static int	ft_get_prev_dir(char ***env, char *old, char *pwd);
 static void	ft_chdir_err(char *path);
 
 /// @brief			Change directory
-/// @details
-/// - Set variable "_" to the last argument of the command
-/// - If no argument: Go to home
-///	- If there is more than one argument: Print error message
-///	- If argument is empty: Go to home
-///	- Change to requested directory
 /// @param sh		Pointer to a t_shell struct
 /// @param cmd		Pointer to t_cmd struct
 /// @return			SUCCESS(0)
@@ -57,6 +51,9 @@ int	ft_cd(t_shell *sh, t_cmd *cmd)
 	return (ft_chdir(sh, cmd->argv[1]));
 }
 
+/// @brief			Change directory
+/// @param sh		Pointer to a t_shell struct
+/// @param path		Directory path
 static int	ft_chdir(t_shell *sh, char *path)
 {
 	char	*pwd;
@@ -110,6 +107,8 @@ int	ft_get_prev_dir(char ***env, char *old, char *pwd)
 	return (chdir_ret);
 }
 
+/// @brief			Change directory error
+/// @param path		Directory path
 static void	ft_chdir_err(char *path)
 {
 	t_stat	sb;
