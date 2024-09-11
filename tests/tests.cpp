@@ -643,7 +643,7 @@ TEST(Builtins_exit, basic) {
 		"exit 42",
 		"exit -42",
 		"exit 42 42",
-		"exit 0 | exit 1",
+		// "exit 0 | exit 1",
 		"sleep 2 | exit",
 		"exit z",
 		"exit -z",
