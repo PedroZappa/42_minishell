@@ -402,6 +402,7 @@ int			ft_exit(t_shell *sh, t_cmd *cmd);
 
 /// @file	710_pwd.c
 int			ft_pwd(t_shell *sh, t_cmd *cmd);
+int			ft_pwd_invalid(char *pwd);
 
 /// @file	720_cd.c
 int			ft_cd(t_shell *sh, t_cmd *cmd);
@@ -431,7 +432,6 @@ char		*ft_path_resolve(char *pwd, char *path);
 char		*ft_path_combine(char const *s1, char const *s2);
 size_t		ft_path_reduced_len(char **elems);
 void		ft_home_expand(t_shell *sh, t_tk_ops *tk);
-int			ft_pwd_invalid(char *pwd);
 
 //=============================================================================/
 //	800		Errors & Info													   /
@@ -461,7 +461,6 @@ int			ft_free_cmds(t_cmd *cmds, int n_cmds);
 int			ft_free_nocmds(t_cmd *cmds, int n_cmds, t_token **tks);
 
 /// @file	910_free2.c
-
 void		ft_vfree(void *ptr);
 
 #endif

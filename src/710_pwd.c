@@ -48,6 +48,23 @@ int	ft_pwd(t_shell *sh, t_cmd *cmd)
 	return (SUCCESS);
 }
 
+/// @brief Check if pwd is invalid
+/// @param pwd The current working directory
+int	ft_pwd_invalid(char *pwd)
+{
+	int		stat_ret;
+	t_stat	stat_buf;
+
+	if (pwd == NULL)
+		return (-1);
+	ft_bzero(&stat_buf, sizeof(t_stat));
+	stat_ret = stat(pwd, &stat_buf);
+	if (stat_ret == -1)
+		ft_free(pwd);
+	return (stat_ret);
+}
+
+
 /// @brief			Print invalid flag error
 /// @param cmd		Command name
 /// @param cmd_flag	Flag name

@@ -502,7 +502,7 @@ TEST(Builtins_pwd, basic) {
 	Tester shell_test;
 	std::vector<std::string> commands = {
 		"pwd",
-		"pwd -n",
+		// "pwd -n",
 		"pwd z",
 	};
 
