@@ -19,6 +19,8 @@
 
 #include "../inc/minishell.h"
 
+static int	ft_pwd_err(char *cmd, char *cmd_flag);
+
 /// @brief			pwd built-in command
 /// @details
 /// - Check if command flags are valid
@@ -37,13 +39,20 @@ int	ft_pwd(t_shell *sh, t_cmd *cmd)
 	i = 0;
 	while (cmd->argv[++i])
 		if (cmd->argv[i][0] == '-')
-			return (ft_flag_err(cmd->argv[0], cmd->argv[i]));
+			return (ft_pwd_err(cmd->argv[0], cmd->argv[i]));
 	pwd = ft_get_var("PWD", sh->envp);
 	if (pwd == NULL || ft_pwd_invalid(pwd))
 		pwd = getcwd(NULL, 0);
 	ft_putendl_fd(pwd, STDOUT_FILENO);
 	ft_free(pwd);
 	return (SUCCESS);
+}
+
+static int	ft_pwd_err(char *cmd, char *cmd_flag)
+{
+	ft_fprintf(STDERR_FILENO, "bash: %s: %s: invalid option\n",
+		cmd, cmd_flag);
+	return (2);
 }
 
 /** @} */
