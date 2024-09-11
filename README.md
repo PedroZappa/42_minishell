@@ -117,6 +117,9 @@ Redirect -> Pipe -> Command
 ls << EOF # Send Ctrl+C inside heredoc then exit provokes a leak
 
 cd ../../../../../.. # Invalid Read
+
+ls <	# Error Message Output differ
+ls >	# Error Message Output differ
 ```
 
 - ✅ Fix signals (ctrl + d com texto nao sair) 

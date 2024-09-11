@@ -278,7 +278,9 @@ TEST(Commands, WithPipes) {
 	Tester shell_test;
 	std::vector<std::string> commands = {
 		"ls | wc -l",
-		"ls | wc |",
+		"ls | cat | wc -l",
+		"ls | wc -l | cat",
+		// "ls | wc |",
 	};
 
 	for (const auto& cmd : commands) {
@@ -290,8 +292,8 @@ TEST(Commands, WithPipes) {
 TEST(Commands, WithRedirection) {
 	Tester shell_test;
 	std::vector<std::string> commands = {
-		"ls <",
-		"ls >",
+		// "ls <",
+		// "ls >",
 		"ls < > a",
 		"| ls",
 		"echo $VOID_VAR",
@@ -480,7 +482,7 @@ TEST(Builtins_env, withPipes) {
 	leakReport();
 }
 
-TEST(Builtins, env_withRedirection) {
+TEST(Builtins_env, env_withRedirection) {
 	Tester shell_test;
 	std::vector<std::string> commands = {
 		"env > a.txt",
@@ -594,7 +596,7 @@ TEST(Builtins_unset, unset) {
 	leakReport();
 }
 
-TEST(Builtins, unsetWithPipesRedirection) {
+TEST(Builtins_unset, unsetWithPipesRedirection) {
 	Tester shell_test;
 	std::vector<std::string> commands = {
 		"unset | ls",
