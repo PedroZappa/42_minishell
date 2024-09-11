@@ -120,6 +120,9 @@ cd ../../../../../.. # Invalid Read
 
 ls <	# Error Message Output differ
 ls >	# Error Message Output differ
+
+env z | ls	# Error Message Output differ
+ls | env z	# Error Message Output differ
 ```
 
 - ✅ Fix signals (ctrl + d com texto nao sair) 
