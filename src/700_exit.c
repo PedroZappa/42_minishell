@@ -45,7 +45,7 @@ int	ft_exit(t_shell *sh, t_cmd *cmd)
 	if (cmd->argc == 2)
 	{
 		if (ft_isnum(cmd->argv[1]) || cmd->argv[1][0] == '-')
-			ft_kill(sh, ft_abs(ft_atoi(cmd->argv[1])));
+			ft_kill(sh, (256 - (ft_atoi(cmd->argv[1]) * -1)));
 		else
 			ft_fprintf(STDERR_FILENO,
 				"bash: exit: %s: numeric argument required\n", cmd->argv[1]);
