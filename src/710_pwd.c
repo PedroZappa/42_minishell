@@ -48,6 +48,10 @@ int	ft_pwd(t_shell *sh, t_cmd *cmd)
 	return (SUCCESS);
 }
 
+/// @brief			Print invalid flag error
+/// @param cmd		Command name
+/// @param cmd_flag	Flag name
+/// @return			SUCCESS(ret)
 static int	ft_pwd_err(char *cmd, char *cmd_flag)
 {
 	ft_fprintf(STDERR_FILENO, "bash: %s: %s: invalid option\n",
