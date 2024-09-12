@@ -133,15 +133,10 @@ end
 
 # 220_tk_expander.c
 define expander
-	display sh
-	display tk_str
-	display **sub_tkns
-	display sub_tkns[curr_tk]
-	display *sub_tkns@5
-	display *ret
-	display curr_tk
-	display *curr_tk
-	display tk_str[i]
+	display tkn
+	display tkn[i]
+	display tkn_start
+	display *list
 	display i
 end
 
@@ -155,14 +150,11 @@ define expand_dollar
 end
 
 define expand_squote
-	display sub_tkns
-	display (*sub_tkns)[(*curr_tk)]
 	display tkn
-	display tkn[*i]
-	display *i
-	display curr_tk
+	display tkn[i]
+	display i
 	display tkn_start
-	display tkn_len
+	display *ret
 end
 
 define expand_dquote
@@ -491,9 +483,9 @@ end
 
 # 700_exit.c
 define exit
-	display *sh
-	display n
-	display *sh->cmds[n]
+	display *cmd->argc
+	display *cmd->argv@3
+	display cmd->argv[1][0]
 end
 
 define ft_kill

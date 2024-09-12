@@ -656,13 +656,24 @@ TEST(Builtins_exit, basic) {
 		"exit 42",
 		"exit -42",
 		"exit 42 42",
-		// "exit 0 | exit 1",
-		"sleep 2 | exit",
 		"exit z",
 		"exit -z",
 		"exit z 42",
 		"exit 42 z",
 		"exit /",
+	};
+
+	for (const auto& cmd : commands) {
+		runTest(shell_test, cmd);
+	}
+	leakReport();
+}
+
+TEST(Builtins_exit, advanced) {
+	Tester shell_test;
+	std::vector<std::string> commands = {
+		// "exit 0 | exit 1",
+		"sleep 2 | exit",
 		"exit > a.txt",
 		"exit < a.txt",
 		"exit < void_file",
@@ -674,7 +685,6 @@ TEST(Builtins_exit, basic) {
 	}
 	leakReport();
 }
-
 
 TEST(Redirection, Basic) {
 	Tester shell_test;
