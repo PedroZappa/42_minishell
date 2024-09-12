@@ -136,9 +136,6 @@ ls | env z	# Error Message Output differ
 echo > a.txt	# Leaks
 echo "'$'"		# Eats $
 
-sudo			# Needs to call sudo
-
-ls | OK | KO		# Exit code
 ```
 
 - ✅ Fix signals (ctrl + d com texto nao sair) 
