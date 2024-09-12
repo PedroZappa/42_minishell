@@ -1,6 +1,8 @@
 #include "tester.hpp"
 
 void Tester::Test(const std::string& minishell_cmd) {
+	Tester test_shell;
+    std::string output;
     std::pair<std::string, int> bash_output = get_bash_output(minishell_cmd);
     std::pair<std::string, int> minishell_output = get_minishell_output(bash_output.first, minishell_cmd);
 	std::pair<std::string, int> valgrind_output = get_valgrind(minishell_path, minishell_cmd);
@@ -14,6 +16,28 @@ void Tester::Test(const std::string& minishell_cmd) {
     } else {
         std::cout << GRN"Outputs match!" << NC << std::endl;
     }
+
+	// Create output file streams for passing and failing tests
+    std::ofstream pass_file(".temp/bash_passing_tests.txt", std::ios_base::out | std::ios_base::trunc);
+    std::ofstream fail_file(".temp/bash_failing_tests.txt", std::ios_base::out | std::ios_base::trunc);
+
+    // Write output to different files based on exit code
+    if (test_shell.bash_exit_status == 0) {
+        // Test passed, write to passing_tests.txt
+        pass_file << "Test: " << minishell_cmd << "\n";
+        pass_file << "Output:\n" << output << "\n";
+        pass_file << "-----------------------\n";
+    } else {
+        // Test failed, write to failing_tests.txt
+        fail_file << "Test: " << minishell_cmd << "\n";
+        fail_file << "Output:\n" << output << "\n";
+        fail_file << "Exit Code: " << test_shell.bash_exit_status << "\n";
+        fail_file << "-----------------------\n";
+    }
+
+    // Close the file streams
+    pass_file.close();
+    fail_file.close();
 }
 
 std::pair<std::string, int> Tester::get_bash_output(const std::string& cmd) {
@@ -32,6 +56,7 @@ std::pair<std::string, int> Tester::get_bash_output(const std::string& cmd) {
 
     c.wait();
 	test_shell.bash_exit_status = c.exit_code();
+	
     return {output, test_shell.bash_exit_status};
 }
 

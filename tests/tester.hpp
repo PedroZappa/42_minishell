@@ -7,6 +7,7 @@
 # include <iostream>
 # include <map>
 #include <utility>
+#include <fstream>
 
 # include <boost/process.hpp>
 # include <boost/version.hpp>

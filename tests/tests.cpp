@@ -36,6 +36,19 @@ void runTest(Tester& shell_test, const std::string& cmd) {
         //     std::cout << valgrind_output.first << std::endl;
         // }
     }
+	// Print the contents of the .temp/bash_failing_tests.txt and bash_passing_tests.txt file
+	std::cout << "Failling tests:" << std::endl;
+	std::ifstream fail_file(".temp/bash_failing_tests.txt");
+	std::string line;
+	while (std::getline(fail_file, line)) {
+	    std::cout << line << std::endl;
+	}
+
+	std::cout << "Passing tests:" << std::endl;
+	std::ifstream pass_file(".temp/bash_passing_tests.txt");
+	while (std::getline(pass_file, line)) {
+	    std::cout << line << std::endl;
+	}
 }
 
 void leakReport() {
