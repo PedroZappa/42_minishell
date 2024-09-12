@@ -21,6 +21,7 @@
 
 static char	**ft_split_path(char **envp);
 static int	ft_path_from_env(char **envp);
+static void	ft_check_cmds(t_shell *sh);
 
 /**
 * @brief	Execute commands
@@ -31,6 +32,8 @@ static int	ft_path_from_env(char **envp);
 int	ft_execute(t_shell *sh)
 {
 	sh->path = ft_split_path(sh->envp);
+	sh->n_pipes = sh->n_cmds - (sh->n_cmds > 0);
+	ft_check_cmds(sh);
 	if (sh->n_cmds == 1)
 	{
 		if (ft_exec_one(sh))
@@ -81,6 +84,22 @@ static int	ft_path_from_env(char **envp)
 		if (!ft_strncmp("PATH=", envp[i++], 5))
 			return (i - 1);
 	return (-1);
+}
+
+static void	ft_check_cmds(t_shell *sh)
+{
+	int	i;
+	int	type;
+
+	i = 0;
+	while (i < sh->n_cmds)
+	{
+		type = ft_exec_check(sh->cmds[i].argv[0]);
+		if (type == CMD_EXEC)
+			sh->cmds[i].argv[0] = ft_exec_check_cmd(sh->path,
+					sh->cmds[i].argv[0]);
+		i++;
+	}
 }
 
 /** @} */

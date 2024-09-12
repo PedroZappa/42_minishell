@@ -363,6 +363,7 @@ int			ft_execute(t_shell *sh);
 
 /// @file	610_exec_check.c
 int			ft_exec_check(char *cmd);
+char		*ft_exec_check_cmd(char **path, char *cmd);
 
 /// @file	620_exec_one.c
 int			ft_exec_one(t_shell *sh);
@@ -379,17 +380,15 @@ void		ft_exec_child_last(t_shell *sh, int i);
 /// @file	650_exec_cmd.c
 void		ft_exec_cmd(t_shell *sh, int id, int i);
 int			ft_exec(t_shell *sh, int cmd, int n);
+void		ft_execve(t_cmd *cmd, char **envp);
 
-/// @file	660_execve.c
-void		ft_execve(char **path, char **argv, char **envp);
-
-/// @file	670_pipes.c
+/// @file	660_pipes.c
 void		ft_pipe_init(t_shell *sh);
 int			ft_pipe_setter(t_shell *sh, int i, int end);
 int			ft_pipe_setter_fd(t_shell *sh, int fd, int in);
 void		ft_close_pipes(t_shell *sh);
 
-/// @file	680_redir.c
+/// @file	670_redir.c
 void		ft_redir_in(t_shell *sh, t_cmd *cmd);
 void		ft_redir_out(t_shell *sh, t_cmd *cmd);
 
