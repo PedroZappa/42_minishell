@@ -127,10 +127,6 @@ a
 exit << a	# Leaks
 a
 
-exit /	# Does not exit as it should
-
-exit ''		# Exit message missing
-
 ls <	# Error Message Output differ
 ls >	# Error Message Output differ
 
