@@ -350,10 +350,6 @@ char		**ft_env_del_var(char **env, char *to_del);
 /// @file	520_build_var.c
 int			ft_append(t_shell *sh, t_cmd *cmd, int i);
 
-/// @file	530_last_cmd.c
-void		ft_build_last_cmd(t_shell *sh, t_cmd *cmd);
-int			ft_update_last_cmd(t_shell *sh);
-
 //=============================================================================/
 //	600		Executer														   /
 //=============================================================================/

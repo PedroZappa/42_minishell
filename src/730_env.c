@@ -28,7 +28,6 @@ int	ft_env(t_shell *sh, t_cmd *cmd)
 {
 	int		i;
 
-	ft_set_var("_", cmd->argv[0], &sh->envp);
 	i = 0;
 	while (cmd->argv[++i])
 		if (cmd->argv[i][0] == '-')

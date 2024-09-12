@@ -65,7 +65,6 @@ FILES			+= 400_signal.c
 FILES			+= 500_env_get.c
 FILES			+= 510_env_set.c
 FILES			+= 520_append_var.c
-FILES			+= 530_last_cmd.c
 FILES			+= 600_execute.c
 FILES			+= 610_exec_check.c
 FILES			+= 620_exec_one.c

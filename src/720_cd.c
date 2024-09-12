@@ -34,7 +34,6 @@ int	ft_cd(t_shell *sh, t_cmd *cmd)
 	char	*home;
 	int		chdir;
 
-	ft_set_var("_", cmd->argv[0], &sh->envp);
 	if (cmd->argv[1] == NULL)
 	{
 		home = ft_get_var("HOME", sh->envp);

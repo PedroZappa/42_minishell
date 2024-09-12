@@ -30,7 +30,6 @@ int	ft_unset(t_shell *sh, t_cmd *cmd)
 	char	*var;
 	int		i;
 
-	ft_set_var("_", cmd->argv[0], &sh->envp);
 	i = 0;
 	if (!cmd->argv[1] || !sh->envp)
 		return (FAILURE);
