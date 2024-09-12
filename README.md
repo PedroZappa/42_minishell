@@ -140,10 +140,6 @@ ls | env z	# Error Message Output differ
 echo > a.txt	# Leaks
 echo "'$'"		# Eats $
 
-mkdir nopermission
-chmod 000 nopermission
-cd nopermission		# Should give no permission err
-
 sudo			# Needs to call sudo
 
 ls | OK | KO		# Exit code

@@ -119,6 +119,9 @@ static void	ft_chdir_err(char *path)
 	if (stat_ret == 0 && (sb.st_mode & __S_IFMT) != __S_IFDIR)
 		ft_fprintf(STDOUT_FILENO, "bash: cd: %s: Not a directory\n",
 			path);
+	if (stat_ret == 0 && (sb.st_mode & __S_IFMT) != __S_IFREG)
+		ft_fprintf(STDOUT_FILENO,
+			 "bash: cd: no permission: permission denied\n");
 	if (stat_ret == -1)
 		ft_fprintf(STDERR_FILENO, "bash: cd: %s: No such file or directory\n",
 			path);
