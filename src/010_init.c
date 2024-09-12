@@ -48,22 +48,14 @@ int	ft_init(t_shell *sh, char **envp)
 /// @note		Used in main()
 static void	ft_shlvl(t_shell *sh)
 {
-	static int	lvl;
 	char		*shlvl;
 	char		*new;
 	int			i;
 
-	lvl = 0;
 	shlvl = ft_get_var("SHLVL", sh->envp);
 	if (shlvl)
 	{
-		if (lvl == 0)
-		{
-			lvl = 1;
-			i = ft_atoi(shlvl);
-		}
-		else
-			i = (ft_atoi(shlvl) + 1);
+		i = (ft_atoi(shlvl) + 1);
 		new = ft_itoa(i);
 		if (new == NULL)
 			ft_err(MALLOC_ERR, errno);

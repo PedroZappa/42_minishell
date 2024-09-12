@@ -22,10 +22,6 @@
 static int	ft_pwd_err(char *cmd, char *cmd_flag);
 
 /// @brief			pwd built-in command
-/// @details
-/// - Check if command flags are valid
-/// - Get current working directory
-/// - Print directory
 /// @param sh		Pointer to a t_shell struct
 /// @param cmd		Pointer to t_cmd struct
 /// @return			SUCCESS(0)

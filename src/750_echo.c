@@ -31,6 +31,7 @@ int	ft_echo(t_shell *sh, t_cmd *cmd)
 	int	sentinel;
 	int	i;
 
+	(void)sh;
 	sentinel = '\n';
 	i = 0;
 	while (cmd->argv[++i] && ft_is_nflag(cmd->argv[i]))
