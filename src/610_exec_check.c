@@ -84,7 +84,7 @@ static char	*ft_stat_path(char **path, char *cmd)
 		exec_path = ft_strjoin(path[i], cmd);
 		if (!exec_path)
 			break ;
-		if (access(exec_path, X_OK) == 0)
+		if (access(exec_path, F_OK) == 0)
 			return (ft_free(cmd), exec_path);
 		++i;
 		free(exec_path);

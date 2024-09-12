@@ -34,7 +34,7 @@ void	ft_exec_cmd(t_shell *sh, int id, int i)
 	}
 	if (!sh->cmds[i].argv[0][0])
 		return ;
-	ft_execve(sh->cmds[i].argv, sh->envp);
+	ft_execve(sh->cmds + i, sh->envp);
 	ft_free_sh(sh);
 	exit(g_exit);
 }
@@ -71,11 +71,22 @@ int	ft_exec(t_shell *sh, int type, int n)
 }
 
 /// @brief			Execute command with execve w/ absolute or relative path
-/// @param argv		Pointer to command arguments array
+/// @param cmd		Pointer to command
 /// @param envp		Pointer to environment variables array
-void	ft_execve(char **argv, char **envp)
+void	ft_execve(t_cmd *cmd, char **envp)
 {
-	execve(*argv, argv, envp);
+	int	execve_err;
+
+	execve_err = execve(cmd->argv[0], cmd->argv, envp);
+	if (execve_err == EXECVE_ERR)
+	{
+		if (access(cmd->cmd, X_OK))
+		{
+			ft_fprintf(STDOUT_FILENO,
+				"bash: %s: Permission denied\n", cmd->cmd);
+			g_exit = 126;
+		}
+	}
 }
 
 /** @} */

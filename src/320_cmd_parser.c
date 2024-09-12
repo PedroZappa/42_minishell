@@ -59,6 +59,8 @@ t_token	*ft_parse_cmds_inner(t_token *tks, t_cmd *cmd, t_ctrs *c)
 {
 	if (tks->type == TK_CMD)
 	{
+		if (cmd->cmd == NULL)
+			cmd->cmd = ft_strdup(tks->name);
 		cmd->argv[c->j] = ft_strdup(tks->name);
 		c->j += 1;
 	}
