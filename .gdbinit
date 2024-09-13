@@ -143,10 +143,11 @@ end
 define expand_dollar
 	display tkn
 	display *i
+	display tkn[*i - 1]
 	display tkn[*i]
+	display tkn[*i + 1]
 	display tkn_start
-	display tkn_len
-	display *ret
+	display ret
 end
 
 define expand_squote
@@ -385,6 +386,7 @@ end
 define execute
 	display *sh
 	display *sh->path
+	display *sh->pipes
 end
 
 define split_path
@@ -525,11 +527,10 @@ end
 
 ### 750_echo.c 
 define ft_echo
-	display *sh
-	display n
-	display i
-	display *sh->cmds[n].argv@sh->cmds[n].argc
-	display sh->cmds[n].argv[i]
+	display cmd->argc
+	display cmd->argv@sh->cmds[i].argc
+	display cmd->argv[i]
+	display cmd->argv[i + 1]
 end
 
 define rm_squotes

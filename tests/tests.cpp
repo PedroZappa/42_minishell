@@ -154,6 +154,7 @@ TEST(Expander, Basic) {
         "echo ~/",
         "echo $",
         "echo \"$\"",
+        "echo \'$\'",
         "echo $USER",
     };
 
