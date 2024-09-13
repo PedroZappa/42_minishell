@@ -130,8 +130,8 @@ a
 ls <	# Error Message Output differ
 ls >	# Error Message Output differ
 
-env z | ls	# Error Message Output differ
-ls | env z	# Error Message Output differ
+env | ls	# Error Message Output differ
+ls | env	# Error Message Output differ
 
 echo > a.txt	# Leaks
 
