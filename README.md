@@ -134,7 +134,6 @@ env z | ls	# Error Message Output differ
 ls | env z	# Error Message Output differ
 
 echo > a.txt	# Leaks
-echo "'$'"		# Eats $
 
 ```
 
