@@ -143,6 +143,7 @@ end
 define expand_dollar
 	display tkn
 	display *i
+	display tkn[*i - 2]
 	display tkn[*i - 1]
 	display tkn[*i]
 	display tkn[*i + 1]
