@@ -230,10 +230,6 @@ test: $(BUILD_PATH) $(LIBFT_ARC) $(OBJS_TEST)
 	$(CC) $(CFLAGS) $(DFLAGS) $(OBJS_TEST) $(INC) $(LIBFT_ARC) $(RFLAGS) -o $(TEST_NAME)
 	@echo "[$(_SUCCESS) compiling $(MAG)$(NAME)$(D) $(YEL)🖔$(D)]"
 
-%.o: %.c
-	@echo -n "$(MAG)█$(D)"
-	$(CC) $(CFLAGS) $(DFLAGS) -MMD -MP -c $< -o $@
-
 ##@ Test Rules 🧪
 
 sync_shell: $(BUILD)		## Test w/ syncshell
