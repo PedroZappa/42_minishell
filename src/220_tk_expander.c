@@ -74,10 +74,10 @@ char	*ft_expand_squote(char *tkn, int *i)
 
 /// @brief		Dollar sign expansion
 /// @param sh	Pointer to a t_shell struct
-/// @param tkn	Token string
+/// @param t	Token string
 /// @param i	Reference to index
 /// @return		Expanded token
-char	*ft_expand_dollar(t_shell *sh, char *tkn, int *i)
+char	*ft_expand_dollar(t_shell *sh, char *t, int *i)
 {
 	char	*ret;
 	char	*temp;
@@ -85,21 +85,21 @@ char	*ft_expand_dollar(t_shell *sh, char *tkn, int *i)
 
 	tkn_start = *i;
 	*i += 1;
-	if (tkn[*i] && (ft_check_alpha(tkn[*i]) == 0))
+	if (t[*i] && (ft_check_alpha(t[*i]) == 0))
 	{
-		while (tkn[*i] && (ft_check_alnum(tkn[*i]) == 0))
+		while (t[*i] && (ft_check_alnum(t[*i]) == 0))
 			*i += 1;
 	}
-	else if (tkn[*i] == '?' || ft_isdigit(tkn[*i]))
+	else if (t[*i] == '?' || ft_isdigit(t[*i]))
 		*i += 1;
-	else if ((tkn[*i] == '\'' || tkn[*i] == '\"') && tkn[*i + 1] != '\0')
+	else if ((t[*i] == '\'' || t[*i] == '\"') && t[*i + 1] != '\0')
 	{
-		if ((tkn[*i - 2] == '\'') && (tkn[*i + 1] == '$') && (tkn[*i] == '\''))
+		if ((t[*i - 2] == '\'') && (t[*i + 1] == '$') && (t[*i] == '\''))
 			return (ft_strdup(""));
 	}
 	else
 		return (ft_strdup("$"));
-	temp = ft_substr(tkn, tkn_start, (*i - tkn_start));
+	temp = ft_substr(t, tkn_start, (*i - tkn_start));
 	ret = ft_fill_var(sh, temp);
 	if (ret == NULL)
 		ret = ft_strdup("");
