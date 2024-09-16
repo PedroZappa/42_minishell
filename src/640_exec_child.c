@@ -64,7 +64,7 @@ void	ft_exec_child_inner(t_shell *sh, t_cmd *cmd)
 		ft_redir_in(sh, cmd);
 	if (cmd->n_out > 0)
 		ft_redir_out(sh, cmd);
-	ft_close_pipes(sh, &cmd->in_fd, &cmd->out_fd);
+	ft_pipe_close(sh, &cmd->in_fd, &cmd->out_fd);
 	if (cmd->argv[0])
 		ft_exec_cmd(sh, ft_exec_check(cmd->argv[0]), NO_PIPE);
 	ft_free_sh(sh);

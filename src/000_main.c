@@ -58,6 +58,7 @@ static int	ft_sh_loop(t_shell *sh)
 	line_buf = NULL;
 	while (1)
 	{
+		ft_pipe_reset();
 		ft_sigset();
 		status = ft_parser(sh, line_buf);
 		if (status == FAILURE)

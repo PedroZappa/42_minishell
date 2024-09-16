@@ -41,7 +41,7 @@ int	ft_exec_pipeline(t_shell *sh)
 		return (ft_free_arr(sh->path), FAILURE);
 	if (ft_exec_last(sh) == FAILURE)
 		return (ft_free_arr(sh->path), FAILURE);
-	ft_close_pipes(sh);
+	ft_pipe_close(sh, NULL, NULL);
 	wait(&g_exit);
 	while (cmd_idx--)
 		wait(&g_exit);

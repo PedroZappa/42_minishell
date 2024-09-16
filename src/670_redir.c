@@ -47,7 +47,7 @@ void	ft_redir_out(t_shell *sh, t_cmd *cmd)
 	int	i;
 
 	i = 0;
-	cmd->out_fd = open(cmd->out[0].name, O_CREAT | O_WRONLY,
+	cmd->out_fd = open(cmd->out[i].name, O_CREAT | O_WRONLY,
 			S_IRWXU | S_IRGRP | S_IROTH);
 	if (cmd->out_fd < 0)
 		ft_fork_exit(sh, cmd->out[i].name, FAILURE);

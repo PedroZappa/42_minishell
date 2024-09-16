@@ -382,7 +382,8 @@ void		ft_execve(t_cmd *cmd, char **envp);
 void		ft_pipe_init(t_shell *sh);
 int			ft_pipe_setter(t_shell *sh, int i, int end);
 int			ft_pipe_setter_fd(t_shell *sh, int fd, int in);
-void		ft_close_pipes(t_shell *sh, int *fd_in, int *fd_out);
+void		ft_pipe_close(t_shell *sh, int *fd_in, int *fd_out);
+void		ft_pipe_reset(void);
 
 /// @file	670_redir.c
 void		ft_redir_in(t_shell *sh, t_cmd *cmd);
