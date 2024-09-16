@@ -28,8 +28,6 @@ void Tester::Test(const std::string& minishell_cmd) {
         std::cerr << "Error opening failing tests file!" << std::endl;
     }
 	
-	int bash_exit_status = bash_output.second;
-
     // Write output to different files based on exit code
     if (test_shell.bash_exit_status == 0) {
         // Test passed, write to passing_tests.txt
