@@ -97,6 +97,8 @@ int	ft_free_cmds(t_cmd *cmds, int n_cmds)
 				ft_free(cmds[i].argv[j]);
 		free(cmds[i].argv);
 		ft_free(cmds[i].cmd);
+		unlink(cmds[i].heredoc_name);
+		ft_free(cmds[i].heredoc_name);
 		ft_free_redir(cmds + i);
 	}
 	ft_vfree(cmds);

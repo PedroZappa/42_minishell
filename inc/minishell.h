@@ -204,6 +204,7 @@ typedef struct s_cmd
 
 	t_redir	*in;
 	int		in_fd;
+	char	*heredoc_name;
 	int		n_in;
 
 	t_redir	*out;
@@ -388,6 +389,7 @@ void		ft_pipe_reset(void);
 /// @file	670_redir.c
 void		ft_redir_in(t_shell *sh, t_cmd *cmd);
 void		ft_redir_out(t_shell *sh, t_cmd *cmd);
+char		*ft_redir_heredoc_name(int i);
 
 //=============================================================================/
 //	700		Builtins														   /
