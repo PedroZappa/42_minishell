@@ -27,7 +27,7 @@ void	ft_redir_in(t_shell *sh, t_cmd *cmd)
 {
 	int	i;
 
-	i = 0;
+	i = cmd->n_in - 1;
 	cmd->in_fd = open(cmd->in[i].name, O_CREAT | O_RDONLY,
 			S_IRWXU | S_IRGRP | S_IROTH);
 	if (cmd->in_fd < 0)
