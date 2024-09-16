@@ -18,8 +18,17 @@ void Tester::Test(const std::string& minishell_cmd) {
     }
 
 	// Create output file streams for passing and failing tests
-    std::ofstream pass_file(".temp/bash_passing_tests.txt", std::ios_base::out | std::ios_base::trunc);
-    std::ofstream fail_file(".temp/bash_failing_tests.txt", std::ios_base::out | std::ios_base::trunc);
+    std::ofstream pass_file(".temp/bash_passing_tests.txt", std::ios_base::out);
+    if (!pass_file.is_open()) {
+        std::cerr << "Error opening passing tests file!" << std::endl;
+    }
+    
+    std::ofstream fail_file(".temp/bash_failing_tests.txt", std::ios_base::out);
+    if (!fail_file.is_open()) {
+        std::cerr << "Error opening failing tests file!" << std::endl;
+    }
+	
+	int bash_exit_status = bash_output.second;
 
     // Write output to different files based on exit code
     if (test_shell.bash_exit_status == 0) {
