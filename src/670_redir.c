@@ -47,10 +47,20 @@ void	ft_redir_out(t_shell *sh, t_cmd *cmd)
 	int	i;
 
 	i = 0;
-	cmd->out_fd = open(cmd->out[i].name, O_CREAT | O_WRONLY,
-			S_IRWXU | S_IRGRP | S_IROTH);
+	while (i < cmd->n_out)
+	{
+		if (cmd->out_fd != -1)
+		{
+			close(cmd->out_fd);
+			cmd->out_fd = -1;
+		}
+		cmd->out_fd = open(cmd->out[i].name, O_CREAT | O_WRONLY
+				| (O_APPEND * (cmd->out[i].type == RD_OUT_APP)),
+				S_IRWXU | S_IRGRP | S_IROTH);
+		++i;
+	}
 	if (cmd->out_fd < 0)
-		ft_fork_exit(sh, cmd->out[i].name, FAILURE);
+		ft_fork_exit(sh, cmd->out[i - 1].name, FAILURE);
 	if ((cmd->out_fd != 1)
 		&& (ft_pipe_setter_fd(sh, cmd->out_fd, STDOUT_FILENO) == PIPE_FAIL))
 	{
