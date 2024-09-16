@@ -291,7 +291,7 @@ t_token		*ft_tk_last(t_token *tk);
 
 /// @file	220_tk_expander.c
 char		*ft_expander(t_shell *sh, char *tkn);
-char		*ft_expand_dollar(t_shell *sh, char *tkn, int *i);
+char		*ft_expand_dollar(t_shell *sh, char *tkn, int *i, int dq);
 char		*ft_expand_squote(char *tkn, int *i);
 char		*ft_expand_dquote(t_shell *sh, char *tkn, int *i);
 
@@ -457,6 +457,7 @@ int			ft_free_nocmds(t_cmd *cmds, int n_cmds, t_token **tks);
 
 /// @file	910_free2.c
 void		ft_vfree(void *ptr);
+void		ft_free_redir(t_cmd *cmd);
 
 #endif
 

@@ -97,10 +97,7 @@ int	ft_free_cmds(t_cmd *cmds, int n_cmds)
 				ft_free(cmds[i].argv[j]);
 		free(cmds[i].argv);
 		ft_free(cmds[i].cmd);
-		if (cmds[i].in)
-			ft_vfree(cmds[i].in);
-		if (cmds[i].out)
-			ft_vfree(cmds[i].out);
+		ft_free_redir(cmds + i);
 	}
 	ft_vfree(cmds);
 	return (SUCCESS);

@@ -91,7 +91,7 @@ char	*ft_expand_dollars(t_shell *sh, char *tkn)
 			continue ;
 		}
 		ft_lstadd_back_ptr(&list, ft_substr(tkn, tkn_start, i - tkn_start));
-		ft_lstadd_back_ptr(&list, ft_expand_dollar(sh, tkn, &i));
+		ft_lstadd_back_ptr(&list, ft_expand_dollar(sh, tkn, &i, 0));
 		tkn_start = i;
 	}
 	ft_lstadd_back_ptr(&list, ft_substr(tkn, tkn_start, i - tkn_start));

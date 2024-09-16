@@ -28,4 +28,25 @@ void	ft_vfree(void *ptr)
 	free(ptr);
 }
 
+void	ft_free_redir(t_cmd *cmd)
+{
+	int	i;
+
+	i = 0;
+	if (cmd->in)
+	{
+		while (i < cmd->n_in)
+			ft_free(cmd->in[i++].name);
+		ft_vfree(cmd->in);
+		cmd->in = NULL;
+	}
+	i = 0;
+	if (cmd->out)
+	{
+		while (i < cmd->n_out)
+			ft_free(cmd->out[i++].name);
+		ft_vfree(cmd->out);
+		cmd->out = NULL;
+	}
+}
 /** @} */

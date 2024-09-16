@@ -41,7 +41,7 @@ char	*ft_expander(t_shell *sh, char *tkn)
 		}
 		ft_lstadd_back_ptr(&list, ft_substr(tkn, tkn_start, i - tkn_start));
 		if (tkn[i] == '$')
-			ft_lstadd_back_ptr(&list, ft_expand_dollar(sh, tkn, &i));
+			ft_lstadd_back_ptr(&list, ft_expand_dollar(sh, tkn, &i, 0));
 		else if (tkn[i] == '\'')
 			ft_lstadd_back_ptr(&list, ft_expand_squote(tkn, &i));
 		else
@@ -77,7 +77,7 @@ char	*ft_expand_squote(char *tkn, int *i)
 /// @param t	Token string
 /// @param i	Reference to index
 /// @return		Expanded token
-char	*ft_expand_dollar(t_shell *sh, char *t, int *i)
+char	*ft_expand_dollar(t_shell *sh, char *t, int *i, int dq)
 {
 	char	*ret;
 	char	*temp;
@@ -92,11 +92,8 @@ char	*ft_expand_dollar(t_shell *sh, char *t, int *i)
 	}
 	else if (t[*i] == '?' || ft_isdigit(t[*i]))
 		*i += 1;
-	else if ((t[*i] == '\'' || t[*i] == '\"') && t[*i + 1] != '\0')
-	{
-		if ((t[*i - 2] == '\'') && (t[*i + 1] == '$') && (t[*i] == '\''))
-			return (ft_strdup(""));
-	}
+	else if ((t[*i] == '\'' || t[*i] == '\"') && dq == 0)
+		return (ft_strdup(""));
 	else
 		return (ft_strdup("$"));
 	temp = ft_substr(t, tkn_start, (*i - tkn_start));
@@ -127,7 +124,7 @@ char	*ft_expand_dquote(t_shell *sh, char *tkn, int *i)
 			continue ;
 		}
 		ret = ft_strjoin_free(ret, ft_substr(tkn, tkn_start, *i - tkn_start));
-		ret = ft_strjoin_free(ret, ft_expand_dollar(sh, tkn, i));
+		ret = ft_strjoin_free(ret, ft_expand_dollar(sh, tkn, i, '"'));
 		tkn_start = *i;
 	}
 	if (tkn[*i] != '\"')
