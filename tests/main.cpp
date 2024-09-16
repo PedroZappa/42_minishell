@@ -65,6 +65,22 @@ int main(int argc, char** argv) {
 
         std::cout << "Running selected tests...\n";
         RUN_ALL_TESTS();
+
+		// Open the files again for reading
+		std::ifstream fail_file_in(".temp/bash_failing_tests.txt");
+		std::ifstream pass_file_in(".temp/bash_passing_tests.txt");
+
+		std::cout << "Failing tests:" << std::endl;
+		std::string line;
+		while (std::getline(fail_file_in, line)) {
+			std::cout << line << std::endl;
+		}
+
+		std::cout << "Passing tests:" << std::endl;
+		while (std::getline(pass_file_in, line)) {
+			std::cout << line << std::endl;
+		}
+
     }
 
     return 0;
