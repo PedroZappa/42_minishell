@@ -44,6 +44,8 @@ int	ft_parse_cmds(t_token *tks, t_cmd *cmds)
 			&& tks->type != TK_AND && tks->type != TK_PARENTESHIS)
 			tks = ft_parse_cmds_inner(tks, cmds + c.i, &c);
 		cmds[c.i].argv[c.j] = NULL;
+		cmds[c.i].in_fd = -1;
+		cmds[c.i].out_fd = -1;
 		++c.i;
 		if (tks)
 			tks = tks->next;

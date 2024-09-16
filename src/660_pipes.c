@@ -50,7 +50,7 @@ int	ft_pipe_setter(t_shell *sh, int i, int out)
 		return (FAILURE);
 	if (dup2(sh->pipes[i][out], out) == PIPE_FAIL)
 	{
-		ft_close_pipes(sh);
+		ft_close_pipes(sh, NULL, NULL);
 		ft_fork_exit(sh, PIPE_ERR, FAILURE);
 	}
 	return (SUCCESS);
@@ -67,7 +67,8 @@ int	ft_pipe_setter_fd(t_shell *sh, int fd, int out)
 		return (FAILURE);
 	if (dup2(fd, out) == PIPE_FAIL)
 	{
-		ft_close_pipes(sh);
+		ft_close_pipes(sh, &fd, NULL);
+		close(fd);
 		ft_fork_exit(sh, PIPE_ERR, FAILURE);
 	}
 	return (SUCCESS);
@@ -75,7 +76,7 @@ int	ft_pipe_setter_fd(t_shell *sh, int fd, int out)
 
 /// @brief			Close pipes
 /// @param sh		Pointer to a t_shell struct
-void	ft_close_pipes(t_shell *sh)
+void	ft_close_pipes(t_shell *sh, int *fd_in, int *fd_out)
 {
 	int	i;
 
@@ -91,7 +92,13 @@ void	ft_close_pipes(t_shell *sh)
 		ft_vfree(sh->pipes[i]);
 		sh->pipes[i] = NULL;
 	}
+	if (fd_in && *fd_in > 0)
+		close(*fd_in);
+	if (fd_out && *fd_out > 0)
+		close(*fd_out);
 	ft_vfree(sh->pipes);
+	*fd_in = -1;
+	*fd_out = -1;
 	sh->pipes = NULL;
 }
 

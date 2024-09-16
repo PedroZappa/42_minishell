@@ -19,17 +19,18 @@
 
 #include "../inc/minishell.h"
 
+void	ft_exec_child_inner(t_shell *sh, t_cmd *cmd);
+
 /// @brief			Execute first command in pipeline
 /// @param sh		Pointer to a t_shell struct
 void	ft_exec_child_first(t_shell *sh)
 {
+	t_cmd	*cmd;
+
+	cmd = sh->cmds;
 	if (sh->n_pipes != 0)
 		ft_pipe_setter(sh, 0, STDOUT_FILENO);
-	ft_close_pipes(sh);
-	if (sh->cmds[0].argv[0])
-		ft_exec_cmd(sh, ft_exec_check(sh->cmds[0].argv[0]), NO_PIPE);
-	ft_free_sh(sh);
-	exit(g_exit);
+	ft_exec_child_inner(sh, cmd);
 }
 
 /// @brief			Execute command in pipeline
@@ -37,13 +38,12 @@ void	ft_exec_child_first(t_shell *sh)
 /// @param i		Command index
 void	ft_exec_child_i(t_shell *sh, int i)
 {
+	t_cmd	*cmd;
+
+	cmd = sh->cmds + i;
 	ft_pipe_setter(sh, i - 1, STDIN_FILENO);
 	ft_pipe_setter(sh, i, STDOUT_FILENO);
-	ft_close_pipes(sh);
-	if (sh->cmds[i].argv[0])
-		ft_exec_cmd(sh, ft_exec_check(sh->cmds[i].argv[0]), i);
-	ft_free_sh(sh);
-	exit(g_exit);
+	ft_exec_child_inner(sh, cmd);
 }
 
 /// @brief			Execute last command in pipeline
@@ -51,10 +51,22 @@ void	ft_exec_child_i(t_shell *sh, int i)
 /// @param i		Command index
 void	ft_exec_child_last(t_shell *sh, int i)
 {
+	t_cmd	*cmd;
+
+	cmd = sh->cmds + i;
 	ft_pipe_setter(sh, i - 1, STDIN_FILENO);
-	ft_close_pipes(sh);
-	if (sh->cmds[i].argv[0])
-		ft_exec_cmd(sh, ft_exec_check(sh->cmds[i].argv[0]), i);
+	ft_exec_child_inner(sh, cmd);
+}
+
+void	ft_exec_child_inner(t_shell *sh, t_cmd *cmd)
+{
+	if (cmd->n_in > 0)
+		ft_redir_in(sh, cmd);
+	if (cmd->n_out > 0)
+		ft_redir_out(sh, cmd);
+	ft_close_pipes(sh, &cmd->in_fd, &cmd->out_fd);
+	if (cmd->argv[0])
+		ft_exec_cmd(sh, ft_exec_check(cmd->argv[0]), NO_PIPE);
 	ft_free_sh(sh);
 	exit(g_exit);
 }

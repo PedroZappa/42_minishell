@@ -39,6 +39,8 @@ void	ft_free_redir(t_cmd *cmd)
 			ft_free(cmd->in[i++].name);
 		ft_vfree(cmd->in);
 		cmd->in = NULL;
+		if (cmd->in_fd != -1)
+			close(cmd->in_fd);
 	}
 	i = 0;
 	if (cmd->out)
@@ -47,6 +49,8 @@ void	ft_free_redir(t_cmd *cmd)
 			ft_free(cmd->out[i++].name);
 		ft_vfree(cmd->out);
 		cmd->out = NULL;
+		if (cmd->out_fd != -1)
+			close(cmd->out_fd);
 	}
 }
 /** @} */

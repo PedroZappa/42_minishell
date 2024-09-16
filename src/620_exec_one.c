@@ -36,6 +36,11 @@ int	ft_exec_one(t_shell *sh)
 		|| (cmd == CMD_CD) || ((cmd == CMD_EXPORT) && sh->cmds[0].argv[1])
 		|| ((cmd == CMD_UNSET) && sh->cmds[0].argv[1]))
 	{
+		if (sh->cmds[0].n_in > 0)
+			ft_redir_in(sh, sh->cmds);
+		if (sh->cmds[0].n_out > 0)
+			ft_redir_out(sh, sh->cmds);
+		ft_close_pipes(sh, &sh->cmds[0].in_fd, &sh->cmds[0].out_fd);
 		if (ft_exec(sh, cmd, 0))
 			return (ft_free_arr(sh->path), FAILURE);
 	}

@@ -25,17 +25,16 @@
 /// @param cmd		Pointer to a t_cmd struct
 void	ft_redir_in(t_shell *sh, t_cmd *cmd)
 {
-	int	fd;
 	int	i;
 
 	i = 0;
-	fd = open(cmd->in[i].name, O_CREAT | O_RDONLY,
+	cmd->in_fd = open(cmd->in[i].name, O_CREAT | O_RDONLY,
 			S_IRWXU | S_IRGRP | S_IROTH);
-	if (fd < 0)
+	if (cmd->in_fd < 0)
 		ft_fork_exit(sh, cmd->in[i].name, FAILURE);
-	if (ft_pipe_setter_fd(sh, fd, STDIN_FILENO) == PIPE_FAIL)
+	if (ft_pipe_setter_fd(sh, cmd->in_fd, STDIN_FILENO) == PIPE_FAIL)
 	{
-		close(fd);
+		close(cmd->in_fd);
 		ft_fork_exit(sh, PIPE_ERR, FAILURE);
 	}
 }
@@ -45,17 +44,17 @@ void	ft_redir_in(t_shell *sh, t_cmd *cmd)
 /// @param cmd		Pointer to a t_cmd struct
 void	ft_redir_out(t_shell *sh, t_cmd *cmd)
 {
-	int	fd;
 	int	i;
 
 	i = 0;
-	fd = open(cmd->out[0].name, O_CREAT | O_WRONLY,
+	cmd->out_fd = open(cmd->out[0].name, O_CREAT | O_WRONLY,
 			S_IRWXU | S_IRGRP | S_IROTH);
-	if (fd < 0)
+	if (cmd->out_fd < 0)
 		ft_fork_exit(sh, cmd->out[i].name, FAILURE);
-	if ((fd != 1) && (ft_pipe_setter_fd(sh, fd, STDOUT_FILENO) == PIPE_FAIL))
+	if ((cmd->out_fd != 1)
+		&& (ft_pipe_setter_fd(sh, cmd->out_fd, STDOUT_FILENO) == PIPE_FAIL))
 	{
-		close(fd);
+		close(cmd->out_fd);
 		ft_fork_exit(sh, PIPE_ERR, FAILURE);
 	}
 }
