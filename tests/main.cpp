@@ -9,13 +9,13 @@ int main(int argc, char** argv) {
 
 	// Print Tester Header
 	std::cout << GRN << R"(
- __  __ _      _    _        _ _ 
+ __  __ _      _    _        _ _
 |  \/  (_)_ _ (_)__| |_  ___| | |
 | |\/| | | ' \| (_-< ' \/ -_) | |
 |_|__|_|_|_||_|_/__/_||_\___|_|_|
-|_   _|__ __| |_ ___ _ _         
-  | |/ -_|_-<  _/ -_) '_|        
-  |_|\___/__/\__\___|_|          
+|_   _|__ __| |_ ___ _ _
+  | |/ -_|_-<  _/ -_) '_|
+  |_|\___/__/\__\___|_|
 )" << NC << std::endl;
 	std::cout << MAG"By: " << NC << "passunca & gfragoso" << std::endl;
     while (true) {
@@ -26,22 +26,20 @@ int main(int argc, char** argv) {
         std::string input;
         std::getline(std::cin, input);
 
+		// Select test suites
         if (input.empty() || input == "exit") {
             std::cout << "Exiting..." << std::endl;
             break;
         }
-
 		if (input == "x") {
             ::testing::GTEST_FLAG(filter) = "*";
             std::cout << "Running all tests...\n";
             RUN_ALL_TESTS();
             continue;
         }
-
         std::set<std::string> selected_suites;
         std::stringstream ss(input);
         int choice;
-
         while (ss >> choice) {
             if (test_suites.find(choice) != test_suites.end()) {
                 selected_suites.insert(test_suites[choice]);
@@ -49,7 +47,6 @@ int main(int argc, char** argv) {
                 std::cout << RED"Invalid selection '" << choice << "'. Please try again...\n" << NC;
             }
         }
-
         if (selected_suites.empty()) {
             std::cout << "No valid test suites selected. Please try again." << std::endl;
             continue;
@@ -60,7 +57,6 @@ int main(int argc, char** argv) {
         for (const auto& suite : selected_suites) {
             ::testing::GTEST_FLAG(filter) += suite + ".*:";
         }
-
         ::testing::GTEST_FLAG(filter).pop_back();  // Remove trailing ':'
 
 		// Remove temp files from previous run
@@ -74,18 +70,19 @@ int main(int argc, char** argv) {
 		std::ifstream fail_file_in(".temp/bash_failing_tests.txt");
 		std::ifstream pass_file_in(".temp/bash_passing_tests.txt");
 
-		std::cout << "Failing tests:" << std::endl;
-		std::string line;
-		while (std::getline(fail_file_in, line)) {
-			std::cout << line << std::endl;
-		}
-
-		// std::cout << "Passing tests:" << std::endl;
-		// while (std::getline(pass_file_in, line)) {
+		// std::cout << "Failing tests:" << std::endl;
+		// std::string line;
+		// while (std::getline(fail_file_in, line)) {
 		// 	std::cout << line << std::endl;
 		// }
+		std::cout << "Failing tests:" << std::endl;
+        std::string line;
+        bool has_failing_tests = false;
+        while (std::getline(fail_file_in, line)) {
+            has_failing_tests = true;
+            std::cout << line << std::endl;
+        }
     }
-
     return 0;
 }
 
@@ -93,7 +90,7 @@ std::map<int, std::string> ListTestSuites() {
     std::map<int, std::string> test_suites;
     int count = 1;
     ::testing::UnitTest& unit_test = *::testing::UnitTest::GetInstance();
-    
+
 	std::cout << std::endl;
     for (int i = 0; i < unit_test.total_test_suite_count(); ++i) {
         const ::testing::TestSuite *test_suite = unit_test.GetTestSuite(i);

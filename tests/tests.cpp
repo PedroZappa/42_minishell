@@ -66,21 +66,23 @@ void runTest(Tester& shell_test, const std::string& cmd) {
         // Test passed, write to passing_tests.txt
         pass_file << "Test: " << cmd << "\n";
         pass_file << "Bash Output:\n" << bash_output.first << "\n";
+		pass_file << "Exit Code: " << bash_output.second << "\n";
         pass_file << "Minishell Output:\n" << minishell_output.first << "\n";
+        pass_file << "Exit Code: " << minishell_output.second << "\n";
         pass_file << "-----------------------\n";
     } else {
         // Test failed, write to failing_tests.txt
         fail_file << "Test: " << cmd << "\n";
         fail_file << "Bash Output:\n" << bash_output.first << "\n";
-        fail_file << "Minishell Output:\n" << minishell_output.first << "\n";
         fail_file << "Exit Code: " << bash_output.second << "\n";
+        fail_file << "Minishell Output:\n" << minishell_output.first << "\n";
+        fail_file << "Exit Code: " << minishell_output.second << "\n";
         fail_file << "-----------------------\n";
     }
 
     // Close the file streams
     pass_file.close();
     fail_file.close();
-
 }
 
 void leakReport() {

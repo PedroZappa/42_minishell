@@ -8,6 +8,7 @@
 # include <map>
 #include <utility>
 #include <fstream>
+#include <unistd.h>  // for access()
 
 # include <boost/process.hpp>
 # include <boost/version.hpp>
