@@ -29,9 +29,9 @@ int			ft_isnum(char *str);
 /// @param cmd		Pointer to t_cmd struct
 int	ft_exit(t_shell *sh, t_cmd *cmd)
 {
+	ft_fprintf(STDOUT_FILENO, "exit\n");
 	if (cmd->argc > 2)
 	{
-		ft_fprintf(STDOUT_FILENO, "exit\n");
 		if (!ft_isnum(cmd->argv[1]))
 			ft_exit_exit(sh, 2);
 		else
@@ -41,7 +41,6 @@ int	ft_exit(t_shell *sh, t_cmd *cmd)
 		ft_kill(sh, 0);
 	if (cmd->argc == 2)
 	{
-		ft_fprintf(STDOUT_FILENO, "exit\n");
 		if (!ft_isnum(cmd->argv[1]))
 			ft_exit_exit(sh, 2);
 		else
