@@ -57,9 +57,18 @@ int	ft_return_err(char *msg, int err_code, int exit_status)
 /// @param err_code		Error Code
 void	ft_fork_exit(t_shell *sh, char *msg, int err_code)
 {
-	ft_return_err(msg, err_code, FAILURE);
+	if (msg != NULL)
+		ft_return_err(msg, err_code, FAILURE);
 	ft_free_sh(sh);
 	exit(err_code);
+}
+
+int	ft_no_file_err(char *fname)
+{
+	ft_fprintf(STDERR_FILENO,
+		"bash: %s: No such file or directory\n",
+		fname);
+	return (1);
 }
 
 /** @} */

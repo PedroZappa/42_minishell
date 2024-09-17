@@ -42,7 +42,7 @@ void	ft_redir_in(t_shell *sh, t_cmd *cmd)
 		i++;
 	}
 	if (cmd->in_fd < 0)
-		ft_fork_exit(sh, cmd->in[i - 1].name, FAILURE);
+		ft_fork_exit(sh, NULL, FAILURE);
 	if (ft_pipe_setter_fd(sh, cmd->in_fd, STDIN_FILENO) == PIPE_FAIL)
 	{
 		close(cmd->in_fd);
@@ -55,14 +55,19 @@ int	ft_redir_in_type(char *fname, t_redir *redir)
 	int	ret;
 
 	if (redir->type == RD_IN)
-		return (open(redir->name, O_CREAT | O_RDONLY,
-				S_IRWXU | S_IRGRP | S_IROTH));
+	{
+		ret = open(redir->name, O_RDONLY,
+				S_IRWXU | S_IRGRP | S_IROTH);
+		if (ret == -1)
+			g_exit = ft_no_file_err(redir->name);
+		return (ret);
+	}
 	ret = open(fname, O_CREAT | O_WRONLY,
 			S_IRWXU | S_IRGRP | S_IROTH);
 	write(ret, redir->name, ft_strlen(redir->name));
 	write(ret, "\n", 1);
 	close(ret);
-	return (open(fname, O_CREAT | O_RDONLY,
+	return (open(fname, O_RDONLY,
 			S_IRWXU | S_IRGRP | S_IROTH));
 }
 

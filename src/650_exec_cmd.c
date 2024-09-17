@@ -22,8 +22,7 @@
 
 /// @brief			Execute a command
 /// @param sh		Pointer to a t_shell struct
-/// @param id		Command type
-/// @param i		Command index
+/// @param cmd		Command
 /// @note			Used in ft_exec_child()
 void	ft_exec_cmd(t_shell *sh, t_cmd *cmd)
 {
@@ -44,7 +43,7 @@ void	ft_exec_cmd(t_shell *sh, t_cmd *cmd)
 
 /// @brief			Execute one builtin command
 /// @param sh		Pointer to a t_shell struct
-/// @param cmd		Command type
+/// @param cmd		Command
 /// @param type		Base command type
 /// @return			SUCCESS(0)
 ///	@return			FAILURE(1)
