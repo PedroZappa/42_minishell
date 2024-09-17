@@ -1,4 +1,4 @@
-break ft_check_syntax
+break ft_execute
 fs cmd
 info thread
 info break

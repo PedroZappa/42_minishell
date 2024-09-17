@@ -48,14 +48,10 @@ Ctrl+C
 exit << a	# Leaks
 a
 
-env | ls	# Segfault
+env | ls	# wrong exit code
 ls | env	# Segfault
 
 cat < a.txt > b.txt		# Should print error message, shouldn't create any files
-```
 
-- ✅ Fix signals (ctrl + d com texto nao sair) 
-- Indireitar os pipes
-  -- Resolver 2 forks escreverem ao mesmo tempo
-- Redirects
-- Misc fixes
+$VOID	# Shouldn't print anything, should exit with 0
+```

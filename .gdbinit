@@ -473,6 +473,11 @@ define exec_child_first
 	display sh->pipe
 end
 
+define exec_child_inner
+	display *cmd
+	display *cmd->argv@cmd->argc
+end
+
 # 670_pipes.c
 define pipe_init
 	display **path
