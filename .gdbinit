@@ -271,6 +271,11 @@ define expand_check_dollar
 	display *i
 end
 
+define check_syntax
+	display *tk
+	display exit
+end
+
 ### 310_readline.c
 define readline
 	display **line_buf

@@ -48,9 +48,6 @@ Ctrl+C
 exit << a	# Leaks
 a
 
-ls <	# Error Message Output differ
-ls >	# Error Message Output differ
-
 env | ls	# Segfault
 ls | env	# Segfault
 

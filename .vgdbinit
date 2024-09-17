@@ -1,4 +1,4 @@
-break ft_expand_dollar
+break ft_check_syntax
 fs cmd
 info thread
 info break

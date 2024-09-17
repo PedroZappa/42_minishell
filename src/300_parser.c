@@ -69,7 +69,6 @@ static int	ft_check_syntax(t_token *tk)
 	{
 		if (tk->next == NULL && (tk->type == TK_PIPE || tk->type == TK_OR
 				|| tk->type == TK_AND || ft_strcmp(tk->name, "(") == 0
-				|| tk->type == TK_IN || tk->type == TK_OUT
 				|| tk->type == TK_HEREDOC))
 			return (ft_syntax_err(tk->name));
 		exit = ft_check_syntax2(tk);
@@ -92,6 +91,8 @@ static int	ft_check_syntax2(t_token *tk)
 	if (tk->next && ((tk->type == TK_IN || tk->type == TK_OUT
 				|| tk->type == TK_HEREDOC) && (tk->next->type != TK_CMD)))
 		return (ft_syntax_err(tk->next->name));
+	if ((tk->next == NULL) && ((tk->type == TK_IN || tk->type == TK_OUT)))
+		return (ft_syntax_err("newline"));
 	return (SUCCESS);
 }
 
