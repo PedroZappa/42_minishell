@@ -39,9 +39,10 @@ void	ft_count_args(t_shell *sh, t_token *tks)
 			if ((tks->type == TK_CMD) && (prev->type != TK_IN)
 				&& (prev->type != TK_OUT) && (prev->type != TK_HEREDOC))
 				++sh->cmds[i].argc;
-			if ((prev->type == TK_IN) || (prev->type == TK_HEREDOC))
+			if (prev != tks && ((prev->type == TK_IN)
+					|| (prev->type == TK_HEREDOC)))
 				++sh->cmds[i].n_in;
-			if (prev->type == TK_OUT)
+			if (prev != tks && (prev->type == TK_OUT))
 				++sh->cmds[i].n_out;
 			prev = tks;
 			tks = tks->next;
