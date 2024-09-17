@@ -375,8 +375,8 @@ void		ft_exec_child_i(t_shell *sh, int i);
 void		ft_exec_child_last(t_shell *sh, int i);
 
 /// @file	650_exec_cmd.c
-void		ft_exec_cmd(t_shell *sh, int id, int i);
-int			ft_exec(t_shell *sh, int cmd, int n);
+void		ft_exec_cmd(t_shell *sh, t_cmd *cmd);
+int			ft_exec(t_shell *sh, t_cmd *cmd, int type);
 void		ft_execve(t_cmd *cmd, char **envp);
 
 /// @file	660_pipes.c

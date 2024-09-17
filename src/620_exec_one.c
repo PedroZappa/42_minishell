@@ -32,10 +32,7 @@ int	ft_exec_one(t_shell *sh)
 	if (sh->cmds[0].argv[0])
 		cmd = ft_exec_check(sh->cmds[0].argv[0]);
 	if (cmd == CMD_EXIT)
-	{
-		if (ft_exec(sh, cmd, 0))
-			return (ft_free_arr(sh->path), FAILURE);
-	}
+		return (ft_exit(sh, sh->cmds + 0));
 	else if (ft_exec_fork(sh))
 		return (ft_free_arr(sh->path), FAILURE);
 	return (ft_free_arr(sh->path), SUCCESS);

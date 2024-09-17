@@ -99,8 +99,8 @@ void	ft_pipe_close(t_shell *sh, int *fd_in, int *fd_out)
 
 void	ft_pipe_reset(void)
 {
-	dup2(STDIN_FILENO, 0);
-	dup2(STDOUT_FILENO, 1);
+	dup2(0, STDIN_FILENO);
+	dup2(1, STDOUT_FILENO);
 }
 
 /** @} */
