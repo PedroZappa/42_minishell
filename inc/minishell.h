@@ -390,6 +390,7 @@ void		ft_pipe_reset(void);
 void		ft_redir_in(t_shell *sh, t_cmd *cmd);
 void		ft_redir_out(t_shell *sh, t_cmd *cmd);
 char		*ft_redir_heredoc_name(int i);
+void		ft_redir_close(int *fd_in, int *fd_out);
 
 //=============================================================================/
 //	700		Builtins														   /

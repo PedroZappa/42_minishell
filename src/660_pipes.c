@@ -92,13 +92,8 @@ void	ft_pipe_close(t_shell *sh, int *fd_in, int *fd_out)
 		ft_vfree(sh->pipes[i]);
 		sh->pipes[i] = NULL;
 	}
-	if (fd_in && *fd_in > 0)
-		close(*fd_in);
-	if (fd_out && *fd_out > 0)
-		close(*fd_out);
+	ft_redir_close(fd_in, fd_out);
 	ft_vfree(sh->pipes);
-	*fd_in = -1;
-	*fd_out = -1;
 	sh->pipes = NULL;
 }
 

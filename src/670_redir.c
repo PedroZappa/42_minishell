@@ -60,6 +60,7 @@ int	ft_redir_in_type(char *fname, t_redir *redir)
 	ret = open(fname, O_CREAT | O_WRONLY,
 			S_IRWXU | S_IRGRP | S_IROTH);
 	write(ret, redir->name, ft_strlen(redir->name));
+	write(ret, "\n", 1);
 	close(ret);
 	return (open(fname, O_CREAT | O_RDONLY,
 			S_IRWXU | S_IRGRP | S_IROTH));
@@ -104,6 +105,20 @@ char	*ft_redir_heredoc_name(int i)
 	ret = ft_strjoin(".heredoc_", temp);
 	ft_free(temp);
 	return (ret);
+}
+
+void	ft_redir_close(int *fd_in, int *fd_out)
+{
+	if (fd_in && *fd_in != -1)
+	{
+		close(*fd_in);
+		*fd_in = -1;
+	}
+	if (fd_out && *fd_out != -1)
+	{
+		close(*fd_out);
+		*fd_out = -1;
+	}
 }
 
 /** @} */
