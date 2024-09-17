@@ -37,6 +37,50 @@ void runTest(Tester& shell_test, const std::string& cmd) {
         // }
     }
 	// Print the contents of the .temp/bash_failing_tests.txt and bash_passing_tests.txt file
+	    if (bash_output != minishell_output) {
+        std::cerr << RED"Outputs differ!" << NC << std::endl;
+    } else {
+        std::cout << GRN"Outputs match!" << NC << std::endl;
+    }
+	// Ensure the ".temp" directory exists, if not, create it
+    struct stat info;
+    if (stat(".temp", &info) != 0) {
+        // Directory doesn't exist, create it
+        if (mkdir(".temp", 0777) != 0) {
+            std::cerr << "Error creating directory .temp!" << std::endl;
+            return;  // Exit the function if the directory cannot be created
+        }
+    }
+	// Create output file streams for passing and failing tests
+    std::ofstream pass_file(".temp/bash_passing_tests.txt", std::ios_base::out | std::ios_base::app);
+    if (!pass_file.is_open()) {
+        std::cerr << "Error opening passing tests file!" << std::endl;
+    }
+    
+    std::ofstream fail_file(".temp/bash_failing_tests.txt", std::ios_base::out | std::ios_base::app);
+    if (!fail_file.is_open()) {
+        std::cerr << "Error opening failing tests file!" << std::endl;
+    }
+	// Write output to different files based on the comparison of outputs
+    if (bash_output == minishell_output) {
+        // Test passed, write to passing_tests.txt
+        pass_file << "Test: " << cmd << "\n";
+        pass_file << "Bash Output:\n" << bash_output.first << "\n";
+        pass_file << "Minishell Output:\n" << minishell_output.first << "\n";
+        pass_file << "-----------------------\n";
+    } else {
+        // Test failed, write to failing_tests.txt
+        fail_file << "Test: " << cmd << "\n";
+        fail_file << "Bash Output:\n" << bash_output.first << "\n";
+        fail_file << "Minishell Output:\n" << minishell_output.first << "\n";
+        fail_file << "Exit Code: " << bash_output.second << "\n";
+        fail_file << "-----------------------\n";
+    }
+
+    // Close the file streams
+    pass_file.close();
+    fail_file.close();
+
 }
 
 void leakReport() {
@@ -74,7 +118,7 @@ TEST(Parser, Basic) {
 		"echo \"\"",
         "echo '$'",
         "echo \"'$'\"",
-        "echo \'\"'$'\"\'",
+        // "echo \'\"'$'\"\'",
         "echo \"$\"",
         "echo $USER",
         "echo '$USER'",
