@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
+#    By: gfragoso <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/29 20:35:29 by passunca          #+#    #+#              #
-#    Updated: 2024/09/09 09:34:04 by passunca         ###   ########.fr        #
+#    Updated: 2024/09/17 15:52:33 by gfragoso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ FILES			+= 311_readline_utils.c
 FILES			+= 320_cmd_parser.c
 FILES			+= 321_cmd_parser_utils.c
 FILES			+= 400_signal.c
+FILES			+= 401_signal2.c
 FILES			+= 500_env_get.c
 FILES			+= 510_env_set.c
 FILES			+= 520_append_var.c

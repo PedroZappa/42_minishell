@@ -6,7 +6,7 @@
 /*   By: gfragoso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:11:31 by passunca          #+#    #+#             */
-/*   Updated: 2024/09/09 09:13:31 by passunca         ###   ########.fr       */
+/*   Updated: 2024/09/17 15:53:56 by gfragoso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -333,6 +333,9 @@ int			ft_cmd_allocate(t_cmd *cmd);
 void		ft_sigset(void);
 void		ft_fork_sigset(void);
 void		ft_fork_sighandler(int sig);
+
+/// @file	401_signal2.c
+void		ft_heredoc_sigset(void);
 
 //=============================================================================/
 //	500		Env Setters/Getters												   /
