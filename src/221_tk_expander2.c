@@ -23,6 +23,23 @@
 int		ft_get_line_heredoc(t_list **list, char *delim);
 char	*ft_expand_dollars(t_shell *sh, char *tkn);
 
+char	*ft_heredoc_write(t_shell *sh, char *to_write)
+{
+	int		fd;
+	char	*ret;
+
+	if (to_write == NULL)
+		return (NULL);
+	ret = ft_redir_heredoc_name(sh->n_heredocs - 1);
+	unlink(ret);
+	fd = open(ret, O_CREAT | O_WRONLY | O_EXCL,
+			S_IRWXU | S_IRGRP | S_IROTH);
+	write(fd, to_write, ft_strlen(to_write));
+	write(fd, "\n", 1);
+	close(fd);
+	return (ft_free(to_write), ret);
+}
+
 /// @brief		Heredoc expander
 /// @param sh	Pointer to a t_shell struct
 /// @param tkn	Pointer to token string
@@ -44,7 +61,7 @@ char	*ft_heredoc_expander(t_shell *sh, char *tkn)
 	ret = ft_compress_free_list(&list, '\n');
 	if (expand)
 		ret = ft_expand_dollars(sh, ret);
-	return (ft_free(tkn), ret);
+	return (ft_free(tkn), ft_heredoc_write(sh, ret));
 }
 
 /// @brief			Get heredoc line

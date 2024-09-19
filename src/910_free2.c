@@ -53,4 +53,22 @@ void	ft_free_redir(t_cmd *cmd)
 			close(cmd->out_fd);
 	}
 }
+
+void	ft_free_heredoc(t_shell *sh)
+{
+	int		i;
+	char	*name;
+
+	i = 0;
+	while (i < sh->n_heredocs)
+	{
+		name = ft_redir_heredoc_name(i);
+		if (name != NULL)
+		{
+			unlink(name);
+			ft_free(name);
+		}
+		i++;
+	}
+}
 /** @} */

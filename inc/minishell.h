@@ -204,7 +204,6 @@ typedef struct s_cmd
 
 	t_redir	*in;
 	int		in_fd;
-	char	*heredoc_name;
 	int		n_in;
 
 	t_redir	*out;
@@ -239,8 +238,10 @@ typedef struct s_shell
 	char	*user;
 
 	int		exit_status;
+
 	int		**pipes;
 	int		n_pipes;
+	int		n_heredocs;
 }	t_shell;
 
 typedef struct s_ctrs
@@ -466,6 +467,7 @@ int			ft_free_nocmds(t_cmd *cmds, int n_cmds, t_token **tks);
 /// @file	910_free2.c
 void		ft_vfree(void *ptr);
 void		ft_free_redir(t_cmd *cmd);
+void		ft_free_heredoc(t_shell *sh);
 
 #endif
 

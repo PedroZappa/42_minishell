@@ -46,6 +46,7 @@ int	ft_tokenizer(t_shell *sh, char *line, t_token **tks)
 		if (tk->type == TK_HEREDOC && tk->next != NULL
 			&& tk->next->type == TK_CMD)
 		{
+			sh->n_heredocs++;
 			tk->next->name = ft_heredoc_expander(sh, tk->next->name);
 			tk = tk->next->next;
 			continue ;

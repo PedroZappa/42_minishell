@@ -46,7 +46,6 @@ int	ft_parse_cmds(t_token *tks, t_cmd *cmds)
 		cmds[c.i].argv[c.j] = NULL;
 		cmds[c.i].in_fd = -1;
 		cmds[c.i].out_fd = -1;
-		cmds[c.i].heredoc_name = ft_redir_heredoc_name(c.i);
 		++c.i;
 		if (tks)
 			tks = tks->next;
