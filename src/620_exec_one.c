@@ -33,7 +33,10 @@ int	ft_exec_one(t_shell *sh)
 		cmd = ft_exec_check(sh->cmds[0].argv[0]);
 	if (cmd == CMD_EXIT || cmd == CMD_EXPORT || cmd == CMD_UNSET
 		|| cmd == CMD_CD || cmd == CMD_PWD || cmd == CMD_CLEAR)
-		return (ft_exec(sh, sh->cmds + 0, cmd));
+	{
+		if (ft_exec(sh, sh->cmds + 0, cmd))
+			return (ft_free_arr(sh->path), FAILURE);
+	}
 	else if (ft_exec_fork(sh))
 		return (ft_free_arr(sh->path), FAILURE);
 	return (ft_free_arr(sh->path), SUCCESS);
