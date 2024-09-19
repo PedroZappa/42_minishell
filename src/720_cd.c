@@ -43,6 +43,8 @@ int	ft_cd(t_shell *sh, t_cmd *cmd)
 		ft_free(home);
 		return (chdir);
 	}
+	if (cmd->argv[1][0] == '-')
+		return (ft_flag_err(cmd->argv[0], cmd->argv[1]));
 	if (cmd->argc > 2)
 		return (ft_err("bash: cd: too many arguments\n", FAILURE));
 	if (cmd->argv[1][0] == '\0')
@@ -64,7 +66,7 @@ static int	ft_chdir(t_shell *sh, char *path)
 	if (path == NULL || pwd == NULL || ft_pwd_invalid(pwd))
 		pwd = getcwd(NULL, 0);
 	chdir_ret = 0;
-	if (path[0] == '-')
+	if (strncmp(path, "-", 3) == 0)
 		ft_get_prev_dir(&sh->envp, old, pwd);
 	else
 	{

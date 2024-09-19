@@ -23,6 +23,7 @@ static int		ft_get_tkns(t_shell *sh, char *line, \
 						t_token **tks, t_tk_ops *ops);
 static t_tk_ops	ft_get_tk(char *tk, t_tk_ops *ops);
 static t_tk_ops	ft_find_ops(char *tk, t_tk_ops *ops);
+static void		ft_remove_blank_tks(t_token **tkn);
 
 /// @brief			Tokenizer
 /// @param sh		Pointer to a t_shell struct
@@ -53,6 +54,7 @@ int	ft_tokenizer(t_shell *sh, char *line, t_token **tks)
 			tk->name = ft_expander(sh, tk->name);
 		tk = tk->next;
 	}
+	ft_remove_blank_tks(tks);
 	return (SUCCESS);
 }
 
@@ -135,6 +137,35 @@ static t_tk_ops	ft_find_ops(char *tk, t_tk_ops *ops)
 		dq = ft_get_dq(dq, tk[i]);
 	}
 	return ((t_tk_ops){ft_substr(tk, 0, (size_t)i), TK_CMD, i});
+}
+
+static void	ft_remove_blank_tks(t_token **tkn)
+{
+	t_token	*tk;
+	t_token	*temp;
+	t_token	*prev;
+
+	tk = *tkn;
+	prev = NULL;
+	temp = NULL;
+	while (tk)
+	{
+		if (tk->type == TK_CMD && tk->name != NULL
+			&& tk->name[0] == '\0')
+		{
+			ft_free(tk->name);
+			temp = tk;
+			if (tk == *tkn)
+				*tkn = tk->next;
+			else
+				prev->next = tk->next;
+			tk = tk->next;
+			free(temp);
+			continue ;
+		}
+		prev = tk;
+		tk = tk->next;
+	}
 }
 
 /** @} */
