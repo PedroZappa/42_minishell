@@ -40,6 +40,7 @@ int	ft_init(t_shell *sh, char **envp)
 	ft_set_var("OLDPWD", NULL, &sh->envp);
 	ft_get_termios(STDIN_FILENO, &sh->termios);
 	sh->n_pipes = 0;
+	sh->n_heredocs = 0;
 	return (SUCCESS);
 }
 

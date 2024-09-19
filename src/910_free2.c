@@ -70,5 +70,6 @@ void	ft_free_heredoc(t_shell *sh)
 		}
 		i++;
 	}
+	sh->n_heredocs = 0;
 }
 /** @} */

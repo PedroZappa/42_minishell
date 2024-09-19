@@ -60,7 +60,7 @@ static int	ft_sh_loop(t_shell *sh)
 	{
 		ft_pipe_reset();
 		ft_sigset();
-		sh->n_heredocs = 0;
+		ft_free_heredoc(sh);
 		status = ft_parser(sh, line_buf);
 		if (status == FAILURE)
 			continue ;
