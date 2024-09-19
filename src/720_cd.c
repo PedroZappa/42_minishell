@@ -43,7 +43,7 @@ int	ft_cd(t_shell *sh, t_cmd *cmd)
 		ft_free(home);
 		return (chdir);
 	}
-	if (cmd->argv[1][0] == '-')
+	if (cmd->argv[1][0] == '-' && cmd->argv[1][1] != '\0')
 		return (ft_flag_err(cmd->argv[0], cmd->argv[1]));
 	if (cmd->argc > 2)
 		return (ft_err("bash: cd: too many arguments\n", FAILURE));
