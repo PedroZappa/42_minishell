@@ -29,10 +29,8 @@ static int	ft_pwd_err(char *cmd, char *cmd_flag);
 int	ft_pwd(t_shell *sh, t_cmd *cmd)
 {
 	char	*pwd;
-	int		i;
 
-	i = 0;
-	if (cmd->argv[1])
+	if (cmd->argc > 1)
 		return (ft_pwd_err(cmd->argv[0], cmd->argv[1]));
 	pwd = ft_get_var("PWD", sh->envp);
 	if (pwd == NULL || ft_pwd_invalid(pwd))
