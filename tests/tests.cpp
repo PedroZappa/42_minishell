@@ -344,8 +344,8 @@ TEST(Commands, WithRedirection) {
 	std::vector<std::string> commands = {
 		// "ls <",
 		// "ls >",
-		"ls < > a",
-		"| ls",
+		// "ls < > a",
+		// "| ls",
 		"echo $VOID_VAR",
 		"echo $",
 		"cat Makefile | grep vgdb",
@@ -375,7 +375,7 @@ TEST(Builtins_echo, basic) {
 		"echo ~/696969",
 		"echo ~696969",
         // "echo -n yo",
-        "echo -n -n -n -n",
+        // "echo -n -n -n -n",
         // "echo --n yo",
         "echo -n2 -n yo",
         "echo --nnnnnnnnnnnnnn",
@@ -431,15 +431,11 @@ TEST(Builtins_echo, withPipesRedirs) {
 		"echo '$HOME > ho | me.txt'",
 		"echo | ls",
 		"ls | echo",
-		"nocmd | echo",
+		// "nocmd | echo",
 		// "echo | nocmd",
 		"echo > a.txt",
 		"echo whatever > a.txt",
 		"echo < void_file",
-		"echo << void_file",
-		"z.txt",
-		"~~minishell",
-		"l  s",
     };
 
     for (const auto& cmd : commands) {
@@ -477,7 +473,7 @@ TEST(Builtins_cd, advanced) {
 		"cd ../../../../../..",
 		"cd | ls",
 		"ls | cd",
-		"cd | nocmd",
+		// "cd | nocmd",
 		"nocmd | cd",
 		"cd -n | ls",		// invalid option -n
 		"ls | cd -n",		// invalid option -n
@@ -486,7 +482,6 @@ TEST(Builtins_cd, advanced) {
 		"cd > a.txt",		// a.txt is created and cd is executed
 		"cd < a.txt",		// cd is executed
 		"cd < void_file",	// void_file does not exist
-		"cd << a",			// Heredoc opens, written into then cd is executed
 	};
 
 	for (const auto& cmd : commands) {

@@ -554,7 +554,7 @@ end
 define export
 	display *sh
 	display i
-	display cmd[i].argv@3
+	display *cmd[i].argv@3
 	display cmd[i].argv[i]
 end
 
@@ -687,7 +687,7 @@ end
 
 
 # ft_exec_pipeline
-break ft_exec_pipeline
+break ft_export
 run
 fs cmd
 rfr
