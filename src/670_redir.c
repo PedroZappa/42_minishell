@@ -32,11 +32,11 @@ void	ft_redir_in(t_shell *sh, t_cmd *cmd)
 	i = 0;
 	while (i < cmd->n_in)
 	{
-		if (cmd->in_fd != -1)
+		if (cmd->in_fd != -1 && i > 0)
 		{
 			close(cmd->in_fd);
-			if (cmd->in[i].type == RD_IN_HD)
-				unlink(cmd->in[i].name);
+			if (cmd->in[i - 1].type == RD_IN_HD)
+				unlink(cmd->in[i - 1].name);
 			cmd->in_fd = -1;
 		}
 		cmd->in_fd = ft_redir_in_type(cmd->in + i);
