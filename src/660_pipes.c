@@ -53,7 +53,6 @@ int	ft_pipe_setter(t_shell *sh, int i, int out)
 		ft_pipe_close(sh, NULL, NULL);
 		ft_fork_exit(sh, PIPE_ERR, FAILURE);
 	}
-	close(out);
 	return (SUCCESS);
 }
 
@@ -99,6 +98,7 @@ void	ft_pipe_close(t_shell *sh, int *fd_in, int *fd_out)
 	sh->pipes = NULL;
 }
 
+/// @brief  		Resets pipes to their default fds
 void	ft_pipe_reset(void)
 {
 	dup2(0, STDIN_FILENO);
