@@ -62,13 +62,12 @@ static int	ft_check_syntax(t_token *tk)
 	int	exit;
 
 	exit = 0;
-	if (tk && (tk->type == TK_PIPE || tk->type == TK_OR || tk->type == TK_AND
-			|| ft_strcmp(tk->name, ")") == 0))
+	if (tk && (tk->type == TK_PIPE || tk->type == TK_OR || tk->type == TK_AND))
 		return (ft_syntax_err(tk->name));
 	while (tk)
 	{
 		if (tk->next == NULL && (tk->type == TK_PIPE || tk->type == TK_OR
-				|| tk->type == TK_AND || ft_strcmp(tk->name, "(") == 0
+				|| tk->type == TK_AND
 				|| tk->type == TK_HEREDOC))
 			return (ft_syntax_err(tk->name));
 		exit = ft_check_syntax2(tk);
