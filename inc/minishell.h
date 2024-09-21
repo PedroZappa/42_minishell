@@ -244,6 +244,8 @@ typedef struct s_shell
 	int		n_heredocs;
 }	t_shell;
 
+/// @struct				Counters 
+/// @brief				Allows having up to 4 counters inside a single variable.
 typedef struct s_ctrs
 {
 	int		i;
@@ -252,6 +254,12 @@ typedef struct s_ctrs
 	int		l;
 }	t_ctrs;
 
+/// @struct				Heredoc Variables
+/// @brief				Stores variables used in the heredoc.
+/// @param delim		Heredoc delimiter
+/// @param ret			Function return
+/// @param list			Heredoc line list
+/// @param tk			Token list
 typedef struct s_hd_vars
 {
 	char	*delim;
@@ -346,7 +354,7 @@ void		ft_fork_sighandler(int sig);
 
 /// @file	401_signal2.c
 void		ft_heredoc_sigset(void);
-void		ft_heredoc_sighandler(int signal, t_shell *sh, t_hd_vars *vars);
+void		ft_heredoc_sighandler(int signo, t_shell *sh, t_hd_vars *vars);
 void		ft_sigignore(void);
 
 //=============================================================================/
