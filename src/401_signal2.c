@@ -12,12 +12,15 @@
 
 #include "../inc/minishell.h"
 
-void	ft_heredoc_sighandler(int signal, t_shell *sh, t_hd_vars *vars)
+/// @brief			Heredoc fork signal handler
+/// @param signo	Signal number (or -1 to set sh and vars)
+///	@note			Used in ft_sgnal_handler()
+void	ft_heredoc_sighandler(int signo, t_shell *sh, t_hd_vars *vars)
 {
 	static t_shell		*hd_sh = NULL;
 	static t_hd_vars	*hd_vars = NULL;
 
-	if (signal == -1)
+	if (signo == -1)
 	{
 		hd_sh = sh;
 		hd_vars = vars;
@@ -35,8 +38,8 @@ void	ft_heredoc_sighandler(int signal, t_shell *sh, t_hd_vars *vars)
 	exit(130);
 }
 
-/// @brief			Fork signal setter
-/// @details		Handles SIGINT and SIGQUIT
+/// @brief			Heredoc signal setter
+/// @details		Handles SIGINT and SIGTERM
 /// @note			Used in ft_exec_fork()
 void	ft_heredoc_sigset(void)
 {
@@ -45,6 +48,8 @@ void	ft_heredoc_sigset(void)
 	signal(SIGTERM, (void *)ft_heredoc_sighandler);
 }
 
+/// @brief			Set signals to be ignored
+/// @details		On SIGINT, SIGQUIT and SIGTERM
 void	ft_sigignore(void)
 {
 	signal(SIGINT, SIG_IGN);

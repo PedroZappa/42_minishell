@@ -66,7 +66,7 @@ static int	ft_stat_cmd(char *cmd)
 		if ((sb.st_mode & __S_IFMT) == __S_IFDIR)
 			ft_fprintf(STDERR_FILENO, "bash: %s: Is a directory\n", cmd);
 		else
-			ft_fprintf(STDOUT_FILENO, "bash: %s: Permission denied\n", cmd);
+			ft_fprintf(STDERR_FILENO, "bash: %s: Permission denied\n", cmd);
 		g_exit = 126;
 		return (FAILURE);
 	}

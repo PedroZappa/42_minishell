@@ -86,6 +86,8 @@ static int	ft_path_from_env(char **envp)
 	return (-1);
 }
 
+/// @brief 		Loops over cmds and checks if cmds exists
+/// @param sh	Pointer to a t_shell struct 
 static void	ft_check_cmds(t_shell *sh)
 {
 	int	i;

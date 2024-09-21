@@ -60,6 +60,9 @@ char	*ft_fill_var(t_shell *sh, char *tkn)
 	return (var);
 }
 
+/// @brief			Adds content to the end of a list
+/// @param lst 		List pointer
+/// @param ptr 		Content to add
 void	ft_lstadd_back_ptr(t_list **lst, void *ptr)
 {
 	t_list	*new;

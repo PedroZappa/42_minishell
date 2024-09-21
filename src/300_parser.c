@@ -53,10 +53,11 @@ int	ft_parser(t_shell *sh, char *line_buf)
 	return (ft_free_tks(&tks), SUCCESS);
 }
 
-/// @brief Check if a given token's list is a valid command syntactically
-/// @param tk	Pointer to a t_token struct
-/// @return		SUCCESS(0)
-/// @note		Used in ft_parser()
+/// @brief 			Check if a given token's list is 
+///						a valid command syntactically
+/// @param tk		Pointer to a t_token struct
+/// @return			SUCCESS(0)
+/// @note			Used in ft_parser()
 static int	ft_check_syntax(t_token *tk)
 {
 	int	exit;
@@ -78,8 +79,10 @@ static int	ft_check_syntax(t_token *tk)
 	return (SUCCESS);
 }
 
-/// @brief Check if a given token's list is a valid command syntactically 2
-/// @param tk	Pointer to a t_token struct
+/// @brief 			Second section of ft_check_syntax
+/// @param tk		Pointer to a t_token struct
+/// @return			SUCCESS(0)
+/// @note			Used in ft_parser()
 static int	ft_check_syntax2(t_token *tk)
 {
 	if (tk->next && ((tk->type == TK_PIPE) && (tk->next->type == TK_PIPE))
@@ -97,7 +100,6 @@ static int	ft_check_syntax2(t_token *tk)
 
 /// @brief			Count commands
 /// @param tks		Pointer to a t_token struct
-/// @var count		Count of commands
 /// @return			Number of commands
 static int	ft_count_cmds(t_token *tks)
 {

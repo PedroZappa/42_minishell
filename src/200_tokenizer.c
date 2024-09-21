@@ -142,6 +142,8 @@ static t_tk_ops	ft_find_ops(char *tk, t_tk_ops *ops)
 	return ((t_tk_ops){ft_substr(tk, 0, (size_t)i), TK_CMD, i});
 }
 
+/// @brief			Goes over the list of commands and removes any empty ones
+/// @param tkn		List of tokens
 static void	ft_remove_blank_tks(t_token **tkn)
 {
 	t_token	*tk;
