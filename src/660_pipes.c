@@ -53,6 +53,7 @@ int	ft_pipe_setter(t_shell *sh, int i, int out)
 		ft_pipe_close(sh, NULL, NULL);
 		ft_fork_exit(sh, PIPE_ERR, FAILURE);
 	}
+	close(out);
 	return (SUCCESS);
 }
 
@@ -71,6 +72,7 @@ int	ft_pipe_setter_fd(t_shell *sh, int fd, int out)
 		close(fd);
 		ft_fork_exit(sh, PIPE_ERR, FAILURE);
 	}
+	close(fd);
 	return (SUCCESS);
 }
 

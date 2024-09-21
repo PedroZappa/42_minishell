@@ -50,7 +50,6 @@ void	ft_free_redir(t_cmd *cmd)
 		ft_vfree(cmd->out);
 		cmd->out = NULL;
 	}
-	printf("cleaning redir!\n");
 	if (cmd->out_fd != -1)
 		close(cmd->out_fd);
 }
@@ -61,6 +60,8 @@ void	ft_free_heredoc(t_shell *sh)
 	char	*name;
 
 	i = 0;
+	if (sh == NULL)
+		return ;
 	while (i < sh->n_heredocs)
 	{
 		name = ft_redir_heredoc_name(i);
@@ -73,4 +74,16 @@ void	ft_free_heredoc(t_shell *sh)
 	}
 	sh->n_heredocs = 0;
 }
+
+void	ft_free_sh_partial(t_shell *sh)
+{
+	if (sh == NULL)
+		return ;
+	ft_free_arr(sh->envp);
+	free(sh->hostname);
+	free(sh->home);
+	free(sh->user);
+	free(sh);
+}
+
 /** @} */

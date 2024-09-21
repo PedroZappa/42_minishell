@@ -23,44 +23,72 @@
 int		ft_get_line_heredoc(t_list **list, char *delim);
 char	*ft_expand_dollars(t_shell *sh, char *tkn);
 
-char	*ft_heredoc_write(t_shell *sh, char *to_write)
+int	ft_heredoc_write(t_shell *sh, char *to_write)
 {
 	int		fd;
 	char	*ret;
 
 	if (to_write == NULL)
-		return (NULL);
+		return (FAILURE);
 	ret = ft_redir_heredoc_name(sh->n_heredocs - 1);
+	if (ret == NULL)
+		return (ft_free(to_write), FAILURE);
 	unlink(ret);
 	fd = open(ret, O_CREAT | O_WRONLY | O_EXCL,
 			S_IRWXU | S_IRGRP | S_IROTH);
+	if (fd < 0)
+		return (FAILURE);
 	write(fd, to_write, ft_strlen(to_write));
 	write(fd, "\n", 1);
 	close(fd);
-	return (ft_free(to_write), ret);
+	return (ft_free(to_write), ft_free(ret), SUCCESS);
 }
 
 /// @brief		Heredoc expander
 /// @param sh	Pointer to a t_shell struct
 /// @param tkn	Pointer to token string
-char	*ft_heredoc_expander(t_shell *sh, char *tkn)
+int	ft_heredoc_expander_fork(t_shell *sh, t_token *tk, char *tkn)
 {
-	char	*delim;
-	char	*ret;
-	int		expand;
-	t_list	*list;
+	t_hd_vars	hd;
+	int			expand;
 
-	list = NULL;
-	ret = ft_strdup(tkn);
-	delim = ft_expander(sh, ret);
-	expand = ft_strcmp(tkn, delim) == 0;
-	while (ft_get_line_heredoc(&list, delim) == 0)
+	hd.list = NULL;
+	hd.tk = tk;
+	hd.ret = ft_strdup(tkn);
+	hd.delim = ft_expander(sh, hd.ret);
+	expand = ft_strcmp(tkn, hd.delim) == 0;
+	hd.ret = NULL;
+	ft_heredoc_sighandler(-1, sh, &hd);
+	while (ft_get_line_heredoc(&hd.list, hd.delim) == 0)
 		;
-	ret = ft_compress_free_list(&list, '\n');
+	hd.ret = ft_compress_free_list(&hd.list, '\n');
+	hd.list = NULL;
 	if (expand)
-		ret = ft_expand_dollars(sh, ret);
-	return (ft_free(tkn), ft_free(delim),
-		ft_heredoc_write(sh, ret));
+		hd.ret = ft_expand_dollars(sh, hd.ret);
+	return (ft_free(hd.delim), ft_heredoc_write(sh, hd.ret));
+}
+
+int	ft_heredoc_expander(t_shell *sh, t_token *tk, char *tkn)
+{
+	int	pid;
+
+	pid = fork();
+	if (pid == PID_FAIL)
+		return (ft_err(FORK_ERR, errno), FAILURE);
+	ft_sigignore();
+	if (pid == SUCCESS)
+	{
+		ft_heredoc_sigset();
+		ft_heredoc_expander_fork(sh, tk, tkn);
+		ft_free_tks(&tk);
+		ft_free_sh_partial(sh);
+		exit(0);
+	}
+	wait(&g_exit);
+	ft_sigset();
+	if (g_exit == 0)
+		ft_free(tkn);
+	return (g_exit);
 }
 
 /// @brief			Get heredoc line

@@ -252,6 +252,15 @@ typedef struct s_ctrs
 	int		l;
 }	t_ctrs;
 
+typedef struct s_hd_vars
+{
+	char	*delim;
+	char	*ret;
+	t_list	*list;
+
+	t_token	*tk;
+}	t_hd_vars;
+
 //=============================================================================/
 //							Function Prototypes                                /
 //=============================================================================/
@@ -298,7 +307,7 @@ char		*ft_expand_squote(char *tkn, int *i);
 char		*ft_expand_dquote(t_shell *sh, char *tkn, int *i);
 
 /// @file	221_tk_expander.c
-char		*ft_heredoc_expander(t_shell *sh, char *tkn);
+int			ft_heredoc_expander(t_shell *sh, t_token *tk, char *tkn);
 
 /// @file	222_tk_expander_utils.c
 int			ft_check_alpha(char c);
@@ -337,6 +346,8 @@ void		ft_fork_sighandler(int sig);
 
 /// @file	401_signal2.c
 void		ft_heredoc_sigset(void);
+void		ft_heredoc_sighandler(int signal, t_shell *sh, t_hd_vars *vars);
+void		ft_sigignore(void);
 
 //=============================================================================/
 //	500		Env Setters/Getters												   /
@@ -468,6 +479,7 @@ int			ft_free_nocmds(t_cmd *cmds, int n_cmds, t_token **tks);
 void		ft_vfree(void *ptr);
 void		ft_free_redir(t_cmd *cmd);
 void		ft_free_heredoc(t_shell *sh);
+void		ft_free_sh_partial(t_shell *sh);
 
 #endif
 

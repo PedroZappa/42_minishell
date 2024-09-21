@@ -47,7 +47,9 @@ int	ft_tokenizer(t_shell *sh, char *line, t_token **tks)
 			&& tk->next->type == TK_CMD)
 		{
 			sh->n_heredocs++;
-			tk->next->name = ft_heredoc_expander(sh, tk->next->name);
+			if (ft_heredoc_expander(sh, *tks, tk->next->name))
+				return (FAILURE);
+			tk->next->name = ft_redir_heredoc_name(sh->n_heredocs - 1);
 			tk = tk->next->next;
 			continue ;
 		}
