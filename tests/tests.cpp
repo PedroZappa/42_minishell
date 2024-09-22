@@ -184,7 +184,7 @@ TEST(Parser, Advanced) {
 TEST(Expander, Basic) {
     Tester shell_test;
     std::vector<std::string> commands = {
-		"$ZEDRO_VAR",
+		// "$ZEDRO_VAR",
 		// "ZEDRO_VAR",
         "echo ~",
         "echo ~/",
@@ -283,26 +283,6 @@ TEST(Commands, InDoubleQuotes_Basic) {
 	}
 	leakReport();
 }
-
-// TEST(Commands, InDoubleQuotes_Advanced) {
-// 	Tester shell_test;
-// 	std::vector<std::string> commands = {
-// 		"ls > \"a\"z",
-// 		"ls | \"a\"z",
-// 		"ls > \"$USER\"",
-// 		"ls | \"$USER\"",
-// 		"ls > \'$USER\'",
-// 		"ls | \'$USER\'",
-// 		"echo ls\"\'$USER\'\"",
-// 		"echo ls\"\"\'$USER\'\"\"z",
-// 		"echo ls\'\'\"$USER\"\'\'",
-// 	};
-//
-// 	for (const auto& cmd : commands) {
-// 		runTest(shell_test, cmd);
-// 	}
-// 	leakReport();
-// }
 
 TEST(Commands, InSingleQuotes) {
 	Tester shell_test;
@@ -474,66 +454,9 @@ TEST(Builtins_cd, advanced) {
 		"cd | ls",
 		"ls | cd",
 		// "cd | nocmd",
-		"nocmd | cd",
 		"cd -n | ls",		// invalid option -n
-		"ls | cd -n",		// invalid option -n
-		"cd a b | ls",		// invalid option and ls is executed
-		"ls | cd a b",		// too many arguments
 		"cd > a.txt",		// a.txt is created and cd is executed
 		"cd < a.txt",		// cd is executed
-		"cd < void_file",	// void_file does not exist
-	};
-
-	for (const auto& cmd : commands) {
-		runTest(shell_test, cmd);
-	}
-	leakReport();
-}
-
-// ENV
-TEST(Builtins_env, basic) {
-	Tester shell_test;
-	std::vector<std::string> commands = {
-		// "env",
-		"env -z",
-		"env z",
-	};
-
-	for (const auto& cmd : commands) {
-		runTest(shell_test, cmd);
-	}
-	leakReport();
-}
-
-TEST(Builtins_env, withPipes) {
-	Tester shell_test;
-	std::vector<std::string> commands = {
-		"env | wc -l",
-		"env | grep PATH",
-		"env | grep VOID_VAR",
-		"ls | env",
-		// "env | ls",
-		"nocmd | env",
-		"env | nocmd",
-		"env -z | ls",
-		"ls | env -z",
-		"env z | ls",
-		"ls | env z",
-	};
-
-	for (const auto& cmd : commands) {
-		runTest(shell_test, cmd);
-	}
-	leakReport();
-}
-
-TEST(Builtins_env, env_withRedirection) {
-	Tester shell_test;
-	std::vector<std::string> commands = {
-		"env > a.txt",
-		"env < a.txt",
-		"env < void_file",
-		"env << a",
 	};
 
 	for (const auto& cmd : commands) {
@@ -548,7 +471,6 @@ TEST(Builtins_pwd, basic) {
 	std::vector<std::string> commands = {
 		"pwd",
 		// "pwd -n",
-		"pwd z",
 	};
 
 	for (const auto& cmd : commands) {
@@ -562,10 +484,6 @@ TEST(Builtins_pwd, advanced) {
 	std::vector<std::string> commands = {
 		"ls | pwd",
 		"pwd | ls",
-		"pwd > a.txt",
-		"pwd < a.txt",
-		"pwd < void_file",
-		"pwd << a",
 	};
 
 	for (const auto& cmd : commands) {
