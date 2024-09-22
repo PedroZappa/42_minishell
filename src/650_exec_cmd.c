@@ -81,9 +81,15 @@ void	ft_execve(t_cmd *cmd, char **envp)
 	{
 		if (access(cmd->cmd, X_OK))
 		{
-			ft_fprintf(STDOUT_FILENO,
+			ft_fprintf(STDERR_FILENO,
 				"bash: %s: Permission denied\n", cmd->cmd);
 			g_exit = 126;
+		}
+		else
+		{
+			ft_fprintf(STDERR_FILENO,
+				"bash: %s: File could not be executed\n", cmd->cmd);
+			g_exit = errno;
 		}
 	}
 }
