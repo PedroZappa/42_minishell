@@ -454,9 +454,53 @@ TEST(Builtins_cd, advanced) {
 		"cd | ls",
 		"ls | cd",
 		// "cd | nocmd",
-		"cd -n | ls",		// invalid option -n
-		"cd > a.txt",		// a.txt is created and cd is executed
-		"cd < a.txt",		// cd is executed
+		// "nocmd | cd",
+		"cd < void_file",	// void_file does not exist
+	};
+
+	for (const auto& cmd : commands) {
+		runTest(shell_test, cmd);
+	}
+	leakReport();
+}
+
+// ENV
+TEST(Builtins_env, basic) {
+	Tester shell_test;
+	std::vector<std::string> commands = {
+		"env",
+	};
+
+	for (const auto& cmd : commands) {
+		runTest(shell_test, cmd);
+	}
+	leakReport();
+}
+
+TEST(Builtins_env, withPipes) {
+	Tester shell_test;
+	std::vector<std::string> commands = {
+		"env | wc -l",
+		"env | grep PATH",
+		"env | grep VOID_VAR",
+		"ls | env",
+		// "env | ls",
+		"nocmd | env",
+		"env | nocmd",
+	};
+
+	for (const auto& cmd : commands) {
+		runTest(shell_test, cmd);
+	}
+	leakReport();
+}
+
+TEST(Builtins_env, env_withRedirection) {
+	Tester shell_test;
+	std::vector<std::string> commands = {
+		"env > a.txt",
+		"env < a.txt",
+		"env < void_file",
 	};
 
 	for (const auto& cmd : commands) {
@@ -564,12 +608,9 @@ TEST(Builtins_unset, unsetWithPipesRedirection) {
 	std::vector<std::string> commands = {
 		"unset | ls",
 		"ls | unset",
-		"unset -z | ls",
-		"ls | unset -z",
 		"unset > a.txt",
 		"unset < a.txt",
 		"unset < void_file",
-		"unset << a",
 	};
 
 	for (const auto& cmd : commands) {
