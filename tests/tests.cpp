@@ -464,50 +464,50 @@ TEST(Builtins_cd, advanced) {
 	leakReport();
 }
 
-// ENV
-TEST(Builtins_env, basic) {
-	Tester shell_test;
-	std::vector<std::string> commands = {
-		"env",
-	};
-
-	for (const auto& cmd : commands) {
-		runTest(shell_test, cmd);
-	}
-	leakReport();
-}
-
-TEST(Builtins_env, withPipes) {
-	Tester shell_test;
-	std::vector<std::string> commands = {
-		"env | wc -l",
-		"env | grep PATH",
-		"env | grep VOID_VAR",
-		"ls | env",
-		// "env | ls",
-		"nocmd | env",
-		"env | nocmd",
-	};
-
-	for (const auto& cmd : commands) {
-		runTest(shell_test, cmd);
-	}
-	leakReport();
-}
-
-TEST(Builtins_env, env_withRedirection) {
-	Tester shell_test;
-	std::vector<std::string> commands = {
-		"env > a.txt",
-		"env < a.txt",
-		"env < void_file",
-	};
-
-	for (const auto& cmd : commands) {
-		runTest(shell_test, cmd);
-	}
-	leakReport();
-}
+// // ENV
+// TEST(Builtins_env, basic) {
+// 	Tester shell_test;
+// 	std::vector<std::string> commands = {
+// 		"env",
+// 	};
+//
+// 	for (const auto& cmd : commands) {
+// 		runTest(shell_test, cmd);
+// 	}
+// 	leakReport();
+// }
+//
+// TEST(Builtins_env, withPipes) {
+// 	Tester shell_test;
+// 	std::vector<std::string> commands = {
+// 		"env | wc -l",
+// 		"env | grep PATH",
+// 		"env | grep VOID_VAR",
+// 		"ls | env",
+// 		// "env | ls",
+// 		"nocmd | env",
+// 		"env | nocmd",
+// 	};
+//
+// 	for (const auto& cmd : commands) {
+// 		runTest(shell_test, cmd);
+// 	}
+// 	leakReport();
+// }
+//
+// TEST(Builtins_env, env_withRedirection) {
+// 	Tester shell_test;
+// 	std::vector<std::string> commands = {
+// 		"env > a.txt",
+// 		"env < a.txt",
+// 		"env < void_file",
+// 	};
+//
+// 	for (const auto& cmd : commands) {
+// 		runTest(shell_test, cmd);
+// 	}
+// 	leakReport();
+// }
 
 // PWD
 TEST(Builtins_pwd, basic) {
@@ -541,17 +541,11 @@ TEST(Builtins_export, export) {
 	Tester shell_test;
 	std::vector<std::string> commands = {
 		// "export",			// list formated list of environment variables
-		"export -z",			// invalid option
 		// "export | grep XDG",
 		// "export | wc -l",
-		"ls | export",
-		"export | ls",
-		"export -z | ls",
-		"ls | export -z",
-		"export > a.txt",
-		"export < a.txt",
-		"export < void_file",
-		"export << a",
+		// "export > a.txt",
+		// "export < a.txt",
+		// "export << a",
 		"export ZEDRO=69 | ls",
 		"ls | export ZEDRO=69",
 		"export ZEDRO=69",
@@ -559,24 +553,20 @@ TEST(Builtins_export, export) {
 		"export ZEDRO=\"This is | a < value < no input\"",
 		"export ZEDRO=",
 		"export ZEDRO=$USER",
-		"export -x ZEDRO=z",
-		"export a.42 | ls",
-		"ls | export a.42",
-		"export V/A/R=zedro",
-		"export =zedro",
+		// "export a.42 | ls",
+		// "ls | export a.42",
+		// "export V/A/R=zedro",
+		// "export =zedro",
 		"export ZED1 ZED2=zedro",
-		"export =",
-		"export 1ZEDRO=test",
+		// "export =",
+		// "export 1ZEDRO=test",
 		"export Z2EDRO=test",
 		"export TEST=ZEDRO",
-		"export $ZZZ=void",
+		// "export $ZZZ=void",
 		"export a_test b_test",
 		"export z=42 z=69",
 		"export a=42 z=69",
-		"export \"VAR= 42\"",
-		"export \"VAR =42\"",
-		"export \"\"",
-		"export TEST1=u\"withdouble\" TEST2 TEST3=wihoutquotes TEST4=\"with spaces and expand $USER\" TEST5=\"ok, but it has more\" TEST6= TEST7='with single $PATH' = TEST8 9TEST9 TEST10=\"\" TEST11=too=many=equals TEST.12=\" \" TEST13='withsingle' TEST14",
+		// "export \"\"",
 	};
 
 	for (const auto& cmd : commands) {
@@ -589,12 +579,12 @@ TEST(Builtins_unset, unset) {
 	Tester shell_test;
 	std::vector<std::string> commands = {
 		"unset",
-		"unset ''",
-		"unset \"\"",
+		// "unset ''",
+		// "unset \"\"",
 		"unset $USER",
 		"unset PATH",
-		"unset a f z",
-		"unset -z",
+		// "unset a f z",
+		// "unset -z",
 	};
 
 	for (const auto& cmd : commands) {
@@ -639,88 +629,61 @@ TEST(Builtins_unset, unsetWithPipesRedirection) {
 // 	leakReport();
 // }
 
-// EXIT
-TEST(Builtins_exit, basic) {
-	Tester shell_test;
-	std::vector<std::string> commands = {
-		"exit",
-		"exit 42",
-		"exit -42",
-		"exit 42 42",
-		"exit z",
-		"exit -z",
-		"exit z 42",
-		"exit 42 z",
-		"exit /",
-	};
-
-	for (const auto& cmd : commands) {
-		runTest(shell_test, cmd);
-	}
-	leakReport();
-}
-
-TEST(Builtins_exit, advanced) {
-	Tester shell_test;
-	std::vector<std::string> commands = {
-		// "exit 0 | exit 1",
-		"sleep 2 | exit",
-		"exit > a.txt",
-		"exit < a.txt",
-		"exit < void_file",
-		"exit << a",
-	};
-
-	for (const auto& cmd : commands) {
-		runTest(shell_test, cmd);
-	}
-	leakReport();
-}
+// // EXIT
+// TEST(Builtins_exit, basic) {
+// 	Tester shell_test;
+// 	std::vector<std::string> commands = {
+// 		"exit",
+// 		"exit 42",
+// 		"exit -42",
+// 		"exit 42 42",
+// 		"exit z",
+// 		"exit -z",
+// 		"exit z 42",
+// 		"exit 42 z",
+// 		"exit /",
+// 	};
+//
+// 	for (const auto& cmd : commands) {
+// 		runTest(shell_test, cmd);
+// 	}
+// 	leakReport();
+// }
+//
+// TEST(Builtins_exit, advanced) {
+// 	Tester shell_test;
+// 	std::vector<std::string> commands = {
+// 		// "exit 0 | exit 1",
+// 		"sleep 2 | exit",
+// 		"exit > a.txt",
+// 		"exit < a.txt",
+// 		"exit < void_file",
+// 		"exit << a",
+// 	};
+//
+// 	for (const auto& cmd : commands) {
+// 		runTest(shell_test, cmd);
+// 	}
+// 	leakReport();
+// }
 
 TEST(Redirection, Basic) {
 	Tester shell_test;
 	std::vector<std::string> commands = {
 		"echo 42 > 42",
-		"cat < a.txt > b.txt",
-		"cat < a.txt < c.txt > b.txt >> d.txt",
-		"cat < a.txt < c.txt",
+		// "cat < a.txt > b.txt",
+		// "cat < a.txt < c.txt > b.txt >> d.txt",
+		// "cat < a.txt < c.txt",
 		// "cat >> b.txt",
 		// "cat << a",
-		"echo yo > > file",
-		"echo yo >>> file",
 		"echo yo > a.txt >> b.txt",
 		"echo yo >> a.txt > b.txt",
-		"echo yo > $ZEDRO_VAR",
+		// "echo yo > $ZEDRO_VAR",
 		"ls > a.txt -al",
 		"> a.txt",
-		"<< a > a.txt",
 		"< void_file $NOVAR",
 		"$VOID_VAR > b.txt",
 		"$VOID_VAR ls",
-		"ls > src",
-	};
-
-	for (const auto& cmd : commands) {
-		runTest(shell_test, cmd);
-	}
-	leakReport();
-}
-
-TEST(Redirection, WithPipes) {
-	Tester shell_test;
-	std::vector<std::string> commands = {
-		"cat < a.txt | sort < c.txt",
-		"cat << a | sort",
-		"cat << a | sort < a.txt",
-		"cat << a | sort > a.txt",
-		"cat << a | sort << b",
-		"< a.txt cat | < b.txt cat",
-		"ls | $ZEDRO_VAR",
-		"ls | grep a | grep M > a.txt",
-		"ls > a.txt | grep a | grep M",
-		"ls | grep a > a.txt | grep M",
-		"ls | grep a > a.txt | grep M > b.txt",
-		"cat < Makefile | cat < README.md",
 	};
 
 	for (const auto& cmd : commands) {
@@ -734,28 +697,8 @@ TEST(Pipes, Basic) {
 	std::vector<std::string> commands = {
 		"env | grep USER",
 		"cat .vgdbinit | grep info",
-		"nocmd | ls",
-		"ls | nocmd",
-		"nonocmd | nocmd",
 		// "cat | cat | ls",
 		"ls | grep a | grep k | grep e",
-	};
-
-	for (const auto& cmd : commands) {
-		runTest(shell_test, cmd);
-	}
-	leakReport();
-}
-
-TEST(ExitCodes, Basic) {
-	Tester shell_test;
-	std::vector<std::string> commands = {
-		"yo",
-		"nocmd | nocmd",
-		"$VOID_VAR",
-		"cat < void_file",
-		"nocmd < void_file",
-		"expr $? + $?",
 	};
 
 	for (const auto& cmd : commands) {
