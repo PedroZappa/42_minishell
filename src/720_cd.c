@@ -66,7 +66,7 @@ static int	ft_chdir(t_shell *sh, char *path)
 	if (path == NULL || pwd == NULL || ft_pwd_invalid(pwd))
 		pwd = getcwd(NULL, 0);
 	chdir_ret = 0;
-	if (strncmp(path, "-", 3) == 0)
+	if (ft_strncmp(path, "-", 3) == 0)
 		ft_get_prev_dir(&sh->envp, old, pwd);
 	else
 	{
@@ -115,7 +115,7 @@ static void	ft_chdir_err(char *path)
 	t_stat	sb;
 	int		stat_ret;
 
-	memset(&sb, 0, sizeof(t_stat));
+	ft_memset(&sb, 0, sizeof(t_stat));
 	stat_ret = stat(path, &sb);
 	if (stat_ret == 0 && (sb.st_mode & __S_IFMT) != __S_IFDIR)
 		ft_fprintf(STDOUT_FILENO, "bash: cd: %s: Not a directory\n",

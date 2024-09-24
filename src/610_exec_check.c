@@ -53,7 +53,7 @@ static int	ft_stat_cmd(char *cmd)
 	t_stat	sb;
 	int		stat_ret;
 
-	memset(&sb, 0, sizeof(t_stat));
+	ft_memset(&sb, 0, sizeof(t_stat));
 	stat_ret = stat(cmd, &sb);
 	if (stat_ret == -1)
 	{
