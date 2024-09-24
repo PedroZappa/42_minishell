@@ -33,7 +33,7 @@ int	ft_unset(t_shell *sh, t_cmd *cmd)
 	i = 0;
 	if (!cmd->argv[1] || !sh->envp)
 		return (FAILURE);
-	if (cmd->argv[2])
+	if (cmd->argv[1][0] == '-' && cmd->argv[1][1] != '\0')
 		return (ft_flag_err(cmd->argv[0], cmd->argv[2]));
 	i = 0;
 	while (cmd->argv[++i])
