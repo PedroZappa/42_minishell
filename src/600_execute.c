@@ -93,14 +93,14 @@ static void	ft_check_cmds(t_shell *sh)
 	int	i;
 	int	type;
 
-	i = 0;
-	while (i < sh->n_cmds)
+	i = (sh->n_cmds - 1);
+	while (i >= 0)
 	{
 		type = ft_exec_check(sh->cmds[i].argv[0]);
 		if (type == CMD_EXEC)
 			sh->cmds[i].argv[0] = ft_exec_check_cmd(sh->path,
 					sh->cmds[i].argv[0]);
-		i++;
+		--i;
 	}
 }
 
