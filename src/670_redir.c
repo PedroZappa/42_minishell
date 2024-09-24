@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   680_redir.c                                        :+:      :+:    :+:   */
+/*   670_redir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gfragoso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 11:40:09 by passunca          #+#    #+#             */
-/*   Updated: 2024/08/17 12:02:49 by passunca         ###   ########.fr       */
+/*   Updated: 2024/09/24 14:29:33 by gfragoso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ void	ft_redir_out(t_shell *sh, t_cmd *cmd)
 			cmd->out_fd = -1;
 		}
 		cmd->out_fd = open(cmd->out[i].name, O_CREAT | O_WRONLY
-				| (O_APPEND * (cmd->out[i].type == RD_OUT_APP)),
+				| (O_APPEND * (cmd->out[i].type == RD_OUT_APP)
+					| (O_TRUNC * (cmd->out[i].type == RD_OUT))),
 				S_IRWXU | S_IRGRP | S_IROTH);
 		++i;
 	}
