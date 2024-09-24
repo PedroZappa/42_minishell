@@ -105,7 +105,7 @@ static char	*ft_build_prompt(t_shell *sh)
 		ft_free(cwd);
 		ft_free(home);
 	}
-	ret = ft_strjoin(temp, BWHT"$ "NC);
+	ret = ft_strjoin(temp, "$ ");
 	return (ft_free(temp), ret);
 }
 
@@ -147,12 +147,10 @@ static char	*ft_prompt_user(t_shell *sh)
 	char	*ret;
 	char	*temp;
 
-	temp = ft_strjoin(RED, sh->user);
-	ret = ft_strjoin(temp, "@");
-	ft_free(temp);
+	ret = ft_strjoin(sh->user, "@");
 	temp = ft_strjoin(ret, sh->hostname);
 	ft_free(ret);
-	ret = ft_strjoin(temp, BWHT":"BBLU);
+	ret = ft_strjoin(temp, ":");
 	ft_free(temp);
 	return (ret);
 }

@@ -117,7 +117,7 @@ int	ft_get_line_heredoc(t_list **list, char *delim)
 {
 	char	*ret;
 
-	ret = readline(BWHT"> "NC);
+	ret = readline("> ");
 	if (ret == NULL)
 	{
 		ft_printf("bash: warning: here-document at line "
