@@ -121,8 +121,10 @@ int	ft_get_line_heredoc(t_list **list, char *delim)
 	if (ret == NULL)
 	{
 		ft_printf("bash: warning: here-document at line "
-			"%d delimited by end-of-file; (wanted '%s')\n",
-			ft_lstsize(*list), delim);
+			"%d delimited by end-of-file; (wanted '%s')",
+			ft_lstsize(*list) + 1, delim);
+		if (ft_lstsize(*list) > 0)
+			ft_printf("\n");
 		return (FAILURE);
 	}
 	if (ft_strcmp(ret, delim) == 0)

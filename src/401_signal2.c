@@ -35,6 +35,8 @@ void	ft_heredoc_sighandler(int signo, t_shell *sh, t_hd_vars *vars)
 		ft_free_tks(&hd_vars->tk);
 		ft_lstclear(&hd_vars->list, free);
 	}
+	rl_on_new_line();
+	write(1, "\n", 1);
 	exit(130);
 }
 
