@@ -105,7 +105,7 @@ static char	*ft_build_prompt(t_shell *sh)
 		ft_free(cwd);
 		ft_free(home);
 	}
-	ret = ft_strjoin(temp, "$ ");
+	ret = ft_strjoin(temp, "$> ");
 	return (ft_free(temp), ret);
 }
 

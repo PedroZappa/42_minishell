@@ -63,8 +63,6 @@ void	ft_fork_sighandler(int sig)
 	if (sig == SIGQUIT)
 	{
 		ft_putstr_fd("Quit\n", STDOUT_FILENO);
-		rl_on_new_line();
-		rl_redisplay();
 		g_exit = EXIT_SIGQUIT;
 	}
 	else if (sig == SIGINT)
