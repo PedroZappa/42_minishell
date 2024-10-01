@@ -3,7 +3,7 @@
 
 # minishell
 
-> Who thought treading on parallelism & concurrency land could be so philosophically deadly 🕱
+> As beautiful as a shell
 
 <p>
     <img src="https://img.shields.io/badge/score-%20%2F%2099-success?style=for-the-badge" />
