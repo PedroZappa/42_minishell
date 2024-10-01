@@ -7,7 +7,7 @@
 > Who thought treading on parallelism & concurrency land could be so philosophically deadly 🕱
 
 <p>
-    <img src="https://img.shields.io/badge/score-%20%2F%20099-success?style=for-the-badge" />
+    <img src="https://img.shields.io/badge/score-%20%2F%2099-success?style=for-the-badge" />
     <img src="https://img.shields.io/github/repo-size/PedroZappa/42_minishell?style=for-the-badge&logo=github">
     <img src="https://img.shields.io/github/languages/count/PedroZappa/42_minishell?style=for-the-badge&logo=" />
     <img src="https://img.shields.io/github/languages/top/PedroZappa/42_minishell?style=for-the-badge" />
@@ -62,6 +62,7 @@ git clone https://github.com/PedroZappa/42_minishell.git 42_minishell
 
 Build the program:
 ```sh
+cd 42_minishell
 make
 ```
 
