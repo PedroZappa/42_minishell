@@ -1,4 +1,3 @@
-42 Project : minishell
 <a name="readme-top"></a>
 <div align="center">
 
