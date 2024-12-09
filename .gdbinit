@@ -649,11 +649,11 @@ end
 #
 ### 000_main.c
 ## main()
-# break main
-# run
-# main
-# fs cmd
-# rfr
+break main
+run
+main
+fs cmd
+rfr
 
 ## ft_init()
 # break ft_init
@@ -687,10 +687,10 @@ end
 
 
 # ft_exec_pipeline
-break ft_export
-run
-fs cmd
-rfr
+# break ft_export
+# run
+# fs cmd
+# rfr
 
 ### Info Stats
 info break
