@@ -105,6 +105,15 @@
         packages = with pkgs; {
           inherit neovim neovim-debug neovim-developer;
         };
+        # Include the tools and dependencies you want in your development environment
+        buildInputs = with pkgs; [
+          neovim-developer # This brings in the developer version of Neovim
+          cmake # Likely needed for building Neovim
+          gcc # Compiler for building
+          tree-sitter # Already part of neovim-developer, but explicit here if needed separately
+          python3 # For any Python-based tools or scripts
+          lua # For Lua development
+        ];
       }
     );
 }
