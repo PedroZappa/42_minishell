@@ -110,6 +110,8 @@ CFLAGS		= -Wall -Wextra -Werror
 DFLAGS		= -g
 RFLAGS		= -lreadline
 INC			= -I $(INC_PATH)
+CFLAGS += -I/usr/include
+
 
 BUILD 		?= all
 ASAN_FLAGS	= -fsanitize=address

@@ -31,6 +31,7 @@
 # include <stdlib.h> // exit, free, malloc
 # include <termios.h> // termios interface
 # include <unistd.h> // STDIN_FILENO STDOUT_FILENO
+# include <stdio.h>
 # include <readline/readline.h> // readline
 # include <readline/history.h> // shell history
 # include <sys/wait.h> // wait()
